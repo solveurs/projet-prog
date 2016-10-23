@@ -10,12 +10,12 @@
 void lambert93(double * x, double * y)
 {
      double n       = 0.7256077650;
-     double c       = 11754255.426;
+	 double c		= 11753572;
      double Xs      = 700000.0;
      double Ys      = 12655612.050;
-     double l0      = 0.0524;
+     double l0      = 0.05235987;
      double e       = 0.08248325676;
-     double eps     = 0.0001;
+     double eps     = 0.00001;
 
      double X = *x;
      double Y = *y;
@@ -39,11 +39,10 @@ void lambert93(double * x, double * y)
 
 int main()
 {
-     //double x=1029705.0830, y=272723.8490;
-     double x=655413, y=6664791;
+     double x=655712, y=6664882;	//position INSA
      lambert93(&x,&y);
 
-     printf("Ouh lala ça marche ??? %lf°N %lf°E",x, y);
+     printf("long : %lf , lat: %lf",x, y);
 
      return 0;
 }
