@@ -1,3 +1,7 @@
+//sudo apt-get install libgtk-3-dev
+// sudo apt-get install glib-2.0
+
+
 
 #include <cairo.h>
 #include <gtk/gtk.h>
@@ -29,7 +33,7 @@ static void do_drawing(cairo_t *cr)
   image = cairo_image_surface_create_from_png ("Carte_France_geo.png");
   w = cairo_image_surface_get_width (image);
   h = cairo_image_surface_get_height (image);
-  cairo_scale (cr, 256.0/w, 256.0/h);
+  cairo_scale (cr, 512.0/w, 512.0/h);
 
 
   cairo_set_source_surface (cr, image, 0, 0);
@@ -47,9 +51,12 @@ static void do_drawing(cairo_t *cr)
   glob.count = 0;
   cairo_stroke(cr);
 }
+
+
+
 static gboolean clicked(GtkWidget *widget, GdkEventButton *event, gpointer user_data)
   {
-    printf(“clicked\n”);
+    printf("clicked at %f %f\n", event->x, event->y);
     if (event->button == 1) {
       glob.coordx[glob.count] = event->x;
       glob.coordy[glob.count++] = event->y;
@@ -72,12 +79,12 @@ static gboolean clicked(GtkWidget *widget, GdkEventButton *event, gpointer user_
     darea = gtk_drawing_area_new();
     gtk_container_add(GTK_CONTAINER(window), darea);
     gtk_widget_add_events(window, GDK_BUTTON_PRESS_MASK);
-    g_signal_connect(G_OBJECT(darea), “draw”, G_CALLBACK(on_draw_event), NULL);
-    g_signal_connect(window, “destroy”, G_CALLBACK(gtk_main_quit), NULL);
-    g_signal_connect(window, “button-press-event”, G_CALLBACK(clicked), NULL);
+    g_signal_connect(G_OBJECT(darea), "draw", G_CALLBACK(on_draw_event), NULL);
+    g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
+    g_signal_connect(window, "button-press-event", G_CALLBACK(clicked), NULL);
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
-    gtk_window_set_default_size(GTK_WINDOW(window), 400, 300);
-    gtk_window_set_title(GTK_WINDOW(window), “Lines”);
+    gtk_window_set_default_size(GTK_WINDOW(window), 800, 800);
+    gtk_window_set_title(GTK_WINDOW(window), "Lines");
     gtk_widget_show_all(window);
     gtk_main();
     return 0;
