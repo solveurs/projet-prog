@@ -1,3 +1,9 @@
 
 Schéma organisation BDD (lecture seulement)
 https://drive.google.com/drive/folders/0B3mYt3ngMk23WVZQS3BQX2xvbnM?usp=sharing
+
+Documentation GTK+
+https://developer.gnome.org/gtk3/stable/index.html
+
+Documentation Cairo
+https://www.cairographics.org/manual/index.html
