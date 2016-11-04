@@ -22,7 +22,7 @@ void activate (GtkApplication* app, gpointer user_data)
   //Creation de la fenetre
   GtkWidget* fenetre;
 
-  fenetre = gtk_application_window_new (app);
+  fenetre = gtk_application_window_new(app);
   gtk_window_set_title (GTK_WINDOW (fenetre), "Mes tests loufoques");
   gtk_window_set_default_size (GTK_WINDOW (fenetre), 600, 600);
 
@@ -45,10 +45,12 @@ void activate (GtkApplication* app, gpointer user_data)
   ajoutGrille(grille, buttonBox, 1, 0, 1, 1);
 
   //Bouton menu
+  /* Version non a jour
   GtkWidget* menuBouton;
   menuBouton = gtk_menu_button_new();
   // A faire: le menu 
-  ajoutGrille(grille, menuBouton, 2, 0, 1, 1);
+  ajoutGrille(grille, menuBouton, 2, 0, 1, 1)
+  */
 
   //Le spin button
   GtkWidget* monSpin;
@@ -112,10 +114,7 @@ void activate (GtkApplication* app, gpointer user_data)
   gtk_box_pack_start(GTK_BOX(maBox), menuBar, FALSE, FALSE, 0);
   ajoutGrille(grille, maBox, 0, 2, 1, 1);
 
-/*
   //Selection de fichier
-  //Non fonctionnelle ?
-
   GtkWidget *boutonChoix;
 
   boutonChoix = gtk_file_chooser_button_new(("Choisir un fichier"),GTK_FILE_CHOOSER_ACTION_OPEN);
@@ -123,11 +122,9 @@ void activate (GtkApplication* app, gpointer user_data)
   ajoutGrille(grille, boutonChoix, 1, 1, 1, 1);
 
   //Image
-
   GtkWidget* image;
   image = gtk_image_new_from_file("votre_image");
   ajoutGrille(grille, image, 0, 3, 1, 1);
-*/
   
   //Affichage recursif des widgets
   gtk_widget_show_all (fenetre);
