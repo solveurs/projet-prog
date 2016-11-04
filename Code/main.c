@@ -6,13 +6,11 @@ int main(int argc, char* argv[])
 
      #ifdef FRONT
           printf("front\n");
-     #endif
 
-     #ifdef BACK
+     #elif BACK
           printf("back\n");
-     #endif
 
-     #ifdef DEBUG
+     #elif DEBUG
           printf("debug\n");
      #endif
      printf("toujours\n");

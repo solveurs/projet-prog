@@ -1,5 +1,5 @@
 #pragma once
 #include <stdio.h>
-#include <sdtlib.h>
+#include <stdlib.h>
 #include <string.h>
 #include <math.h>

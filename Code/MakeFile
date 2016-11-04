@@ -1,0 +1,21 @@
+DEBUG = yes
+CC = gcc
+ifeq ($(DEBUG),yes)
+	CFLAGS = -Wall -W -ansi -pedantic -g -D DEBUG
+else
+	CFLAGS = -Wall -W -ansi -pedantic
+endif
+
+LDFLAGS = -lm
+EXEC = main
+
+all : $(EXEC)
+
+main :  main.o
+	$(CC) -o $@ $^ $(LDFLAGS)
+
+main.o : main.c headers/main.h
+	$(CC) -o $@ -c $< $(CFLAGS)
+
+clean :
+	rm *.o && rm $(EXEC)
