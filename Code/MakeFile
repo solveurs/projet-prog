@@ -1,11 +1,20 @@
-DEBUG = yes
+DEBUG = no
+FRONT = no
+BACK = yes
 CC = gcc
 ifeq ($(DEBUG),yes)
 	CFLAGS = -Wall -W -ansi -pedantic -g -D DEBUG
 else
-	CFLAGS = -Wall -W -ansi -pedantic
+	ifeq ($(DEBUG),yes)
+		CFLAGS = -Wall -W -ansi -pedantic -D FRONT
+	else
+		ifeq ($(BACK),yes)
+			CFLAGS = -Wall -W -ansi -pedantic -D BACK
+		else
+			CFLAGS = -Wall -W -ansi -pedantic
+		endif
+	endif
 endif
-
 LDFLAGS = -lm
 EXEC = main
 
@@ -17,5 +26,5 @@ main :  main.o
 main.o : main.c headers/main.h
 	$(CC) -o $@ -c $< $(CFLAGS)
 
-clean :
-	rm *.o && rm $(EXEC)
+clean:
+	rm *.o $(EXEC)
