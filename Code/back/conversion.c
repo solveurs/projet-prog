@@ -1,6 +1,5 @@
 #include "../headers/conversion.h"
 
-
 /**
  * \fn void lambert93(double * x, double * y)
  * \brief conversion de coordonnée lambert93 vers GPS long/lat
