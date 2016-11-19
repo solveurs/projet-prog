@@ -7,7 +7,7 @@
 #
 CC = gcc
 BIN = main
-SRC = main.c figures.c
+SRC = figures.c main.c
 OBJ = $(SRC:.c=.o)
 
 
@@ -38,7 +38,7 @@ all: $(BIN)
 # Compile :
 $(BIN): $(SRC)
 	$(CC) $(SRC) -c $(CFLAGS)
-	$(CC) $(OBJ) figures.h -o $(BIN) $(CFLAGS)
+	$(CC) $(OBJ) -o $(BIN) $(CFLAGS)
 
 #
 # Nettoyage:
