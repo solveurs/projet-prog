@@ -36,12 +36,16 @@ void lambert93ToGPS(double * x, double * y)
      *y = phi * 180.0 / M_PI;
 }
 
-/*int main()
+struct tm * timestampToReadable(const long parDate)
 {
-     double x=655712, y=6664882;	//position INSA
-     lambert93(&x,&y);
+	const time_t varT = parDate;
+	return localtime(&varT);
+}
 
-     printf("long : %lf , lat: %lf\n",x, y);
-
-     return 0;
-}*/
+char * timestampToString(const long parDate)
+{
+	char * buf;
+	buf = (char*)calloc(80, sizeof(char));
+	strftime(buf, sizeof(buf), "%a %Y-%m-%d %H:%M:%S %Z", timestampToReadable(parDate));
+	return buf;
+}

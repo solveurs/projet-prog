@@ -33,7 +33,7 @@ void ajoutTrace(trajet * parTr, trace * parT)
 	{
 		parTr->premier = parT;
 		parTr->dernier = parT;
-		parT->prec = NULL
+		parT->prec = NULL;
 		parT->suiv = NULL;
 	}
 	parT->suiv = NULL;
