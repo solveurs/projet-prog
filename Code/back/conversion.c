@@ -6,7 +6,7 @@
  * \param x X en coord de Lambert convertie en longitude
  * \param y Y en coord de Lambert convertie en latitude
  */
-void lambert93(double * x, double * y)
+void lambert93ToGPS(double * x, double * y)
 {
      double n       = 0.7256077650;
 	 double c		= 11753572;
@@ -36,12 +36,12 @@ void lambert93(double * x, double * y)
      *y = phi * 180.0 / M_PI;
 }
 
-int main()
+/*int main()
 {
      double x=655712, y=6664882;	//position INSA
      lambert93(&x,&y);
 
-     printf("long : %lf , lat: %lf",x, y);
+     printf("long : %lf , lat: %lf\n",x, y);
 
      return 0;
-}
+}*/

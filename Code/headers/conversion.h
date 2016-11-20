@@ -2,4 +2,4 @@
 #include "includes.h"
 #include "structures.h"
 
-void lambert93(double * x, double * y);
+void lambert93ToGPS(double * x, double * y);
