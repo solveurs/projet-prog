@@ -1,0 +1,185 @@
+\hypertarget{test__csv_8c}{}\section{/\+Users/frj/\+Documents/\+Code/\+Projet\+\_\+prog\+\_\+3a/\+Code/back/libcsv-\/3.0.3/test\+\_\+csv.c File Reference}
+\label{test__csv_8c}\index{/\+Users/frj/\+Documents/\+Code/\+Projet\+\_\+prog\+\_\+3a/\+Code/back/libcsv-\/3.\+0.\+3/test\+\_\+csv.\+c@{/\+Users/frj/\+Documents/\+Code/\+Projet\+\_\+prog\+\_\+3a/\+Code/back/libcsv-\/3.\+0.\+3/test\+\_\+csv.\+c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}./csv.\+h\char`\"{}}\newline
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structevent}{event}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{test__csv_8c_ab2f18b6531a527175ed3572d6aa1c4a9}{C\+S\+V\+\_\+\+E\+ND}~0
+\item 
+\#define \hyperlink{test__csv_8c_ab9ef69bd58f71dddbcf96da3a4dd6973}{C\+S\+V\+\_\+\+C\+OL}~1
+\item 
+\#define \hyperlink{test__csv_8c_a14be8605517ef5dbf0bc811ea063c913}{C\+S\+V\+\_\+\+R\+OW}~2
+\item 
+\#define \hyperlink{test__csv_8c_af5e9296ac1b7504e7d0023bcf1947f18}{C\+S\+V\+\_\+\+E\+RR}~3
+\item 
+\#define \hyperlink{test__csv_8c_a475681b338e585660d57295a2bdabb68}{D\+O\+\_\+\+T\+E\+ST}(name,  options)
+\item 
+\#define \hyperlink{test__csv_8c_a0445ef88b99fe6776816d92e6e868c93}{D\+O\+\_\+\+T\+E\+S\+T\+\_\+\+C\+U\+S\+T\+OM}(name,  options,  d,  q,  s,  t)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{test__csv_8c_ad2582fe149aaa13686dd74de738fd674}{fail\+\_\+parser} (char $\ast$test\+\_\+name, char $\ast$message)
+\item 
+void \hyperlink{test__csv_8c_a92d7e865e21eca7f248e0566ba268331}{fail\+\_\+writer} (char $\ast$test\+\_\+name, char $\ast$message)
+\item 
+void \hyperlink{test__csv_8c_ade1f382fdd539890161332fc440f72f0}{cb1} (void $\ast$data, size\+\_\+t len, void $\ast$t)
+\item 
+void \hyperlink{test__csv_8c_ac18726758b83820c49f8f417e49fb160}{cb2} (int c, void $\ast$t)
+\item 
+void \hyperlink{test__csv_8c_a958e2fc073d2c91e0632fecc712b3e33}{test\+\_\+parser} (char $\ast$test\+\_\+name, unsigned char options, void $\ast$input, size\+\_\+t len, struct \hyperlink{structevent}{event} expected\mbox{[}$\,$\mbox{]}, char delimiter, char quote, int($\ast$space\+\_\+func)(unsigned char), int($\ast$term\+\_\+func)(unsigned char))
+\item 
+void \hyperlink{test__csv_8c_a3fb7086e4ffb81a4d86ece5aa935615d}{test\+\_\+writer} (char $\ast$test\+\_\+name, char $\ast$input, size\+\_\+t input\+\_\+len, char $\ast$expected, size\+\_\+t expected\+\_\+len)
+\item 
+void \hyperlink{test__csv_8c_a5105e86af2cc3863d0fde2830d1c1969}{test\+\_\+writer2} (char $\ast$test\+\_\+name, char $\ast$input, size\+\_\+t input\+\_\+len, char $\ast$expected, size\+\_\+t expected\+\_\+len, char quote)
+\item 
+int \hyperlink{test__csv_8c_a840291bc02cba5474a4cb46a9b9566fe}{main} (void)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structevent}{event} $\ast$ \hyperlink{test__csv_8c_a1504ba55cc69bc5077da274e151101f7}{event\+\_\+ptr}
+\item 
+int \hyperlink{test__csv_8c_ab8897ffbc0cc4bf5d33445135fe67936}{event\+\_\+idx}
+\item 
+size\+\_\+t \hyperlink{test__csv_8c_a97ab3b8ef2f074e3774c66099d7ec59b}{row}
+\item 
+size\+\_\+t \hyperlink{test__csv_8c_a72f49011b5605e0c59eabd1ab811cdfd}{col}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{test__csv_8c_ab9ef69bd58f71dddbcf96da3a4dd6973}{}\label{test__csv_8c_ab9ef69bd58f71dddbcf96da3a4dd6973} 
+\index{test\+\_\+csv.\+c@{test\+\_\+csv.\+c}!C\+S\+V\+\_\+\+C\+OL@{C\+S\+V\+\_\+\+C\+OL}}
+\index{C\+S\+V\+\_\+\+C\+OL@{C\+S\+V\+\_\+\+C\+OL}!test\+\_\+csv.\+c@{test\+\_\+csv.\+c}}
+\subsubsection{\texorpdfstring{C\+S\+V\+\_\+\+C\+OL}{CSV\_COL}}
+{\footnotesize\ttfamily \#define C\+S\+V\+\_\+\+C\+OL~1}
+
+\hypertarget{test__csv_8c_ab2f18b6531a527175ed3572d6aa1c4a9}{}\label{test__csv_8c_ab2f18b6531a527175ed3572d6aa1c4a9} 
+\index{test\+\_\+csv.\+c@{test\+\_\+csv.\+c}!C\+S\+V\+\_\+\+E\+ND@{C\+S\+V\+\_\+\+E\+ND}}
+\index{C\+S\+V\+\_\+\+E\+ND@{C\+S\+V\+\_\+\+E\+ND}!test\+\_\+csv.\+c@{test\+\_\+csv.\+c}}
+\subsubsection{\texorpdfstring{C\+S\+V\+\_\+\+E\+ND}{CSV\_END}}
+{\footnotesize\ttfamily \#define C\+S\+V\+\_\+\+E\+ND~0}
+
+\hypertarget{test__csv_8c_af5e9296ac1b7504e7d0023bcf1947f18}{}\label{test__csv_8c_af5e9296ac1b7504e7d0023bcf1947f18} 
+\index{test\+\_\+csv.\+c@{test\+\_\+csv.\+c}!C\+S\+V\+\_\+\+E\+RR@{C\+S\+V\+\_\+\+E\+RR}}
+\index{C\+S\+V\+\_\+\+E\+RR@{C\+S\+V\+\_\+\+E\+RR}!test\+\_\+csv.\+c@{test\+\_\+csv.\+c}}
+\subsubsection{\texorpdfstring{C\+S\+V\+\_\+\+E\+RR}{CSV\_ERR}}
+{\footnotesize\ttfamily \#define C\+S\+V\+\_\+\+E\+RR~3}
+
+\hypertarget{test__csv_8c_a14be8605517ef5dbf0bc811ea063c913}{}\label{test__csv_8c_a14be8605517ef5dbf0bc811ea063c913} 
+\index{test\+\_\+csv.\+c@{test\+\_\+csv.\+c}!C\+S\+V\+\_\+\+R\+OW@{C\+S\+V\+\_\+\+R\+OW}}
+\index{C\+S\+V\+\_\+\+R\+OW@{C\+S\+V\+\_\+\+R\+OW}!test\+\_\+csv.\+c@{test\+\_\+csv.\+c}}
+\subsubsection{\texorpdfstring{C\+S\+V\+\_\+\+R\+OW}{CSV\_ROW}}
+{\footnotesize\ttfamily \#define C\+S\+V\+\_\+\+R\+OW~2}
+
+\hypertarget{test__csv_8c_a475681b338e585660d57295a2bdabb68}{}\label{test__csv_8c_a475681b338e585660d57295a2bdabb68} 
+\index{test\+\_\+csv.\+c@{test\+\_\+csv.\+c}!D\+O\+\_\+\+T\+E\+ST@{D\+O\+\_\+\+T\+E\+ST}}
+\index{D\+O\+\_\+\+T\+E\+ST@{D\+O\+\_\+\+T\+E\+ST}!test\+\_\+csv.\+c@{test\+\_\+csv.\+c}}
+\subsubsection{\texorpdfstring{D\+O\+\_\+\+T\+E\+ST}{DO\_TEST}}
+{\footnotesize\ttfamily \#define D\+O\+\_\+\+T\+E\+ST(\begin{DoxyParamCaption}\item[{}]{name,  }\item[{}]{options }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\hyperlink{test__csv_8c_a958e2fc073d2c91e0632fecc712b3e33}{test\_parser}(\textcolor{stringliteral}{"test"} #name, options, test ## name ## \_data, \(\backslash\)
+        \textcolor{keyword}{sizeof}(test ## name ## \_data) - 1, test ## name ## \_results, \(\backslash\)
+        \hyperlink{csv_8h_a413c6988d7ae8ba42f66ef6c9952e8a2}{CSV\_COMMA}, \hyperlink{csv_8h_a530e66b204a9b81a24abb71aac625f2d}{CSV\_QUOTE}, NULL, NULL)
+\end{DoxyCode}
+\hypertarget{test__csv_8c_a0445ef88b99fe6776816d92e6e868c93}{}\label{test__csv_8c_a0445ef88b99fe6776816d92e6e868c93} 
+\index{test\+\_\+csv.\+c@{test\+\_\+csv.\+c}!D\+O\+\_\+\+T\+E\+S\+T\+\_\+\+C\+U\+S\+T\+OM@{D\+O\+\_\+\+T\+E\+S\+T\+\_\+\+C\+U\+S\+T\+OM}}
+\index{D\+O\+\_\+\+T\+E\+S\+T\+\_\+\+C\+U\+S\+T\+OM@{D\+O\+\_\+\+T\+E\+S\+T\+\_\+\+C\+U\+S\+T\+OM}!test\+\_\+csv.\+c@{test\+\_\+csv.\+c}}
+\subsubsection{\texorpdfstring{D\+O\+\_\+\+T\+E\+S\+T\+\_\+\+C\+U\+S\+T\+OM}{DO\_TEST\_CUSTOM}}
+{\footnotesize\ttfamily \#define D\+O\+\_\+\+T\+E\+S\+T\+\_\+\+C\+U\+S\+T\+OM(\begin{DoxyParamCaption}\item[{}]{name,  }\item[{}]{options,  }\item[{}]{d,  }\item[{}]{q,  }\item[{}]{s,  }\item[{}]{t }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\hyperlink{test__csv_8c_a958e2fc073d2c91e0632fecc712b3e33}{test\_parser}(\textcolor{stringliteral}{"custom"} #name, options, custom ## name ## \_data, \(\backslash\)
+        \textcolor{keyword}{sizeof}(custom ## name ## \_data) - 1, custom ## name ## \_results, d, q, s, t)
+\end{DoxyCode}
+
+
+\subsection{Function Documentation}
+\hypertarget{test__csv_8c_ade1f382fdd539890161332fc440f72f0}{}\label{test__csv_8c_ade1f382fdd539890161332fc440f72f0} 
+\index{test\+\_\+csv.\+c@{test\+\_\+csv.\+c}!cb1@{cb1}}
+\index{cb1@{cb1}!test\+\_\+csv.\+c@{test\+\_\+csv.\+c}}
+\subsubsection{\texorpdfstring{cb1()}{cb1()}}
+{\footnotesize\ttfamily void cb1 (\begin{DoxyParamCaption}\item[{void $\ast$}]{data,  }\item[{size\+\_\+t}]{len,  }\item[{void $\ast$}]{t }\end{DoxyParamCaption})}
+
+\hypertarget{test__csv_8c_ac18726758b83820c49f8f417e49fb160}{}\label{test__csv_8c_ac18726758b83820c49f8f417e49fb160} 
+\index{test\+\_\+csv.\+c@{test\+\_\+csv.\+c}!cb2@{cb2}}
+\index{cb2@{cb2}!test\+\_\+csv.\+c@{test\+\_\+csv.\+c}}
+\subsubsection{\texorpdfstring{cb2()}{cb2()}}
+{\footnotesize\ttfamily void cb2 (\begin{DoxyParamCaption}\item[{int}]{c,  }\item[{void $\ast$}]{t }\end{DoxyParamCaption})}
+
+\hypertarget{test__csv_8c_ad2582fe149aaa13686dd74de738fd674}{}\label{test__csv_8c_ad2582fe149aaa13686dd74de738fd674} 
+\index{test\+\_\+csv.\+c@{test\+\_\+csv.\+c}!fail\+\_\+parser@{fail\+\_\+parser}}
+\index{fail\+\_\+parser@{fail\+\_\+parser}!test\+\_\+csv.\+c@{test\+\_\+csv.\+c}}
+\subsubsection{\texorpdfstring{fail\+\_\+parser()}{fail\_parser()}}
+{\footnotesize\ttfamily void fail\+\_\+parser (\begin{DoxyParamCaption}\item[{char $\ast$}]{test\+\_\+name,  }\item[{char $\ast$}]{message }\end{DoxyParamCaption})}
+
+\hypertarget{test__csv_8c_a92d7e865e21eca7f248e0566ba268331}{}\label{test__csv_8c_a92d7e865e21eca7f248e0566ba268331} 
+\index{test\+\_\+csv.\+c@{test\+\_\+csv.\+c}!fail\+\_\+writer@{fail\+\_\+writer}}
+\index{fail\+\_\+writer@{fail\+\_\+writer}!test\+\_\+csv.\+c@{test\+\_\+csv.\+c}}
+\subsubsection{\texorpdfstring{fail\+\_\+writer()}{fail\_writer()}}
+{\footnotesize\ttfamily void fail\+\_\+writer (\begin{DoxyParamCaption}\item[{char $\ast$}]{test\+\_\+name,  }\item[{char $\ast$}]{message }\end{DoxyParamCaption})}
+
+\hypertarget{test__csv_8c_a840291bc02cba5474a4cb46a9b9566fe}{}\label{test__csv_8c_a840291bc02cba5474a4cb46a9b9566fe} 
+\index{test\+\_\+csv.\+c@{test\+\_\+csv.\+c}!main@{main}}
+\index{main@{main}!test\+\_\+csv.\+c@{test\+\_\+csv.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\hypertarget{test__csv_8c_a958e2fc073d2c91e0632fecc712b3e33}{}\label{test__csv_8c_a958e2fc073d2c91e0632fecc712b3e33} 
+\index{test\+\_\+csv.\+c@{test\+\_\+csv.\+c}!test\+\_\+parser@{test\+\_\+parser}}
+\index{test\+\_\+parser@{test\+\_\+parser}!test\+\_\+csv.\+c@{test\+\_\+csv.\+c}}
+\subsubsection{\texorpdfstring{test\+\_\+parser()}{test\_parser()}}
+{\footnotesize\ttfamily void test\+\_\+parser (\begin{DoxyParamCaption}\item[{char $\ast$}]{test\+\_\+name,  }\item[{unsigned char}]{options,  }\item[{void $\ast$}]{input,  }\item[{size\+\_\+t}]{len,  }\item[{struct \hyperlink{structevent}{event}}]{expected\mbox{[}$\,$\mbox{]},  }\item[{char}]{delimiter,  }\item[{char}]{quote,  }\item[{int($\ast$)(unsigned char)}]{space\+\_\+func,  }\item[{int($\ast$)(unsigned char)}]{term\+\_\+func }\end{DoxyParamCaption})}
+
+\hypertarget{test__csv_8c_a3fb7086e4ffb81a4d86ece5aa935615d}{}\label{test__csv_8c_a3fb7086e4ffb81a4d86ece5aa935615d} 
+\index{test\+\_\+csv.\+c@{test\+\_\+csv.\+c}!test\+\_\+writer@{test\+\_\+writer}}
+\index{test\+\_\+writer@{test\+\_\+writer}!test\+\_\+csv.\+c@{test\+\_\+csv.\+c}}
+\subsubsection{\texorpdfstring{test\+\_\+writer()}{test\_writer()}}
+{\footnotesize\ttfamily void test\+\_\+writer (\begin{DoxyParamCaption}\item[{char $\ast$}]{test\+\_\+name,  }\item[{char $\ast$}]{input,  }\item[{size\+\_\+t}]{input\+\_\+len,  }\item[{char $\ast$}]{expected,  }\item[{size\+\_\+t}]{expected\+\_\+len }\end{DoxyParamCaption})}
+
+\hypertarget{test__csv_8c_a5105e86af2cc3863d0fde2830d1c1969}{}\label{test__csv_8c_a5105e86af2cc3863d0fde2830d1c1969} 
+\index{test\+\_\+csv.\+c@{test\+\_\+csv.\+c}!test\+\_\+writer2@{test\+\_\+writer2}}
+\index{test\+\_\+writer2@{test\+\_\+writer2}!test\+\_\+csv.\+c@{test\+\_\+csv.\+c}}
+\subsubsection{\texorpdfstring{test\+\_\+writer2()}{test\_writer2()}}
+{\footnotesize\ttfamily void test\+\_\+writer2 (\begin{DoxyParamCaption}\item[{char $\ast$}]{test\+\_\+name,  }\item[{char $\ast$}]{input,  }\item[{size\+\_\+t}]{input\+\_\+len,  }\item[{char $\ast$}]{expected,  }\item[{size\+\_\+t}]{expected\+\_\+len,  }\item[{char}]{quote }\end{DoxyParamCaption})}
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{test__csv_8c_a72f49011b5605e0c59eabd1ab811cdfd}{}\label{test__csv_8c_a72f49011b5605e0c59eabd1ab811cdfd} 
+\index{test\+\_\+csv.\+c@{test\+\_\+csv.\+c}!col@{col}}
+\index{col@{col}!test\+\_\+csv.\+c@{test\+\_\+csv.\+c}}
+\subsubsection{\texorpdfstring{col}{col}}
+{\footnotesize\ttfamily size\+\_\+t col}
+
+\hypertarget{test__csv_8c_ab8897ffbc0cc4bf5d33445135fe67936}{}\label{test__csv_8c_ab8897ffbc0cc4bf5d33445135fe67936} 
+\index{test\+\_\+csv.\+c@{test\+\_\+csv.\+c}!event\+\_\+idx@{event\+\_\+idx}}
+\index{event\+\_\+idx@{event\+\_\+idx}!test\+\_\+csv.\+c@{test\+\_\+csv.\+c}}
+\subsubsection{\texorpdfstring{event\+\_\+idx}{event\_idx}}
+{\footnotesize\ttfamily int event\+\_\+idx}
+
+\hypertarget{test__csv_8c_a1504ba55cc69bc5077da274e151101f7}{}\label{test__csv_8c_a1504ba55cc69bc5077da274e151101f7} 
+\index{test\+\_\+csv.\+c@{test\+\_\+csv.\+c}!event\+\_\+ptr@{event\+\_\+ptr}}
+\index{event\+\_\+ptr@{event\+\_\+ptr}!test\+\_\+csv.\+c@{test\+\_\+csv.\+c}}
+\subsubsection{\texorpdfstring{event\+\_\+ptr}{event\_ptr}}
+{\footnotesize\ttfamily struct \hyperlink{structevent}{event}$\ast$ event\+\_\+ptr}
+
+\hypertarget{test__csv_8c_a97ab3b8ef2f074e3774c66099d7ec59b}{}\label{test__csv_8c_a97ab3b8ef2f074e3774c66099d7ec59b} 
+\index{test\+\_\+csv.\+c@{test\+\_\+csv.\+c}!row@{row}}
+\index{row@{row}!test\+\_\+csv.\+c@{test\+\_\+csv.\+c}}
+\subsubsection{\texorpdfstring{row}{row}}
+{\footnotesize\ttfamily size\+\_\+t row}
+

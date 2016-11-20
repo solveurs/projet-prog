@@ -1,0 +1,295 @@
+\hypertarget{libcsv_8c}{}\section{/\+Users/frj/\+Documents/\+Code/\+Projet\+\_\+prog\+\_\+3a/\+Code/back/libcsv-\/3.0.3/libcsv.c File Reference}
+\label{libcsv_8c}\index{/\+Users/frj/\+Documents/\+Code/\+Projet\+\_\+prog\+\_\+3a/\+Code/back/libcsv-\/3.\+0.\+3/libcsv.\+c@{/\+Users/frj/\+Documents/\+Code/\+Projet\+\_\+prog\+\_\+3a/\+Code/back/libcsv-\/3.\+0.\+3/libcsv.\+c}}
+{\ttfamily \#include \char`\"{}csv.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{libcsv_8c_a3c75bb398badb69c7577b21486f9963f}{S\+I\+Z\+E\+\_\+\+M\+AX}~((size\+\_\+t)-\/1) /$\ast$ C89 doesn\textquotesingle{}t have stdint.\+h or S\+I\+Z\+E\+\_\+\+M\+AX $\ast$/
+\item 
+\#define \hyperlink{libcsv_8c_a1c6d5de492ac61ad29aec7aa9a436bbf}{V\+E\+R\+S\+I\+ON}~\char`\"{}3.\+0.\+3\char`\"{}
+\item 
+\#define \hyperlink{libcsv_8c_a0dde908c580ee4b9b134794d9b09f202}{R\+O\+W\+\_\+\+N\+O\+T\+\_\+\+B\+E\+G\+UN}~0
+\item 
+\#define \hyperlink{libcsv_8c_aba08ab8c86cf7bbfa7b273bba5c8f790}{F\+I\+E\+L\+D\+\_\+\+N\+O\+T\+\_\+\+B\+E\+G\+UN}~1
+\item 
+\#define \hyperlink{libcsv_8c_aeb6e4175a8c79aa99f8da332b6fe62af}{F\+I\+E\+L\+D\+\_\+\+B\+E\+G\+UN}~2
+\item 
+\#define \hyperlink{libcsv_8c_a5c0e812d40c0a8c74fab6ce4470aa251}{F\+I\+E\+L\+D\+\_\+\+M\+I\+G\+H\+T\+\_\+\+H\+A\+V\+E\+\_\+\+E\+N\+D\+ED}~3
+\item 
+\#define \hyperlink{libcsv_8c_ad0dacbd38cc5eb390c548c7867e43cf9}{M\+E\+M\+\_\+\+B\+L\+K\+\_\+\+S\+I\+ZE}~128
+\item 
+\#define \hyperlink{libcsv_8c_a7a2f81e24c40f0acaa9b9124d9e462fb}{S\+U\+B\+M\+I\+T\+\_\+\+F\+I\+E\+LD}(p)
+\item 
+\#define \hyperlink{libcsv_8c_ae1cde301a29f28acd4bae1c16b857b77}{S\+U\+B\+M\+I\+T\+\_\+\+R\+OW}(p,  c)
+\item 
+\#define \hyperlink{libcsv_8c_aa04efa0e1db1fb2103914c191fcfa221}{S\+U\+B\+M\+I\+T\+\_\+\+C\+H\+AR}(p,  c)~((p)-\/$>$entry\+\_\+buf\mbox{[}entry\+\_\+pos++\mbox{]} = (c))
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{libcsv_8c_a78159ae4750c0b2d881725b99ebe5dd9}{csv\+\_\+error} (struct \hyperlink{structcsv__parser}{csv\+\_\+parser} $\ast$p)
+\item 
+char $\ast$ \hyperlink{libcsv_8c_a86a1461b9eb8d316b4c5f93cdd8af7ee}{csv\+\_\+strerror} (int status)
+\item 
+int \hyperlink{libcsv_8c_a7c79f27843c72931144831794121a1bd}{csv\+\_\+get\+\_\+opts} (struct \hyperlink{structcsv__parser}{csv\+\_\+parser} $\ast$p)
+\item 
+int \hyperlink{libcsv_8c_ad13f02ed1d06f5310cf97c873e5d26d6}{csv\+\_\+set\+\_\+opts} (struct \hyperlink{structcsv__parser}{csv\+\_\+parser} $\ast$p, unsigned char options)
+\item 
+int \hyperlink{libcsv_8c_a63ff1a27640a503afe336e67ae114a86}{csv\+\_\+init} (struct \hyperlink{structcsv__parser}{csv\+\_\+parser} $\ast$p, unsigned char options)
+\item 
+void \hyperlink{libcsv_8c_aab56b15fc2b67a3f0f5f65f17b897c37}{csv\+\_\+free} (struct \hyperlink{structcsv__parser}{csv\+\_\+parser} $\ast$p)
+\item 
+int \hyperlink{libcsv_8c_a809917e0f1518e43931cfe7667f27708}{csv\+\_\+fini} (struct \hyperlink{structcsv__parser}{csv\+\_\+parser} $\ast$p, void($\ast$\hyperlink{test__csv_8c_ade1f382fdd539890161332fc440f72f0}{cb1})(void $\ast$, size\+\_\+t, void $\ast$), void($\ast$\hyperlink{test__csv_8c_ac18726758b83820c49f8f417e49fb160}{cb2})(int c, void $\ast$), void $\ast$data)
+\item 
+void \hyperlink{libcsv_8c_a4e4b65ef50d610649c2ca4ba0176771e}{csv\+\_\+set\+\_\+delim} (struct \hyperlink{structcsv__parser}{csv\+\_\+parser} $\ast$p, unsigned char c)
+\item 
+void \hyperlink{libcsv_8c_a176484b938d55a95c7a5411bd303a4ad}{csv\+\_\+set\+\_\+quote} (struct \hyperlink{structcsv__parser}{csv\+\_\+parser} $\ast$p, unsigned char c)
+\item 
+unsigned char \hyperlink{libcsv_8c_a89398e7652905aa69ec5668e91583e72}{csv\+\_\+get\+\_\+delim} (struct \hyperlink{structcsv__parser}{csv\+\_\+parser} $\ast$p)
+\item 
+unsigned char \hyperlink{libcsv_8c_a6c1522a9fe6d742a3a00da0a3aa0854d}{csv\+\_\+get\+\_\+quote} (struct \hyperlink{structcsv__parser}{csv\+\_\+parser} $\ast$p)
+\item 
+void \hyperlink{libcsv_8c_ab3b2e581f5afee7d891bd049ba05e0ce}{csv\+\_\+set\+\_\+space\+\_\+func} (struct \hyperlink{structcsv__parser}{csv\+\_\+parser} $\ast$p, int($\ast$f)(unsigned char))
+\item 
+void \hyperlink{libcsv_8c_af896f95a75ca7495b0b50ca8832af09f}{csv\+\_\+set\+\_\+term\+\_\+func} (struct \hyperlink{structcsv__parser}{csv\+\_\+parser} $\ast$p, int($\ast$f)(unsigned char))
+\item 
+void \hyperlink{libcsv_8c_a17a3f973b05b3223a36bbfc265b31f3a}{csv\+\_\+set\+\_\+realloc\+\_\+func} (struct \hyperlink{structcsv__parser}{csv\+\_\+parser} $\ast$p, void $\ast$($\ast$f)(void $\ast$, size\+\_\+t))
+\item 
+void \hyperlink{libcsv_8c_a4576551f5060b5d3e30fab552ad67512}{csv\+\_\+set\+\_\+free\+\_\+func} (struct \hyperlink{structcsv__parser}{csv\+\_\+parser} $\ast$p, void($\ast$f)(void $\ast$))
+\item 
+void \hyperlink{libcsv_8c_a83c09c416cc60e77f56fcf9d4bc59797}{csv\+\_\+set\+\_\+blk\+\_\+size} (struct \hyperlink{structcsv__parser}{csv\+\_\+parser} $\ast$p, size\+\_\+t size)
+\item 
+size\+\_\+t \hyperlink{libcsv_8c_ad60993e2fbc173b15844c898b2692806}{csv\+\_\+get\+\_\+buffer\+\_\+size} (struct \hyperlink{structcsv__parser}{csv\+\_\+parser} $\ast$p)
+\item 
+size\+\_\+t \hyperlink{libcsv_8c_a4becc4a3184a228fed0c2eecbeef6558}{csv\+\_\+parse} (struct \hyperlink{structcsv__parser}{csv\+\_\+parser} $\ast$p, const void $\ast$s, size\+\_\+t len, void($\ast$\hyperlink{test__csv_8c_ade1f382fdd539890161332fc440f72f0}{cb1})(void $\ast$, size\+\_\+t, void $\ast$), void($\ast$\hyperlink{test__csv_8c_ac18726758b83820c49f8f417e49fb160}{cb2})(int c, void $\ast$), void $\ast$data)
+\item 
+size\+\_\+t \hyperlink{libcsv_8c_a3c3a42144538bd6edcd15f5aeb6fa41b}{csv\+\_\+write} (void $\ast$dest, size\+\_\+t dest\+\_\+size, const void $\ast$src, size\+\_\+t src\+\_\+size)
+\item 
+int \hyperlink{libcsv_8c_abfd3c874d8ca9b974021f4cfb1c6f673}{csv\+\_\+fwrite} (F\+I\+LE $\ast$fp, const void $\ast$src, size\+\_\+t src\+\_\+size)
+\item 
+size\+\_\+t \hyperlink{libcsv_8c_a0897f99870d6c85d5754606cc3678b50}{csv\+\_\+write2} (void $\ast$dest, size\+\_\+t dest\+\_\+size, const void $\ast$src, size\+\_\+t src\+\_\+size, unsigned char quote)
+\item 
+int \hyperlink{libcsv_8c_a41176ac5de70ff52b859ac5dbe63a921}{csv\+\_\+fwrite2} (F\+I\+LE $\ast$fp, const void $\ast$src, size\+\_\+t src\+\_\+size, unsigned char quote)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{libcsv_8c_aeb6e4175a8c79aa99f8da332b6fe62af}{}\label{libcsv_8c_aeb6e4175a8c79aa99f8da332b6fe62af} 
+\index{libcsv.\+c@{libcsv.\+c}!F\+I\+E\+L\+D\+\_\+\+B\+E\+G\+UN@{F\+I\+E\+L\+D\+\_\+\+B\+E\+G\+UN}}
+\index{F\+I\+E\+L\+D\+\_\+\+B\+E\+G\+UN@{F\+I\+E\+L\+D\+\_\+\+B\+E\+G\+UN}!libcsv.\+c@{libcsv.\+c}}
+\subsubsection{\texorpdfstring{F\+I\+E\+L\+D\+\_\+\+B\+E\+G\+UN}{FIELD\_BEGUN}}
+{\footnotesize\ttfamily \#define F\+I\+E\+L\+D\+\_\+\+B\+E\+G\+UN~2}
+
+\hypertarget{libcsv_8c_a5c0e812d40c0a8c74fab6ce4470aa251}{}\label{libcsv_8c_a5c0e812d40c0a8c74fab6ce4470aa251} 
+\index{libcsv.\+c@{libcsv.\+c}!F\+I\+E\+L\+D\+\_\+\+M\+I\+G\+H\+T\+\_\+\+H\+A\+V\+E\+\_\+\+E\+N\+D\+ED@{F\+I\+E\+L\+D\+\_\+\+M\+I\+G\+H\+T\+\_\+\+H\+A\+V\+E\+\_\+\+E\+N\+D\+ED}}
+\index{F\+I\+E\+L\+D\+\_\+\+M\+I\+G\+H\+T\+\_\+\+H\+A\+V\+E\+\_\+\+E\+N\+D\+ED@{F\+I\+E\+L\+D\+\_\+\+M\+I\+G\+H\+T\+\_\+\+H\+A\+V\+E\+\_\+\+E\+N\+D\+ED}!libcsv.\+c@{libcsv.\+c}}
+\subsubsection{\texorpdfstring{F\+I\+E\+L\+D\+\_\+\+M\+I\+G\+H\+T\+\_\+\+H\+A\+V\+E\+\_\+\+E\+N\+D\+ED}{FIELD\_MIGHT\_HAVE\_ENDED}}
+{\footnotesize\ttfamily \#define F\+I\+E\+L\+D\+\_\+\+M\+I\+G\+H\+T\+\_\+\+H\+A\+V\+E\+\_\+\+E\+N\+D\+ED~3}
+
+\hypertarget{libcsv_8c_aba08ab8c86cf7bbfa7b273bba5c8f790}{}\label{libcsv_8c_aba08ab8c86cf7bbfa7b273bba5c8f790} 
+\index{libcsv.\+c@{libcsv.\+c}!F\+I\+E\+L\+D\+\_\+\+N\+O\+T\+\_\+\+B\+E\+G\+UN@{F\+I\+E\+L\+D\+\_\+\+N\+O\+T\+\_\+\+B\+E\+G\+UN}}
+\index{F\+I\+E\+L\+D\+\_\+\+N\+O\+T\+\_\+\+B\+E\+G\+UN@{F\+I\+E\+L\+D\+\_\+\+N\+O\+T\+\_\+\+B\+E\+G\+UN}!libcsv.\+c@{libcsv.\+c}}
+\subsubsection{\texorpdfstring{F\+I\+E\+L\+D\+\_\+\+N\+O\+T\+\_\+\+B\+E\+G\+UN}{FIELD\_NOT\_BEGUN}}
+{\footnotesize\ttfamily \#define F\+I\+E\+L\+D\+\_\+\+N\+O\+T\+\_\+\+B\+E\+G\+UN~1}
+
+\hypertarget{libcsv_8c_ad0dacbd38cc5eb390c548c7867e43cf9}{}\label{libcsv_8c_ad0dacbd38cc5eb390c548c7867e43cf9} 
+\index{libcsv.\+c@{libcsv.\+c}!M\+E\+M\+\_\+\+B\+L\+K\+\_\+\+S\+I\+ZE@{M\+E\+M\+\_\+\+B\+L\+K\+\_\+\+S\+I\+ZE}}
+\index{M\+E\+M\+\_\+\+B\+L\+K\+\_\+\+S\+I\+ZE@{M\+E\+M\+\_\+\+B\+L\+K\+\_\+\+S\+I\+ZE}!libcsv.\+c@{libcsv.\+c}}
+\subsubsection{\texorpdfstring{M\+E\+M\+\_\+\+B\+L\+K\+\_\+\+S\+I\+ZE}{MEM\_BLK\_SIZE}}
+{\footnotesize\ttfamily \#define M\+E\+M\+\_\+\+B\+L\+K\+\_\+\+S\+I\+ZE~128}
+
+\hypertarget{libcsv_8c_a0dde908c580ee4b9b134794d9b09f202}{}\label{libcsv_8c_a0dde908c580ee4b9b134794d9b09f202} 
+\index{libcsv.\+c@{libcsv.\+c}!R\+O\+W\+\_\+\+N\+O\+T\+\_\+\+B\+E\+G\+UN@{R\+O\+W\+\_\+\+N\+O\+T\+\_\+\+B\+E\+G\+UN}}
+\index{R\+O\+W\+\_\+\+N\+O\+T\+\_\+\+B\+E\+G\+UN@{R\+O\+W\+\_\+\+N\+O\+T\+\_\+\+B\+E\+G\+UN}!libcsv.\+c@{libcsv.\+c}}
+\subsubsection{\texorpdfstring{R\+O\+W\+\_\+\+N\+O\+T\+\_\+\+B\+E\+G\+UN}{ROW\_NOT\_BEGUN}}
+{\footnotesize\ttfamily \#define R\+O\+W\+\_\+\+N\+O\+T\+\_\+\+B\+E\+G\+UN~0}
+
+\hypertarget{libcsv_8c_a3c75bb398badb69c7577b21486f9963f}{}\label{libcsv_8c_a3c75bb398badb69c7577b21486f9963f} 
+\index{libcsv.\+c@{libcsv.\+c}!S\+I\+Z\+E\+\_\+\+M\+AX@{S\+I\+Z\+E\+\_\+\+M\+AX}}
+\index{S\+I\+Z\+E\+\_\+\+M\+AX@{S\+I\+Z\+E\+\_\+\+M\+AX}!libcsv.\+c@{libcsv.\+c}}
+\subsubsection{\texorpdfstring{S\+I\+Z\+E\+\_\+\+M\+AX}{SIZE\_MAX}}
+{\footnotesize\ttfamily \#define S\+I\+Z\+E\+\_\+\+M\+AX~((size\+\_\+t)-\/1) /$\ast$ C89 doesn\textquotesingle{}t have stdint.\+h or S\+I\+Z\+E\+\_\+\+M\+AX $\ast$/}
+
+\hypertarget{libcsv_8c_aa04efa0e1db1fb2103914c191fcfa221}{}\label{libcsv_8c_aa04efa0e1db1fb2103914c191fcfa221} 
+\index{libcsv.\+c@{libcsv.\+c}!S\+U\+B\+M\+I\+T\+\_\+\+C\+H\+AR@{S\+U\+B\+M\+I\+T\+\_\+\+C\+H\+AR}}
+\index{S\+U\+B\+M\+I\+T\+\_\+\+C\+H\+AR@{S\+U\+B\+M\+I\+T\+\_\+\+C\+H\+AR}!libcsv.\+c@{libcsv.\+c}}
+\subsubsection{\texorpdfstring{S\+U\+B\+M\+I\+T\+\_\+\+C\+H\+AR}{SUBMIT\_CHAR}}
+{\footnotesize\ttfamily \#define S\+U\+B\+M\+I\+T\+\_\+\+C\+H\+AR(\begin{DoxyParamCaption}\item[{}]{p,  }\item[{}]{c }\end{DoxyParamCaption})~((p)-\/$>$entry\+\_\+buf\mbox{[}entry\+\_\+pos++\mbox{]} = (c))}
+
+\hypertarget{libcsv_8c_a7a2f81e24c40f0acaa9b9124d9e462fb}{}\label{libcsv_8c_a7a2f81e24c40f0acaa9b9124d9e462fb} 
+\index{libcsv.\+c@{libcsv.\+c}!S\+U\+B\+M\+I\+T\+\_\+\+F\+I\+E\+LD@{S\+U\+B\+M\+I\+T\+\_\+\+F\+I\+E\+LD}}
+\index{S\+U\+B\+M\+I\+T\+\_\+\+F\+I\+E\+LD@{S\+U\+B\+M\+I\+T\+\_\+\+F\+I\+E\+LD}!libcsv.\+c@{libcsv.\+c}}
+\subsubsection{\texorpdfstring{S\+U\+B\+M\+I\+T\+\_\+\+F\+I\+E\+LD}{SUBMIT\_FIELD}}
+{\footnotesize\ttfamily \#define S\+U\+B\+M\+I\+T\+\_\+\+F\+I\+E\+LD(\begin{DoxyParamCaption}\item[{}]{p }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{do} \{ \(\backslash\)
+   if (!quoted) \(\backslash\)
+     entry\_pos -= spaces; \(\backslash\)
+   if (p->options & \hyperlink{csv_8h_ab8ad5c1f198e533856c64b5b06526478}{CSV\_APPEND\_NULL}) \(\backslash\)
+     ((p)->entry\_buf[entry\_pos]) = \textcolor{charliteral}{'\(\backslash\)0'}; \(\backslash\)
+   if (\hyperlink{csvfix_8c_ad57824ac7e2f0429ce46efc17496ed16}{cb1} && (p->options & \hyperlink{csv_8h_acdd8ef0b4cedb12ee72e24c4c4570e46}{CSV\_EMPTY\_IS\_NULL}) && !quoted && entry\_pos == 0) \(\backslash\)
+     cb1(NULL, entry\_pos, data); \(\backslash\)
+   else \textcolor{keywordflow}{if} (\hyperlink{csvfix_8c_ad57824ac7e2f0429ce46efc17496ed16}{cb1}) \(\backslash\)
+     cb1(p->entry\_buf, entry\_pos, data); \(\backslash\)
+   pstate = \hyperlink{libcsv_8c_aba08ab8c86cf7bbfa7b273bba5c8f790}{FIELD\_NOT\_BEGUN}; \(\backslash\)
+   entry\_pos = quoted = spaces = 0; \(\backslash\)
+ \} \textcolor{keywordflow}{while} (0)
+\end{DoxyCode}
+\hypertarget{libcsv_8c_ae1cde301a29f28acd4bae1c16b857b77}{}\label{libcsv_8c_ae1cde301a29f28acd4bae1c16b857b77} 
+\index{libcsv.\+c@{libcsv.\+c}!S\+U\+B\+M\+I\+T\+\_\+\+R\+OW@{S\+U\+B\+M\+I\+T\+\_\+\+R\+OW}}
+\index{S\+U\+B\+M\+I\+T\+\_\+\+R\+OW@{S\+U\+B\+M\+I\+T\+\_\+\+R\+OW}!libcsv.\+c@{libcsv.\+c}}
+\subsubsection{\texorpdfstring{S\+U\+B\+M\+I\+T\+\_\+\+R\+OW}{SUBMIT\_ROW}}
+{\footnotesize\ttfamily \#define S\+U\+B\+M\+I\+T\+\_\+\+R\+OW(\begin{DoxyParamCaption}\item[{}]{p,  }\item[{}]{c }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{do} \{ \(\backslash\)
+    if (\hyperlink{csvfix_8c_aa6289e7902b3263d5711f06e6cab594a}{cb2}) \(\backslash\)
+      cb2(c, data); \(\backslash\)
+    pstate = \hyperlink{libcsv_8c_a0dde908c580ee4b9b134794d9b09f202}{ROW\_NOT\_BEGUN}; \(\backslash\)
+    entry\_pos = quoted = spaces = 0; \(\backslash\)
+  \} \textcolor{keywordflow}{while} (0)
+\end{DoxyCode}
+\hypertarget{libcsv_8c_a1c6d5de492ac61ad29aec7aa9a436bbf}{}\label{libcsv_8c_a1c6d5de492ac61ad29aec7aa9a436bbf} 
+\index{libcsv.\+c@{libcsv.\+c}!V\+E\+R\+S\+I\+ON@{V\+E\+R\+S\+I\+ON}}
+\index{V\+E\+R\+S\+I\+ON@{V\+E\+R\+S\+I\+ON}!libcsv.\+c@{libcsv.\+c}}
+\subsubsection{\texorpdfstring{V\+E\+R\+S\+I\+ON}{VERSION}}
+{\footnotesize\ttfamily \#define V\+E\+R\+S\+I\+ON~\char`\"{}3.\+0.\+3\char`\"{}}
+
+
+
+\subsection{Function Documentation}
+\hypertarget{libcsv_8c_a78159ae4750c0b2d881725b99ebe5dd9}{}\label{libcsv_8c_a78159ae4750c0b2d881725b99ebe5dd9} 
+\index{libcsv.\+c@{libcsv.\+c}!csv\+\_\+error@{csv\+\_\+error}}
+\index{csv\+\_\+error@{csv\+\_\+error}!libcsv.\+c@{libcsv.\+c}}
+\subsubsection{\texorpdfstring{csv\+\_\+error()}{csv\_error()}}
+{\footnotesize\ttfamily int csv\+\_\+error (\begin{DoxyParamCaption}\item[{struct \hyperlink{structcsv__parser}{csv\+\_\+parser} $\ast$}]{p }\end{DoxyParamCaption})}
+
+\hypertarget{libcsv_8c_a809917e0f1518e43931cfe7667f27708}{}\label{libcsv_8c_a809917e0f1518e43931cfe7667f27708} 
+\index{libcsv.\+c@{libcsv.\+c}!csv\+\_\+fini@{csv\+\_\+fini}}
+\index{csv\+\_\+fini@{csv\+\_\+fini}!libcsv.\+c@{libcsv.\+c}}
+\subsubsection{\texorpdfstring{csv\+\_\+fini()}{csv\_fini()}}
+{\footnotesize\ttfamily int csv\+\_\+fini (\begin{DoxyParamCaption}\item[{struct \hyperlink{structcsv__parser}{csv\+\_\+parser} $\ast$}]{p,  }\item[{void($\ast$)(void $\ast$, size\+\_\+t, void $\ast$)}]{cb1,  }\item[{void($\ast$)(int c, void $\ast$)}]{cb2,  }\item[{void $\ast$}]{data }\end{DoxyParamCaption})}
+
+\hypertarget{libcsv_8c_aab56b15fc2b67a3f0f5f65f17b897c37}{}\label{libcsv_8c_aab56b15fc2b67a3f0f5f65f17b897c37} 
+\index{libcsv.\+c@{libcsv.\+c}!csv\+\_\+free@{csv\+\_\+free}}
+\index{csv\+\_\+free@{csv\+\_\+free}!libcsv.\+c@{libcsv.\+c}}
+\subsubsection{\texorpdfstring{csv\+\_\+free()}{csv\_free()}}
+{\footnotesize\ttfamily void csv\+\_\+free (\begin{DoxyParamCaption}\item[{struct \hyperlink{structcsv__parser}{csv\+\_\+parser} $\ast$}]{p }\end{DoxyParamCaption})}
+
+\hypertarget{libcsv_8c_abfd3c874d8ca9b974021f4cfb1c6f673}{}\label{libcsv_8c_abfd3c874d8ca9b974021f4cfb1c6f673} 
+\index{libcsv.\+c@{libcsv.\+c}!csv\+\_\+fwrite@{csv\+\_\+fwrite}}
+\index{csv\+\_\+fwrite@{csv\+\_\+fwrite}!libcsv.\+c@{libcsv.\+c}}
+\subsubsection{\texorpdfstring{csv\+\_\+fwrite()}{csv\_fwrite()}}
+{\footnotesize\ttfamily int csv\+\_\+fwrite (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{fp,  }\item[{const void $\ast$}]{src,  }\item[{size\+\_\+t}]{src\+\_\+size }\end{DoxyParamCaption})}
+
+\hypertarget{libcsv_8c_a41176ac5de70ff52b859ac5dbe63a921}{}\label{libcsv_8c_a41176ac5de70ff52b859ac5dbe63a921} 
+\index{libcsv.\+c@{libcsv.\+c}!csv\+\_\+fwrite2@{csv\+\_\+fwrite2}}
+\index{csv\+\_\+fwrite2@{csv\+\_\+fwrite2}!libcsv.\+c@{libcsv.\+c}}
+\subsubsection{\texorpdfstring{csv\+\_\+fwrite2()}{csv\_fwrite2()}}
+{\footnotesize\ttfamily int csv\+\_\+fwrite2 (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{fp,  }\item[{const void $\ast$}]{src,  }\item[{size\+\_\+t}]{src\+\_\+size,  }\item[{unsigned char}]{quote }\end{DoxyParamCaption})}
+
+\hypertarget{libcsv_8c_ad60993e2fbc173b15844c898b2692806}{}\label{libcsv_8c_ad60993e2fbc173b15844c898b2692806} 
+\index{libcsv.\+c@{libcsv.\+c}!csv\+\_\+get\+\_\+buffer\+\_\+size@{csv\+\_\+get\+\_\+buffer\+\_\+size}}
+\index{csv\+\_\+get\+\_\+buffer\+\_\+size@{csv\+\_\+get\+\_\+buffer\+\_\+size}!libcsv.\+c@{libcsv.\+c}}
+\subsubsection{\texorpdfstring{csv\+\_\+get\+\_\+buffer\+\_\+size()}{csv\_get\_buffer\_size()}}
+{\footnotesize\ttfamily size\+\_\+t csv\+\_\+get\+\_\+buffer\+\_\+size (\begin{DoxyParamCaption}\item[{struct \hyperlink{structcsv__parser}{csv\+\_\+parser} $\ast$}]{p }\end{DoxyParamCaption})}
+
+\hypertarget{libcsv_8c_a89398e7652905aa69ec5668e91583e72}{}\label{libcsv_8c_a89398e7652905aa69ec5668e91583e72} 
+\index{libcsv.\+c@{libcsv.\+c}!csv\+\_\+get\+\_\+delim@{csv\+\_\+get\+\_\+delim}}
+\index{csv\+\_\+get\+\_\+delim@{csv\+\_\+get\+\_\+delim}!libcsv.\+c@{libcsv.\+c}}
+\subsubsection{\texorpdfstring{csv\+\_\+get\+\_\+delim()}{csv\_get\_delim()}}
+{\footnotesize\ttfamily unsigned char csv\+\_\+get\+\_\+delim (\begin{DoxyParamCaption}\item[{struct \hyperlink{structcsv__parser}{csv\+\_\+parser} $\ast$}]{p }\end{DoxyParamCaption})}
+
+\hypertarget{libcsv_8c_a7c79f27843c72931144831794121a1bd}{}\label{libcsv_8c_a7c79f27843c72931144831794121a1bd} 
+\index{libcsv.\+c@{libcsv.\+c}!csv\+\_\+get\+\_\+opts@{csv\+\_\+get\+\_\+opts}}
+\index{csv\+\_\+get\+\_\+opts@{csv\+\_\+get\+\_\+opts}!libcsv.\+c@{libcsv.\+c}}
+\subsubsection{\texorpdfstring{csv\+\_\+get\+\_\+opts()}{csv\_get\_opts()}}
+{\footnotesize\ttfamily int csv\+\_\+get\+\_\+opts (\begin{DoxyParamCaption}\item[{struct \hyperlink{structcsv__parser}{csv\+\_\+parser} $\ast$}]{p }\end{DoxyParamCaption})}
+
+\hypertarget{libcsv_8c_a6c1522a9fe6d742a3a00da0a3aa0854d}{}\label{libcsv_8c_a6c1522a9fe6d742a3a00da0a3aa0854d} 
+\index{libcsv.\+c@{libcsv.\+c}!csv\+\_\+get\+\_\+quote@{csv\+\_\+get\+\_\+quote}}
+\index{csv\+\_\+get\+\_\+quote@{csv\+\_\+get\+\_\+quote}!libcsv.\+c@{libcsv.\+c}}
+\subsubsection{\texorpdfstring{csv\+\_\+get\+\_\+quote()}{csv\_get\_quote()}}
+{\footnotesize\ttfamily unsigned char csv\+\_\+get\+\_\+quote (\begin{DoxyParamCaption}\item[{struct \hyperlink{structcsv__parser}{csv\+\_\+parser} $\ast$}]{p }\end{DoxyParamCaption})}
+
+\hypertarget{libcsv_8c_a63ff1a27640a503afe336e67ae114a86}{}\label{libcsv_8c_a63ff1a27640a503afe336e67ae114a86} 
+\index{libcsv.\+c@{libcsv.\+c}!csv\+\_\+init@{csv\+\_\+init}}
+\index{csv\+\_\+init@{csv\+\_\+init}!libcsv.\+c@{libcsv.\+c}}
+\subsubsection{\texorpdfstring{csv\+\_\+init()}{csv\_init()}}
+{\footnotesize\ttfamily int csv\+\_\+init (\begin{DoxyParamCaption}\item[{struct \hyperlink{structcsv__parser}{csv\+\_\+parser} $\ast$}]{p,  }\item[{unsigned char}]{options }\end{DoxyParamCaption})}
+
+\hypertarget{libcsv_8c_a4becc4a3184a228fed0c2eecbeef6558}{}\label{libcsv_8c_a4becc4a3184a228fed0c2eecbeef6558} 
+\index{libcsv.\+c@{libcsv.\+c}!csv\+\_\+parse@{csv\+\_\+parse}}
+\index{csv\+\_\+parse@{csv\+\_\+parse}!libcsv.\+c@{libcsv.\+c}}
+\subsubsection{\texorpdfstring{csv\+\_\+parse()}{csv\_parse()}}
+{\footnotesize\ttfamily size\+\_\+t csv\+\_\+parse (\begin{DoxyParamCaption}\item[{struct \hyperlink{structcsv__parser}{csv\+\_\+parser} $\ast$}]{p,  }\item[{const void $\ast$}]{s,  }\item[{size\+\_\+t}]{len,  }\item[{void($\ast$)(void $\ast$, size\+\_\+t, void $\ast$)}]{cb1,  }\item[{void($\ast$)(int c, void $\ast$)}]{cb2,  }\item[{void $\ast$}]{data }\end{DoxyParamCaption})}
+
+\hypertarget{libcsv_8c_a83c09c416cc60e77f56fcf9d4bc59797}{}\label{libcsv_8c_a83c09c416cc60e77f56fcf9d4bc59797} 
+\index{libcsv.\+c@{libcsv.\+c}!csv\+\_\+set\+\_\+blk\+\_\+size@{csv\+\_\+set\+\_\+blk\+\_\+size}}
+\index{csv\+\_\+set\+\_\+blk\+\_\+size@{csv\+\_\+set\+\_\+blk\+\_\+size}!libcsv.\+c@{libcsv.\+c}}
+\subsubsection{\texorpdfstring{csv\+\_\+set\+\_\+blk\+\_\+size()}{csv\_set\_blk\_size()}}
+{\footnotesize\ttfamily void csv\+\_\+set\+\_\+blk\+\_\+size (\begin{DoxyParamCaption}\item[{struct \hyperlink{structcsv__parser}{csv\+\_\+parser} $\ast$}]{p,  }\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+\hypertarget{libcsv_8c_a4e4b65ef50d610649c2ca4ba0176771e}{}\label{libcsv_8c_a4e4b65ef50d610649c2ca4ba0176771e} 
+\index{libcsv.\+c@{libcsv.\+c}!csv\+\_\+set\+\_\+delim@{csv\+\_\+set\+\_\+delim}}
+\index{csv\+\_\+set\+\_\+delim@{csv\+\_\+set\+\_\+delim}!libcsv.\+c@{libcsv.\+c}}
+\subsubsection{\texorpdfstring{csv\+\_\+set\+\_\+delim()}{csv\_set\_delim()}}
+{\footnotesize\ttfamily void csv\+\_\+set\+\_\+delim (\begin{DoxyParamCaption}\item[{struct \hyperlink{structcsv__parser}{csv\+\_\+parser} $\ast$}]{p,  }\item[{unsigned char}]{c }\end{DoxyParamCaption})}
+
+\hypertarget{libcsv_8c_a4576551f5060b5d3e30fab552ad67512}{}\label{libcsv_8c_a4576551f5060b5d3e30fab552ad67512} 
+\index{libcsv.\+c@{libcsv.\+c}!csv\+\_\+set\+\_\+free\+\_\+func@{csv\+\_\+set\+\_\+free\+\_\+func}}
+\index{csv\+\_\+set\+\_\+free\+\_\+func@{csv\+\_\+set\+\_\+free\+\_\+func}!libcsv.\+c@{libcsv.\+c}}
+\subsubsection{\texorpdfstring{csv\+\_\+set\+\_\+free\+\_\+func()}{csv\_set\_free\_func()}}
+{\footnotesize\ttfamily void csv\+\_\+set\+\_\+free\+\_\+func (\begin{DoxyParamCaption}\item[{struct \hyperlink{structcsv__parser}{csv\+\_\+parser} $\ast$}]{p,  }\item[{void($\ast$)(void $\ast$)}]{f }\end{DoxyParamCaption})}
+
+\hypertarget{libcsv_8c_ad13f02ed1d06f5310cf97c873e5d26d6}{}\label{libcsv_8c_ad13f02ed1d06f5310cf97c873e5d26d6} 
+\index{libcsv.\+c@{libcsv.\+c}!csv\+\_\+set\+\_\+opts@{csv\+\_\+set\+\_\+opts}}
+\index{csv\+\_\+set\+\_\+opts@{csv\+\_\+set\+\_\+opts}!libcsv.\+c@{libcsv.\+c}}
+\subsubsection{\texorpdfstring{csv\+\_\+set\+\_\+opts()}{csv\_set\_opts()}}
+{\footnotesize\ttfamily int csv\+\_\+set\+\_\+opts (\begin{DoxyParamCaption}\item[{struct \hyperlink{structcsv__parser}{csv\+\_\+parser} $\ast$}]{p,  }\item[{unsigned char}]{options }\end{DoxyParamCaption})}
+
+\hypertarget{libcsv_8c_a176484b938d55a95c7a5411bd303a4ad}{}\label{libcsv_8c_a176484b938d55a95c7a5411bd303a4ad} 
+\index{libcsv.\+c@{libcsv.\+c}!csv\+\_\+set\+\_\+quote@{csv\+\_\+set\+\_\+quote}}
+\index{csv\+\_\+set\+\_\+quote@{csv\+\_\+set\+\_\+quote}!libcsv.\+c@{libcsv.\+c}}
+\subsubsection{\texorpdfstring{csv\+\_\+set\+\_\+quote()}{csv\_set\_quote()}}
+{\footnotesize\ttfamily void csv\+\_\+set\+\_\+quote (\begin{DoxyParamCaption}\item[{struct \hyperlink{structcsv__parser}{csv\+\_\+parser} $\ast$}]{p,  }\item[{unsigned char}]{c }\end{DoxyParamCaption})}
+
+\hypertarget{libcsv_8c_a17a3f973b05b3223a36bbfc265b31f3a}{}\label{libcsv_8c_a17a3f973b05b3223a36bbfc265b31f3a} 
+\index{libcsv.\+c@{libcsv.\+c}!csv\+\_\+set\+\_\+realloc\+\_\+func@{csv\+\_\+set\+\_\+realloc\+\_\+func}}
+\index{csv\+\_\+set\+\_\+realloc\+\_\+func@{csv\+\_\+set\+\_\+realloc\+\_\+func}!libcsv.\+c@{libcsv.\+c}}
+\subsubsection{\texorpdfstring{csv\+\_\+set\+\_\+realloc\+\_\+func()}{csv\_set\_realloc\_func()}}
+{\footnotesize\ttfamily void csv\+\_\+set\+\_\+realloc\+\_\+func (\begin{DoxyParamCaption}\item[{struct \hyperlink{structcsv__parser}{csv\+\_\+parser} $\ast$}]{p,  }\item[{void $\ast$($\ast$)(void $\ast$, size\+\_\+t)}]{f }\end{DoxyParamCaption})}
+
+\hypertarget{libcsv_8c_ab3b2e581f5afee7d891bd049ba05e0ce}{}\label{libcsv_8c_ab3b2e581f5afee7d891bd049ba05e0ce} 
+\index{libcsv.\+c@{libcsv.\+c}!csv\+\_\+set\+\_\+space\+\_\+func@{csv\+\_\+set\+\_\+space\+\_\+func}}
+\index{csv\+\_\+set\+\_\+space\+\_\+func@{csv\+\_\+set\+\_\+space\+\_\+func}!libcsv.\+c@{libcsv.\+c}}
+\subsubsection{\texorpdfstring{csv\+\_\+set\+\_\+space\+\_\+func()}{csv\_set\_space\_func()}}
+{\footnotesize\ttfamily void csv\+\_\+set\+\_\+space\+\_\+func (\begin{DoxyParamCaption}\item[{struct \hyperlink{structcsv__parser}{csv\+\_\+parser} $\ast$}]{p,  }\item[{int($\ast$)(unsigned char)}]{f }\end{DoxyParamCaption})}
+
+\hypertarget{libcsv_8c_af896f95a75ca7495b0b50ca8832af09f}{}\label{libcsv_8c_af896f95a75ca7495b0b50ca8832af09f} 
+\index{libcsv.\+c@{libcsv.\+c}!csv\+\_\+set\+\_\+term\+\_\+func@{csv\+\_\+set\+\_\+term\+\_\+func}}
+\index{csv\+\_\+set\+\_\+term\+\_\+func@{csv\+\_\+set\+\_\+term\+\_\+func}!libcsv.\+c@{libcsv.\+c}}
+\subsubsection{\texorpdfstring{csv\+\_\+set\+\_\+term\+\_\+func()}{csv\_set\_term\_func()}}
+{\footnotesize\ttfamily void csv\+\_\+set\+\_\+term\+\_\+func (\begin{DoxyParamCaption}\item[{struct \hyperlink{structcsv__parser}{csv\+\_\+parser} $\ast$}]{p,  }\item[{int($\ast$)(unsigned char)}]{f }\end{DoxyParamCaption})}
+
+\hypertarget{libcsv_8c_a86a1461b9eb8d316b4c5f93cdd8af7ee}{}\label{libcsv_8c_a86a1461b9eb8d316b4c5f93cdd8af7ee} 
+\index{libcsv.\+c@{libcsv.\+c}!csv\+\_\+strerror@{csv\+\_\+strerror}}
+\index{csv\+\_\+strerror@{csv\+\_\+strerror}!libcsv.\+c@{libcsv.\+c}}
+\subsubsection{\texorpdfstring{csv\+\_\+strerror()}{csv\_strerror()}}
+{\footnotesize\ttfamily char$\ast$ csv\+\_\+strerror (\begin{DoxyParamCaption}\item[{int}]{status }\end{DoxyParamCaption})}
+
+\hypertarget{libcsv_8c_a3c3a42144538bd6edcd15f5aeb6fa41b}{}\label{libcsv_8c_a3c3a42144538bd6edcd15f5aeb6fa41b} 
+\index{libcsv.\+c@{libcsv.\+c}!csv\+\_\+write@{csv\+\_\+write}}
+\index{csv\+\_\+write@{csv\+\_\+write}!libcsv.\+c@{libcsv.\+c}}
+\subsubsection{\texorpdfstring{csv\+\_\+write()}{csv\_write()}}
+{\footnotesize\ttfamily size\+\_\+t csv\+\_\+write (\begin{DoxyParamCaption}\item[{void $\ast$}]{dest,  }\item[{size\+\_\+t}]{dest\+\_\+size,  }\item[{const void $\ast$}]{src,  }\item[{size\+\_\+t}]{src\+\_\+size }\end{DoxyParamCaption})}
+
+\hypertarget{libcsv_8c_a0897f99870d6c85d5754606cc3678b50}{}\label{libcsv_8c_a0897f99870d6c85d5754606cc3678b50} 
+\index{libcsv.\+c@{libcsv.\+c}!csv\+\_\+write2@{csv\+\_\+write2}}
+\index{csv\+\_\+write2@{csv\+\_\+write2}!libcsv.\+c@{libcsv.\+c}}
+\subsubsection{\texorpdfstring{csv\+\_\+write2()}{csv\_write2()}}
+{\footnotesize\ttfamily size\+\_\+t csv\+\_\+write2 (\begin{DoxyParamCaption}\item[{void $\ast$}]{dest,  }\item[{size\+\_\+t}]{dest\+\_\+size,  }\item[{const void $\ast$}]{src,  }\item[{size\+\_\+t}]{src\+\_\+size,  }\item[{unsigned char}]{quote }\end{DoxyParamCaption})}
+

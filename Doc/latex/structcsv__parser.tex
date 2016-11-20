@@ -1,0 +1,145 @@
+\hypertarget{structcsv__parser}{}\section{csv\+\_\+parser Struct Reference}
+\label{structcsv__parser}\index{csv\+\_\+parser@{csv\+\_\+parser}}
+
+
+{\ttfamily \#include $<$csv.\+h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{structcsv__parser_a57d6eb644698f5567c0511832729881d}{pstate}
+\item 
+int \hyperlink{structcsv__parser_a17cf94344b659e2d1785109db2028acd}{quoted}
+\item 
+size\+\_\+t \hyperlink{structcsv__parser_a8285d03865a23548f549a0dafe1639f7}{spaces}
+\item 
+unsigned char $\ast$ \hyperlink{structcsv__parser_a188bc93ecf5d24ea761c9f152e6e84fb}{entry\+\_\+buf}
+\item 
+size\+\_\+t \hyperlink{structcsv__parser_a4dafa17fc8952592ad1d7339cec87b0c}{entry\+\_\+pos}
+\item 
+size\+\_\+t \hyperlink{structcsv__parser_a050339de09565a18f08b217913851295}{entry\+\_\+size}
+\item 
+int \hyperlink{structcsv__parser_a6e27f49150e9a14580fb313cc2777e00}{status}
+\item 
+unsigned char \hyperlink{structcsv__parser_aa05f6399318ee41633b822ca07303438}{options}
+\item 
+unsigned char \hyperlink{structcsv__parser_a065023bbecdc489441e184f5b06463e3}{quote\+\_\+char}
+\item 
+unsigned char \hyperlink{structcsv__parser_a42bfd1492c290309b8ceca0f42f1901f}{delim\+\_\+char}
+\item 
+int($\ast$ \hyperlink{structcsv__parser_a84bb1e129be92e0aede2b8f550663e40}{is\+\_\+space} )(unsigned char)
+\item 
+int($\ast$ \hyperlink{structcsv__parser_a69d7ecb460015723c67157151cdcdc4d}{is\+\_\+term} )(unsigned char)
+\item 
+size\+\_\+t \hyperlink{structcsv__parser_a365db0540bd9887aec764442d23e5e85}{blk\+\_\+size}
+\item 
+void $\ast$($\ast$ \hyperlink{structcsv__parser_ac3696e7898d2203393fa88c804f446b9}{malloc\+\_\+func} )(size\+\_\+t)
+\item 
+void $\ast$($\ast$ \hyperlink{structcsv__parser_a58f8a7d9d7463aad1b63f837a6f86932}{realloc\+\_\+func} )(void $\ast$, size\+\_\+t)
+\item 
+void($\ast$ \hyperlink{structcsv__parser_aa8cedfd81f841b27885884598e1fafcf}{free\+\_\+func} )(void $\ast$)
+\end{DoxyCompactItemize}
+
+
+\subsection{Field Documentation}
+\hypertarget{structcsv__parser_a365db0540bd9887aec764442d23e5e85}{}\label{structcsv__parser_a365db0540bd9887aec764442d23e5e85} 
+\index{csv\+\_\+parser@{csv\+\_\+parser}!blk\+\_\+size@{blk\+\_\+size}}
+\index{blk\+\_\+size@{blk\+\_\+size}!csv\+\_\+parser@{csv\+\_\+parser}}
+\subsubsection{\texorpdfstring{blk\+\_\+size}{blk\_size}}
+{\footnotesize\ttfamily size\+\_\+t blk\+\_\+size}
+
+\hypertarget{structcsv__parser_a42bfd1492c290309b8ceca0f42f1901f}{}\label{structcsv__parser_a42bfd1492c290309b8ceca0f42f1901f} 
+\index{csv\+\_\+parser@{csv\+\_\+parser}!delim\+\_\+char@{delim\+\_\+char}}
+\index{delim\+\_\+char@{delim\+\_\+char}!csv\+\_\+parser@{csv\+\_\+parser}}
+\subsubsection{\texorpdfstring{delim\+\_\+char}{delim\_char}}
+{\footnotesize\ttfamily unsigned char delim\+\_\+char}
+
+\hypertarget{structcsv__parser_a188bc93ecf5d24ea761c9f152e6e84fb}{}\label{structcsv__parser_a188bc93ecf5d24ea761c9f152e6e84fb} 
+\index{csv\+\_\+parser@{csv\+\_\+parser}!entry\+\_\+buf@{entry\+\_\+buf}}
+\index{entry\+\_\+buf@{entry\+\_\+buf}!csv\+\_\+parser@{csv\+\_\+parser}}
+\subsubsection{\texorpdfstring{entry\+\_\+buf}{entry\_buf}}
+{\footnotesize\ttfamily unsigned char$\ast$ entry\+\_\+buf}
+
+\hypertarget{structcsv__parser_a4dafa17fc8952592ad1d7339cec87b0c}{}\label{structcsv__parser_a4dafa17fc8952592ad1d7339cec87b0c} 
+\index{csv\+\_\+parser@{csv\+\_\+parser}!entry\+\_\+pos@{entry\+\_\+pos}}
+\index{entry\+\_\+pos@{entry\+\_\+pos}!csv\+\_\+parser@{csv\+\_\+parser}}
+\subsubsection{\texorpdfstring{entry\+\_\+pos}{entry\_pos}}
+{\footnotesize\ttfamily size\+\_\+t entry\+\_\+pos}
+
+\hypertarget{structcsv__parser_a050339de09565a18f08b217913851295}{}\label{structcsv__parser_a050339de09565a18f08b217913851295} 
+\index{csv\+\_\+parser@{csv\+\_\+parser}!entry\+\_\+size@{entry\+\_\+size}}
+\index{entry\+\_\+size@{entry\+\_\+size}!csv\+\_\+parser@{csv\+\_\+parser}}
+\subsubsection{\texorpdfstring{entry\+\_\+size}{entry\_size}}
+{\footnotesize\ttfamily size\+\_\+t entry\+\_\+size}
+
+\hypertarget{structcsv__parser_aa8cedfd81f841b27885884598e1fafcf}{}\label{structcsv__parser_aa8cedfd81f841b27885884598e1fafcf} 
+\index{csv\+\_\+parser@{csv\+\_\+parser}!free\+\_\+func@{free\+\_\+func}}
+\index{free\+\_\+func@{free\+\_\+func}!csv\+\_\+parser@{csv\+\_\+parser}}
+\subsubsection{\texorpdfstring{free\+\_\+func}{free\_func}}
+{\footnotesize\ttfamily void($\ast$ free\+\_\+func) (void $\ast$)}
+
+\hypertarget{structcsv__parser_a84bb1e129be92e0aede2b8f550663e40}{}\label{structcsv__parser_a84bb1e129be92e0aede2b8f550663e40} 
+\index{csv\+\_\+parser@{csv\+\_\+parser}!is\+\_\+space@{is\+\_\+space}}
+\index{is\+\_\+space@{is\+\_\+space}!csv\+\_\+parser@{csv\+\_\+parser}}
+\subsubsection{\texorpdfstring{is\+\_\+space}{is\_space}}
+{\footnotesize\ttfamily int($\ast$ is\+\_\+space) (unsigned char)}
+
+\hypertarget{structcsv__parser_a69d7ecb460015723c67157151cdcdc4d}{}\label{structcsv__parser_a69d7ecb460015723c67157151cdcdc4d} 
+\index{csv\+\_\+parser@{csv\+\_\+parser}!is\+\_\+term@{is\+\_\+term}}
+\index{is\+\_\+term@{is\+\_\+term}!csv\+\_\+parser@{csv\+\_\+parser}}
+\subsubsection{\texorpdfstring{is\+\_\+term}{is\_term}}
+{\footnotesize\ttfamily int($\ast$ is\+\_\+term) (unsigned char)}
+
+\hypertarget{structcsv__parser_ac3696e7898d2203393fa88c804f446b9}{}\label{structcsv__parser_ac3696e7898d2203393fa88c804f446b9} 
+\index{csv\+\_\+parser@{csv\+\_\+parser}!malloc\+\_\+func@{malloc\+\_\+func}}
+\index{malloc\+\_\+func@{malloc\+\_\+func}!csv\+\_\+parser@{csv\+\_\+parser}}
+\subsubsection{\texorpdfstring{malloc\+\_\+func}{malloc\_func}}
+{\footnotesize\ttfamily void$\ast$($\ast$ malloc\+\_\+func) (size\+\_\+t)}
+
+\hypertarget{structcsv__parser_aa05f6399318ee41633b822ca07303438}{}\label{structcsv__parser_aa05f6399318ee41633b822ca07303438} 
+\index{csv\+\_\+parser@{csv\+\_\+parser}!options@{options}}
+\index{options@{options}!csv\+\_\+parser@{csv\+\_\+parser}}
+\subsubsection{\texorpdfstring{options}{options}}
+{\footnotesize\ttfamily unsigned char options}
+
+\hypertarget{structcsv__parser_a57d6eb644698f5567c0511832729881d}{}\label{structcsv__parser_a57d6eb644698f5567c0511832729881d} 
+\index{csv\+\_\+parser@{csv\+\_\+parser}!pstate@{pstate}}
+\index{pstate@{pstate}!csv\+\_\+parser@{csv\+\_\+parser}}
+\subsubsection{\texorpdfstring{pstate}{pstate}}
+{\footnotesize\ttfamily int pstate}
+
+\hypertarget{structcsv__parser_a065023bbecdc489441e184f5b06463e3}{}\label{structcsv__parser_a065023bbecdc489441e184f5b06463e3} 
+\index{csv\+\_\+parser@{csv\+\_\+parser}!quote\+\_\+char@{quote\+\_\+char}}
+\index{quote\+\_\+char@{quote\+\_\+char}!csv\+\_\+parser@{csv\+\_\+parser}}
+\subsubsection{\texorpdfstring{quote\+\_\+char}{quote\_char}}
+{\footnotesize\ttfamily unsigned char quote\+\_\+char}
+
+\hypertarget{structcsv__parser_a17cf94344b659e2d1785109db2028acd}{}\label{structcsv__parser_a17cf94344b659e2d1785109db2028acd} 
+\index{csv\+\_\+parser@{csv\+\_\+parser}!quoted@{quoted}}
+\index{quoted@{quoted}!csv\+\_\+parser@{csv\+\_\+parser}}
+\subsubsection{\texorpdfstring{quoted}{quoted}}
+{\footnotesize\ttfamily int quoted}
+
+\hypertarget{structcsv__parser_a58f8a7d9d7463aad1b63f837a6f86932}{}\label{structcsv__parser_a58f8a7d9d7463aad1b63f837a6f86932} 
+\index{csv\+\_\+parser@{csv\+\_\+parser}!realloc\+\_\+func@{realloc\+\_\+func}}
+\index{realloc\+\_\+func@{realloc\+\_\+func}!csv\+\_\+parser@{csv\+\_\+parser}}
+\subsubsection{\texorpdfstring{realloc\+\_\+func}{realloc\_func}}
+{\footnotesize\ttfamily void$\ast$($\ast$ realloc\+\_\+func) (void $\ast$, size\+\_\+t)}
+
+\hypertarget{structcsv__parser_a8285d03865a23548f549a0dafe1639f7}{}\label{structcsv__parser_a8285d03865a23548f549a0dafe1639f7} 
+\index{csv\+\_\+parser@{csv\+\_\+parser}!spaces@{spaces}}
+\index{spaces@{spaces}!csv\+\_\+parser@{csv\+\_\+parser}}
+\subsubsection{\texorpdfstring{spaces}{spaces}}
+{\footnotesize\ttfamily size\+\_\+t spaces}
+
+\hypertarget{structcsv__parser_a6e27f49150e9a14580fb313cc2777e00}{}\label{structcsv__parser_a6e27f49150e9a14580fb313cc2777e00} 
+\index{csv\+\_\+parser@{csv\+\_\+parser}!status@{status}}
+\index{status@{status}!csv\+\_\+parser@{csv\+\_\+parser}}
+\subsubsection{\texorpdfstring{status}{status}}
+{\footnotesize\ttfamily int status}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/frj/\+Documents/\+Code/\+Projet\+\_\+prog\+\_\+3a/\+Code/back/libcsv-\/3.\+0.\+3/\hyperlink{csv_8h}{csv.\+h}\end{DoxyCompactItemize}
