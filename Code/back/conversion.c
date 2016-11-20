@@ -45,7 +45,7 @@ struct tm * timestampToReadable(const long parDate)
 char * timestampToString(const long parDate)
 {
 	char * buf;
-	buf = (char*)calloc(80, sizeof(char));
-	strftime(buf, sizeof(buf), "%a %Y-%m-%d %H:%M:%S %Z", timestampToReadable(parDate));
+	buf = (char*)calloc(100,sizeof(char));
+	strftime(buf, 100, "%Y-%m-%d %H:%M:%S", timestampToReadable(parDate));
 	return buf;
 }
