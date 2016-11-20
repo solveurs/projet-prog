@@ -20,11 +20,26 @@ EXEC = main
 
 all : $(EXEC)
 
-main :  main.o
+main :  main.o trace.o parserBddGeoloc.o parserBddAdresse.o conversion.o
 	$(CC) -o $@ $^ $(LDFLAGS)
 
 main.o : main.c headers/main.h
-	$(CC) -o $@ -c $< $(CFLAGS)
+$(CC) -o $@ -c $< $(CFLAGS)
+
+trace.o : back/trace.c headers/trace.h
+$(CC) -o $@ -c $< $(CFLAGS)
+
+parserBddGeoloc.o : back/parserBddGeoloc.c headers/parserBddGeoloc.h
+$(CC) -o $@ -c $< $(CFLAGS)
+
+parserBddAdresse.o : back/parserBddAdresse.c headers/parserBddAdresse.h
+$(CC) -o $@ -c $< $(CFLAGS)
+
+conversion.o : back/conversion.c headers/conversion.h
+$(CC) -o $@ -c $< $(CFLAGS)
+
+
+
 
 clean:
 	rm *.o $(EXEC)
