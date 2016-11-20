@@ -42,19 +42,28 @@ typedef struct adresse adresse;
 
 struct trace
 {
-     double         date;
+     long         date;
      point          coord;
      struct trace * prec;
      struct trace * suiv;
 };
 typedef struct trace trace;
 
+struct trajet
+{
+	int		taille;
+	trace *	premier;
+	trace * dernier;
+};
+typedef struct trajet trajet;
+
 struct bdd_trace
 {
-     char      chemin[128];
-     int       taille;
-     trace *   tab_trace; //pas sûr
-     int       visibilite; //0=public >0 = depend user
+	char     chemin[128];
+	//int       taille;
+	trajet * trajet;
+     //trace *   tab_trace; //pas sûr
+	int      visibilite; //0=public >0 = depend user
 };
 typedef struct bdd_trace bdd_trace;
 
