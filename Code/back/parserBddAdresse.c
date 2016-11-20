@@ -11,7 +11,7 @@ const char* recuperer_champ(char* ligne, int numero_champ)
   const char* tok;
   for (tok = strtok(ligne, ",");tok && *tok;tok = strtok(NULL, ",\n")) // strtok écrit sur ligne
   {
-    if (!--numero)
+    //if (!--numero)
     {
       return tok;
     }

@@ -15,17 +15,17 @@ bdd_trace * readGeoloc(FILE * parFd)
 	bdd_trace * varBddTrace = (bdd_trace*)malloc(sizeof(bdd_trace));
 	long date;
 	double lat,lon;
-	varBddTrace->trajet = initTrace();
-	varBddTrace->chemin = "";
-	varBddTrace->visiblite = 0;
+	varBddTrace->trajet = initTrajet();
+	strcpy(varBddTrace->chemin," ");
+	varBddTrace->visibilite = 0;
 	
-	while (fscanf("date:%ld,lat:%f,long:%f;",date,lat,lon) > 0)
+	while (fscanf(parFd,"date:%ld,lat:%lf,long:%lf;",&date,&lat,&lon) > 0)
 	{
 		point p;
 		p.x = lat;
 		p.y = lon;
-		trace * varT;
-		varT = initTrace(NULL,date,p,NULL,NULL);
+		trace * varT = createTrace();
+		initTrace(varT,date,p,NULL,NULL);
 		ajoutTrace(varBddTrace->trajet, varT);
 	}
 	return varBddTrace;
