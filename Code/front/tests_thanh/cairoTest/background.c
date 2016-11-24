@@ -3,8 +3,6 @@
 
 static void do_drawing(cairo_t *, GtkWidget *widget);
 
-// Une structure point globale car la passer en cascade
-// aux arguments n'est pas pratique
 struct 
 {
   // coordonnees du coin superieur gauche
