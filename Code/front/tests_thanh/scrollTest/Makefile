@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS = -W -Wall -g `pkg-config --cflags cairo`
 LDFLAGS=
-EXEC=scroll
+EXEC=main
 
 all: 		$(EXEC)
 		rm *.o

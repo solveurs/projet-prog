@@ -169,8 +169,8 @@ int main(int argc, char *argv[])
   GtkWidget *window;
   GtkWidget *darea;
   
-  carte.image = cairo_image_surface_create_from_png("france.png");
-  carte.copy = cairo_image_surface_create_from_png("france.png");
+  carte.image = cairo_image_surface_create_from_png("../france.png");
+  carte.copy = cairo_image_surface_create_from_png("../france.png");
 
   gtk_init(&argc, &argv);
 

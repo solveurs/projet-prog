@@ -246,7 +246,7 @@ int main(int argc, char *argv[])
   GtkWidget *darea;
 
   // Chargement de l'img de fond
-  monImg = cairo_image_surface_create_from_png("france.png"); 
+  monImg = cairo_image_surface_create_from_png("../france.png"); 
 
   gtk_init(&argc, &argv);
 

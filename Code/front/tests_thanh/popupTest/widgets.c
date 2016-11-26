@@ -78,7 +78,7 @@ void activate(GtkApplication *app, gpointer user_data)
 
   //Image
   	GtkWidget* image;
-  	image = gtk_image_new_from_file("surprise.jpg");
+  	image = gtk_image_new_from_file("../surprise.jpg");
   	ajoutGrille(grille, image, 0, 1, 1, 1);
 
   	gtk_widget_show_all(popup);
