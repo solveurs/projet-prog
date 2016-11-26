@@ -1,3 +1,23 @@
+/**
+ * \file      UITrace.c
+ * \brief     Programme de tests.
+ * \author    Thanh.L
+ * \version   0.1
+ *
+ * Programme de test le tracage des traces et de la route.
+ *
+ *
+ * === INSTRUCTIONS ===
+ * Click gauche pour charger des traces en memoire
+ * Click droit pour les afficher les traces
+ * Click central pour afficher la route (traces reliees)
+ * TAILLE definit le nombre de points
+ *
+ * J'adapterai le code lorsqu'on aura les structures
+ * definitives du backend
+*/
+
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <cairo.h>
@@ -6,22 +26,13 @@
 
 #define TAILLE 50
 
-/* === INSTRUCTIONS ===
-*
-* Click gauche pour charger des traces en memoire
-* Click droit pour les afficher les traces
-* Click central pour afficher la route (traces reliees)
-* TAILLE definit le nombre de points
-*
-* J'adapterai le code lorsqu'on aura les structures
-* deifinitives du backend
-*/
 
 struct point
 {
   // coordonnees du coin superieur gauche
   int x;
   int y;
+  int temps;
 };
 
 // ===== Global =========
@@ -32,11 +43,17 @@ int ROUTE = 0;
 
 // ===== Fonctions ======
 
+/**
+ * \fn      void genereTrace()
+ * \brief   Genere pseudo-aleatoirement une trace dans "trace.txt".
+ *
+ * \return  Si erreur, modifie errno en consequence.
+*/
 void genereTrace()
-{
+{ 
   FILE *fp;
 
-  if( (fp=fopen("trace.txt", "w+"))==NULL)
+  if( (fp=fopen("trace.txt", "w+"))==NULL )
   {
     perror("creation");
     exit(EXIT_FAILURE);
@@ -52,11 +69,18 @@ void genereTrace()
   fclose(fp);
 }
 
+
+/**
+ * \fn      void lectureTrace()
+ * \brief   Lis les coordonnees d'une trace situee dans "trace.txt".
+ *
+ * \return  Si erreur, modifie errno en consequence.
+*/
 void lectureTrace()
 {
   FILE *fp;
 
-  if( (fp=fopen("trace.txt", "r"))==NULL)
+  if( (fp=fopen("trace.txt", "r"))==NULL )
   {
     perror("lecture");
     exit(EXIT_FAILURE);
@@ -71,6 +95,13 @@ void lectureTrace()
   fclose(fp);
 }
 
+
+/**
+ * \fn      static void do_trace(cairo_t *cr)
+ * \brief   Effectue l'affichage des traces, et celle de la route si demandee.
+ *
+ * \param   cr Contexte Cairo.
+*/
 static void do_trace(cairo_t *cr)
 {
   /* === Notes ===
@@ -82,7 +113,7 @@ static void do_trace(cairo_t *cr)
   * du for ainsi que la derniere.
   */
 
-  // On definit l'arriere plan avant
+  // On definit l'arriere plan
   cairo_set_source_surface(cr, monImg, 0, 0);
   cairo_paint(cr);
 
