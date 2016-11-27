@@ -36,6 +36,14 @@ void activate (GtkApplication* app, gpointer user_data)
   monLabel = gtk_label_new("Mon label");
   ajoutGrille(grille, monLabel, 0, 0, 1, 1);
 
+  /* Box
+  GtkWidget * gtk_box_new (GtkOrientation orientation, gint spacing);
+
+  void gtk_box_pack_start (GtkBox *box, GtkWidget *child,
+                          gboolean expand, gboolean fill,
+                          guint padding);
+  */
+
   
   //Bouton + ButtonBox
   GtkWidget *monBouton, *buttonBox;
