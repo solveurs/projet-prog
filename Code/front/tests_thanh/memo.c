@@ -45,12 +45,10 @@ void activate (GtkApplication* app, gpointer user_data)
   ajoutGrille(grille, buttonBox, 1, 0, 1, 1);
 
   //Bouton menu
-  /* Version non a jour
   GtkWidget* menuBouton;
   menuBouton = gtk_menu_button_new();
   // A faire: le menu 
-  ajoutGrille(grille, menuBouton, 2, 0, 1, 1)
-  */
+  ajoutGrille(grille, menuBouton, 2, 0, 1, 1);
 
   //Le spin button
   GtkWidget* monSpin;
