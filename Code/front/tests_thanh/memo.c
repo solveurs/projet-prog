@@ -123,7 +123,7 @@ void activate (GtkApplication* app, gpointer user_data)
 
   //Image
   GtkWidget* image;
-  image = gtk_image_new_from_file("votre_image");
+  image = gtk_image_new_from_file("votre_image.extension");
   ajoutGrille(grille, image, 0, 3, 1, 1);
   
   //Affichage recursif des widgets
