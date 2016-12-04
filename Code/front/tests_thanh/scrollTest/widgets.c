@@ -34,7 +34,7 @@ void activate(GtkApplication *app, gpointer user_data)
   ajoutWidget(fenetre, monScroll);
 
   GtkWidget* image;
-  image = gtk_image_new_from_file("surprise.jpg");
+  image = gtk_image_new_from_file("../surprise.jpg");
   ajoutWidget(monScroll, image);
 
 

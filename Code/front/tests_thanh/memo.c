@@ -36,6 +36,14 @@ void activate (GtkApplication* app, gpointer user_data)
   monLabel = gtk_label_new("Mon label");
   ajoutGrille(grille, monLabel, 0, 0, 1, 1);
 
+  /* Box
+  GtkWidget * gtk_box_new (GtkOrientation orientation, gint spacing);
+
+  void gtk_box_pack_start (GtkBox *box, GtkWidget *child,
+                          gboolean expand, gboolean fill,
+                          guint padding);
+  */
+
   
   //Bouton + ButtonBox
   GtkWidget *monBouton, *buttonBox;
@@ -45,12 +53,10 @@ void activate (GtkApplication* app, gpointer user_data)
   ajoutGrille(grille, buttonBox, 1, 0, 1, 1);
 
   //Bouton menu
-  /* Version non a jour
   GtkWidget* menuBouton;
   menuBouton = gtk_menu_button_new();
   // A faire: le menu 
-  ajoutGrille(grille, menuBouton, 2, 0, 1, 1)
-  */
+  ajoutGrille(grille, menuBouton, 2, 0, 1, 1);
 
   //Le spin button
   GtkWidget* monSpin;
@@ -123,7 +129,7 @@ void activate (GtkApplication* app, gpointer user_data)
 
   //Image
   GtkWidget* image;
-  image = gtk_image_new_from_file("votre_image");
+  image = gtk_image_new_from_file("votre_image.extension");
   ajoutGrille(grille, image, 0, 3, 1, 1);
   
   //Affichage recursif des widgets

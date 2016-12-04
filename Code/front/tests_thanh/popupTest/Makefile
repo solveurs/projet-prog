@@ -1,9 +1,9 @@
 CC=gcc
 CFLAGS = -W -Wall -g `pkg-config --cflags cairo`
 LDFLAGS=
-EXEC=fentest
+EXEC=main
 
-all: 		$(EXEC)
+all: 	$(EXEC)
 		rm *.o
 
 $(EXEC): fentest.o widgets.o
