@@ -7,22 +7,24 @@ trace * createTrace(void)
 	return varT;
 }
 
-void initTrace(trace * parT, double parDate, point parCoord, trace * parPrec, trace * parSuiv)
+void initTrace(trace * parT, long parDate, point parCoord, trace * parPrec, trace * parSuiv)
 {
 	if (parT == NULL)
 	{
 		parT = createTrace();
 	}
-	parT->date	= parDate;
-	parT->coord = parCoord;
-	parT->prec	= parPrec;
-	parT->suiv	= parSuiv;
+	parT->date			= parDate;
+	parT->coord			= parCoord;
+	parT->prec			= parPrec;
+	parT->suiv			= parSuiv;
+	parT->visibilite	= 1;
 }
 
 trajet * initTrajet(void)
 {
 	trajet * varTr = (trajet*)malloc(sizeof(trajet));
 	varTr->taille	=	0;
+	varTr->visiblite=	1;
 	varTr->premier	=	NULL;
 	varTr->dernier	=	NULL;
 	return varTr;
