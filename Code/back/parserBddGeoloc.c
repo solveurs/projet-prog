@@ -19,7 +19,7 @@ bdd_trace * readGeoloc(FILE * parFd)
 	strcpy(varBddTrace->chemin," ");
 	varBddTrace->visibilite = 0;
 	
-	while (fscanf(parFd,"date:%ld,lat:%lf,long:%lf;",&date,&lat,&lon) > 0)
+	while (fscanf(parFd,"date:%ld,lat:%lf,long:%lf;\n",&date,&lat,&lon) > 0)
 	{
 		point p;
 		p.x = lat;
@@ -27,6 +27,7 @@ bdd_trace * readGeoloc(FILE * parFd)
 		trace * varT = createTrace();
 		initTrace(varT,date,p,NULL,NULL);
 		ajoutTrace(varBddTrace->trajet, varT);
+		printf("%d \n", varBddTrace->trajet->taille);
 	}
 	return varBddTrace;
 }

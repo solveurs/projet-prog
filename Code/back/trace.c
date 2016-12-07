@@ -49,12 +49,36 @@ void ajoutTrace(trajet * parTr, trace * parT)
 	parTr->taille++;
 }
 
+void supprimerTraceN(trajet * parTr, trace * parT, int parPos)
+{
+	if (parPos==1)
+	{
+		parTr->premier->suiv->prec = NULL;
+		parTr->premier = parTr->premier->suiv;
+	}
+	else if (parPos > parTr->taille)
+	{
+		parTr->dernier->prec->suiv = NULL;
+		parTr->dernier = parTr->dernier->prec;
+	}
+	else
+	{
+		trace* it = parTr->premier;
+		int i;
+		for (i = 0; i < parPos; i++)
+			it = it->suiv;
+		it->prec->suiv = it->suiv;
+		it->suiv->prec = it->prec;
+		free(it);
+	}
+}
+
 void afficheTrace(trace * parT)
 {
-	printf("-----------------\n");
+	printf("-----------------------\n");
 	printf("date : %s\n",timestampToString(parT->date));
 	printf("Coordonées : %lf, %lf\n",parT->coord.x, parT->coord.y);
-	printf("-----------------\n");
+	printf("-----------------------\n");
 }
 
 void afficheTrajet(trajet * parTr)
@@ -63,6 +87,7 @@ void afficheTrajet(trajet * parTr)
 	it = parTr->premier;
 	while (it->suiv != NULL)
 	{
+
 		afficheTrace(it);
 		it = it->suiv;
 	}
