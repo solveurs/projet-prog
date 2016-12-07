@@ -1,4 +1,5 @@
 #include "../headers/trace.h"
+#include "../headers/conversion.h"
 
 trace * createTrace(void)
 {
@@ -36,9 +37,37 @@ void ajoutTrace(trajet * parTr, trace * parT)
 		parT->prec = NULL;
 		parT->suiv = NULL;
 	}
-	parT->suiv = NULL;
-	parT->prec = parTr->dernier;
-	parTr->dernier->suiv = parT;
-	parTr->dernier = parTr->dernier->suiv;
+	else
+	{
+		parT->suiv = NULL;
+		parT->prec = parTr->dernier;
+		parTr->dernier->suiv = parT;
+		parTr->dernier = parTr->dernier->suiv;
+	}
 	parTr->taille++;
 }
+
+void afficheTrace(trace * parT)
+{
+	printf("-----------------\n");
+	printf("date : %s\n",timestampToString(parT->date));
+	printf("Coordonées : %lf, %lf\n",parT->coord.x, parT->coord.y);
+	printf("-----------------\n");
+}
+
+void afficheTrajet(trajet * parTr)
+{
+	trace* it;
+	it = parTr->premier;
+	while (it->suiv != NULL)
+	{
+		afficheTrace(it);
+		it = it->suiv;
+	}
+}
+
+
+
+
+
+

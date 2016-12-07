@@ -22,6 +22,9 @@ carte_Bourges.png
 	47.048429			47.048429
 	2.309103			2.470207
 
+centre
+	2.389655			47.079962			
+
 
 
 carte_Insa.png

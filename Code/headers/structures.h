@@ -8,11 +8,12 @@ struct point
 };
 typedef struct point point;
 
+//Origine : coin haut-gauche
 struct rectangle
 {
      point     origine;
-     int       largeur;
-     int       hauteur;
+     double    largeur;
+     double    hauteur;
 };
 typedef struct rectangle rectangle;
 
