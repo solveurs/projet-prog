@@ -27,7 +27,7 @@ bdd_trace * readGeoloc(FILE * parFd)
 		trace * varT = createTrace();
 		initTrace(varT,date,p,NULL,NULL);
 		ajoutTrace(varBddTrace->trajet, varT);
-		printf("%d \n", varBddTrace->trajet->taille);
+		//printf("%d \n", varBddTrace->trajet->taille);
 	}
 	return varBddTrace;
 }

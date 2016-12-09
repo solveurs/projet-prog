@@ -9,10 +9,9 @@ int main(int argc, char* argv[])
 	
 #elif BACK
 	printf("back\n");
-	
-	
+		
 #elif DEBUG
-	printf("debug\n");
+	printf("DEBUG\n");
 	
 	//double x=655712, y=6664882;	//position INSA
 	//lambert93ToGPS(&x,&y);
