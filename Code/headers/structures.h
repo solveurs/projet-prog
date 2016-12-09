@@ -72,14 +72,21 @@ typedef struct bdd_trace bdd_trace;
 
 struct pt_interet
 {
-	int		importance;
+	int			importance;
 	time_t		debut;
 	time_t		fin;
 	point		position;
-	adresse *	tab_adresse;
+	adresse		adresse;
 };
 typedef struct pt_interet pt_interet;
-typedef pt_interet** liste_pt_interet;
+
+struct liste_pt_interet
+{
+	int				taille;
+	int				occupee;
+	pt_interet**	t;
+};
+typedef struct liste_pt_interet liste_pt_interet;
 
 struct carte
 {

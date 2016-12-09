@@ -7,3 +7,4 @@
 #include "trajet.h"
 #include "fonctionFront.h"
 #include "pointInteret.h"
+#include "config.h"
