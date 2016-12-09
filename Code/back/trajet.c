@@ -29,28 +29,31 @@ void ajoutTrace(trajet * parTr, trace * parT)
 	parTr->taille++;
 }
 
-void supprimerTraceN(trajet * parTr, trace * parT, int parPos)
+void supprimerTraceN(trajet * parTr, int parPos)
 {
+	trace* it;
 	if (parPos==1)
 	{
-		parTr->premier->suiv->prec = NULL;
+		it = parTr->premier;
+		it->suiv->prec = NULL;
 		parTr->premier = parTr->premier->suiv;
 	}
 	else if (parPos > parTr->taille)
 	{
-		parTr->dernier->prec->suiv = NULL;
+		it = parTr->dernier;
+		it->prec->suiv = NULL;
 		parTr->dernier = parTr->dernier->prec;
 	}
 	else
 	{
-		trace* it = parTr->premier;
+		it = parTr->premier;
 		int i;
 		for (i = 0; i < parPos; i++)
 			it = it->suiv;
 		it->prec->suiv = it->suiv;
 		it->suiv->prec = it->prec;
-		free(it);
 	}
+	free(it);
 }
 
 void afficheTrajet(trajet * parTr)
@@ -66,3 +69,17 @@ void afficheTrajet(trajet * parTr)
 		it = it->suiv;
 	}
 }
+
+void supprimerTrajet(trajet * parTr)
+{
+	while (parTr->premier != NULL)
+	{
+		supprimerTraceN(parTr, 1);
+	}
+	free(parTr);
+}
+
+
+
+
+

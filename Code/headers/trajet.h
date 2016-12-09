@@ -3,7 +3,8 @@
 #include "structures.h"
 #include "trace.h"
 
-void afficheTrajet(trajet * parTr);
-void ajoutTrace(trajet * parTr, trace * parT);
-void supprimerTraceN(trajet * parTr, trace * parT, int parPos);
 trajet * initTrajet(void);
+void ajoutTrace(trajet * parTr, trace * parT);
+void supprimerTraceN(trajet * parTr, int parPos);
+void afficheTrajet(trajet * parTr);
+void supprimerTrajet(trajet * parTr);
