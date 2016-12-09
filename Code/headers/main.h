@@ -6,3 +6,4 @@
 #include "trace.h"
 #include "trajet.h"
 #include "fonctionFront.h"
+#include "pointInteret.h"
