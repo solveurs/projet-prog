@@ -2,19 +2,33 @@
 \label{structtrace}\index{trace@{trace}}
 
 
+modélisation d\textquotesingle{}une trace  
+
+
+
+
 {\ttfamily \#include $<$structures.\+h$>$}
 
 \subsection*{Data Fields}
 \begin{DoxyCompactItemize}
 \item 
-long \hyperlink{structtrace_abb80b058118845508dbd87b3bb6600be}{date}
-\item 
 \hyperlink{structpoint}{point} \hyperlink{structtrace_a16be187ac405f3bb61930a342b444253}{coord}
+\item 
+time\+\_\+t \hyperlink{structtrace_afd1d5f3476eea5753c7c59bfa90777ba}{date}
 \item 
 struct \hyperlink{structtrace}{trace} $\ast$ \hyperlink{structtrace_a1967dba5ed4900e2f554b2442863e69e}{prec}
 \item 
 struct \hyperlink{structtrace}{trace} $\ast$ \hyperlink{structtrace_ab7909a2cccd6f40ca9499c850c9c948c}{suiv}
+\item 
+int \hyperlink{structtrace_aa34b47a3ed3a7dfed8a672132bcc3f2a}{visibilite}
 \end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+modélisation d\textquotesingle{}une trace 
+
+Definition at line 63 of file structures.\+h.
+
 
 
 \subsection{Field Documentation}
@@ -24,11 +38,19 @@ struct \hyperlink{structtrace}{trace} $\ast$ \hyperlink{structtrace_ab7909a2cccd
 \subsubsection{\texorpdfstring{coord}{coord}}
 {\footnotesize\ttfamily \hyperlink{structpoint}{point} coord}
 
-\hypertarget{structtrace_abb80b058118845508dbd87b3bb6600be}{}\label{structtrace_abb80b058118845508dbd87b3bb6600be} 
+coordonnée de la trace 
+
+Definition at line 66 of file structures.\+h.
+
+\hypertarget{structtrace_afd1d5f3476eea5753c7c59bfa90777ba}{}\label{structtrace_afd1d5f3476eea5753c7c59bfa90777ba} 
 \index{trace@{trace}!date@{date}}
 \index{date@{date}!trace@{trace}}
 \subsubsection{\texorpdfstring{date}{date}}
-{\footnotesize\ttfamily long date}
+{\footnotesize\ttfamily time\+\_\+t date}
+
+Date de relevé de la trace 
+
+Definition at line 65 of file structures.\+h.
 
 \hypertarget{structtrace_a1967dba5ed4900e2f554b2442863e69e}{}\label{structtrace_a1967dba5ed4900e2f554b2442863e69e} 
 \index{trace@{trace}!prec@{prec}}
@@ -36,11 +58,29 @@ struct \hyperlink{structtrace}{trace} $\ast$ \hyperlink{structtrace_ab7909a2cccd
 \subsubsection{\texorpdfstring{prec}{prec}}
 {\footnotesize\ttfamily struct \hyperlink{structtrace}{trace}$\ast$ prec}
 
+pointeur sur la trace précédente 
+
+Definition at line 68 of file structures.\+h.
+
 \hypertarget{structtrace_ab7909a2cccd6f40ca9499c850c9c948c}{}\label{structtrace_ab7909a2cccd6f40ca9499c850c9c948c} 
 \index{trace@{trace}!suiv@{suiv}}
 \index{suiv@{suiv}!trace@{trace}}
 \subsubsection{\texorpdfstring{suiv}{suiv}}
 {\footnotesize\ttfamily struct \hyperlink{structtrace}{trace}$\ast$ suiv}
+
+pointeur sur la trace suivante 
+
+Definition at line 69 of file structures.\+h.
+
+\hypertarget{structtrace_aa34b47a3ed3a7dfed8a672132bcc3f2a}{}\label{structtrace_aa34b47a3ed3a7dfed8a672132bcc3f2a} 
+\index{trace@{trace}!visibilite@{visibilite}}
+\index{visibilite@{visibilite}!trace@{trace}}
+\subsubsection{\texorpdfstring{visibilite}{visibilite}}
+{\footnotesize\ttfamily int visibilite}
+
+visibilité, 0 --$>$ invisible, 1 --$>$ visible 
+
+Definition at line 67 of file structures.\+h.
 
 
 

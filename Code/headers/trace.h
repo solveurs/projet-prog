@@ -5,6 +5,6 @@
 #include "trajet.h"
 
 trace * createTrace(void);
-void initTrace(trace * parT, long parDate, point parCoord, trace * parPrec, trace * parSuiv);
+trace * initTrace(long parDate, point parCoord, trace * parPrec, trace * parSuiv);
 void afficheTrace(trace * parT);
 

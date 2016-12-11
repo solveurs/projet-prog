@@ -1,27 +1,113 @@
 \hypertarget{k_8c}{}\section{/\+Users/frj/\+Documents/\+Code/\+Projet\+\_\+prog\+\_\+3a/\+Code/front/figures/k.c File Reference}
 \label{k_8c}\index{/\+Users/frj/\+Documents/\+Code/\+Projet\+\_\+prog\+\_\+3a/\+Code/front/figures/k.\+c@{/\+Users/frj/\+Documents/\+Code/\+Projet\+\_\+prog\+\_\+3a/\+Code/front/figures/k.\+c}}
-{\ttfamily \#include $<$cairo.\+h$>$}\newline
 {\ttfamily \#include $<$gtk/gtk.\+h$>$}\newline
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
+static gboolean \hyperlink{k_8c_aa5a4b8924043ba7896af4bbd7a2141e2}{button\+\_\+press\+\_\+event\+\_\+cb} (Gtk\+Widget $\ast$widget, Gdk\+Event\+Button $\ast$event, gpointer data)
+\item 
+static void \hyperlink{k_8c_afbbd14813450d074480382e8a1014b3c}{clear\+\_\+surface} (void)
+\item 
+static void \hyperlink{k_8c_a94c34ffa866ed646d2890742680898c5}{close\+\_\+window} (void)
+\item 
+static gboolean \hyperlink{k_8c_aea3e6c652659db47b72040fbeb134425}{configure\+\_\+event\+\_\+cb} (Gtk\+Widget $\ast$widget, Gdk\+Event\+Configure $\ast$event, gpointer data)
+\item 
+static void \hyperlink{k_8c_ab8a79e5d10cb4c455c10754c45646297}{draw\+\_\+brush} (Gtk\+Widget $\ast$widget, gdouble \hyperlink{_u_i_cercle_anonymat_8c_a6150e0515f7202e2fb518f7206ed97dc}{x}, gdouble \hyperlink{_u_i_cercle_anonymat_8c_a0a2f84ed7838f07779ae24c5a9086d33}{y})
+\item 
+static gboolean \hyperlink{k_8c_a00f3adab97a5ac9fcb26c9aa238ae12e}{draw\+\_\+cb} (Gtk\+Widget $\ast$widget, cairo\+\_\+t $\ast$cr, gpointer data)
+\item 
+static gboolean \hyperlink{k_8c_ae6276e29424ee05067321e10a0357f5c}{efface} (Gtk\+Widget $\ast$widget, gpointer data)
+\item 
 int \hyperlink{k_8c_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\item 
+static gboolean \hyperlink{k_8c_aa8a60b3173b9d98263955681ae25a8c2}{motion\+\_\+notify\+\_\+event\+\_\+cb} (Gtk\+Widget $\ast$widget, Gdk\+Event\+Motion $\ast$event, gpointer data)
+\item 
+void \hyperlink{k_8c_a72e8e37fbc468063fd0a2b8b28f61c60}{tailledessin} (Gtk\+Widget $\ast$widget, Gtk\+Allocation $\ast$allocation, void $\ast$data)
 \end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-\begin{tabbing}
-xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
-struct \{\\
-\>int \hyperlink{k_8c_ad43c3812e6d13e0518d9f8b8f463ffcf}{count}\\
-\>double \hyperlink{k_8c_ad6f81ab9dfb99882184b1aef87ed725a}{coordx} \mbox{[}100\mbox{]}\\
-\>double \hyperlink{k_8c_a37795152cd3d40b9c5e5720da0bb0f62}{coordy} \mbox{[}100\mbox{]}\\
-\} \hyperlink{k_8c_ad8f27dcb877ac2f821265d3bc02dd6ba}{glob}\\
-
-\end{tabbing}\end{DoxyCompactItemize}
+int \hyperlink{k_8c_a26f1a936d933f85e70ff48ce26f2bdf1}{bordure} =8
+\item 
+int \hyperlink{k_8c_a5e94a2f98c16e8b6860f95c99da1c0d3}{hauteur} =300
+\item 
+int \hyperlink{k_8c_a74f0f2591e5f65bf792b2c3c67817d78}{largeur} =600
+\item 
+static cairo\+\_\+surface\+\_\+t $\ast$ \hyperlink{k_8c_a76e6dbb8b33b4373ca91aab3cab86245}{surface} = N\+U\+LL
+\end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}
+\hypertarget{k_8c_aa5a4b8924043ba7896af4bbd7a2141e2}{}\label{k_8c_aa5a4b8924043ba7896af4bbd7a2141e2} 
+\index{k.\+c@{k.\+c}!button\+\_\+press\+\_\+event\+\_\+cb@{button\+\_\+press\+\_\+event\+\_\+cb}}
+\index{button\+\_\+press\+\_\+event\+\_\+cb@{button\+\_\+press\+\_\+event\+\_\+cb}!k.\+c@{k.\+c}}
+\subsubsection{\texorpdfstring{button\+\_\+press\+\_\+event\+\_\+cb()}{button\_press\_event\_cb()}}
+{\footnotesize\ttfamily static gboolean button\+\_\+press\+\_\+event\+\_\+cb (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{Gdk\+Event\+Button $\ast$}]{event,  }\item[{gpointer}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 96 of file k.\+c.
+
+\hypertarget{k_8c_afbbd14813450d074480382e8a1014b3c}{}\label{k_8c_afbbd14813450d074480382e8a1014b3c} 
+\index{k.\+c@{k.\+c}!clear\+\_\+surface@{clear\+\_\+surface}}
+\index{clear\+\_\+surface@{clear\+\_\+surface}!k.\+c@{k.\+c}}
+\subsubsection{\texorpdfstring{clear\+\_\+surface()}{clear\_surface()}}
+{\footnotesize\ttfamily static void clear\+\_\+surface (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 21 of file k.\+c.
+
+\hypertarget{k_8c_a94c34ffa866ed646d2890742680898c5}{}\label{k_8c_a94c34ffa866ed646d2890742680898c5} 
+\index{k.\+c@{k.\+c}!close\+\_\+window@{close\+\_\+window}}
+\index{close\+\_\+window@{close\+\_\+window}!k.\+c@{k.\+c}}
+\subsubsection{\texorpdfstring{close\+\_\+window()}{close\_window()}}
+{\footnotesize\ttfamily static void close\+\_\+window (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 133 of file k.\+c.
+
+\hypertarget{k_8c_aea3e6c652659db47b72040fbeb134425}{}\label{k_8c_aea3e6c652659db47b72040fbeb134425} 
+\index{k.\+c@{k.\+c}!configure\+\_\+event\+\_\+cb@{configure\+\_\+event\+\_\+cb}}
+\index{configure\+\_\+event\+\_\+cb@{configure\+\_\+event\+\_\+cb}!k.\+c@{k.\+c}}
+\subsubsection{\texorpdfstring{configure\+\_\+event\+\_\+cb()}{configure\_event\_cb()}}
+{\footnotesize\ttfamily static gboolean configure\+\_\+event\+\_\+cb (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{Gdk\+Event\+Configure $\ast$}]{event,  }\item[{gpointer}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 44 of file k.\+c.
+
+\hypertarget{k_8c_ab8a79e5d10cb4c455c10754c45646297}{}\label{k_8c_ab8a79e5d10cb4c455c10754c45646297} 
+\index{k.\+c@{k.\+c}!draw\+\_\+brush@{draw\+\_\+brush}}
+\index{draw\+\_\+brush@{draw\+\_\+brush}!k.\+c@{k.\+c}}
+\subsubsection{\texorpdfstring{draw\+\_\+brush()}{draw\_brush()}}
+{\footnotesize\ttfamily static void draw\+\_\+brush (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{gdouble}]{x,  }\item[{gdouble}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 75 of file k.\+c.
+
+\hypertarget{k_8c_a00f3adab97a5ac9fcb26c9aa238ae12e}{}\label{k_8c_a00f3adab97a5ac9fcb26c9aa238ae12e} 
+\index{k.\+c@{k.\+c}!draw\+\_\+cb@{draw\+\_\+cb}}
+\index{draw\+\_\+cb@{draw\+\_\+cb}!k.\+c@{k.\+c}}
+\subsubsection{\texorpdfstring{draw\+\_\+cb()}{draw\_cb()}}
+{\footnotesize\ttfamily static gboolean draw\+\_\+cb (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{cairo\+\_\+t $\ast$}]{cr,  }\item[{gpointer}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 66 of file k.\+c.
+
+\hypertarget{k_8c_ae6276e29424ee05067321e10a0357f5c}{}\label{k_8c_ae6276e29424ee05067321e10a0357f5c} 
+\index{k.\+c@{k.\+c}!efface@{efface}}
+\index{efface@{efface}!k.\+c@{k.\+c}}
+\subsubsection{\texorpdfstring{efface()}{efface()}}
+{\footnotesize\ttfamily static gboolean efface (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{gpointer}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 33 of file k.\+c.
+
 \hypertarget{k_8c_a0ddf1224851353fc92bfbff6f499fa97}{}\label{k_8c_a0ddf1224851353fc92bfbff6f499fa97} 
 \index{k.\+c@{k.\+c}!main@{main}}
 \index{main@{main}!k.\+c@{k.\+c}}
@@ -30,28 +116,68 @@ struct \{\\
 
 
 
+Definition at line 149 of file k.\+c.
+
+\hypertarget{k_8c_aa8a60b3173b9d98263955681ae25a8c2}{}\label{k_8c_aa8a60b3173b9d98263955681ae25a8c2} 
+\index{k.\+c@{k.\+c}!motion\+\_\+notify\+\_\+event\+\_\+cb@{motion\+\_\+notify\+\_\+event\+\_\+cb}}
+\index{motion\+\_\+notify\+\_\+event\+\_\+cb@{motion\+\_\+notify\+\_\+event\+\_\+cb}!k.\+c@{k.\+c}}
+\subsubsection{\texorpdfstring{motion\+\_\+notify\+\_\+event\+\_\+cb()}{motion\_notify\_event\_cb()}}
+{\footnotesize\ttfamily static gboolean motion\+\_\+notify\+\_\+event\+\_\+cb (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{Gdk\+Event\+Motion $\ast$}]{event,  }\item[{gpointer}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 120 of file k.\+c.
+
+\hypertarget{k_8c_a72e8e37fbc468063fd0a2b8b28f61c60}{}\label{k_8c_a72e8e37fbc468063fd0a2b8b28f61c60} 
+\index{k.\+c@{k.\+c}!tailledessin@{tailledessin}}
+\index{tailledessin@{tailledessin}!k.\+c@{k.\+c}}
+\subsubsection{\texorpdfstring{tailledessin()}{tailledessin()}}
+{\footnotesize\ttfamily void tailledessin (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{Gtk\+Allocation $\ast$}]{allocation,  }\item[{void $\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+Definition at line 9 of file k.\+c.
+
+
+
 \subsection{Variable Documentation}
-\hypertarget{k_8c_ad6f81ab9dfb99882184b1aef87ed725a}{}\label{k_8c_ad6f81ab9dfb99882184b1aef87ed725a} 
-\index{k.\+c@{k.\+c}!coordx@{coordx}}
-\index{coordx@{coordx}!k.\+c@{k.\+c}}
-\subsubsection{\texorpdfstring{coordx}{coordx}}
-{\footnotesize\ttfamily double coordx\mbox{[}100\mbox{]}}
+\hypertarget{k_8c_a26f1a936d933f85e70ff48ce26f2bdf1}{}\label{k_8c_a26f1a936d933f85e70ff48ce26f2bdf1} 
+\index{k.\+c@{k.\+c}!bordure@{bordure}}
+\index{bordure@{bordure}!k.\+c@{k.\+c}}
+\subsubsection{\texorpdfstring{bordure}{bordure}}
+{\footnotesize\ttfamily int bordure =8}
 
-\hypertarget{k_8c_a37795152cd3d40b9c5e5720da0bb0f62}{}\label{k_8c_a37795152cd3d40b9c5e5720da0bb0f62} 
-\index{k.\+c@{k.\+c}!coordy@{coordy}}
-\index{coordy@{coordy}!k.\+c@{k.\+c}}
-\subsubsection{\texorpdfstring{coordy}{coordy}}
-{\footnotesize\ttfamily double coordy\mbox{[}100\mbox{]}}
 
-\hypertarget{k_8c_ad43c3812e6d13e0518d9f8b8f463ffcf}{}\label{k_8c_ad43c3812e6d13e0518d9f8b8f463ffcf} 
-\index{k.\+c@{k.\+c}!count@{count}}
-\index{count@{count}!k.\+c@{k.\+c}}
-\subsubsection{\texorpdfstring{count}{count}}
-{\footnotesize\ttfamily int count}
 
-\hypertarget{k_8c_ad8f27dcb877ac2f821265d3bc02dd6ba}{}\label{k_8c_ad8f27dcb877ac2f821265d3bc02dd6ba} 
-\index{k.\+c@{k.\+c}!glob@{glob}}
-\index{glob@{glob}!k.\+c@{k.\+c}}
-\subsubsection{\texorpdfstring{glob}{glob}}
-{\footnotesize\ttfamily struct \{ ... \}   glob}
+Definition at line 6 of file k.\+c.
+
+\hypertarget{k_8c_a5e94a2f98c16e8b6860f95c99da1c0d3}{}\label{k_8c_a5e94a2f98c16e8b6860f95c99da1c0d3} 
+\index{k.\+c@{k.\+c}!hauteur@{hauteur}}
+\index{hauteur@{hauteur}!k.\+c@{k.\+c}}
+\subsubsection{\texorpdfstring{hauteur}{hauteur}}
+{\footnotesize\ttfamily int hauteur =300}
+
+
+
+Definition at line 6 of file k.\+c.
+
+\hypertarget{k_8c_a74f0f2591e5f65bf792b2c3c67817d78}{}\label{k_8c_a74f0f2591e5f65bf792b2c3c67817d78} 
+\index{k.\+c@{k.\+c}!largeur@{largeur}}
+\index{largeur@{largeur}!k.\+c@{k.\+c}}
+\subsubsection{\texorpdfstring{largeur}{largeur}}
+{\footnotesize\ttfamily int largeur =600}
+
+
+
+Definition at line 6 of file k.\+c.
+
+\hypertarget{k_8c_a76e6dbb8b33b4373ca91aab3cab86245}{}\label{k_8c_a76e6dbb8b33b4373ca91aab3cab86245} 
+\index{k.\+c@{k.\+c}!surface@{surface}}
+\index{surface@{surface}!k.\+c@{k.\+c}}
+\subsubsection{\texorpdfstring{surface}{surface}}
+{\footnotesize\ttfamily cairo\+\_\+surface\+\_\+t$\ast$ surface = N\+U\+LL\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 16 of file k.\+c.
 

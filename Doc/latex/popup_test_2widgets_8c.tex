@@ -1,27 +1,41 @@
 \hypertarget{popup_test_2widgets_8c}{}\section{/\+Users/frj/\+Documents/\+Code/\+Projet\+\_\+prog\+\_\+3a/\+Code/front/tests\+\_\+thanh/popup\+Test/widgets.c File Reference}
 \label{popup_test_2widgets_8c}\index{/\+Users/frj/\+Documents/\+Code/\+Projet\+\_\+prog\+\_\+3a/\+Code/front/tests\+\_\+thanh/popup\+Test/widgets.\+c@{/\+Users/frj/\+Documents/\+Code/\+Projet\+\_\+prog\+\_\+3a/\+Code/front/tests\+\_\+thanh/popup\+Test/widgets.\+c}}
-{\ttfamily \#include $<$stdio.\+h$>$}\newline
-{\ttfamily \#include $<$stdlib.\+h$>$}\newline
-{\ttfamily \#include $<$gtk/gtk.\+h$>$}\newline
 {\ttfamily \#include \char`\"{}widgets.\+h\char`\"{}}\newline
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{popup_test_2widgets_8c_a004b2d3e70e78539d27176d471d7ff74}{ajout\+Widget} (Gtk\+Widget $\ast$emplacement, Gtk\+Widget $\ast$widget)
+void \hyperlink{popup_test_2widgets_8c_adfca91e4388899f97db57d9d1877d27d}{activate} (Gtk\+Application $\ast$app, gpointer user\+\_\+data)
 \item 
 void \hyperlink{popup_test_2widgets_8c_a04f50d4227153f00d9e860be4a8d4241}{ajout\+Grille} (Gtk\+Widget $\ast$grille, Gtk\+Widget $\ast$widget, gint colonne, gint ligne, gint dimX, gint dimY)
 \item 
-void \hyperlink{popup_test_2widgets_8c_adfca91e4388899f97db57d9d1877d27d}{activate} (Gtk\+Application $\ast$app, gpointer user\+\_\+data)
+void \hyperlink{popup_test_2widgets_8c_a004b2d3e70e78539d27176d471d7ff74}{ajout\+Widget} (Gtk\+Widget $\ast$emplacement, Gtk\+Widget $\ast$widget)
 \item 
-void \hyperlink{popup_test_2widgets_8c_aa2c7cfb59eba659c2f79bb1d62c0616f}{ouverture} (Gtk\+Widget $\ast$widget, gpointer user\+\_\+data)
+void \hyperlink{popup_test_2widgets_8c_a71b6f8bda27e4c5eb17f819c96dddeb3}{U\+I\+Anim} (Gtk\+Widget $\ast$widget, gpointer user\+\_\+data)
+\item 
+void \hyperlink{popup_test_2widgets_8c_ac63ad0d1e0a7b326859c4b64b15c5e8c}{U\+I\+Anom} (Gtk\+Widget $\ast$widget, gpointer user\+\_\+data)
+\item 
+void \hyperlink{popup_test_2widgets_8c_aa5668ef3e950c706f6ad3fa3e1b42159}{U\+I\+Carte} (Gtk\+Widget $\ast$widget, gpointer user\+\_\+data)
+\item 
+void \hyperlink{popup_test_2widgets_8c_afa4b13ca849e0380e89e9e2c4f0c6884}{U\+I\+Surprise} (Gtk\+Widget $\ast$widget, gpointer user\+\_\+data)
+\item 
+void \hyperlink{popup_test_2widgets_8c_a3990c80fa4243727861a298ae4792256}{U\+I\+Traces} (Gtk\+Widget $\ast$widget, gpointer user\+\_\+data)
 \end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-int \hyperlink{popup_test_2widgets_8c_ade857a99d48bcb8cfaa57c4cd8d7d2e8}{compteur} = 0
+Gtk\+Widget $\ast$ \hyperlink{popup_test_2widgets_8c_a45bae6d9cf7eb02a5fa13329974a5cd2}{fenetre}
 \item 
-Gtk\+Widget $\ast$ \hyperlink{popup_test_2widgets_8c_a56468613724e529c5475a9afbe3be03d}{mon\+Label}
-\end{DoxyCompactItemize}
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>int \hyperlink{popup_test_2widgets_8c_a9cdebc9b6ac484eefedd5603cde3d648}{animation}\\
+\>int \hyperlink{popup_test_2widgets_8c_a0a4795122c32f2da55086b7d98f5ba70}{anonymat}\\
+\>int \hyperlink{popup_test_2widgets_8c_a518e760afcb68c5869e037e7fb0d9365}{carte}\\
+\>int \hyperlink{popup_test_2widgets_8c_a826c2c2228327fcd6d96969a3645b90e}{surprise}\\
+\>int \hyperlink{popup_test_2widgets_8c_ad6c604053d4bdb9dc1dd132105385b1b}{traces}\\
+\} \hyperlink{popup_test_2widgets_8c_abb6b1cea3a68d58406a76c9eb8122364}{status}\\
+
+\end{tabbing}\end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}
@@ -31,11 +45,19 @@ Gtk\+Widget $\ast$ \hyperlink{popup_test_2widgets_8c_a56468613724e529c5475a9afbe
 \subsubsection{\texorpdfstring{activate()}{activate()}}
 {\footnotesize\ttfamily void activate (\begin{DoxyParamCaption}\item[{Gtk\+Application $\ast$}]{app,  }\item[{gpointer}]{user\+\_\+data }\end{DoxyParamCaption})}
 
+
+
+Definition at line 40 of file widgets.\+c.
+
 \hypertarget{popup_test_2widgets_8c_a04f50d4227153f00d9e860be4a8d4241}{}\label{popup_test_2widgets_8c_a04f50d4227153f00d9e860be4a8d4241} 
 \index{popup\+Test/widgets.\+c@{popup\+Test/widgets.\+c}!ajout\+Grille@{ajout\+Grille}}
 \index{ajout\+Grille@{ajout\+Grille}!popup\+Test/widgets.\+c@{popup\+Test/widgets.\+c}}
 \subsubsection{\texorpdfstring{ajout\+Grille()}{ajoutGrille()}}
 {\footnotesize\ttfamily void ajout\+Grille (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{grille,  }\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{gint}]{colonne,  }\item[{gint}]{ligne,  }\item[{gint}]{dimX,  }\item[{gint}]{dimY }\end{DoxyParamCaption})}
+
+
+
+Definition at line 293 of file widgets.\+c.
 
 \hypertarget{popup_test_2widgets_8c_a004b2d3e70e78539d27176d471d7ff74}{}\label{popup_test_2widgets_8c_a004b2d3e70e78539d27176d471d7ff74} 
 \index{popup\+Test/widgets.\+c@{popup\+Test/widgets.\+c}!ajout\+Widget@{ajout\+Widget}}
@@ -43,24 +65,126 @@ Gtk\+Widget $\ast$ \hyperlink{popup_test_2widgets_8c_a56468613724e529c5475a9afbe
 \subsubsection{\texorpdfstring{ajout\+Widget()}{ajoutWidget()}}
 {\footnotesize\ttfamily void ajout\+Widget (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{emplacement,  }\item[{Gtk\+Widget $\ast$}]{widget }\end{DoxyParamCaption})}
 
-\hypertarget{popup_test_2widgets_8c_aa2c7cfb59eba659c2f79bb1d62c0616f}{}\label{popup_test_2widgets_8c_aa2c7cfb59eba659c2f79bb1d62c0616f} 
-\index{popup\+Test/widgets.\+c@{popup\+Test/widgets.\+c}!ouverture@{ouverture}}
-\index{ouverture@{ouverture}!popup\+Test/widgets.\+c@{popup\+Test/widgets.\+c}}
-\subsubsection{\texorpdfstring{ouverture()}{ouverture()}}
-{\footnotesize\ttfamily void ouverture (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{gpointer}]{user\+\_\+data }\end{DoxyParamCaption})}
+
+
+Definition at line 288 of file widgets.\+c.
+
+\hypertarget{popup_test_2widgets_8c_a71b6f8bda27e4c5eb17f819c96dddeb3}{}\label{popup_test_2widgets_8c_a71b6f8bda27e4c5eb17f819c96dddeb3} 
+\index{popup\+Test/widgets.\+c@{popup\+Test/widgets.\+c}!U\+I\+Anim@{U\+I\+Anim}}
+\index{U\+I\+Anim@{U\+I\+Anim}!popup\+Test/widgets.\+c@{popup\+Test/widgets.\+c}}
+\subsubsection{\texorpdfstring{U\+I\+Anim()}{UIAnim()}}
+{\footnotesize\ttfamily void U\+I\+Anim (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{gpointer}]{user\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+Definition at line 124 of file widgets.\+c.
+
+\hypertarget{popup_test_2widgets_8c_ac63ad0d1e0a7b326859c4b64b15c5e8c}{}\label{popup_test_2widgets_8c_ac63ad0d1e0a7b326859c4b64b15c5e8c} 
+\index{popup\+Test/widgets.\+c@{popup\+Test/widgets.\+c}!U\+I\+Anom@{U\+I\+Anom}}
+\index{U\+I\+Anom@{U\+I\+Anom}!popup\+Test/widgets.\+c@{popup\+Test/widgets.\+c}}
+\subsubsection{\texorpdfstring{U\+I\+Anom()}{UIAnom()}}
+{\footnotesize\ttfamily void U\+I\+Anom (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{gpointer}]{user\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+Definition at line 245 of file widgets.\+c.
+
+\hypertarget{popup_test_2widgets_8c_aa5668ef3e950c706f6ad3fa3e1b42159}{}\label{popup_test_2widgets_8c_aa5668ef3e950c706f6ad3fa3e1b42159} 
+\index{popup\+Test/widgets.\+c@{popup\+Test/widgets.\+c}!U\+I\+Carte@{U\+I\+Carte}}
+\index{U\+I\+Carte@{U\+I\+Carte}!popup\+Test/widgets.\+c@{popup\+Test/widgets.\+c}}
+\subsubsection{\texorpdfstring{U\+I\+Carte()}{UICarte()}}
+{\footnotesize\ttfamily void U\+I\+Carte (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{gpointer}]{user\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+Definition at line 99 of file widgets.\+c.
+
+\hypertarget{popup_test_2widgets_8c_afa4b13ca849e0380e89e9e2c4f0c6884}{}\label{popup_test_2widgets_8c_afa4b13ca849e0380e89e9e2c4f0c6884} 
+\index{popup\+Test/widgets.\+c@{popup\+Test/widgets.\+c}!U\+I\+Surprise@{U\+I\+Surprise}}
+\index{U\+I\+Surprise@{U\+I\+Surprise}!popup\+Test/widgets.\+c@{popup\+Test/widgets.\+c}}
+\subsubsection{\texorpdfstring{U\+I\+Surprise()}{UISurprise()}}
+{\footnotesize\ttfamily void U\+I\+Surprise (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{gpointer}]{user\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+Definition at line 266 of file widgets.\+c.
+
+\hypertarget{popup_test_2widgets_8c_a3990c80fa4243727861a298ae4792256}{}\label{popup_test_2widgets_8c_a3990c80fa4243727861a298ae4792256} 
+\index{popup\+Test/widgets.\+c@{popup\+Test/widgets.\+c}!U\+I\+Traces@{U\+I\+Traces}}
+\index{U\+I\+Traces@{U\+I\+Traces}!popup\+Test/widgets.\+c@{popup\+Test/widgets.\+c}}
+\subsubsection{\texorpdfstring{U\+I\+Traces()}{UITraces()}}
+{\footnotesize\ttfamily void U\+I\+Traces (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{gpointer}]{user\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+Definition at line 198 of file widgets.\+c.
 
 
 
 \subsection{Variable Documentation}
-\hypertarget{popup_test_2widgets_8c_ade857a99d48bcb8cfaa57c4cd8d7d2e8}{}\label{popup_test_2widgets_8c_ade857a99d48bcb8cfaa57c4cd8d7d2e8} 
-\index{popup\+Test/widgets.\+c@{popup\+Test/widgets.\+c}!compteur@{compteur}}
-\index{compteur@{compteur}!popup\+Test/widgets.\+c@{popup\+Test/widgets.\+c}}
-\subsubsection{\texorpdfstring{compteur}{compteur}}
-{\footnotesize\ttfamily int compteur = 0}
+\hypertarget{popup_test_2widgets_8c_a9cdebc9b6ac484eefedd5603cde3d648}{}\label{popup_test_2widgets_8c_a9cdebc9b6ac484eefedd5603cde3d648} 
+\index{popup\+Test/widgets.\+c@{popup\+Test/widgets.\+c}!animation@{animation}}
+\index{animation@{animation}!popup\+Test/widgets.\+c@{popup\+Test/widgets.\+c}}
+\subsubsection{\texorpdfstring{animation}{animation}}
+{\footnotesize\ttfamily int animation}
 
-\hypertarget{popup_test_2widgets_8c_a56468613724e529c5475a9afbe3be03d}{}\label{popup_test_2widgets_8c_a56468613724e529c5475a9afbe3be03d} 
-\index{popup\+Test/widgets.\+c@{popup\+Test/widgets.\+c}!mon\+Label@{mon\+Label}}
-\index{mon\+Label@{mon\+Label}!popup\+Test/widgets.\+c@{popup\+Test/widgets.\+c}}
-\subsubsection{\texorpdfstring{mon\+Label}{monLabel}}
-{\footnotesize\ttfamily Gtk\+Widget$\ast$ mon\+Label}
+
+
+Definition at line 30 of file widgets.\+c.
+
+\hypertarget{popup_test_2widgets_8c_a0a4795122c32f2da55086b7d98f5ba70}{}\label{popup_test_2widgets_8c_a0a4795122c32f2da55086b7d98f5ba70} 
+\index{popup\+Test/widgets.\+c@{popup\+Test/widgets.\+c}!anonymat@{anonymat}}
+\index{anonymat@{anonymat}!popup\+Test/widgets.\+c@{popup\+Test/widgets.\+c}}
+\subsubsection{\texorpdfstring{anonymat}{anonymat}}
+{\footnotesize\ttfamily int anonymat}
+
+
+
+Definition at line 32 of file widgets.\+c.
+
+\hypertarget{popup_test_2widgets_8c_a518e760afcb68c5869e037e7fb0d9365}{}\label{popup_test_2widgets_8c_a518e760afcb68c5869e037e7fb0d9365} 
+\index{popup\+Test/widgets.\+c@{popup\+Test/widgets.\+c}!carte@{carte}}
+\index{carte@{carte}!popup\+Test/widgets.\+c@{popup\+Test/widgets.\+c}}
+\subsubsection{\texorpdfstring{carte}{carte}}
+{\footnotesize\ttfamily int \hyperlink{structcarte}{carte}}
+
+
+
+Definition at line 29 of file widgets.\+c.
+
+\hypertarget{popup_test_2widgets_8c_a45bae6d9cf7eb02a5fa13329974a5cd2}{}\label{popup_test_2widgets_8c_a45bae6d9cf7eb02a5fa13329974a5cd2} 
+\index{popup\+Test/widgets.\+c@{popup\+Test/widgets.\+c}!fenetre@{fenetre}}
+\index{fenetre@{fenetre}!popup\+Test/widgets.\+c@{popup\+Test/widgets.\+c}}
+\subsubsection{\texorpdfstring{fenetre}{fenetre}}
+{\footnotesize\ttfamily Gtk\+Widget$\ast$ fenetre}
+
+
+
+Definition at line 37 of file widgets.\+c.
+
+\hypertarget{popup_test_2widgets_8c_abb6b1cea3a68d58406a76c9eb8122364}{}\label{popup_test_2widgets_8c_abb6b1cea3a68d58406a76c9eb8122364} 
+\index{popup\+Test/widgets.\+c@{popup\+Test/widgets.\+c}!status@{status}}
+\index{status@{status}!popup\+Test/widgets.\+c@{popup\+Test/widgets.\+c}}
+\subsubsection{\texorpdfstring{status}{status}}
+{\footnotesize\ttfamily struct \{ ... \}   status}
+
+\hypertarget{popup_test_2widgets_8c_a826c2c2228327fcd6d96969a3645b90e}{}\label{popup_test_2widgets_8c_a826c2c2228327fcd6d96969a3645b90e} 
+\index{popup\+Test/widgets.\+c@{popup\+Test/widgets.\+c}!surprise@{surprise}}
+\index{surprise@{surprise}!popup\+Test/widgets.\+c@{popup\+Test/widgets.\+c}}
+\subsubsection{\texorpdfstring{surprise}{surprise}}
+{\footnotesize\ttfamily int surprise}
+
+
+
+Definition at line 33 of file widgets.\+c.
+
+\hypertarget{popup_test_2widgets_8c_ad6c604053d4bdb9dc1dd132105385b1b}{}\label{popup_test_2widgets_8c_ad6c604053d4bdb9dc1dd132105385b1b} 
+\index{popup\+Test/widgets.\+c@{popup\+Test/widgets.\+c}!traces@{traces}}
+\index{traces@{traces}!popup\+Test/widgets.\+c@{popup\+Test/widgets.\+c}}
+\subsubsection{\texorpdfstring{traces}{traces}}
+{\footnotesize\ttfamily int traces}
+
+
+
+Definition at line 31 of file widgets.\+c.
 

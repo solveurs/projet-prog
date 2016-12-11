@@ -1,5 +1,10 @@
 \hypertarget{parser_bdd_geoloc_8c}{}\section{/\+Users/frj/\+Documents/\+Code/\+Projet\+\_\+prog\+\_\+3a/\+Code/back/parser\+Bdd\+Geoloc.c File Reference}
 \label{parser_bdd_geoloc_8c}\index{/\+Users/frj/\+Documents/\+Code/\+Projet\+\_\+prog\+\_\+3a/\+Code/back/parser\+Bdd\+Geoloc.\+c@{/\+Users/frj/\+Documents/\+Code/\+Projet\+\_\+prog\+\_\+3a/\+Code/back/parser\+Bdd\+Geoloc.\+c}}
+
+
+Ouverture et traintement du fichier de trace geoloc.  
+
+
 {\ttfamily \#include \char`\"{}../headers/parser\+Bdd\+Geoloc.\+h\char`\"{}}\newline
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
@@ -10,6 +15,11 @@ F\+I\+LE $\ast$ \hyperlink{parser_bdd_geoloc_8c_aff4c778a97f944d6042490c5da67617
 \end{DoxyCompactItemize}
 
 
+\subsection{Detailed Description}
+Ouverture et traintement du fichier de trace geoloc. 
+
+
+
 \subsection{Function Documentation}
 \hypertarget{parser_bdd_geoloc_8c_aff4c778a97f944d6042490c5da67617b}{}\label{parser_bdd_geoloc_8c_aff4c778a97f944d6042490c5da67617b} 
 \index{parser\+Bdd\+Geoloc.\+c@{parser\+Bdd\+Geoloc.\+c}!open\+Geoloc@{open\+Geoloc}}
@@ -17,9 +27,37 @@ F\+I\+LE $\ast$ \hyperlink{parser_bdd_geoloc_8c_aff4c778a97f944d6042490c5da67617
 \subsubsection{\texorpdfstring{open\+Geoloc()}{openGeoloc()}}
 {\footnotesize\ttfamily F\+I\+LE$\ast$ open\+Geoloc (\begin{DoxyParamCaption}\item[{const char $\ast$}]{nom }\end{DoxyParamCaption})}
 
+ouverture d\textquotesingle{}un fichier de log geoloc
+
+
+\begin{DoxyParams}{Parameters}
+{\em nom} & chemin vers le fichier\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+un descripteur de fichier ouvert 
+\end{DoxyReturn}
+
+
+Definition at line 17 of file parser\+Bdd\+Geoloc.\+c.
+
 \hypertarget{parser_bdd_geoloc_8c_a21f5a5c496514cc62740a76070097c6e}{}\label{parser_bdd_geoloc_8c_a21f5a5c496514cc62740a76070097c6e} 
 \index{parser\+Bdd\+Geoloc.\+c@{parser\+Bdd\+Geoloc.\+c}!read\+Geoloc@{read\+Geoloc}}
 \index{read\+Geoloc@{read\+Geoloc}!parser\+Bdd\+Geoloc.\+c@{parser\+Bdd\+Geoloc.\+c}}
 \subsubsection{\texorpdfstring{read\+Geoloc()}{readGeoloc()}}
 {\footnotesize\ttfamily \hyperlink{structbdd__trace}{bdd\+\_\+trace}$\ast$ read\+Geoloc (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{par\+Fd }\end{DoxyParamCaption})}
+
+ouverture d\textquotesingle{}une bdd geoloc
+
+
+\begin{DoxyParams}{Parameters}
+{\em par\+Fd} & le descripteur sur le fichier de log geoloc\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+un pointeur du \hyperlink{structbdd__trace}{bdd\+\_\+trace} 
+\end{DoxyReturn}
+
+
+Definition at line 34 of file parser\+Bdd\+Geoloc.\+c.
 

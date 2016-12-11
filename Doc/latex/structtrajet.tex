@@ -2,17 +2,31 @@
 \label{structtrajet}\index{trajet@{trajet}}
 
 
+modelisation d\textquotesingle{}un trajet  
+
+
+
+
 {\ttfamily \#include $<$structures.\+h$>$}
 
 \subsection*{Data Fields}
 \begin{DoxyCompactItemize}
 \item 
-int \hyperlink{structtrajet_a29bf3fc0ffe4e72e45f0c84ab4f8cd1e}{taille}
+\hyperlink{structtrace}{trace} $\ast$ \hyperlink{structtrajet_a0f24911c2181642cd5909d397ac74b2c}{dernier}
 \item 
 \hyperlink{structtrace}{trace} $\ast$ \hyperlink{structtrajet_acc04ed138412836472c25ba9913c7474}{premier}
 \item 
-\hyperlink{structtrace}{trace} $\ast$ \hyperlink{structtrajet_a0f24911c2181642cd5909d397ac74b2c}{dernier}
+int \hyperlink{structtrajet_a29bf3fc0ffe4e72e45f0c84ab4f8cd1e}{taille}
+\item 
+int \hyperlink{structtrajet_a46e7ab7119b26df81cade0dc996c4e18}{visiblite}
 \end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+modelisation d\textquotesingle{}un trajet 
+
+Definition at line 76 of file structures.\+h.
+
 
 
 \subsection{Field Documentation}
@@ -22,17 +36,39 @@ int \hyperlink{structtrajet_a29bf3fc0ffe4e72e45f0c84ab4f8cd1e}{taille}
 \subsubsection{\texorpdfstring{dernier}{dernier}}
 {\footnotesize\ttfamily \hyperlink{structtrace}{trace}$\ast$ dernier}
 
+pointeur sur la derniere trace 
+
+Definition at line 81 of file structures.\+h.
+
 \hypertarget{structtrajet_acc04ed138412836472c25ba9913c7474}{}\label{structtrajet_acc04ed138412836472c25ba9913c7474} 
 \index{trajet@{trajet}!premier@{premier}}
 \index{premier@{premier}!trajet@{trajet}}
 \subsubsection{\texorpdfstring{premier}{premier}}
 {\footnotesize\ttfamily \hyperlink{structtrace}{trace}$\ast$ premier}
 
+pointeur sur la premiere trace 
+
+Definition at line 80 of file structures.\+h.
+
 \hypertarget{structtrajet_a29bf3fc0ffe4e72e45f0c84ab4f8cd1e}{}\label{structtrajet_a29bf3fc0ffe4e72e45f0c84ab4f8cd1e} 
 \index{trajet@{trajet}!taille@{taille}}
 \index{taille@{taille}!trajet@{trajet}}
 \subsubsection{\texorpdfstring{taille}{taille}}
 {\footnotesize\ttfamily int taille}
+
+nombre de trace dans le trajet 
+
+Definition at line 78 of file structures.\+h.
+
+\hypertarget{structtrajet_a46e7ab7119b26df81cade0dc996c4e18}{}\label{structtrajet_a46e7ab7119b26df81cade0dc996c4e18} 
+\index{trajet@{trajet}!visiblite@{visiblite}}
+\index{visiblite@{visiblite}!trajet@{trajet}}
+\subsubsection{\texorpdfstring{visiblite}{visiblite}}
+{\footnotesize\ttfamily int visiblite}
+
+visibilité, 0 --$>$ invisible, 1 --$>$ visible 
+
+Definition at line 79 of file structures.\+h.
 
 
 

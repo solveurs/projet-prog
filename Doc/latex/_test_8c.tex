@@ -6,7 +6,13 @@
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
+static gboolean \hyperlink{_test_8c_a0f60e0f9340a1bd8f2cd2f585c1e54af}{clicked} (Gtk\+Widget $\ast$widget, Gdk\+Event\+Button $\ast$event, gpointer user\+\_\+data)
+\item 
+static void \hyperlink{_test_8c_a8de5d245bdee5e1a5ac3fd6f216ef367}{do\+\_\+drawing} (cairo\+\_\+t $\ast$)
+\item 
 int \hyperlink{_test_8c_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\item 
+static gboolean \hyperlink{_test_8c_af2927f3d8b5d36770e86aed1778c2959}{on\+\_\+draw\+\_\+event} (Gtk\+Widget $\ast$widget, cairo\+\_\+t $\ast$cr, gpointer user\+\_\+data)
 \end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
@@ -14,20 +20,54 @@ int \hyperlink{_test_8c_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char
 \begin{tabbing}
 xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
 struct \{\\
-\>int \hyperlink{_test_8c_ad43c3812e6d13e0518d9f8b8f463ffcf}{count}\\
 \>double \hyperlink{_test_8c_ad6f81ab9dfb99882184b1aef87ed725a}{coordx} \mbox{[}100\mbox{]}\\
 \>double \hyperlink{_test_8c_a37795152cd3d40b9c5e5720da0bb0f62}{coordy} \mbox{[}100\mbox{]}\\
-\} \hyperlink{_test_8c_ae93a4d711f44b3edf3628b91ce9adce6}{glob}\\
+\>int \hyperlink{_test_8c_ad43c3812e6d13e0518d9f8b8f463ffcf}{count}\\
+\} \hyperlink{_test_8c_a9cd44a21d95c863f0d66520e943568a3}{glob}\\
 
 \end{tabbing}\end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}
+\hypertarget{_test_8c_a0f60e0f9340a1bd8f2cd2f585c1e54af}{}\label{_test_8c_a0f60e0f9340a1bd8f2cd2f585c1e54af} 
+\index{Test.\+c@{Test.\+c}!clicked@{clicked}}
+\index{clicked@{clicked}!Test.\+c@{Test.\+c}}
+\subsubsection{\texorpdfstring{clicked()}{clicked()}}
+{\footnotesize\ttfamily static gboolean clicked (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{Gdk\+Event\+Button $\ast$}]{event,  }\item[{gpointer}]{user\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 57 of file Test.\+c.
+
+\hypertarget{_test_8c_a8de5d245bdee5e1a5ac3fd6f216ef367}{}\label{_test_8c_a8de5d245bdee5e1a5ac3fd6f216ef367} 
+\index{Test.\+c@{Test.\+c}!do\+\_\+drawing@{do\+\_\+drawing}}
+\index{do\+\_\+drawing@{do\+\_\+drawing}!Test.\+c@{Test.\+c}}
+\subsubsection{\texorpdfstring{do\+\_\+drawing()}{do\_drawing()}}
+{\footnotesize\ttfamily static void do\+\_\+drawing (\begin{DoxyParamCaption}\item[{cairo\+\_\+t $\ast$}]{cr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 22 of file Test.\+c.
+
 \hypertarget{_test_8c_a0ddf1224851353fc92bfbff6f499fa97}{}\label{_test_8c_a0ddf1224851353fc92bfbff6f499fa97} 
 \index{Test.\+c@{Test.\+c}!main@{main}}
 \index{main@{main}!Test.\+c@{Test.\+c}}
 \subsubsection{\texorpdfstring{main()}{main()}}
 {\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 72 of file Test.\+c.
+
+\hypertarget{_test_8c_af2927f3d8b5d36770e86aed1778c2959}{}\label{_test_8c_af2927f3d8b5d36770e86aed1778c2959} 
+\index{Test.\+c@{Test.\+c}!on\+\_\+draw\+\_\+event@{on\+\_\+draw\+\_\+event}}
+\index{on\+\_\+draw\+\_\+event@{on\+\_\+draw\+\_\+event}!Test.\+c@{Test.\+c}}
+\subsubsection{\texorpdfstring{on\+\_\+draw\+\_\+event()}{on\_draw\_event()}}
+{\footnotesize\ttfamily static gboolean on\+\_\+draw\+\_\+event (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{cairo\+\_\+t $\ast$}]{cr,  }\item[{gpointer}]{user\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 17 of file Test.\+c.
 
 
 
@@ -38,11 +78,19 @@ struct \{\\
 \subsubsection{\texorpdfstring{coordx}{coordx}}
 {\footnotesize\ttfamily double coordx\mbox{[}100\mbox{]}}
 
+
+
+Definition at line 13 of file Test.\+c.
+
 \hypertarget{_test_8c_a37795152cd3d40b9c5e5720da0bb0f62}{}\label{_test_8c_a37795152cd3d40b9c5e5720da0bb0f62} 
 \index{Test.\+c@{Test.\+c}!coordy@{coordy}}
 \index{coordy@{coordy}!Test.\+c@{Test.\+c}}
 \subsubsection{\texorpdfstring{coordy}{coordy}}
 {\footnotesize\ttfamily double coordy\mbox{[}100\mbox{]}}
+
+
+
+Definition at line 14 of file Test.\+c.
 
 \hypertarget{_test_8c_ad43c3812e6d13e0518d9f8b8f463ffcf}{}\label{_test_8c_ad43c3812e6d13e0518d9f8b8f463ffcf} 
 \index{Test.\+c@{Test.\+c}!count@{count}}
@@ -50,7 +98,11 @@ struct \{\\
 \subsubsection{\texorpdfstring{count}{count}}
 {\footnotesize\ttfamily int count}
 
-\hypertarget{_test_8c_ae93a4d711f44b3edf3628b91ce9adce6}{}\label{_test_8c_ae93a4d711f44b3edf3628b91ce9adce6} 
+
+
+Definition at line 12 of file Test.\+c.
+
+\hypertarget{_test_8c_a9cd44a21d95c863f0d66520e943568a3}{}\label{_test_8c_a9cd44a21d95c863f0d66520e943568a3} 
 \index{Test.\+c@{Test.\+c}!glob@{glob}}
 \index{glob@{glob}!Test.\+c@{Test.\+c}}
 \subsubsection{\texorpdfstring{glob}{glob}}

@@ -2,25 +2,36 @@
 \label{trace_8h}\index{/\+Users/frj/\+Documents/\+Code/\+Projet\+\_\+prog\+\_\+3a/\+Code/headers/trace.\+h@{/\+Users/frj/\+Documents/\+Code/\+Projet\+\_\+prog\+\_\+3a/\+Code/headers/trace.\+h}}
 {\ttfamily \#include \char`\"{}includes.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}structures.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}conversion.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}trajet.\+h\char`\"{}}\newline
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
+void \hyperlink{trace_8h_af5e794ac95bd7ef824d7e61ee84a2026}{affiche\+Trace} (\hyperlink{structtrace}{trace} $\ast$parT)
+\item 
 \hyperlink{structtrace}{trace} $\ast$ \hyperlink{trace_8h_a38291d4f116a4afa35beae4383925c05}{create\+Trace} (void)
 \item 
-void \hyperlink{trace_8h_af204a82935564e10c5fcfc425861a8b2}{init\+Trace} (\hyperlink{structtrace}{trace} $\ast$parT, double par\+Date, \hyperlink{structpoint}{point} par\+Coord, \hyperlink{structtrace}{trace} $\ast$par\+Prec, \hyperlink{structtrace}{trace} $\ast$par\+Suiv)
-\item 
-\hyperlink{structtrajet}{trajet} $\ast$ \hyperlink{trace_8h_ab2dec46a01d6a4c2148979b8cc9fc953}{init\+Trajet} (void)
-\item 
-void \hyperlink{trace_8h_a314aee860a7d3f26858f415c3e698b2f}{ajout\+Trace} (\hyperlink{structtrajet}{trajet} $\ast$par\+Tr, \hyperlink{structtrace}{trace} $\ast$parT)
+\hyperlink{structtrace}{trace} $\ast$ \hyperlink{trace_8h_adba0951ae1c290405802ad1ef183c0ec}{init\+Trace} (long par\+Date, \hyperlink{structpoint}{point} par\+Coord, \hyperlink{structtrace}{trace} $\ast$par\+Prec, \hyperlink{structtrace}{trace} $\ast$par\+Suiv)
 \end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}
-\hypertarget{trace_8h_a314aee860a7d3f26858f415c3e698b2f}{}\label{trace_8h_a314aee860a7d3f26858f415c3e698b2f} 
-\index{trace.\+h@{trace.\+h}!ajout\+Trace@{ajout\+Trace}}
-\index{ajout\+Trace@{ajout\+Trace}!trace.\+h@{trace.\+h}}
-\subsubsection{\texorpdfstring{ajout\+Trace()}{ajoutTrace()}}
-{\footnotesize\ttfamily void ajout\+Trace (\begin{DoxyParamCaption}\item[{\hyperlink{structtrajet}{trajet} $\ast$}]{par\+Tr,  }\item[{\hyperlink{structtrace}{trace} $\ast$}]{parT }\end{DoxyParamCaption})}
+\hypertarget{trace_8h_af5e794ac95bd7ef824d7e61ee84a2026}{}\label{trace_8h_af5e794ac95bd7ef824d7e61ee84a2026} 
+\index{trace.\+h@{trace.\+h}!affiche\+Trace@{affiche\+Trace}}
+\index{affiche\+Trace@{affiche\+Trace}!trace.\+h@{trace.\+h}}
+\subsubsection{\texorpdfstring{affiche\+Trace()}{afficheTrace()}}
+{\footnotesize\ttfamily void affiche\+Trace (\begin{DoxyParamCaption}\item[{\hyperlink{structtrace}{trace} $\ast$}]{parT }\end{DoxyParamCaption})}
+
+affiche le contenu de la trace
+
+
+\begin{DoxyParams}{Parameters}
+{\em parT} & la trace \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 48 of file trace.\+c.
 
 \hypertarget{trace_8h_a38291d4f116a4afa35beae4383925c05}{}\label{trace_8h_a38291d4f116a4afa35beae4383925c05} 
 \index{trace.\+h@{trace.\+h}!create\+Trace@{create\+Trace}}
@@ -28,15 +39,38 @@ void \hyperlink{trace_8h_a314aee860a7d3f26858f415c3e698b2f}{ajout\+Trace} (\hype
 \subsubsection{\texorpdfstring{create\+Trace()}{createTrace()}}
 {\footnotesize\ttfamily \hyperlink{structtrace}{trace}$\ast$ create\+Trace (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
 
-\hypertarget{trace_8h_af204a82935564e10c5fcfc425861a8b2}{}\label{trace_8h_af204a82935564e10c5fcfc425861a8b2} 
+création de trace
+
+\begin{DoxyReturn}{Returns}
+un pointeur sur trace 
+\end{DoxyReturn}
+
+
+Definition at line 15 of file trace.\+c.
+
+\hypertarget{trace_8h_adba0951ae1c290405802ad1ef183c0ec}{}\label{trace_8h_adba0951ae1c290405802ad1ef183c0ec} 
 \index{trace.\+h@{trace.\+h}!init\+Trace@{init\+Trace}}
 \index{init\+Trace@{init\+Trace}!trace.\+h@{trace.\+h}}
 \subsubsection{\texorpdfstring{init\+Trace()}{initTrace()}}
-{\footnotesize\ttfamily void init\+Trace (\begin{DoxyParamCaption}\item[{\hyperlink{structtrace}{trace} $\ast$}]{parT,  }\item[{double}]{par\+Date,  }\item[{\hyperlink{structpoint}{point}}]{par\+Coord,  }\item[{\hyperlink{structtrace}{trace} $\ast$}]{par\+Prec,  }\item[{\hyperlink{structtrace}{trace} $\ast$}]{par\+Suiv }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \hyperlink{structtrace}{trace}$\ast$ init\+Trace (\begin{DoxyParamCaption}\item[{long}]{par\+Date,  }\item[{\hyperlink{structpoint}{point}}]{par\+Coord,  }\item[{\hyperlink{structtrace}{trace} $\ast$}]{par\+Prec,  }\item[{\hyperlink{structtrace}{trace} $\ast$}]{par\+Suiv }\end{DoxyParamCaption})}
 
-\hypertarget{trace_8h_ab2dec46a01d6a4c2148979b8cc9fc953}{}\label{trace_8h_ab2dec46a01d6a4c2148979b8cc9fc953} 
-\index{trace.\+h@{trace.\+h}!init\+Trajet@{init\+Trajet}}
-\index{init\+Trajet@{init\+Trajet}!trace.\+h@{trace.\+h}}
-\subsubsection{\texorpdfstring{init\+Trajet()}{initTrajet()}}
-{\footnotesize\ttfamily \hyperlink{structtrajet}{trajet}$\ast$ init\+Trajet (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+initialise une trace
+
+
+\begin{DoxyParams}{Parameters}
+{\em par\+Date} & la date \\
+\hline
+{\em par\+Coord} & la coordonnée \\
+\hline
+{\em par\+Prec} & la trace précédente \\
+\hline
+{\em par\+Suiv} & la trace suivante\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+un pointeur sur le nouvelle trace 
+\end{DoxyReturn}
+
+
+Definition at line 31 of file trace.\+c.
 

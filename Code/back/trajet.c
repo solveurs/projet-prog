@@ -1,5 +1,17 @@
+/**
+ @file trajet.c
+ 
+ @brief fonctions relatives à la gestion des trajets
+ */
 #include "../headers/trajet.h"
 
+
+
+/**
+ initialisation d'un trajet
+
+ @return un pointeur sur le nouveau trajet
+ */
 trajet * initTrajet(void)
 {
 	trajet * varTr = (trajet*)malloc(sizeof(trajet));
@@ -10,6 +22,12 @@ trajet * initTrajet(void)
 	return varTr;
 }
 
+/**
+ ajouter une trace à un trajet
+
+ @param parTr le trajet
+ @param parT  la trace à ajouter
+ */
 void ajoutTrace(trajet * parTr, trace * parT)
 {
 	if (parTr->premier == NULL)
@@ -29,6 +47,12 @@ void ajoutTrace(trajet * parTr, trace * parT)
 	parTr->taille++;
 }
 
+/**
+ supprimer la trace à la position N du trajet
+
+ @param parTr  le trajet
+ @param parPos la position de la trace à supprimer
+ */
 void supprimerTraceN(trajet * parTr, int parPos)
 {
 	trace* it;
@@ -56,6 +80,11 @@ void supprimerTraceN(trajet * parTr, int parPos)
 	free(it);
 }
 
+/**
+ afficher un trajet complet
+
+ @param parTr le trajet à afficher
+ */
 void afficheTrajet(trajet * parTr)
 {
 	trace* it;
@@ -70,6 +99,12 @@ void afficheTrajet(trajet * parTr)
 	}
 }
 
+
+/**
+ suppression d'un trajet
+
+ @param parTr le trajet
+ */
 void supprimerTrajet(trajet * parTr)
 {
 	while (parTr->premier != NULL)

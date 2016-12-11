@@ -2,6 +2,8 @@
 \label{parser_bdd_geoloc_8h}\index{/\+Users/frj/\+Documents/\+Code/\+Projet\+\_\+prog\+\_\+3a/\+Code/headers/parser\+Bdd\+Geoloc.\+h@{/\+Users/frj/\+Documents/\+Code/\+Projet\+\_\+prog\+\_\+3a/\+Code/headers/parser\+Bdd\+Geoloc.\+h}}
 {\ttfamily \#include \char`\"{}includes.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}structures.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}trace.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}trajet.\+h\char`\"{}}\newline
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -18,9 +20,37 @@ F\+I\+LE $\ast$ \hyperlink{parser_bdd_geoloc_8h_aff4c778a97f944d6042490c5da67617
 \subsubsection{\texorpdfstring{open\+Geoloc()}{openGeoloc()}}
 {\footnotesize\ttfamily F\+I\+LE$\ast$ open\+Geoloc (\begin{DoxyParamCaption}\item[{const char $\ast$}]{nom }\end{DoxyParamCaption})}
 
+ouverture d\textquotesingle{}un fichier de log geoloc
+
+
+\begin{DoxyParams}{Parameters}
+{\em nom} & chemin vers le fichier\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+un descripteur de fichier ouvert 
+\end{DoxyReturn}
+
+
+Definition at line 17 of file parser\+Bdd\+Geoloc.\+c.
+
 \hypertarget{parser_bdd_geoloc_8h_a21f5a5c496514cc62740a76070097c6e}{}\label{parser_bdd_geoloc_8h_a21f5a5c496514cc62740a76070097c6e} 
 \index{parser\+Bdd\+Geoloc.\+h@{parser\+Bdd\+Geoloc.\+h}!read\+Geoloc@{read\+Geoloc}}
 \index{read\+Geoloc@{read\+Geoloc}!parser\+Bdd\+Geoloc.\+h@{parser\+Bdd\+Geoloc.\+h}}
 \subsubsection{\texorpdfstring{read\+Geoloc()}{readGeoloc()}}
 {\footnotesize\ttfamily \hyperlink{structbdd__trace}{bdd\+\_\+trace}$\ast$ read\+Geoloc (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{par\+Fd }\end{DoxyParamCaption})}
+
+ouverture d\textquotesingle{}une bdd geoloc
+
+
+\begin{DoxyParams}{Parameters}
+{\em par\+Fd} & le descripteur sur le fichier de log geoloc\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+un pointeur du \hyperlink{structbdd__trace}{bdd\+\_\+trace} 
+\end{DoxyReturn}
+
+
+Definition at line 14 of file parser\+Bdd\+Adresse.\+c.
 

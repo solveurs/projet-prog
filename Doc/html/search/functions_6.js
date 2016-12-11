@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['opengeoloc',['openGeoloc',['../parser_bdd_geoloc_8c.html#aff4c778a97f944d6042490c5da67617b',1,'openGeoloc(const char *nom):&#160;parserBddGeoloc.c'],['../parser_bdd_geoloc_8h.html#aff4c778a97f944d6042490c5da67617b',1,'openGeoloc(const char *nom):&#160;parserBddGeoloc.c']]],
-  ['ouverture',['ouverture',['../popup_test_2widgets_8c.html#aa2c7cfb59eba659c2f79bb1d62c0616f',1,'ouverture(GtkWidget *widget, gpointer user_data):&#160;widgets.c'],['../popup_test_2widgets_8h.html#aa2c7cfb59eba659c2f79bb1d62c0616f',1,'ouverture(GtkWidget *widget, gpointer user_data):&#160;widgets.c']]]
+  ['initlistepointinteret',['initListePointInteret',['../point_interet_8c.html#a2599215e4204bd4c92564a34adfd889c',1,'initListePointInteret(void):&#160;pointInteret.c'],['../point_interet_8h.html#a2599215e4204bd4c92564a34adfd889c',1,'initListePointInteret(void):&#160;pointInteret.c']]],
+  ['initpointinteret',['initPointInteret',['../point_interet_8c.html#a062e2cf2a173edce8231647347cf0311',1,'initPointInteret(int parImpor, time_t parDbt, time_t parFin, point parPt, adresse parAddr):&#160;pointInteret.c'],['../point_interet_8h.html#a062e2cf2a173edce8231647347cf0311',1,'initPointInteret(int parImpor, time_t parDbt, time_t parFin, point parPt, adresse parAddr):&#160;pointInteret.c']]],
+  ['inittrace',['initTrace',['../trace_8c.html#adba0951ae1c290405802ad1ef183c0ec',1,'initTrace(long parDate, point parCoord, trace *parPrec, trace *parSuiv):&#160;trace.c'],['../trace_8h.html#adba0951ae1c290405802ad1ef183c0ec',1,'initTrace(long parDate, point parCoord, trace *parPrec, trace *parSuiv):&#160;trace.c']]],
+  ['inittrajet',['initTrajet',['../trajet_8c.html#ab2dec46a01d6a4c2148979b8cc9fc953',1,'initTrajet(void):&#160;trajet.c'],['../trajet_8h.html#ab2dec46a01d6a4c2148979b8cc9fc953',1,'initTrajet(void):&#160;trajet.c']]]
 ];

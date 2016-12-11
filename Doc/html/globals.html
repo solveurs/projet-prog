@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -20,6 +27,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo_solveur-64.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Projet-Geoloc
    </div>
@@ -43,6 +51,20 @@ $(function() {
 </script>
 <div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('globals.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -62,304 +84,208 @@ $(function() {
 
 <h3><a id="index_a"></a>- a -</h3><ul>
 <li>activate()
-: <a class="el" href="popup_test_2widgets_8c.html#adfca91e4388899f97db57d9d1877d27d">widgets.c</a>
-, <a class="el" href="popup_test_2widgets_8h.html#adfca91e4388899f97db57d9d1877d27d">widgets.h</a>
-, <a class="el" href="tmp_memo_8c.html#adfca91e4388899f97db57d9d1877d27d">tmpMemo.c</a>
-, <a class="el" href="scroll_test_2widgets_8c.html#adfca91e4388899f97db57d9d1877d27d">widgets.c</a>
+: <a class="el" href="memo_8c.html#adfca91e4388899f97db57d9d1877d27d">memo.c</a>
+, <a class="el" href="popup_test_2widgets_8c.html#adfca91e4388899f97db57d9d1877d27d">widgets.c</a>
 , <a class="el" href="scroll_test_2widgets_8h.html#adfca91e4388899f97db57d9d1877d27d">widgets.h</a>
 </li>
 <li>adresse
 : <a class="el" href="structures_8h.html#a1e87c781571309cf7b2248d82ba2ce0b">structures.h</a>
 </li>
+<li>afficheTrace()
+: <a class="el" href="trace_8h.html#af5e794ac95bd7ef824d7e61ee84a2026">trace.h</a>
+, <a class="el" href="trace_8c.html#af5e794ac95bd7ef824d7e61ee84a2026">trace.c</a>
+</li>
+<li>afficheTrajet()
+: <a class="el" href="trajet_8c.html#a18b9597ac0920fea1674d1fd15328ca5">trajet.c</a>
+, <a class="el" href="trajet_8h.html#a18b9597ac0920fea1674d1fd15328ca5">trajet.h</a>
+</li>
 <li>ajoutGrille()
-: <a class="el" href="scroll_test_2widgets_8c.html#a04f50d4227153f00d9e860be4a8d4241">widgets.c</a>
-, <a class="el" href="scroll_test_2widgets_8h.html#a04f50d4227153f00d9e860be4a8d4241">widgets.h</a>
-, <a class="el" href="tmp_memo_8c.html#a04f50d4227153f00d9e860be4a8d4241">tmpMemo.c</a>
+: <a class="el" href="memo_8c.html#a04f50d4227153f00d9e860be4a8d4241">memo.c</a>
 , <a class="el" href="popup_test_2widgets_8c.html#a04f50d4227153f00d9e860be4a8d4241">widgets.c</a>
 , <a class="el" href="popup_test_2widgets_8h.html#a04f50d4227153f00d9e860be4a8d4241">widgets.h</a>
+, <a class="el" href="scroll_test_2widgets_8c.html#a04f50d4227153f00d9e860be4a8d4241">widgets.c</a>
+, <a class="el" href="scroll_test_2widgets_8h.html#a04f50d4227153f00d9e860be4a8d4241">widgets.h</a>
+</li>
+<li>ajoutPointInteret()
+: <a class="el" href="point_interet_8c.html#af3a347e14a3873078abd10bd1292be88">pointInteret.c</a>
+, <a class="el" href="point_interet_8h.html#af3a347e14a3873078abd10bd1292be88">pointInteret.h</a>
 </li>
 <li>ajoutTrace()
-: <a class="el" href="trace_8h.html#a314aee860a7d3f26858f415c3e698b2f">trace.h</a>
-, <a class="el" href="trace_8c.html#a314aee860a7d3f26858f415c3e698b2f">trace.c</a>
+: <a class="el" href="trajet_8h.html#a314aee860a7d3f26858f415c3e698b2f">trajet.h</a>
+, <a class="el" href="trajet_8c.html#a314aee860a7d3f26858f415c3e698b2f">trajet.c</a>
 </li>
 <li>ajoutWidget()
-: <a class="el" href="scroll_test_2widgets_8h.html#a004b2d3e70e78539d27176d471d7ff74">widgets.h</a>
-, <a class="el" href="popup_test_2widgets_8c.html#a004b2d3e70e78539d27176d471d7ff74">widgets.c</a>
-, <a class="el" href="tmp_memo_8c.html#a004b2d3e70e78539d27176d471d7ff74">tmpMemo.c</a>
+: <a class="el" href="popup_test_2widgets_8c.html#a004b2d3e70e78539d27176d471d7ff74">widgets.c</a>
+, <a class="el" href="memo_8c.html#a004b2d3e70e78539d27176d471d7ff74">memo.c</a>
+, <a class="el" href="scroll_test_2widgets_8h.html#a004b2d3e70e78539d27176d471d7ff74">widgets.h</a>
+, <a class="el" href="scroll_test_2widgets_8c.html#a004b2d3e70e78539d27176d471d7ff74">widgets.c</a>
+, <a class="el" href="popup_test_2widgets_8h.html#a004b2d3e70e78539d27176d471d7ff74">widgets.h</a>
+</li>
+<li>animation
+: <a class="el" href="popup_test_2widgets_8c.html#a9cdebc9b6ac484eefedd5603cde3d648">widgets.c</a>
+</li>
+<li>anonymat
+: <a class="el" href="popup_test_2widgets_8c.html#a0a4795122c32f2da55086b7d98f5ba70">widgets.c</a>
+</li>
+<li>appendListePointInteret()
+: <a class="el" href="point_interet_8h.html#a831eafae0e919c3e35221dc2871178cd">pointInteret.h</a>
+, <a class="el" href="point_interet_8c.html#a831eafae0e919c3e35221dc2871178cd">pointInteret.c</a>
 </li>
 </ul>
 
 
 <h3><a id="index_b"></a>- b -</h3><ul>
-<li>bdd_pt_interet
-: <a class="el" href="structures_8h.html#a3cd5dc17d5f52d5ec8073028f98678ce">structures.h</a>
-</li>
 <li>bdd_trace
 : <a class="el" href="structures_8h.html#ac6d40299338e3e01d3972e81002bfb46">structures.h</a>
+</li>
+<li>bordure
+: <a class="el" href="figures_8c.html#a26f1a936d933f85e70ff48ce26f2bdf1">figures.c</a>
+, <a class="el" href="k_8c.html#a26f1a936d933f85e70ff48ce26f2bdf1">k.c</a>
+</li>
+<li>button_press_event_cb()
+: <a class="el" href="figures_8c.html#aba49077690b01bb9bdd409b85f364929">figures.c</a>
+, <a class="el" href="figures_8h.html#aba49077690b01bb9bdd409b85f364929">figures.h</a>
+, <a class="el" href="k_8c.html#aa5a4b8924043ba7896af4bbd7a2141e2">k.c</a>
 </li>
 </ul>
 
 
 <h3><a id="index_c"></a>- c -</h3><ul>
+<li>calculPointInteret()
+: <a class="el" href="point_interet_8h.html#af6d01abd27021ab218ad9cc4a60bb06b">pointInteret.h</a>
+</li>
 <li>carte
 : <a class="el" href="structures_8h.html#a9f5a41d65272655fbd89f6d04197b623">structures.h</a>
-</li>
-<li>cb1()
-: <a class="el" href="csvfix_8c.html#ad57824ac7e2f0429ce46efc17496ed16">csvfix.c</a>
-, <a class="el" href="test__csv_8c.html#ade1f382fdd539890161332fc440f72f0">test_csv.c</a>
-, <a class="el" href="csvinfo_8c.html#aa6db290facdd5f4e36ef411ce4479c43">csvinfo.c</a>
-, <a class="el" href="csvtest_8c.html#ab2be7a5e32cdb2bbb00f084bf7132610">csvtest.c</a>
-</li>
-<li>cb2()
-: <a class="el" href="csvtest_8c.html#ae76763e1896b6e21c09b20a0b9739de6">csvtest.c</a>
-, <a class="el" href="test__csv_8c.html#ac18726758b83820c49f8f417e49fb160">test_csv.c</a>
-, <a class="el" href="csvfix_8c.html#aa6289e7902b3263d5711f06e6cab594a">csvfix.c</a>
-, <a class="el" href="csvinfo_8c.html#a4583b6151317f8a0f7b3a758695e822f">csvinfo.c</a>
+, <a class="el" href="popup_test_2widgets_8c.html#a518e760afcb68c5869e037e7fb0d9365">widgets.c</a>
+, <a class="el" href="_u_i_cercle_anonymat_8c.html#ac2fd99f5d2630c7559bb990519c9659a">UICercleAnonymat.c</a>
 </li>
 <li>cercle
 : <a class="el" href="structures_8h.html#a62a3ea0b2e8d6156103b9678a98b81c8">structures.h</a>
+, <a class="el" href="_u_i_cercle_anonymat_8c.html#aa596f6e1ec166f9c578d89dead2695cf">UICercleAnonymat.c</a>
 </li>
-<li>col
-: <a class="el" href="test__csv_8c.html#a72f49011b5605e0c59eabd1ab811cdfd">test_csv.c</a>
+<li>clear_surface()
+: <a class="el" href="figures_8h.html#a4223523a2f4525b9b1395a33381858e0">figures.h</a>
+, <a class="el" href="k_8c.html#afbbd14813450d074480382e8a1014b3c">k.c</a>
+, <a class="el" href="figures_8c.html#a4223523a2f4525b9b1395a33381858e0">figures.c</a>
 </li>
-<li>compteur
-: <a class="el" href="popup_test_2widgets_8c.html#ade857a99d48bcb8cfaa57c4cd8d7d2e8">widgets.c</a>
+<li>clicked()
+: <a class="el" href="_test_8c.html#a0f60e0f9340a1bd8f2cd2f585c1e54af">Test.c</a>
+, <a class="el" href="_u_i_cercle_anonymat_8c.html#a0f60e0f9340a1bd8f2cd2f585c1e54af">UICercleAnonymat.c</a>
+, <a class="el" href="cairo_trace_8c.html#a0f60e0f9340a1bd8f2cd2f585c1e54af">cairoTrace.c</a>
+</li>
+<li>CLICKED
+: <a class="el" href="_u_i_cercle_anonymat_8c.html#a5e0fcf4e16f9c6e60e29e0633e9ad5b3">UICercleAnonymat.c</a>
+</li>
+<li>close_window()
+: <a class="el" href="k_8c.html#a94c34ffa866ed646d2890742680898c5">k.c</a>
+, <a class="el" href="figures_8c.html#aa0b970da4405389c144095b04eacd133">figures.c</a>
+, <a class="el" href="figures_8h.html#aa0b970da4405389c144095b04eacd133">figures.h</a>
+</li>
+<li>configure_event_cb()
+: <a class="el" href="figures_8c.html#ab2067e0b42d19c759bf6db808b1c1734">figures.c</a>
+, <a class="el" href="figures_8h.html#ab2067e0b42d19c759bf6db808b1c1734">figures.h</a>
+, <a class="el" href="k_8c.html#aea3e6c652659db47b72040fbeb134425">k.c</a>
 </li>
 <li>coordx
-: <a class="el" href="figures_8h.html#ad6f81ab9dfb99882184b1aef87ed725a">figures.h</a>
-, <a class="el" href="k_8c.html#ad6f81ab9dfb99882184b1aef87ed725a">k.c</a>
-, <a class="el" href="_test_8c.html#ad6f81ab9dfb99882184b1aef87ed725a">Test.c</a>
+: <a class="el" href="_test_8c.html#ad6f81ab9dfb99882184b1aef87ed725a">Test.c</a>
 </li>
 <li>coordy
-: <a class="el" href="figures_8h.html#a37795152cd3d40b9c5e5720da0bb0f62">figures.h</a>
-, <a class="el" href="k_8c.html#a37795152cd3d40b9c5e5720da0bb0f62">k.c</a>
-, <a class="el" href="_test_8c.html#a37795152cd3d40b9c5e5720da0bb0f62">Test.c</a>
+: <a class="el" href="_test_8c.html#a37795152cd3d40b9c5e5720da0bb0f62">Test.c</a>
+</li>
+<li>copy
+: <a class="el" href="_u_i_cercle_anonymat_8c.html#a80e1f4e6af20ddd311888f9069491271">UICercleAnonymat.c</a>
 </li>
 <li>count
-: <a class="el" href="figures_8h.html#ad43c3812e6d13e0518d9f8b8f463ffcf">figures.h</a>
-, <a class="el" href="k_8c.html#ad43c3812e6d13e0518d9f8b8f463ffcf">k.c</a>
-, <a class="el" href="_test_8c.html#ad43c3812e6d13e0518d9f8b8f463ffcf">Test.c</a>
+: <a class="el" href="_test_8c.html#ad43c3812e6d13e0518d9f8b8f463ffcf">Test.c</a>
+</li>
+<li>createPointInteret()
+: <a class="el" href="point_interet_8h.html#a12b65c5aec1268a284ee1bb472cf7e0b">pointInteret.h</a>
+, <a class="el" href="point_interet_8c.html#a12b65c5aec1268a284ee1bb472cf7e0b">pointInteret.c</a>
 </li>
 <li>createTrace()
 : <a class="el" href="trace_8c.html#a38291d4f116a4afa35beae4383925c05">trace.c</a>
 , <a class="el" href="trace_8h.html#a38291d4f116a4afa35beae4383925c05">trace.h</a>
 </li>
-<li>CSV_APPEND_NULL
-: <a class="el" href="csv_8h.html#ab8ad5c1f198e533856c64b5b06526478">csv.h</a>
-</li>
-<li>CSV_COL
-: <a class="el" href="test__csv_8c.html#ab9ef69bd58f71dddbcf96da3a4dd6973">test_csv.c</a>
-</li>
-<li>CSV_COMMA
-: <a class="el" href="csv_8h.html#a413c6988d7ae8ba42f66ef6c9952e8a2">csv.h</a>
-</li>
-<li>CSV_CR
-: <a class="el" href="csv_8h.html#ad43a04e16e2409904d2160d7917a2497">csv.h</a>
-</li>
-<li>CSV_EINVALID
-: <a class="el" href="csv_8h.html#aaf4d766032749c46bd055e67df4207fa">csv.h</a>
-</li>
-<li>CSV_EMPTY_IS_NULL
-: <a class="el" href="csv_8h.html#acdd8ef0b4cedb12ee72e24c4c4570e46">csv.h</a>
-</li>
-<li>CSV_END
-: <a class="el" href="test__csv_8c.html#ab2f18b6531a527175ed3572d6aa1c4a9">test_csv.c</a>
-</li>
-<li>CSV_ENOMEM
-: <a class="el" href="csv_8h.html#aece1ef05d77b06d4a7c039276172e64d">csv.h</a>
-</li>
-<li>CSV_EPARSE
-: <a class="el" href="csv_8h.html#a758994ab67c38a80d9002f0284c1bfdd">csv.h</a>
-</li>
-<li>CSV_ERR
-: <a class="el" href="test__csv_8c.html#af5e9296ac1b7504e7d0023bcf1947f18">test_csv.c</a>
-</li>
-<li>csv_error()
-: <a class="el" href="csv_8h.html#a78159ae4750c0b2d881725b99ebe5dd9">csv.h</a>
-, <a class="el" href="libcsv_8c.html#a78159ae4750c0b2d881725b99ebe5dd9">libcsv.c</a>
-</li>
-<li>CSV_ETOOBIG
-: <a class="el" href="csv_8h.html#a5fd00cbf76c43ca3757e1c03ae6b85c3">csv.h</a>
-</li>
-<li>csv_fini()
-: <a class="el" href="csv_8h.html#a839a13f1c257d5359440611854d30f8e">csv.h</a>
-, <a class="el" href="libcsv_8c.html#a809917e0f1518e43931cfe7667f27708">libcsv.c</a>
-</li>
-<li>csv_free()
-: <a class="el" href="csv_8h.html#aab56b15fc2b67a3f0f5f65f17b897c37">csv.h</a>
-, <a class="el" href="libcsv_8c.html#aab56b15fc2b67a3f0f5f65f17b897c37">libcsv.c</a>
-</li>
-<li>csv_fwrite()
-: <a class="el" href="csv_8h.html#abfd3c874d8ca9b974021f4cfb1c6f673">csv.h</a>
-, <a class="el" href="libcsv_8c.html#abfd3c874d8ca9b974021f4cfb1c6f673">libcsv.c</a>
-</li>
-<li>csv_fwrite2()
-: <a class="el" href="csv_8h.html#a41176ac5de70ff52b859ac5dbe63a921">csv.h</a>
-, <a class="el" href="libcsv_8c.html#a41176ac5de70ff52b859ac5dbe63a921">libcsv.c</a>
-</li>
-<li>csv_get_buffer_size()
-: <a class="el" href="csv_8h.html#ad60993e2fbc173b15844c898b2692806">csv.h</a>
-, <a class="el" href="libcsv_8c.html#ad60993e2fbc173b15844c898b2692806">libcsv.c</a>
-</li>
-<li>csv_get_delim()
-: <a class="el" href="csv_8h.html#a89398e7652905aa69ec5668e91583e72">csv.h</a>
-, <a class="el" href="libcsv_8c.html#a89398e7652905aa69ec5668e91583e72">libcsv.c</a>
-</li>
-<li>csv_get_opts()
-: <a class="el" href="csv_8h.html#a7c79f27843c72931144831794121a1bd">csv.h</a>
-, <a class="el" href="libcsv_8c.html#a7c79f27843c72931144831794121a1bd">libcsv.c</a>
-</li>
-<li>csv_get_quote()
-: <a class="el" href="csv_8h.html#a6c1522a9fe6d742a3a00da0a3aa0854d">csv.h</a>
-, <a class="el" href="libcsv_8c.html#a6c1522a9fe6d742a3a00da0a3aa0854d">libcsv.c</a>
-</li>
-<li>csv_init()
-: <a class="el" href="csv_8h.html#a63ff1a27640a503afe336e67ae114a86">csv.h</a>
-, <a class="el" href="libcsv_8c.html#a63ff1a27640a503afe336e67ae114a86">libcsv.c</a>
-</li>
-<li>CSV_LF
-: <a class="el" href="csv_8h.html#ad736f23c07af47298a2d624298366759">csv.h</a>
-</li>
-<li>CSV_MAJOR
-: <a class="el" href="csv_8h.html#a4d507ea096d2723af0a7d8cce5e7de6c">csv.h</a>
-</li>
-<li>CSV_MINOR
-: <a class="el" href="csv_8h.html#a9065009e0d8e8732ee779b7ab2a95b5d">csv.h</a>
-</li>
-<li>csv_parse()
-: <a class="el" href="libcsv_8c.html#a4becc4a3184a228fed0c2eecbeef6558">libcsv.c</a>
-, <a class="el" href="csv_8h.html#a6ac22718fbb9533a64e4098821537b9e">csv.h</a>
-</li>
-<li>CSV_QUOTE
-: <a class="el" href="csv_8h.html#a530e66b204a9b81a24abb71aac625f2d">csv.h</a>
-</li>
-<li>CSV_RELEASE
-: <a class="el" href="csv_8h.html#a58a8c20d82fefddaa562f9cc223c2521">csv.h</a>
-</li>
-<li>CSV_REPALL_NL
-: <a class="el" href="csv_8h.html#ae6bed0ef3c705f93877c53f8f334ff5e">csv.h</a>
-</li>
-<li>CSV_ROW
-: <a class="el" href="test__csv_8c.html#a14be8605517ef5dbf0bc811ea063c913">test_csv.c</a>
-</li>
-<li>csv_set_blk_size()
-: <a class="el" href="csv_8h.html#a52de70b1af6048f526d8969323077181">csv.h</a>
-, <a class="el" href="libcsv_8c.html#a83c09c416cc60e77f56fcf9d4bc59797">libcsv.c</a>
-</li>
-<li>csv_set_delim()
-: <a class="el" href="csv_8h.html#a4e4b65ef50d610649c2ca4ba0176771e">csv.h</a>
-, <a class="el" href="libcsv_8c.html#a4e4b65ef50d610649c2ca4ba0176771e">libcsv.c</a>
-</li>
-<li>csv_set_free_func()
-: <a class="el" href="csv_8h.html#a037911960f79740308f59911931c6a65">csv.h</a>
-, <a class="el" href="libcsv_8c.html#a4576551f5060b5d3e30fab552ad67512">libcsv.c</a>
-</li>
-<li>csv_set_opts()
-: <a class="el" href="csv_8h.html#ad13f02ed1d06f5310cf97c873e5d26d6">csv.h</a>
-, <a class="el" href="libcsv_8c.html#ad13f02ed1d06f5310cf97c873e5d26d6">libcsv.c</a>
-</li>
-<li>csv_set_quote()
-: <a class="el" href="csv_8h.html#a176484b938d55a95c7a5411bd303a4ad">csv.h</a>
-, <a class="el" href="libcsv_8c.html#a176484b938d55a95c7a5411bd303a4ad">libcsv.c</a>
-</li>
-<li>csv_set_realloc_func()
-: <a class="el" href="libcsv_8c.html#a17a3f973b05b3223a36bbfc265b31f3a">libcsv.c</a>
-, <a class="el" href="csv_8h.html#af984dafc1aa1f88c17c790e99712f676">csv.h</a>
-</li>
-<li>csv_set_space_func()
-: <a class="el" href="csv_8h.html#ab3b2e581f5afee7d891bd049ba05e0ce">csv.h</a>
-, <a class="el" href="libcsv_8c.html#ab3b2e581f5afee7d891bd049ba05e0ce">libcsv.c</a>
-</li>
-<li>csv_set_term_func()
-: <a class="el" href="libcsv_8c.html#af896f95a75ca7495b0b50ca8832af09f">libcsv.c</a>
-, <a class="el" href="csv_8h.html#af896f95a75ca7495b0b50ca8832af09f">csv.h</a>
-</li>
-<li>CSV_SPACE
-: <a class="el" href="csv_8h.html#a55edd79a13fe59785bbfeb7ddb8d6b96">csv.h</a>
-</li>
-<li>csv_strerror()
-: <a class="el" href="libcsv_8c.html#a86a1461b9eb8d316b4c5f93cdd8af7ee">libcsv.c</a>
-, <a class="el" href="csv_8h.html#ad5068205b5b9af4a3755dfa6113d3308">csv.h</a>
-</li>
-<li>CSV_STRICT
-: <a class="el" href="csv_8h.html#aad8a3e9845e7a90cea559551cf36bf23">csv.h</a>
-</li>
-<li>CSV_STRICT_FINI
-: <a class="el" href="csv_8h.html#ac94dacba6a86a94c6005e2c592a699ee">csv.h</a>
-</li>
-<li>CSV_SUCCESS
-: <a class="el" href="csv_8h.html#ae83311fc8dcaff95c6650ca69a69a8ab">csv.h</a>
-</li>
-<li>CSV_TAB
-: <a class="el" href="csv_8h.html#a26cc486825ee3d313e6bac48793ed5ea">csv.h</a>
-</li>
-<li>csv_write()
-: <a class="el" href="libcsv_8c.html#a3c3a42144538bd6edcd15f5aeb6fa41b">libcsv.c</a>
-, <a class="el" href="csv_8h.html#a3c3a42144538bd6edcd15f5aeb6fa41b">csv.h</a>
-</li>
-<li>csv_write2()
-: <a class="el" href="csv_8h.html#a0897f99870d6c85d5754606cc3678b50">csv.h</a>
-, <a class="el" href="libcsv_8c.html#a0897f99870d6c85d5754606cc3678b50">libcsv.c</a>
-</li>
 </ul>
 
 
 <h3><a id="index_d"></a>- d -</h3><ul>
-<li>DO_TEST
-: <a class="el" href="test__csv_8c.html#a475681b338e585660d57295a2bdabb68">test_csv.c</a>
+<li>debugBack()
+: <a class="el" href="main_8c.html#a39037f796dc7f3c40e2378883a3f1777">main.c</a>
 </li>
-<li>DO_TEST_CUSTOM
-: <a class="el" href="test__csv_8c.html#a0445ef88b99fe6776816d92e6e868c93">test_csv.c</a>
+<li>do_drawing()
+: <a class="el" href="_test_8c.html#a8de5d245bdee5e1a5ac3fd6f216ef367">Test.c</a>
+, <a class="el" href="_u_i_cercle_anonymat_8c.html#aca71b06decf6a0fcf8c10222125bccd8">UICercleAnonymat.c</a>
+</li>
+<li>do_trace()
+: <a class="el" href="cairo_trace_8c.html#a7ed727e97cfae6d77232d0046b4211f7">cairoTrace.c</a>
+</li>
+<li>draw_brush()
+: <a class="el" href="k_8c.html#ab8a79e5d10cb4c455c10754c45646297">k.c</a>
+, <a class="el" href="figures_8c.html#a26575b0440be733e8c409fa782d0de77">figures.c</a>
+, <a class="el" href="figures_8h.html#a26575b0440be733e8c409fa782d0de77">figures.h</a>
+</li>
+<li>draw_cb()
+: <a class="el" href="k_8c.html#a00f3adab97a5ac9fcb26c9aa238ae12e">k.c</a>
+, <a class="el" href="figures_8c.html#a00f3adab97a5ac9fcb26c9aa238ae12e">figures.c</a>
+, <a class="el" href="figures_8h.html#a25b9332634a80c6adc0d47401df29dba">figures.h</a>
 </li>
 </ul>
 
 
 <h3><a id="index_e"></a>- e -</h3><ul>
-<li>event_idx
-: <a class="el" href="test__csv_8c.html#ab8897ffbc0cc4bf5d33445135fe67936">test_csv.c</a>
-</li>
-<li>event_ptr
-: <a class="el" href="test__csv_8c.html#a1504ba55cc69bc5077da274e151101f7">test_csv.c</a>
+<li>efface()
+: <a class="el" href="figures_8c.html#a33d81f2442620f52d17210ec4864a59a">figures.c</a>
+, <a class="el" href="k_8c.html#ae6276e29424ee05067321e10a0357f5c">k.c</a>
+, <a class="el" href="figures_8h.html#a33d81f2442620f52d17210ec4864a59a">figures.h</a>
 </li>
 </ul>
 
 
 <h3><a id="index_f"></a>- f -</h3><ul>
-<li>fail_parser()
-: <a class="el" href="test__csv_8c.html#ad2582fe149aaa13686dd74de738fd674">test_csv.c</a>
-</li>
-<li>fail_writer()
-: <a class="el" href="test__csv_8c.html#a92d7e865e21eca7f248e0566ba268331">test_csv.c</a>
-</li>
-<li>FIELD_BEGUN
-: <a class="el" href="libcsv_8c.html#aeb6e4175a8c79aa99f8da332b6fe62af">libcsv.c</a>
-</li>
-<li>FIELD_MIGHT_HAVE_ENDED
-: <a class="el" href="libcsv_8c.html#a5c0e812d40c0a8c74fab6ce4470aa251">libcsv.c</a>
-</li>
-<li>FIELD_NOT_BEGUN
-: <a class="el" href="libcsv_8c.html#aba08ab8c86cf7bbfa7b273bba5c8f790">libcsv.c</a>
+<li>fenetre
+: <a class="el" href="popup_test_2widgets_8c.html#a45bae6d9cf7eb02a5fa13329974a5cd2">widgets.c</a>
 </li>
 </ul>
 
 
 <h3><a id="index_g"></a>- g -</h3><ul>
+<li>genereTrace()
+: <a class="el" href="cairo_trace_8c.html#a49c8b5d5463a35ca403245196ab37662">cairoTrace.c</a>
+</li>
 <li>glob
-: <a class="el" href="figures_8h.html#a9cd44a21d95c863f0d66520e943568a3">figures.h</a>
-, <a class="el" href="_test_8c.html#ae93a4d711f44b3edf3628b91ce9adce6">Test.c</a>
-, <a class="el" href="k_8c.html#ad8f27dcb877ac2f821265d3bc02dd6ba">k.c</a>
+: <a class="el" href="_test_8c.html#a9cd44a21d95c863f0d66520e943568a3">Test.c</a>
+</li>
+</ul>
+
+
+<h3><a id="index_h"></a>- h -</h3><ul>
+<li>hauteur
+: <a class="el" href="figures_8c.html#a5e94a2f98c16e8b6860f95c99da1c0d3">figures.c</a>
+, <a class="el" href="k_8c.html#a5e94a2f98c16e8b6860f95c99da1c0d3">k.c</a>
 </li>
 </ul>
 
 
 <h3><a id="index_i"></a>- i -</h3><ul>
+<li>image
+: <a class="el" href="_u_i_cercle_anonymat_8c.html#a4d3180badf477a42a7f55128b348f141">UICercleAnonymat.c</a>
+</li>
+<li>initListePointInteret()
+: <a class="el" href="point_interet_8c.html#a2599215e4204bd4c92564a34adfd889c">pointInteret.c</a>
+, <a class="el" href="point_interet_8h.html#a2599215e4204bd4c92564a34adfd889c">pointInteret.h</a>
+</li>
+<li>initPointInteret()
+: <a class="el" href="point_interet_8c.html#a062e2cf2a173edce8231647347cf0311">pointInteret.c</a>
+, <a class="el" href="point_interet_8h.html#a062e2cf2a173edce8231647347cf0311">pointInteret.h</a>
+</li>
 <li>initTrace()
-: <a class="el" href="trace_8c.html#af204a82935564e10c5fcfc425861a8b2">trace.c</a>
-, <a class="el" href="trace_8h.html#af204a82935564e10c5fcfc425861a8b2">trace.h</a>
+: <a class="el" href="trace_8h.html#adba0951ae1c290405802ad1ef183c0ec">trace.h</a>
+, <a class="el" href="trace_8c.html#adba0951ae1c290405802ad1ef183c0ec">trace.c</a>
 </li>
 <li>initTrajet()
-: <a class="el" href="trace_8c.html#ab2dec46a01d6a4c2148979b8cc9fc953">trace.c</a>
-, <a class="el" href="trace_8h.html#ab2dec46a01d6a4c2148979b8cc9fc953">trace.h</a>
+: <a class="el" href="trajet_8h.html#ab2dec46a01d6a4c2148979b8cc9fc953">trajet.h</a>
+, <a class="el" href="trajet_8c.html#ab2dec46a01d6a4c2148979b8cc9fc953">trajet.c</a>
 </li>
 </ul>
 
@@ -369,61 +295,88 @@ $(function() {
 : <a class="el" href="conversion_8c.html#a8d07bec6e0346370cf9cc58f0f86e02b">conversion.c</a>
 , <a class="el" href="conversion_8h.html#a8d07bec6e0346370cf9cc58f0f86e02b">conversion.h</a>
 </li>
+<li>largeur
+: <a class="el" href="k_8c.html#a74f0f2591e5f65bf792b2c3c67817d78">k.c</a>
+, <a class="el" href="figures_8c.html#a74f0f2591e5f65bf792b2c3c67817d78">figures.c</a>
+</li>
+<li>lectureTrace()
+: <a class="el" href="cairo_trace_8c.html#a6f27f260f8e5b66a9868a9bb8908690b">cairoTrace.c</a>
+</li>
+<li>liste_pt_interet
+: <a class="el" href="structures_8h.html#afb6afa555765d8390e4f6397a819940f">structures.h</a>
+</li>
 </ul>
 
 
 <h3><a id="index_m"></a>- m -</h3><ul>
 <li>main()
-: <a class="el" href="csvfix_8c.html#a0ddf1224851353fc92bfbff6f499fa97">csvfix.c</a>
-, <a class="el" href="csvinfo_8c.html#a0ddf1224851353fc92bfbff6f499fa97">csvinfo.c</a>
-, <a class="el" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main.c</a>
-, <a class="el" href="csvtest_8c.html#a840291bc02cba5474a4cb46a9b9566fe">csvtest.c</a>
-, <a class="el" href="tmp_memo_8c.html#a3c04138a5bfe5d72780bb7e82a18e627">tmpMemo.c</a>
-, <a class="el" href="scroll_8c.html#a3c04138a5bfe5d72780bb7e82a18e627">scroll.c</a>
-, <a class="el" href="fentest_8c.html#a3c04138a5bfe5d72780bb7e82a18e627">fentest.c</a>
-, <a class="el" href="front_2tests__guillaume_2main_8c.html#a3c04138a5bfe5d72780bb7e82a18e627">main.c</a>
-, <a class="el" href="_test_8c.html#a0ddf1224851353fc92bfbff6f499fa97">Test.c</a>
-, <a class="el" href="front_2figures_2main_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main.c</a>
+: <a class="el" href="parser_bdd_adresse_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">parserBddAdresse.c</a>
 , <a class="el" href="k_8c.html#a0ddf1224851353fc92bfbff6f499fa97">k.c</a>
-, <a class="el" href="parser_bdd_adresse_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">parserBddAdresse.c</a>
-, <a class="el" href="test__csv_8c.html#a840291bc02cba5474a4cb46a9b9566fe">test_csv.c</a>
-, <a class="el" href="csvvalid_8c.html#a0ddf1224851353fc92bfbff6f499fa97">csvvalid.c</a>
+, <a class="el" href="front_2tests__guillaume_2main_8c.html#a3c04138a5bfe5d72780bb7e82a18e627">main.c</a>
+, <a class="el" href="fentest_8c.html#a3c04138a5bfe5d72780bb7e82a18e627">fentest.c</a>
+, <a class="el" href="scroll_8c.html#a3c04138a5bfe5d72780bb7e82a18e627">scroll.c</a>
+, <a class="el" href="_test_8c.html#a0ddf1224851353fc92bfbff6f499fa97">Test.c</a>
+, <a class="el" href="cairo_trace_8c.html#a0ddf1224851353fc92bfbff6f499fa97">cairoTrace.c</a>
+, <a class="el" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main.c</a>
+, <a class="el" href="_u_i_cercle_anonymat_8c.html#a0ddf1224851353fc92bfbff6f499fa97">UICercleAnonymat.c</a>
+, <a class="el" href="memo_8c.html#a3c04138a5bfe5d72780bb7e82a18e627">memo.c</a>
 </li>
-<li>MEM_BLK_SIZE
-: <a class="el" href="libcsv_8c.html#ad0dacbd38cc5eb390c548c7867e43cf9">libcsv.c</a>
+<li>monImg
+: <a class="el" href="cairo_trace_8c.html#ac6da78e2f6df6d4d0fe6bcf0ca47bb84">cairoTrace.c</a>
 </li>
-<li>monLabel
-: <a class="el" href="popup_test_2widgets_8c.html#a56468613724e529c5475a9afbe3be03d">widgets.c</a>
+<li>motion_notify_event_cb()
+: <a class="el" href="figures_8c.html#ab8963aa798b98d1b9eadd19b8e5fa3fc">figures.c</a>
+, <a class="el" href="figures_8h.html#ab8963aa798b98d1b9eadd19b8e5fa3fc">figures.h</a>
+, <a class="el" href="k_8c.html#aa8a60b3173b9d98263955681ae25a8c2">k.c</a>
+</li>
+<li>mouse_moved()
+: <a class="el" href="_u_i_cercle_anonymat_8c.html#a1a688357bf0d66f7be9062d0f602961d">UICercleAnonymat.c</a>
 </li>
 </ul>
 
 
 <h3><a id="index_o"></a>- o -</h3><ul>
+<li>on_draw_event()
+: <a class="el" href="_test_8c.html#af2927f3d8b5d36770e86aed1778c2959">Test.c</a>
+, <a class="el" href="_u_i_cercle_anonymat_8c.html#af2927f3d8b5d36770e86aed1778c2959">UICercleAnonymat.c</a>
+, <a class="el" href="cairo_trace_8c.html#af2927f3d8b5d36770e86aed1778c2959">cairoTrace.c</a>
+</li>
+<li>openBddAddr()
+: <a class="el" href="parser_bdd_adresse_8h.html#aae170ceec6688e22c69bd3814178b732">parserBddAdresse.h</a>
+, <a class="el" href="parser_bdd_adresse_8c.html#aae170ceec6688e22c69bd3814178b732">parserBddAdresse.c</a>
+</li>
 <li>openGeoloc()
 : <a class="el" href="parser_bdd_geoloc_8c.html#aff4c778a97f944d6042490c5da67617b">parserBddGeoloc.c</a>
 , <a class="el" href="parser_bdd_geoloc_8h.html#aff4c778a97f944d6042490c5da67617b">parserBddGeoloc.h</a>
-</li>
-<li>ouverture()
-: <a class="el" href="popup_test_2widgets_8c.html#aa2c7cfb59eba659c2f79bb1d62c0616f">widgets.c</a>
-, <a class="el" href="popup_test_2widgets_8h.html#aa2c7cfb59eba659c2f79bb1d62c0616f">widgets.h</a>
 </li>
 </ul>
 
 
 <h3><a id="index_p"></a>- p -</h3><ul>
 <li>pixel
-: <a class="el" href="structures_8h.html#adbb58f7670e1dd0e03e1529819c3688a">structures.h</a>
+: <a class="el" href="structures_8h.html#a90fdc0e6f4ff1c4df859525140282e89">structures.h</a>
 </li>
 <li>point
-: <a class="el" href="structures_8h.html#af3db11a2d803c7937bdb0952d6d6a66d">structures.h</a>
+: <a class="el" href="structures_8h.html#ae7a114ece308ad841835a1dd8c3ea5fb">structures.h</a>
+</li>
+<li>pt_interet
+: <a class="el" href="structures_8h.html#a5dfbb36cac8c4086cdd977fe453a15c0">structures.h</a>
 </li>
 </ul>
 
 
 <h3><a id="index_r"></a>- r -</h3><ul>
+<li>r
+: <a class="el" href="_u_i_cercle_anonymat_8c.html#acab531abaa74a7e664e3986f2522b33a">UICercleAnonymat.c</a>
+</li>
+<li>rayon()
+: <a class="el" href="_u_i_cercle_anonymat_8c.html#aa1eab767c8dc52d8c56edbc9452438fa">UICercleAnonymat.c</a>
+</li>
 <li>readGeoloc()
-: <a class="el" href="parser_bdd_geoloc_8c.html#a21f5a5c496514cc62740a76070097c6e">parserBddGeoloc.c</a>
-, <a class="el" href="parser_bdd_geoloc_8h.html#a21f5a5c496514cc62740a76070097c6e">parserBddGeoloc.h</a>
+: <a class="el" href="parser_bdd_geoloc_8h.html#a21f5a5c496514cc62740a76070097c6e">parserBddGeoloc.h</a>
+, <a class="el" href="parser_bdd_adresse_8c.html#a21f5a5c496514cc62740a76070097c6e">parserBddAdresse.c</a>
+, <a class="el" href="parser_bdd_geoloc_8c.html#a21f5a5c496514cc62740a76070097c6e">parserBddGeoloc.c</a>
+, <a class="el" href="parser_bdd_adresse_8h.html#a21f5a5c496514cc62740a76070097c6e">parserBddAdresse.h</a>
 </li>
 <li>rectangle
 : <a class="el" href="structures_8h.html#ac05b76cb45185785dc024912b32b7b05">structures.h</a>
@@ -431,51 +384,62 @@ $(function() {
 <li>recuperer_champ()
 : <a class="el" href="parser_bdd_adresse_8c.html#a6a09609ede281d911f36a199b35d299a">parserBddAdresse.c</a>
 </li>
-<li>row
-: <a class="el" href="test__csv_8c.html#a97ab3b8ef2f074e3774c66099d7ec59b">test_csv.c</a>
-</li>
-<li>ROW_NOT_BEGUN
-: <a class="el" href="libcsv_8c.html#a0dde908c580ee4b9b134794d9b09f202">libcsv.c</a>
+<li>ROUTE
+: <a class="el" href="cairo_trace_8c.html#a437684fba29bf4d0eecc04cf14b98f3e">cairoTrace.c</a>
 </li>
 </ul>
 
 
 <h3><a id="index_s"></a>- s -</h3><ul>
-<li>SIZE_MAX
-: <a class="el" href="libcsv_8c.html#a3c75bb398badb69c7577b21486f9963f">libcsv.c</a>
+<li>status
+: <a class="el" href="popup_test_2widgets_8c.html#abb6b1cea3a68d58406a76c9eb8122364">widgets.c</a>
 </li>
-<li>SUBMIT_CHAR
-: <a class="el" href="libcsv_8c.html#aa04efa0e1db1fb2103914c191fcfa221">libcsv.c</a>
+<li>supprimerTraceN()
+: <a class="el" href="trajet_8c.html#ae3cfaa65c8bf39a4d75f155a3ee58599">trajet.c</a>
+, <a class="el" href="trajet_8h.html#ae3cfaa65c8bf39a4d75f155a3ee58599">trajet.h</a>
 </li>
-<li>SUBMIT_FIELD
-: <a class="el" href="libcsv_8c.html#a7a2f81e24c40f0acaa9b9124d9e462fb">libcsv.c</a>
+<li>supprimerTrajet()
+: <a class="el" href="trajet_8c.html#a6276bf6b2bf500f7c12c1415b93339f5">trajet.c</a>
+, <a class="el" href="trajet_8h.html#a6276bf6b2bf500f7c12c1415b93339f5">trajet.h</a>
 </li>
-<li>SUBMIT_ROW
-: <a class="el" href="libcsv_8c.html#ae1cde301a29f28acd4bae1c16b857b77">libcsv.c</a>
+<li>surface
+: <a class="el" href="figures_8c.html#a76e6dbb8b33b4373ca91aab3cab86245">figures.c</a>
+, <a class="el" href="k_8c.html#a76e6dbb8b33b4373ca91aab3cab86245">k.c</a>
+</li>
+<li>surprise
+: <a class="el" href="popup_test_2widgets_8c.html#a826c2c2228327fcd6d96969a3645b90e">widgets.c</a>
 </li>
 </ul>
 
 
 <h3><a id="index_t"></a>- t -</h3><ul>
-<li>test_parser()
-: <a class="el" href="test__csv_8c.html#a958e2fc073d2c91e0632fecc712b3e33">test_csv.c</a>
+<li>tab
+: <a class="el" href="cairo_trace_8c.html#aec3242c0c63cd11d3179645e21f7656c">cairoTrace.c</a>
 </li>
-<li>test_writer()
-: <a class="el" href="test__csv_8c.html#a3fb7086e4ffb81a4d86ece5aa935615d">test_csv.c</a>
+<li>TAILLE
+: <a class="el" href="cairo_trace_8c.html#a7b29335add3a553ed85d0e3ace85629c">cairoTrace.c</a>
 </li>
-<li>test_writer2()
-: <a class="el" href="test__csv_8c.html#a5105e86af2cc3863d0fde2830d1c1969">test_csv.c</a>
+<li>TAILLE_TAB_DYN
+: <a class="el" href="config_8h.html#aeca14a865e2449d4f24a76a5e507d2ba">config.h</a>
+</li>
+<li>tailledessin()
+: <a class="el" href="figures_8c.html#a72e8e37fbc468063fd0a2b8b28f61c60">figures.c</a>
+, <a class="el" href="figures_8h.html#a72e8e37fbc468063fd0a2b8b28f61c60">figures.h</a>
+, <a class="el" href="k_8c.html#a72e8e37fbc468063fd0a2b8b28f61c60">k.c</a>
 </li>
 <li>timestampToReadable()
-: <a class="el" href="conversion_8c.html#a09d4b59f9fe1ffc6eaf4f332f6901de9">conversion.c</a>
-, <a class="el" href="conversion_8h.html#a09d4b59f9fe1ffc6eaf4f332f6901de9">conversion.h</a>
+: <a class="el" href="conversion_8h.html#a09d4b59f9fe1ffc6eaf4f332f6901de9">conversion.h</a>
+, <a class="el" href="conversion_8c.html#a09d4b59f9fe1ffc6eaf4f332f6901de9">conversion.c</a>
 </li>
 <li>timestampToString()
-: <a class="el" href="conversion_8h.html#a734192c845ab92508ca3639ba00559ad">conversion.h</a>
-, <a class="el" href="conversion_8c.html#a734192c845ab92508ca3639ba00559ad">conversion.c</a>
+: <a class="el" href="conversion_8c.html#a734192c845ab92508ca3639ba00559ad">conversion.c</a>
+, <a class="el" href="conversion_8h.html#a734192c845ab92508ca3639ba00559ad">conversion.h</a>
 </li>
 <li>trace
 : <a class="el" href="structures_8h.html#a3a43c5ed8f25945d63ec7d3825fc0c51">structures.h</a>
+</li>
+<li>traces
+: <a class="el" href="popup_test_2widgets_8c.html#ad6c604053d4bdb9dc1dd132105385b1b">widgets.c</a>
 </li>
 <li>trajet
 : <a class="el" href="structures_8h.html#a216f05a94fff952f042d6ed29e9d2d87">structures.h</a>
@@ -484,23 +448,53 @@ $(function() {
 
 
 <h3><a id="index_u"></a>- u -</h3><ul>
+<li>UIAnim()
+: <a class="el" href="popup_test_2widgets_8c.html#a71b6f8bda27e4c5eb17f819c96dddeb3">widgets.c</a>
+, <a class="el" href="popup_test_2widgets_8h.html#a71b6f8bda27e4c5eb17f819c96dddeb3">widgets.h</a>
+</li>
+<li>UIAnom()
+: <a class="el" href="popup_test_2widgets_8h.html#ac63ad0d1e0a7b326859c4b64b15c5e8c">widgets.h</a>
+, <a class="el" href="popup_test_2widgets_8c.html#ac63ad0d1e0a7b326859c4b64b15c5e8c">widgets.c</a>
+</li>
+<li>UICarte()
+: <a class="el" href="popup_test_2widgets_8c.html#aa5668ef3e950c706f6ad3fa3e1b42159">widgets.c</a>
+, <a class="el" href="popup_test_2widgets_8h.html#aa5668ef3e950c706f6ad3fa3e1b42159">widgets.h</a>
+</li>
+<li>UISurprise()
+: <a class="el" href="popup_test_2widgets_8h.html#afa4b13ca849e0380e89e9e2c4f0c6884">widgets.h</a>
+, <a class="el" href="popup_test_2widgets_8c.html#afa4b13ca849e0380e89e9e2c4f0c6884">widgets.c</a>
+</li>
+<li>UITraces()
+: <a class="el" href="popup_test_2widgets_8c.html#a3990c80fa4243727861a298ae4792256">widgets.c</a>
+, <a class="el" href="popup_test_2widgets_8h.html#a3990c80fa4243727861a298ae4792256">widgets.h</a>
+</li>
 <li>utilisateur
 : <a class="el" href="structures_8h.html#a5762136c6e2d9464397b36ae1760d7f1">structures.h</a>
 </li>
 </ul>
 
 
-<h3><a id="index_v"></a>- v -</h3><ul>
-<li>VERSION
-: <a class="el" href="libcsv_8c.html#a1c6d5de492ac61ad29aec7aa9a436bbf">libcsv.c</a>
+<h3><a id="index_x"></a>- x -</h3><ul>
+<li>x
+: <a class="el" href="_u_i_cercle_anonymat_8c.html#a6150e0515f7202e2fb518f7206ed97dc">UICercleAnonymat.c</a>
+</li>
+</ul>
+
+
+<h3><a id="index_y"></a>- y -</h3><ul>
+<li>y
+: <a class="el" href="_u_i_cercle_anonymat_8c.html#a0a2f84ed7838f07779ae24c5a9086d33">UICercleAnonymat.c</a>
 </li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.12
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.12 </li>
+  </ul>
+</div>
 </body>
 </html>

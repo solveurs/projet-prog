@@ -1,22 +1,41 @@
 #pragma once
 #include "includes.h"
 
-struct point
+
+/**
+ @brief modelisation d'un point
+ */
+struct coord_double
 {
 	double x;
 	double y;
 };
-typedef struct point point;
+typedef struct coord_double point;
 
-//Origine : coin haut-gauche
+/**
+ @brief modelisation d'un pixel
+ */
+struct coord_int
+{
+	int x;
+	int y;
+};
+typedef struct coord_int pixel;
+
+/**
+ @brief modelisation d'un rectangle
+ */
 struct rectangle
 {
-	point     origine;
+	point     origine; /**<coin haut-gauche*/
 	double    largeur;
 	double    hauteur;
 };
 typedef struct rectangle rectangle;
 
+/**
+ @brief modelisation d'un cercle
+ */
 struct cercle
 {
 	point     centre;
@@ -24,13 +43,9 @@ struct cercle
 };
 typedef struct cercle cercle;
 
-
-struct pixel
-{
-	int x;
-	int y;
-};
-
+/**
+ @brief modelisation d'une adresse
+ */
 struct adresse
 {
 	int       numero;
@@ -41,25 +56,35 @@ struct adresse
 };
 typedef struct adresse adresse;
 
+
+/**
+ @brief modélisation d'une trace
+ */
 struct trace
 {
-	time_t			date;
-	point			coord;
-	int				visibilite;
-	struct trace *	prec;
-	struct trace *	suiv;
+	time_t			date;/**<Date de relevé de la trace*/
+	point			coord;/**<coordonnée de la trace*/
+	int				visibilite;/**<visibilité, 0 --> invisible, 1 --> visible*/
+	struct trace *	prec;/**<pointeur sur la trace précédente*/
+	struct trace *	suiv;/**<pointeur sur la trace suivante*/
 };
 typedef struct trace trace;
 
+/**
+ @brief modelisation d'un trajet
+ */
 struct trajet
 {
-	int		taille;
-	int		visiblite;
-	trace *	premier;
-	trace * dernier;
+	int		taille;/**<nombre de trace dans le trajet*/
+	int		visiblite;/**<visibilité, 0 --> invisible, 1 --> visible*/
+	trace *	premier;/**<pointeur sur la premiere trace*/
+	trace * dernier;/**<pointeur sur la derniere trace*/
 };
 typedef struct trajet trajet;
 
+/**
+ @brief modelisation de la base de donnée de trace
+ */
 struct bdd_trace
 {
 	char     chemin[128];
@@ -70,16 +95,22 @@ struct bdd_trace
 };
 typedef struct bdd_trace bdd_trace;
 
+/**
+ @brief modelisation d'un point d'interet
+ */
 struct pt_interet
 {
-	int			importance;
-	time_t		debut;
-	time_t		fin;
-	point		position;
-	adresse		adresse;
+	int			importance;/**<importance sur le point d'interet*/
+	time_t		debut;/**<date de debut du point d'interet*/
+	time_t		fin;/**<date de fin du point d'interet*/
+	point		position;/**<coord du point d'interet*/
+	adresse		adresse;/**<adresse du point d'interet*/
 };
 typedef struct pt_interet pt_interet;
 
+/**
+ @brief modelisation d'une liste de point d'interet
+ */
 struct liste_pt_interet
 {
 	int				taille;
@@ -88,6 +119,9 @@ struct liste_pt_interet
 };
 typedef struct liste_pt_interet liste_pt_interet;
 
+/**
+ @brief modelisation d'une carte
+ */
 struct carte
 {
 	char		chemin_image_carte[128];
@@ -99,6 +133,9 @@ struct carte
 };
 typedef struct carte carte;
 
+/**
+ @brief modelisation d'un utilisateur
+ */
 struct utilisateur
 {
 	char      identifiant[128];
@@ -107,4 +144,3 @@ struct utilisateur
 };
 typedef struct utilisateur utilisateur;
 
-typedef struct pixel pixel;

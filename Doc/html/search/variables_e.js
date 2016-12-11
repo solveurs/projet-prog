@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['rayon',['rayon',['../structcercle.html#a2459aedac9f8646ad9566164a9a83f41',1,'cercle']]],
-  ['realloc_5ffunc',['realloc_func',['../structcsv__parser.html#a58f8a7d9d7463aad1b63f837a6f86932',1,'csv_parser']]],
-  ['retval',['retval',['../structevent.html#a7f345697df7eb20c9aba1ab6980cae8f',1,'event']]],
-  ['row',['row',['../test__csv_8c.html#a97ab3b8ef2f074e3774c66099d7ec59b',1,'test_csv.c']]],
-  ['rows',['rows',['../structcounts.html#a5980960db5ba1fed3b570c62807238ef',1,'counts']]]
+  ['status',['status',['../popup_test_2widgets_8c.html#abb6b1cea3a68d58406a76c9eb8122364',1,'widgets.c']]],
+  ['suiv',['suiv',['../structtrace.html#ab7909a2cccd6f40ca9499c850c9c948c',1,'trace']]],
+  ['surface',['surface',['../figures_8c.html#a76e6dbb8b33b4373ca91aab3cab86245',1,'surface():&#160;figures.c'],['../k_8c.html#a76e6dbb8b33b4373ca91aab3cab86245',1,'surface():&#160;k.c']]],
+  ['surprise',['surprise',['../popup_test_2widgets_8c.html#a826c2c2228327fcd6d96969a3645b90e',1,'widgets.c']]]
 ];

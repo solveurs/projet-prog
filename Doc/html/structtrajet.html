@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -20,6 +27,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo_solveur-64.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Projet-Geoloc
    </div>
@@ -42,6 +50,21 @@ $(function() {
 });
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('structtrajet.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -56,7 +79,6 @@ $(function() {
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-attribs">Data Fields</a>  </div>
@@ -65,18 +87,27 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>modelisation d'un trajet  
+ <a href="structtrajet.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="structures_8h_source.html">structures.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a29bf3fc0ffe4e72e45f0c84ab4f8cd1e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtrajet.html#a29bf3fc0ffe4e72e45f0c84ab4f8cd1e">taille</a></td></tr>
-<tr class="separator:a29bf3fc0ffe4e72e45f0c84ab4f8cd1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc04ed138412836472c25ba9913c7474"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structtrace.html">trace</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtrajet.html#acc04ed138412836472c25ba9913c7474">premier</a></td></tr>
-<tr class="separator:acc04ed138412836472c25ba9913c7474"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f24911c2181642cd5909d397ac74b2c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structtrace.html">trace</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtrajet.html#a0f24911c2181642cd5909d397ac74b2c">dernier</a></td></tr>
 <tr class="separator:a0f24911c2181642cd5909d397ac74b2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc04ed138412836472c25ba9913c7474"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structtrace.html">trace</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtrajet.html#acc04ed138412836472c25ba9913c7474">premier</a></td></tr>
+<tr class="separator:acc04ed138412836472c25ba9913c7474"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29bf3fc0ffe4e72e45f0c84ab4f8cd1e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtrajet.html#a29bf3fc0ffe4e72e45f0c84ab4f8cd1e">taille</a></td></tr>
+<tr class="separator:a29bf3fc0ffe4e72e45f0c84ab4f8cd1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46e7ab7119b26df81cade0dc996c4e18"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtrajet.html#a46e7ab7119b26df81cade0dc996c4e18">visiblite</a></td></tr>
+<tr class="separator:a46e7ab7119b26df81cade0dc996c4e18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Field Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>modelisation d'un trajet </p>
+
+<p>Definition at line <a class="el" href="structures_8h_source.html#l00076">76</a> of file <a class="el" href="structures_8h_source.html">structures.h</a>.</p>
+</div><h2 class="groupheader">Field Documentation</h2>
 <a id="a0f24911c2181642cd5909d397ac74b2c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0f24911c2181642cd5909d397ac74b2c">&sect;&nbsp;</a></span>dernier</h2>
 
@@ -88,6 +119,9 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>pointeur sur la derniere trace </p>
+
+<p>Definition at line <a class="el" href="structures_8h_source.html#l00081">81</a> of file <a class="el" href="structures_8h_source.html">structures.h</a>.</p>
 
 </div>
 </div>
@@ -102,6 +136,9 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>pointeur sur la premiere trace </p>
+
+<p>Definition at line <a class="el" href="structures_8h_source.html#l00080">80</a> of file <a class="el" href="structures_8h_source.html">structures.h</a>.</p>
 
 </div>
 </div>
@@ -116,6 +153,26 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>nombre de trace dans le trajet </p>
+
+<p>Definition at line <a class="el" href="structures_8h_source.html#l00078">78</a> of file <a class="el" href="structures_8h_source.html">structures.h</a>.</p>
+
+</div>
+</div>
+<a id="a46e7ab7119b26df81cade0dc996c4e18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46e7ab7119b26df81cade0dc996c4e18">&sect;&nbsp;</a></span>visiblite</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int visiblite</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>visibilité, 0 &ndash;&gt; invisible, 1 &ndash;&gt; visible </p>
+
+<p>Definition at line <a class="el" href="structures_8h_source.html#l00079">79</a> of file <a class="el" href="structures_8h_source.html">structures.h</a>.</p>
 
 </div>
 </div>
@@ -123,11 +180,15 @@ Data Fields</h2></td></tr>
 <li>/Users/frj/Documents/Code/Projet_prog_3a/Code/headers/<a class="el" href="structures_8h_source.html">structures.h</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.12
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="structtrajet.html">trajet</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.12 </li>
+  </ul>
+</div>
 </body>
 </html>

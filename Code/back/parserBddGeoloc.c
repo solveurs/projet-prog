@@ -1,5 +1,19 @@
+/**
+ @file parserBddGeoloc.c
+ 
+ @brief Ouverture et traintement du fichier de trace geoloc
+ */
 #include "../headers/parserBddGeoloc.h"
 
+
+
+/**
+ ouverture d'un fichier de log geoloc
+
+ @param nom chemin vers le fichier
+
+ @return un descripteur de fichier ouvert
+ */
 FILE * openGeoloc(const char * nom)
 {
 	FILE * fd;
@@ -10,6 +24,13 @@ FILE * openGeoloc(const char * nom)
 	return fd;
 }
 
+/**
+ ouverture d'une bdd geoloc
+
+ @param parFd le descripteur sur le fichier de log geoloc
+
+ @return un pointeur du bdd_trace
+ */
 bdd_trace * readGeoloc(FILE * parFd)
 {
 	bdd_trace * varBddTrace = (bdd_trace*)malloc(sizeof(bdd_trace));
@@ -24,8 +45,7 @@ bdd_trace * readGeoloc(FILE * parFd)
 		point p;
 		p.x = lat;
 		p.y = lon;
-		trace * varT = createTrace();
-		initTrace(varT,date,p,NULL,NULL);
+		trace * varT = initTrace(date,p,NULL,NULL);
 		ajoutTrace(varBddTrace->trajet, varT);
 		//printf("%d \n", varBddTrace->trajet->taille);
 	}

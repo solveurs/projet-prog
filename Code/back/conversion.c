@@ -1,10 +1,17 @@
+/**
+ @file conversion.c
+ 
+ @brief fonctions de conversion diverses
+ */
 #include "../headers/conversion.h"
 
+
+
 /**
- * \fn void lambert93(double * x, double * y)
- * \brief conversion de coordonnée lambert93 vers GPS long/lat
- * \param x X en coord de Lambert convertie en longitude
- * \param y Y en coord de Lambert convertie en latitude
+ conversion de lambert 93 aux coord GPS
+
+ @param x un pointeur sur coord x lambert --> lat GPS
+ @param y un pointeur sur coord y lambert --> long GPS
  */
 void lambert93ToGPS(double * x, double * y)
 {
@@ -36,12 +43,26 @@ void lambert93ToGPS(double * x, double * y)
      *y = phi * 180.0 / M_PI;
 }
 
+/**
+ convertie une date (en ms depuis 1970) en date lisible
+
+ @param parDate date en ms depuis 1970
+
+ @return une struct tm * avec la date
+ */
 struct tm * timestampToReadable(const long parDate)
 {
 	const time_t varT = parDate;
 	return localtime(&varT);
 }
 
+/**
+ convertie une date (en ms depuis 1970) en chaine de caractère
+
+ @param parDate date en ms depuis 1970
+
+ @return une chaine de caractère avec la date formatée.
+ */
 char * timestampToString(const long parDate)
 {
 	char * buf;

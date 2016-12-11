@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -20,6 +27,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo_solveur-64.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Projet-Geoloc
    </div>
@@ -42,6 +50,21 @@ $(function() {
 });
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('structcarte.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -56,7 +79,6 @@ $(function() {
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-attribs">Data Fields</a>  </div>
@@ -65,20 +87,29 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>modelisation d'une carte  
+ <a href="structcarte.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="structures_8h_source.html">structures.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a14ecc94c2719b58bbfd7b6249ff3ad4b"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcarte.html#a14ecc94c2719b58bbfd7b6249ff3ad4b">chemin_image_carte</a> [128]</td></tr>
-<tr class="separator:a14ecc94c2719b58bbfd7b6249ff3ad4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac690e5d54248ece98a26eb60fd0c179"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcarte.html#aac690e5d54248ece98a26eb60fd0c179">chemin_donnees_carte</a> [128]</td></tr>
 <tr class="separator:aac690e5d54248ece98a26eb60fd0c179"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:addf5558f9faa154e716d68678b042f98"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structrectangle.html">rectangle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcarte.html#addf5558f9faa154e716d68678b042f98">zone_pixel</a></td></tr>
-<tr class="separator:addf5558f9faa154e716d68678b042f98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14ecc94c2719b58bbfd7b6249ff3ad4b"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcarte.html#a14ecc94c2719b58bbfd7b6249ff3ad4b">chemin_image_carte</a> [128]</td></tr>
+<tr class="separator:a14ecc94c2719b58bbfd7b6249ff3ad4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa422b0077d0c570937a73aa5b8eb4440"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcarte.html#aa422b0077d0c570937a73aa5b8eb4440">ratio</a></td></tr>
+<tr class="separator:aa422b0077d0c570937a73aa5b8eb4440"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad42edc35194368fcf17c221930cbabe0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structrectangle.html">rectangle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcarte.html#ad42edc35194368fcf17c221930cbabe0">zone_latlong</a></td></tr>
 <tr class="separator:ad42edc35194368fcf17c221930cbabe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:addf5558f9faa154e716d68678b042f98"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structrectangle.html">rectangle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcarte.html#addf5558f9faa154e716d68678b042f98">zone_pixel</a></td></tr>
+<tr class="separator:addf5558f9faa154e716d68678b042f98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Field Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>modelisation d'une carte </p>
+
+<p>Definition at line <a class="el" href="structures_8h_source.html#l00125">125</a> of file <a class="el" href="structures_8h_source.html">structures.h</a>.</p>
+</div><h2 class="groupheader">Field Documentation</h2>
 <a id="aac690e5d54248ece98a26eb60fd0c179"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aac690e5d54248ece98a26eb60fd0c179">&sect;&nbsp;</a></span>chemin_donnees_carte</h2>
 
@@ -90,6 +121,8 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="structures_8h_source.html#l00128">128</a> of file <a class="el" href="structures_8h_source.html">structures.h</a>.</p>
 
 </div>
 </div>
@@ -105,6 +138,24 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Definition at line <a class="el" href="structures_8h_source.html#l00127">127</a> of file <a class="el" href="structures_8h_source.html">structures.h</a>.</p>
+
+</div>
+</div>
+<a id="aa422b0077d0c570937a73aa5b8eb4440"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa422b0077d0c570937a73aa5b8eb4440">&sect;&nbsp;</a></span>ratio</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double ratio</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="structures_8h_source.html#l00131">131</a> of file <a class="el" href="structures_8h_source.html">structures.h</a>.</p>
+
 </div>
 </div>
 <a id="ad42edc35194368fcf17c221930cbabe0"></a>
@@ -118,6 +169,8 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="structures_8h_source.html#l00130">130</a> of file <a class="el" href="structures_8h_source.html">structures.h</a>.</p>
 
 </div>
 </div>
@@ -133,17 +186,23 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Definition at line <a class="el" href="structures_8h_source.html#l00129">129</a> of file <a class="el" href="structures_8h_source.html">structures.h</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>/Users/frj/Documents/Code/Projet_prog_3a/Code/headers/<a class="el" href="structures_8h_source.html">structures.h</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.12
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="structcarte.html">carte</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.12 </li>
+  </ul>
+</div>
 </body>
 </html>

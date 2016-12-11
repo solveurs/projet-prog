@@ -3,42 +3,118 @@
 {\ttfamily \#include $<$cairo.\+h$>$}\newline
 {\ttfamily \#include $<$gtk/gtk.\+h$>$}\newline
 {\ttfamily \#include $<$stdio.\+h$>$}\newline
-\subsection*{Variables}
+{\ttfamily \#include $<$math.\+h$>$}\newline
+\subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\begin{tabbing}
-xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
-struct \{\\
-\>int \hyperlink{figures_8h_ad43c3812e6d13e0518d9f8b8f463ffcf}{count}\\
-\>double \hyperlink{figures_8h_ad6f81ab9dfb99882184b1aef87ed725a}{coordx} \mbox{[}100\mbox{]}\\
-\>double \hyperlink{figures_8h_a37795152cd3d40b9c5e5720da0bb0f62}{coordy} \mbox{[}100\mbox{]}\\
-\} \hyperlink{figures_8h_a9cd44a21d95c863f0d66520e943568a3}{glob}\\
+gboolean \hyperlink{figures_8h_aba49077690b01bb9bdd409b85f364929}{button\+\_\+press\+\_\+event\+\_\+cb} (Gtk\+Widget $\ast$widget, Gdk\+Event\+Button $\ast$event, gpointer data)
+\item 
+void \hyperlink{figures_8h_a4223523a2f4525b9b1395a33381858e0}{clear\+\_\+surface} (void)
+\item 
+void \hyperlink{figures_8h_aa0b970da4405389c144095b04eacd133}{close\+\_\+window} (void)
+\item 
+gboolean \hyperlink{figures_8h_ab2067e0b42d19c759bf6db808b1c1734}{configure\+\_\+event\+\_\+cb} (Gtk\+Widget $\ast$widget, Gdk\+Event\+Configure $\ast$event, gpointer data)
+\item 
+void \hyperlink{figures_8h_a26575b0440be733e8c409fa782d0de77}{draw\+\_\+brush} (Gtk\+Widget $\ast$widget, gdouble \hyperlink{_u_i_cercle_anonymat_8c_a6150e0515f7202e2fb518f7206ed97dc}{x}, gdouble \hyperlink{_u_i_cercle_anonymat_8c_a0a2f84ed7838f07779ae24c5a9086d33}{y})
+\item 
+gboolean \hyperlink{figures_8h_a25b9332634a80c6adc0d47401df29dba}{draw\+\_\+cb} (Gtk\+Widget $\ast$widget, cairo\+\_\+t $\ast$cr, gpointer data)
+\item 
+gboolean \hyperlink{figures_8h_a33d81f2442620f52d17210ec4864a59a}{efface} (Gtk\+Widget $\ast$widget, gpointer data)
+\item 
+gboolean \hyperlink{figures_8h_ab8963aa798b98d1b9eadd19b8e5fa3fc}{motion\+\_\+notify\+\_\+event\+\_\+cb} (Gtk\+Widget $\ast$widget, Gdk\+Event\+Motion $\ast$event, gpointer data)
+\item 
+void \hyperlink{figures_8h_a72e8e37fbc468063fd0a2b8b28f61c60}{tailledessin} (Gtk\+Widget $\ast$widget, Gtk\+Allocation $\ast$allocation, void $\ast$data)
+\end{DoxyCompactItemize}
 
-\end{tabbing}\end{DoxyCompactItemize}
+
+\subsection{Function Documentation}
+\hypertarget{figures_8h_aba49077690b01bb9bdd409b85f364929}{}\label{figures_8h_aba49077690b01bb9bdd409b85f364929} 
+\index{figures.\+h@{figures.\+h}!button\+\_\+press\+\_\+event\+\_\+cb@{button\+\_\+press\+\_\+event\+\_\+cb}}
+\index{button\+\_\+press\+\_\+event\+\_\+cb@{button\+\_\+press\+\_\+event\+\_\+cb}!figures.\+h@{figures.\+h}}
+\subsubsection{\texorpdfstring{button\+\_\+press\+\_\+event\+\_\+cb()}{button\_press\_event\_cb()}}
+{\footnotesize\ttfamily gboolean button\+\_\+press\+\_\+event\+\_\+cb (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{Gdk\+Event\+Button $\ast$}]{event,  }\item[{gpointer}]{data }\end{DoxyParamCaption})}
 
 
-\subsection{Variable Documentation}
-\hypertarget{figures_8h_ad6f81ab9dfb99882184b1aef87ed725a}{}\label{figures_8h_ad6f81ab9dfb99882184b1aef87ed725a} 
-\index{figures.\+h@{figures.\+h}!coordx@{coordx}}
-\index{coordx@{coordx}!figures.\+h@{figures.\+h}}
-\subsubsection{\texorpdfstring{coordx}{coordx}}
-{\footnotesize\ttfamily double coordx\mbox{[}100\mbox{]}}
 
-\hypertarget{figures_8h_a37795152cd3d40b9c5e5720da0bb0f62}{}\label{figures_8h_a37795152cd3d40b9c5e5720da0bb0f62} 
-\index{figures.\+h@{figures.\+h}!coordy@{coordy}}
-\index{coordy@{coordy}!figures.\+h@{figures.\+h}}
-\subsubsection{\texorpdfstring{coordy}{coordy}}
-{\footnotesize\ttfamily double coordy\mbox{[}100\mbox{]}}
+Definition at line 97 of file figures.\+c.
 
-\hypertarget{figures_8h_ad43c3812e6d13e0518d9f8b8f463ffcf}{}\label{figures_8h_ad43c3812e6d13e0518d9f8b8f463ffcf} 
-\index{figures.\+h@{figures.\+h}!count@{count}}
-\index{count@{count}!figures.\+h@{figures.\+h}}
-\subsubsection{\texorpdfstring{count}{count}}
-{\footnotesize\ttfamily int count}
+\hypertarget{figures_8h_a4223523a2f4525b9b1395a33381858e0}{}\label{figures_8h_a4223523a2f4525b9b1395a33381858e0} 
+\index{figures.\+h@{figures.\+h}!clear\+\_\+surface@{clear\+\_\+surface}}
+\index{clear\+\_\+surface@{clear\+\_\+surface}!figures.\+h@{figures.\+h}}
+\subsubsection{\texorpdfstring{clear\+\_\+surface()}{clear\_surface()}}
+{\footnotesize\ttfamily void clear\+\_\+surface (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
 
-\hypertarget{figures_8h_a9cd44a21d95c863f0d66520e943568a3}{}\label{figures_8h_a9cd44a21d95c863f0d66520e943568a3} 
-\index{figures.\+h@{figures.\+h}!glob@{glob}}
-\index{glob@{glob}!figures.\+h@{figures.\+h}}
-\subsubsection{\texorpdfstring{glob}{glob}}
-{\footnotesize\ttfamily struct \{ ... \}   glob}
+
+
+Definition at line 18 of file figures.\+c.
+
+\hypertarget{figures_8h_aa0b970da4405389c144095b04eacd133}{}\label{figures_8h_aa0b970da4405389c144095b04eacd133} 
+\index{figures.\+h@{figures.\+h}!close\+\_\+window@{close\+\_\+window}}
+\index{close\+\_\+window@{close\+\_\+window}!figures.\+h@{figures.\+h}}
+\subsubsection{\texorpdfstring{close\+\_\+window()}{close\_window()}}
+{\footnotesize\ttfamily void close\+\_\+window (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 134 of file figures.\+c.
+
+\hypertarget{figures_8h_ab2067e0b42d19c759bf6db808b1c1734}{}\label{figures_8h_ab2067e0b42d19c759bf6db808b1c1734} 
+\index{figures.\+h@{figures.\+h}!configure\+\_\+event\+\_\+cb@{configure\+\_\+event\+\_\+cb}}
+\index{configure\+\_\+event\+\_\+cb@{configure\+\_\+event\+\_\+cb}!figures.\+h@{figures.\+h}}
+\subsubsection{\texorpdfstring{configure\+\_\+event\+\_\+cb()}{configure\_event\_cb()}}
+{\footnotesize\ttfamily gboolean configure\+\_\+event\+\_\+cb (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{Gdk\+Event\+Configure $\ast$}]{event,  }\item[{gpointer}]{data }\end{DoxyParamCaption})}
+
+
+
+Definition at line 45 of file figures.\+c.
+
+\hypertarget{figures_8h_a26575b0440be733e8c409fa782d0de77}{}\label{figures_8h_a26575b0440be733e8c409fa782d0de77} 
+\index{figures.\+h@{figures.\+h}!draw\+\_\+brush@{draw\+\_\+brush}}
+\index{draw\+\_\+brush@{draw\+\_\+brush}!figures.\+h@{figures.\+h}}
+\subsubsection{\texorpdfstring{draw\+\_\+brush()}{draw\_brush()}}
+{\footnotesize\ttfamily void draw\+\_\+brush (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{gdouble}]{x,  }\item[{gdouble}]{y }\end{DoxyParamCaption})}
+
+
+
+Definition at line 76 of file figures.\+c.
+
+\hypertarget{figures_8h_a25b9332634a80c6adc0d47401df29dba}{}\label{figures_8h_a25b9332634a80c6adc0d47401df29dba} 
+\index{figures.\+h@{figures.\+h}!draw\+\_\+cb@{draw\+\_\+cb}}
+\index{draw\+\_\+cb@{draw\+\_\+cb}!figures.\+h@{figures.\+h}}
+\subsubsection{\texorpdfstring{draw\+\_\+cb()}{draw\_cb()}}
+{\footnotesize\ttfamily gboolean draw\+\_\+cb (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{cairo\+\_\+t $\ast$}]{cr,  }\item[{gpointer}]{data }\end{DoxyParamCaption})}
+
+
+
+Definition at line 67 of file figures.\+c.
+
+\hypertarget{figures_8h_a33d81f2442620f52d17210ec4864a59a}{}\label{figures_8h_a33d81f2442620f52d17210ec4864a59a} 
+\index{figures.\+h@{figures.\+h}!efface@{efface}}
+\index{efface@{efface}!figures.\+h@{figures.\+h}}
+\subsubsection{\texorpdfstring{efface()}{efface()}}
+{\footnotesize\ttfamily gboolean efface (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{gpointer}]{data }\end{DoxyParamCaption})}
+
+
+
+Definition at line 30 of file figures.\+c.
+
+\hypertarget{figures_8h_ab8963aa798b98d1b9eadd19b8e5fa3fc}{}\label{figures_8h_ab8963aa798b98d1b9eadd19b8e5fa3fc} 
+\index{figures.\+h@{figures.\+h}!motion\+\_\+notify\+\_\+event\+\_\+cb@{motion\+\_\+notify\+\_\+event\+\_\+cb}}
+\index{motion\+\_\+notify\+\_\+event\+\_\+cb@{motion\+\_\+notify\+\_\+event\+\_\+cb}!figures.\+h@{figures.\+h}}
+\subsubsection{\texorpdfstring{motion\+\_\+notify\+\_\+event\+\_\+cb()}{motion\_notify\_event\_cb()}}
+{\footnotesize\ttfamily gboolean motion\+\_\+notify\+\_\+event\+\_\+cb (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{Gdk\+Event\+Motion $\ast$}]{event,  }\item[{gpointer}]{data }\end{DoxyParamCaption})}
+
+
+
+Definition at line 121 of file figures.\+c.
+
+\hypertarget{figures_8h_a72e8e37fbc468063fd0a2b8b28f61c60}{}\label{figures_8h_a72e8e37fbc468063fd0a2b8b28f61c60} 
+\index{figures.\+h@{figures.\+h}!tailledessin@{tailledessin}}
+\index{tailledessin@{tailledessin}!figures.\+h@{figures.\+h}}
+\subsubsection{\texorpdfstring{tailledessin()}{tailledessin()}}
+{\footnotesize\ttfamily void tailledessin (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{Gtk\+Allocation $\ast$}]{allocation,  }\item[{void $\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+Definition at line 6 of file figures.\+c.
 

@@ -1,3 +1,8 @@
+/**
+ @file fonctionFront.c
+ 
+ @brief interface entre le Back et le Front
+ */
 #include "../headers/fonctionFront.h"
 
 /*
