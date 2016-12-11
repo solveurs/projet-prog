@@ -41,6 +41,7 @@ void ajoutTrace(trajet * parTr, trace * parT)
 	{
 		parT->suiv = NULL;
 		parT->prec = parTr->dernier;
+		parT->id = parTr->taille;
 		parTr->dernier->suiv = parT;
 		parTr->dernier = parTr->dernier->suiv;
 	}

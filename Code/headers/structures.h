@@ -62,6 +62,7 @@ typedef struct adresse adresse;
  */
 struct trace
 {
+	int				id;/**<Id dans le trajet*/
 	time_t			date;/**<Date de relevé de la trace*/
 	point			coord;/**<coordonnée de la trace*/
 	int				visibilite;/**<visibilité, 0 --> invisible, 1 --> visible*/
