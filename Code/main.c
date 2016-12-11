@@ -19,7 +19,8 @@ void debugBack(void)
 
 int main(int argc, char* argv[])
 {
-	
+	clock_t debut, fin;
+	debut = clock();
 #ifdef FRONT
 	printf("front\n");
 	
@@ -35,5 +36,7 @@ int main(int argc, char* argv[])
 	
 #endif
 	//printf("toujours\n");
+	fin = clock();
+	printf("Temps d'excution : %.2f ms \n",(double)(fin - debut) / (CLOCKS_PER_SEC/1000));
 	return 0;
 }

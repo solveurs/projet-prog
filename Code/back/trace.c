@@ -28,9 +28,10 @@ trace * createTrace(void)
 
  @return un pointeur sur le nouvelle trace
  */
-trace * initTrace(long parDate, point parCoord, trace * parPrec, trace * parSuiv)
+trace * initTrace(int parId, long parDate, point parCoord, trace * parPrec, trace * parSuiv)
 {
 	trace * varT = createTrace();
+	varT->id			= 0;
 	varT->date			= parDate;
 	varT->coord			= parCoord;
 	varT->prec			= parPrec;
@@ -48,6 +49,7 @@ trace * initTrace(long parDate, point parCoord, trace * parPrec, trace * parSuiv
 void afficheTrace(trace * parT)
 {
 	printf("--------------------------------\n");
+	printf("Id :			%d\n",parT->id);
 	printf("date :       %s\n",timestampToString(parT->date));
 	printf("Coordonées : %lf, %lf\n",parT->coord.x, parT->coord.y);
 	printf("--------------------------------\n");

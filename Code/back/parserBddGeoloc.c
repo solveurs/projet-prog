@@ -45,7 +45,7 @@ bdd_trace * readGeoloc(FILE * parFd)
 		point p;
 		p.x = lat;
 		p.y = lon;
-		trace * varT = initTrace(date,p,NULL,NULL);
+		trace * varT = initTrace(0,date,p,NULL,NULL);
 		ajoutTrace(varBddTrace->trajet, varT);
 		//printf("%d \n", varBddTrace->trajet->taille);
 	}

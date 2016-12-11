@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['y',['y',['../structpoint.html#ab927965981178aa1fba979a37168db2a',1,'point::y()'],['../structpixel.html#a0a2f84ed7838f07779ae24c5a9086d33',1,'pixel::y()']]]
+  ['zone_5flatlong',['zone_latlong',['../structcarte.html#ad42edc35194368fcf17c221930cbabe0',1,'carte']]],
+  ['zone_5fpixel',['zone_pixel',['../structcarte.html#addf5558f9faa154e716d68678b042f98',1,'carte']]]
 ];
