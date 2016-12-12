@@ -1,3 +1,8 @@
+/**
+ @file utils.c
+ 
+ @brief fonctions utiles pour le back
+ */
 #include "../headers/utils.h"
 
 

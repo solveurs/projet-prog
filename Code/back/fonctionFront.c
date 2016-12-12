@@ -1,7 +1,7 @@
 /**
  @file fonctionFront.c
  
- @brief interface entre le Back et le Front
+ @brief interface entre le Back et le Front, je met I devant mes fonctions pour dire que c'est des interfaces
  */
 #include "../headers/fonctionFront.h"
 
@@ -22,3 +22,15 @@
 +fonction de detection point d'interet
 
 */
+
+trajet * IimportTrajet(const char * nom);
+
+liste_pt_interet* IgetPtInteret(trajet * parTr);
+
+trajet * IlectureTrace(int parCmd, trajet * parTr);
+
+trajet * IanonymisationC(const trajet parTr, const cercle parCercleAno);
+
+trajet * IanonymisationP(const trajet parTr, const int parIdTraceAno);
+
+trajet * IanonymisationR(const trajet parTr, const rectangle parRectAno);
