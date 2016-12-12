@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['pixel',['pixel',['../structures_8h.html#adbb58f7670e1dd0e03e1529819c3688a',1,'structures.h']]],
-  ['point',['point',['../structures_8h.html#af3db11a2d803c7937bdb0952d6d6a66d',1,'structures.h']]]
+  ['liste_5fpt_5finteret',['liste_pt_interet',['../structures_8h.html#afb6afa555765d8390e4f6397a819940f',1,'structures.h']]]
 ];

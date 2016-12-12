@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['fentest_2ec',['fentest.c',['../fentest_8c.html',1,'']]],
-  ['figures_2ec',['figures.c',['../figures_8c.html',1,'']]],
-  ['figures_2eh',['figures.h',['../figures_8h.html',1,'']]]
+  ['cairotrace_2ec',['cairoTrace.c',['../cairo_trace_8c.html',1,'']]],
+  ['config_2eh',['config.h',['../config_8h.html',1,'']]],
+  ['conversion_2ec',['conversion.c',['../conversion_8c.html',1,'']]],
+  ['conversion_2eh',['conversion.h',['../conversion_8h.html',1,'']]]
 ];

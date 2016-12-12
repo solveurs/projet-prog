@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['taille',['taille',['../structtrajet.html#a29bf3fc0ffe4e72e45f0c84ab4f8cd1e',1,'trajet']]],
-  ['trajet',['trajet',['../structbdd__trace.html#ad417eb03de659793c712421b340fbec4',1,'bdd_trace']]]
+  ['visibilite',['visibilite',['../structtrace.html#aa34b47a3ed3a7dfed8a672132bcc3f2a',1,'trace::visibilite()'],['../structbdd__trace.html#aa34b47a3ed3a7dfed8a672132bcc3f2a',1,'bdd_trace::visibilite()']]],
+  ['visiblite',['visiblite',['../structtrajet.html#a46e7ab7119b26df81cade0dc996c4e18',1,'trajet']]]
 ];

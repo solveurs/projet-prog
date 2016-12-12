@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -20,6 +27,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo_solveur-64.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Projet-Geoloc
    </div>
@@ -42,6 +50,21 @@ $(function() {
 });
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('figures_8h.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -56,14 +79,9 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_23fdee2f6995db16c755697cdf620cf4.html">Code</a></li><li class="navelem"><a class="el" href="dir_c82a0cee7a88a433a9c11f77f391cb69.html">front</a></li><li class="navelem"><a class="el" href="dir_c7c2aa34a6cce32ff882e5eed8801c44.html">figures</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">figures.h File Reference</div>  </div>
 </div><!--header-->
@@ -71,84 +89,328 @@ $(function() {
 <div class="textblock"><code>#include &lt;cairo.h&gt;</code><br />
 <code>#include &lt;gtk/gtk.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;math.h&gt;</code><br />
 </div>
 <p><a href="figures_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a9cd44a21d95c863f0d66520e943568a3"><td class="memItemLeft" >struct {</td></tr>
-<tr class="memitem:ad43c3812e6d13e0518d9f8b8f463ffcf"><td class="memItemLeft" >&#160;&#160;&#160;int&#160;&#160;&#160;<a class="el" href="figures_8h.html#ad43c3812e6d13e0518d9f8b8f463ffcf">count</a></td></tr>
-<tr class="separator:ad43c3812e6d13e0518d9f8b8f463ffcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6f81ab9dfb99882184b1aef87ed725a"><td class="memItemLeft" >&#160;&#160;&#160;double&#160;&#160;&#160;<a class="el" href="figures_8h.html#ad6f81ab9dfb99882184b1aef87ed725a">coordx</a> [100]</td></tr>
-<tr class="separator:ad6f81ab9dfb99882184b1aef87ed725a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37795152cd3d40b9c5e5720da0bb0f62"><td class="memItemLeft" >&#160;&#160;&#160;double&#160;&#160;&#160;<a class="el" href="figures_8h.html#a37795152cd3d40b9c5e5720da0bb0f62">coordy</a> [100]</td></tr>
-<tr class="separator:a37795152cd3d40b9c5e5720da0bb0f62"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9cd44a21d95c863f0d66520e943568a3"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="figures_8h.html#a9cd44a21d95c863f0d66520e943568a3">glob</a></td></tr>
-<tr class="separator:a9cd44a21d95c863f0d66520e943568a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:aba49077690b01bb9bdd409b85f364929"><td class="memItemLeft" align="right" valign="top">gboolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="figures_8h.html#aba49077690b01bb9bdd409b85f364929">button_press_event_cb</a> (GtkWidget *widget, GdkEventButton *event, gpointer data)</td></tr>
+<tr class="separator:aba49077690b01bb9bdd409b85f364929"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4223523a2f4525b9b1395a33381858e0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="figures_8h.html#a4223523a2f4525b9b1395a33381858e0">clear_surface</a> (void)</td></tr>
+<tr class="separator:a4223523a2f4525b9b1395a33381858e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0b970da4405389c144095b04eacd133"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="figures_8h.html#aa0b970da4405389c144095b04eacd133">close_window</a> (void)</td></tr>
+<tr class="separator:aa0b970da4405389c144095b04eacd133"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2067e0b42d19c759bf6db808b1c1734"><td class="memItemLeft" align="right" valign="top">gboolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="figures_8h.html#ab2067e0b42d19c759bf6db808b1c1734">configure_event_cb</a> (GtkWidget *widget, GdkEventConfigure *event, gpointer data)</td></tr>
+<tr class="separator:ab2067e0b42d19c759bf6db808b1c1734"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26575b0440be733e8c409fa782d0de77"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="figures_8h.html#a26575b0440be733e8c409fa782d0de77">draw_brush</a> (GtkWidget *widget, gdouble <a class="el" href="_u_i_cercle_anonymat_8c.html#a6150e0515f7202e2fb518f7206ed97dc">x</a>, gdouble <a class="el" href="_u_i_cercle_anonymat_8c.html#a0a2f84ed7838f07779ae24c5a9086d33">y</a>)</td></tr>
+<tr class="separator:a26575b0440be733e8c409fa782d0de77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25b9332634a80c6adc0d47401df29dba"><td class="memItemLeft" align="right" valign="top">gboolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="figures_8h.html#a25b9332634a80c6adc0d47401df29dba">draw_cb</a> (GtkWidget *widget, cairo_t *cr, gpointer data)</td></tr>
+<tr class="separator:a25b9332634a80c6adc0d47401df29dba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33d81f2442620f52d17210ec4864a59a"><td class="memItemLeft" align="right" valign="top">gboolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="figures_8h.html#a33d81f2442620f52d17210ec4864a59a">efface</a> (GtkWidget *widget, gpointer data)</td></tr>
+<tr class="separator:a33d81f2442620f52d17210ec4864a59a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8963aa798b98d1b9eadd19b8e5fa3fc"><td class="memItemLeft" align="right" valign="top">gboolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="figures_8h.html#ab8963aa798b98d1b9eadd19b8e5fa3fc">motion_notify_event_cb</a> (GtkWidget *widget, GdkEventMotion *event, gpointer data)</td></tr>
+<tr class="separator:ab8963aa798b98d1b9eadd19b8e5fa3fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72e8e37fbc468063fd0a2b8b28f61c60"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="figures_8h.html#a72e8e37fbc468063fd0a2b8b28f61c60">tailledessin</a> (GtkWidget *widget, GtkAllocation *allocation, void *data)</td></tr>
+<tr class="separator:a72e8e37fbc468063fd0a2b8b28f61c60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="ad6f81ab9dfb99882184b1aef87ed725a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad6f81ab9dfb99882184b1aef87ed725a">&sect;&nbsp;</a></span>coordx</h2>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="aba49077690b01bb9bdd409b85f364929"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba49077690b01bb9bdd409b85f364929">&sect;&nbsp;</a></span>button_press_event_cb()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double coordx[100]</td>
+          <td class="memname">gboolean button_press_event_cb </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>widget</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GdkEventButton *&#160;</td>
+          <td class="paramname"><em>event</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
+<p>Definition at line <a class="el" href="figures_8c_source.html#l00097">97</a> of file <a class="el" href="figures_8c_source.html">figures.c</a>.</p>
+
 </div>
 </div>
-<a id="a37795152cd3d40b9c5e5720da0bb0f62"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a37795152cd3d40b9c5e5720da0bb0f62">&sect;&nbsp;</a></span>coordy</h2>
+<a id="a4223523a2f4525b9b1395a33381858e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4223523a2f4525b9b1395a33381858e0">&sect;&nbsp;</a></span>clear_surface()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double coordy[100]</td>
+          <td class="memname">void clear_surface </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
+<p>Definition at line <a class="el" href="figures_8c_source.html#l00018">18</a> of file <a class="el" href="figures_8c_source.html">figures.c</a>.</p>
+
 </div>
 </div>
-<a id="ad43c3812e6d13e0518d9f8b8f463ffcf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad43c3812e6d13e0518d9f8b8f463ffcf">&sect;&nbsp;</a></span>count</h2>
+<a id="aa0b970da4405389c144095b04eacd133"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0b970da4405389c144095b04eacd133">&sect;&nbsp;</a></span>close_window()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int count</td>
+          <td class="memname">void close_window </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
+<p>Definition at line <a class="el" href="figures_8c_source.html#l00134">134</a> of file <a class="el" href="figures_8c_source.html">figures.c</a>.</p>
+
 </div>
 </div>
-<a id="a9cd44a21d95c863f0d66520e943568a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9cd44a21d95c863f0d66520e943568a3">&sect;&nbsp;</a></span>glob</h2>
+<a id="ab2067e0b42d19c759bf6db808b1c1734"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2067e0b42d19c759bf6db808b1c1734">&sect;&nbsp;</a></span>configure_event_cb()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">struct { ... }   glob</td>
+          <td class="memname">gboolean configure_event_cb </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>widget</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GdkEventConfigure *&#160;</td>
+          <td class="paramname"><em>event</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="figures_8c_source.html#l00045">45</a> of file <a class="el" href="figures_8c_source.html">figures.c</a>.</p>
+
+</div>
+</div>
+<a id="a26575b0440be733e8c409fa782d0de77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26575b0440be733e8c409fa782d0de77">&sect;&nbsp;</a></span>draw_brush()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void draw_brush </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>widget</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gdouble&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gdouble&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="figures_8c_source.html#l00076">76</a> of file <a class="el" href="figures_8c_source.html">figures.c</a>.</p>
+
+</div>
+</div>
+<a id="a25b9332634a80c6adc0d47401df29dba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25b9332634a80c6adc0d47401df29dba">&sect;&nbsp;</a></span>draw_cb()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">gboolean draw_cb </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>widget</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">cairo_t *&#160;</td>
+          <td class="paramname"><em>cr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="figures_8c_source.html#l00067">67</a> of file <a class="el" href="figures_8c_source.html">figures.c</a>.</p>
+
+</div>
+</div>
+<a id="a33d81f2442620f52d17210ec4864a59a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33d81f2442620f52d17210ec4864a59a">&sect;&nbsp;</a></span>efface()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">gboolean efface </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>widget</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="figures_8c_source.html#l00030">30</a> of file <a class="el" href="figures_8c_source.html">figures.c</a>.</p>
+
+</div>
+</div>
+<a id="ab8963aa798b98d1b9eadd19b8e5fa3fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8963aa798b98d1b9eadd19b8e5fa3fc">&sect;&nbsp;</a></span>motion_notify_event_cb()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">gboolean motion_notify_event_cb </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>widget</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GdkEventMotion *&#160;</td>
+          <td class="paramname"><em>event</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="figures_8c_source.html#l00121">121</a> of file <a class="el" href="figures_8c_source.html">figures.c</a>.</p>
+
+</div>
+</div>
+<a id="a72e8e37fbc468063fd0a2b8b28f61c60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72e8e37fbc468063fd0a2b8b28f61c60">&sect;&nbsp;</a></span>tailledessin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tailledessin </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>widget</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GtkAllocation *&#160;</td>
+          <td class="paramname"><em>allocation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="figures_8c_source.html#l00006">6</a> of file <a class="el" href="figures_8c_source.html">figures.c</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.12
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_23fdee2f6995db16c755697cdf620cf4.html">Code</a></li><li class="navelem"><a class="el" href="dir_c82a0cee7a88a433a9c11f77f391cb69.html">front</a></li><li class="navelem"><a class="el" href="dir_c7c2aa34a6cce32ff882e5eed8801c44.html">figures</a></li><li class="navelem"><a class="el" href="figures_8h.html">figures.h</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.12 </li>
+  </ul>
+</div>
 </body>
 </html>

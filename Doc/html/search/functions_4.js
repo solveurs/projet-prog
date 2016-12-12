@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['lambert93togps',['lambert93ToGPS',['../conversion_8c.html#a8d07bec6e0346370cf9cc58f0f86e02b',1,'lambert93ToGPS(double *x, double *y):&#160;conversion.c'],['../conversion_8h.html#a8d07bec6e0346370cf9cc58f0f86e02b',1,'lambert93ToGPS(double *x, double *y):&#160;conversion.c']]]
+  ['efface',['efface',['../figures_8c.html#a33d81f2442620f52d17210ec4864a59a',1,'efface(GtkWidget *widget, gpointer data):&#160;figures.c'],['../figures_8h.html#a33d81f2442620f52d17210ec4864a59a',1,'efface(GtkWidget *widget, gpointer data):&#160;figures.c'],['../k_8c.html#ae6276e29424ee05067321e10a0357f5c',1,'efface(GtkWidget *widget, gpointer data):&#160;k.c']]]
 ];

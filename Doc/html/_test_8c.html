@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -20,6 +27,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo_solveur-64.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Projet-Geoloc
    </div>
@@ -42,6 +50,21 @@ $(function() {
 });
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('_test_8c.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -56,11 +79,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_23fdee2f6995db16c755697cdf620cf4.html">Code</a></li><li class="navelem"><a class="el" href="dir_c82a0cee7a88a433a9c11f77f391cb69.html">front</a></li><li class="navelem"><a class="el" href="dir_756175d2ae5a7e6749555ecc231c7bf1.html">tests_guillaume</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#func-members">Functions</a> &#124;
@@ -72,25 +90,105 @@ $(function() {
 <div class="textblock"><code>#include &lt;cairo.h&gt;</code><br />
 <code>#include &lt;gtk/gtk.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
-</div><table class="memberdecls">
+</div>
+<p><a href="_test_8c_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a0f60e0f9340a1bd8f2cd2f585c1e54af"><td class="memItemLeft" align="right" valign="top">static gboolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_test_8c.html#a0f60e0f9340a1bd8f2cd2f585c1e54af">clicked</a> (GtkWidget *widget, GdkEventButton *event, gpointer user_data)</td></tr>
+<tr class="separator:a0f60e0f9340a1bd8f2cd2f585c1e54af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8de5d245bdee5e1a5ac3fd6f216ef367"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_test_8c.html#a8de5d245bdee5e1a5ac3fd6f216ef367">do_drawing</a> (cairo_t *)</td></tr>
+<tr class="separator:a8de5d245bdee5e1a5ac3fd6f216ef367"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ddf1224851353fc92bfbff6f499fa97"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_test_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> (int argc, char *argv[])</td></tr>
 <tr class="separator:a0ddf1224851353fc92bfbff6f499fa97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2927f3d8b5d36770e86aed1778c2959"><td class="memItemLeft" align="right" valign="top">static gboolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_test_8c.html#af2927f3d8b5d36770e86aed1778c2959">on_draw_event</a> (GtkWidget *widget, cairo_t *cr, gpointer user_data)</td></tr>
+<tr class="separator:af2927f3d8b5d36770e86aed1778c2959"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ae93a4d711f44b3edf3628b91ce9adce6"><td class="memItemLeft" >struct {</td></tr>
-<tr class="memitem:ad43c3812e6d13e0518d9f8b8f463ffcf"><td class="memItemLeft" >&#160;&#160;&#160;int&#160;&#160;&#160;<a class="el" href="_test_8c.html#ad43c3812e6d13e0518d9f8b8f463ffcf">count</a></td></tr>
-<tr class="separator:ad43c3812e6d13e0518d9f8b8f463ffcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cd44a21d95c863f0d66520e943568a3"><td class="memItemLeft" >struct {</td></tr>
 <tr class="memitem:ad6f81ab9dfb99882184b1aef87ed725a"><td class="memItemLeft" >&#160;&#160;&#160;double&#160;&#160;&#160;<a class="el" href="_test_8c.html#ad6f81ab9dfb99882184b1aef87ed725a">coordx</a> [100]</td></tr>
 <tr class="separator:ad6f81ab9dfb99882184b1aef87ed725a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37795152cd3d40b9c5e5720da0bb0f62"><td class="memItemLeft" >&#160;&#160;&#160;double&#160;&#160;&#160;<a class="el" href="_test_8c.html#a37795152cd3d40b9c5e5720da0bb0f62">coordy</a> [100]</td></tr>
 <tr class="separator:a37795152cd3d40b9c5e5720da0bb0f62"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae93a4d711f44b3edf3628b91ce9adce6"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_test_8c.html#ae93a4d711f44b3edf3628b91ce9adce6">glob</a></td></tr>
-<tr class="separator:ae93a4d711f44b3edf3628b91ce9adce6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad43c3812e6d13e0518d9f8b8f463ffcf"><td class="memItemLeft" >&#160;&#160;&#160;int&#160;&#160;&#160;<a class="el" href="_test_8c.html#ad43c3812e6d13e0518d9f8b8f463ffcf">count</a></td></tr>
+<tr class="separator:ad43c3812e6d13e0518d9f8b8f463ffcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cd44a21d95c863f0d66520e943568a3"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_test_8c.html#a9cd44a21d95c863f0d66520e943568a3">glob</a></td></tr>
+<tr class="separator:a9cd44a21d95c863f0d66520e943568a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a0f60e0f9340a1bd8f2cd2f585c1e54af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f60e0f9340a1bd8f2cd2f585c1e54af">&sect;&nbsp;</a></span>clicked()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static gboolean clicked </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>widget</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GdkEventButton *&#160;</td>
+          <td class="paramname"><em>event</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>user_data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_test_8c_source.html#l00057">57</a> of file <a class="el" href="_test_8c_source.html">Test.c</a>.</p>
+
+</div>
+</div>
+<a id="a8de5d245bdee5e1a5ac3fd6f216ef367"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8de5d245bdee5e1a5ac3fd6f216ef367">&sect;&nbsp;</a></span>do_drawing()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void do_drawing </td>
+          <td>(</td>
+          <td class="paramtype">cairo_t *&#160;</td>
+          <td class="paramname"><em>cr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_test_8c_source.html#l00022">22</a> of file <a class="el" href="_test_8c_source.html">Test.c</a>.</p>
+
+</div>
+</div>
 <a id="a0ddf1224851353fc92bfbff6f499fa97"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0ddf1224851353fc92bfbff6f499fa97">&sect;&nbsp;</a></span>main()</h2>
 
@@ -117,6 +215,52 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Definition at line <a class="el" href="_test_8c_source.html#l00072">72</a> of file <a class="el" href="_test_8c_source.html">Test.c</a>.</p>
+
+</div>
+</div>
+<a id="af2927f3d8b5d36770e86aed1778c2959"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2927f3d8b5d36770e86aed1778c2959">&sect;&nbsp;</a></span>on_draw_event()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static gboolean on_draw_event </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>widget</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">cairo_t *&#160;</td>
+          <td class="paramname"><em>cr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>user_data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_test_8c_source.html#l00017">17</a> of file <a class="el" href="_test_8c_source.html">Test.c</a>.</p>
+
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
@@ -132,6 +276,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Definition at line <a class="el" href="_test_8c_source.html#l00013">13</a> of file <a class="el" href="_test_8c_source.html">Test.c</a>.</p>
+
 </div>
 </div>
 <a id="a37795152cd3d40b9c5e5720da0bb0f62"></a>
@@ -145,6 +291,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_test_8c_source.html#l00014">14</a> of file <a class="el" href="_test_8c_source.html">Test.c</a>.</p>
 
 </div>
 </div>
@@ -160,10 +308,12 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Definition at line <a class="el" href="_test_8c_source.html#l00012">12</a> of file <a class="el" href="_test_8c_source.html">Test.c</a>.</p>
+
 </div>
 </div>
-<a id="ae93a4d711f44b3edf3628b91ce9adce6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae93a4d711f44b3edf3628b91ce9adce6">&sect;&nbsp;</a></span>glob</h2>
+<a id="a9cd44a21d95c863f0d66520e943568a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9cd44a21d95c863f0d66520e943568a3">&sect;&nbsp;</a></span>glob</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -177,11 +327,15 @@ Variables</h2></td></tr>
 </div>
 </div>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.12
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_23fdee2f6995db16c755697cdf620cf4.html">Code</a></li><li class="navelem"><a class="el" href="dir_c82a0cee7a88a433a9c11f77f391cb69.html">front</a></li><li class="navelem"><a class="el" href="dir_756175d2ae5a7e6749555ecc231c7bf1.html">tests_guillaume</a></li><li class="navelem"><a class="el" href="_test_8c.html">Test.c</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.12 </li>
+  </ul>
+</div>
 </body>
 </html>
