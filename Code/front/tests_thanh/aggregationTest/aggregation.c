@@ -2,7 +2,7 @@
  * \file      aggregation.c
  * \brief     Programme de tests.
  * \author    Thanh.L
- * \version   0.0
+ * \version   0.1
  *
  * Programme de test l'aggregation des traces
  *
@@ -10,6 +10,7 @@
  * === INSTRUCTIONS ===
  * Click gauche pour charger des traces en memoire pseudo-aleatoirement
  * Click droit pour afficher les traces
+ * Click molette pour afficher avec une aggregation fixe definie par (XC, YC, R)
  * TAILLE definit le nombre de points
  *
  * J'adapterai le code lorsqu'on fera le main front
@@ -21,9 +22,12 @@
 #include <cairo.h>
 #include <gtk/gtk.h>
 #include <errno.h>
+#include <math.h>
 
 #define TAILLE 500
-#define R 50
+#define XC 500      // Coordonnee X de notre aggregation
+#define YC 500      // Coordonnee Y de notre aggregation
+#define R 50        // Rayon de l'aggregation
 
 
 struct point
@@ -32,14 +36,14 @@ struct point
   int x;
   int y;
   int temps;
-  int aggrege;
+  int visible;
 };
 
 // ===== Global =========
 cairo_t *monImg;
 struct point tab[TAILLE];
-int tabAgg[TAILLE] ;
 int ROUTE = 0;
+int aggregation = 0;
 
 
 // ===== Fonctions ======
@@ -91,10 +95,53 @@ void lectureTrace()
   for(i=0; i<TAILLE; i++)
   {
     fscanf(fp, "%d %d", &tab[i].x, &tab[i].y);
-    tab[i].aggrege = 0;
+    tab[i].visible = 1;
   }
 
   fclose(fp);
+}
+
+
+
+/**
+ * \fn      static int cmp_cercle(int xm, int ym, int xc, int yc)
+ * \brief   Compare si le point M(xm, ym) appartient au cercle C(xc, yc, R)
+ *
+ * \param   xm    Coordonnee X de M(xm, ym)
+ * \param   ym    Coordonnee Y de M(xm, ym)
+ * \param   xm    Coordonnee X de C(xc, yc, R)
+ * \param   ym    Coordonnee Y de C(xc, yc, R)
+*/
+static int cmp_cercle(int xm, int ym, int xc, int yc)
+{
+  int X, Y;
+  X = (xm - xc) * (xm - xc);
+  Y = (ym - yc) * (ym - yc);
+  if ( (X+Y) <= R*R )
+    return 1;
+
+  return 0;
+}
+
+
+/**
+ * \fn      static void do_trace(cairo_t *cr)
+ * \brief   Rend invisibles les points dans la zone d'aggregation
+ *
+ * \param   xc    Coordonnee X de C(xc, yc, R)
+ * \param   yc    Coordonnee Y de C(xc, yc, R)
+*/
+static void do_aggregation(int xc, int yc)
+{
+  int i;
+
+  for(i=0; i<TAILLE; i++)
+  {
+    if(cmp_cercle(tab[i].x, tab[i].y, XC, YC))
+    {
+      tab[i].visible = 0;
+    }
+  }
 }
 
 
@@ -107,12 +154,9 @@ void lectureTrace()
 static void do_trace(cairo_t *cr)
 {
   /* === Notes ===
-  * La fonction est bordelique pour des raisons
-  * esthetiques : j'arriche le depart et l'arrivee
-  * d'une couleur differente
-  * Retracer deux fois le meme trait fait un Seg Fault
-  * Donc j'ai manuellement fait les 2 premieres iterations
-  * du for ainsi que la derniere.
+  * Trace toutes les traces situees dans un tableau de traces (type point ici)
+  * Verifie a la fin si on doit tracer les aggregations
+  * Trace un cercle puis le rempli pour former l'aggregation
   */
 
   // On definit l'arriere plan
@@ -122,43 +166,38 @@ static void do_trace(cairo_t *cr)
   // Epaisseur des lignes
   cairo_set_line_width(cr, 1.0);
   // Couleur de notre point de depart ici bleu
-  cairo_set_source_rgb(cr, 1, 1, 0);
+  cairo_set_source_rgb(cr, 0, 0, 1);
 
+  // Aggregation
+  if(aggregation)
+  {
+    do_aggregation(XC, YC);
+    cairo_move_to(cr, XC, YC);
+    cairo_arc(cr, XC, XC, R, 0, 2 * M_PI);
+    cairo_fill(cr);
+    cairo_stroke(cr); 
+  }
 
   // Trace des points
   int i;
 
-
   cairo_set_source_rgb(cr, 1, 0, 1);
-  for(i=0; i<(TAILLE); i++)
+  for(i=0; i<TAILLE; i++)
   {
-    cairo_move_to(cr, tab[i].x, tab[i].y - 5);
-    cairo_line_to(cr, tab[i].x, tab[i].y + 5);
+    if(tab[i].visible)
+    {
+      cairo_move_to(cr, tab[i].x, tab[i].y - 5);
+      cairo_line_to(cr, tab[i].x, tab[i].y + 5);
 
-    cairo_move_to(cr, tab[i].x - 5, tab[i].y);
-    cairo_line_to(cr, tab[i].x + 5, tab[i].y);
+      cairo_move_to(cr, tab[i].x - 5, tab[i].y);
+      cairo_line_to(cr, tab[i].x + 5, tab[i].y);
+    }
   }
 
   // Affichage dernier point
   cairo_stroke(cr); 
 }
 
-
-static void do_aggreation()
-{
-  // a faire
-}
-
-
-static int cmp_cercle(int xm, int ym, int xc, int yc)
-{
-  int X, Y;
-  X = (xm - xc) * (xm - xc);
-  Y = (ym - yc) * (ym - yc);
-  if ( (X+Y) <= R )
-    return 1;
-  return 0;
-}
 
 
 static gboolean on_draw_event(GtkWidget *widget, cairo_t *cr, 
@@ -180,13 +219,16 @@ static gboolean clicked(GtkWidget *widget, GdkEventButton *event,
       lectureTrace();
     }
 
-    if(event->button == 2)
+    if(event->button == 2) // Click molette
     {
-      do_aggreation();      
+      aggregation = 1;
+      gtk_widget_queue_draw(widget);        
     }
 
-    if(event->button == 3)
+    if(event->button == 3) // Click droit
     { 
+      aggregation = 0;
+      // on pourrait re-rendre visible
       gtk_widget_queue_draw(widget); 
     }
 
@@ -223,7 +265,7 @@ int main(int argc, char *argv[])
  
   gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
   gtk_window_set_default_size(GTK_WINDOW(window), 400, 300); 
-  gtk_window_set_title(GTK_WINDOW(window), "Traces et route");
+  gtk_window_set_title(GTK_WINDOW(window), "Aggregation fixe");
 
   gtk_widget_show_all(window);
 
