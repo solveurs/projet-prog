@@ -18,11 +18,12 @@ pt_interet * createPointInteret(void)
 	varPtInteret->importance			=	0;
 	varPtInteret->position.x			=	0;
 	varPtInteret->position.y			=	0;
-	varPtInteret->adresse.code_postal	=	18000;
-	varPtInteret->adresse.coord.x		=	0;
-	varPtInteret->adresse.coord.y		=	0;
-	strcpy(varPtInteret->adresse.nom_rue, "");
-	varPtInteret->adresse.numero		=	0;
+	varPtInteret->adresse				=	*(initAdresse());
+//	varPtInteret->adresse.code_postal	=	18000;
+//	varPtInteret->adresse.coord.x		=	0;
+//	varPtInteret->adresse.coord.y		=	0;
+//	strcpy(varPtInteret->adresse.nom_rue, "");
+//	varPtInteret->adresse.numero		=	0;
 	return varPtInteret;
 }
 
@@ -95,7 +96,79 @@ void ajoutPointInteret(liste_pt_interet * parListe, pt_interet * parPtInteret)
 	parListe->t[parListe->occupee] = parPtInteret;
 	++parListe->occupee;
 }
-//liste_pt_interet calculPointInteret(trajet * parTr)
-//{
-//	return NULL;
-//}
+
+
+liste_pt_interet * calculPointInteret(trajet * parTr)
+{
+	liste_pt_interet * varListe = initListePointInteret();
+	cercle varC;
+	varC.centre.x = 0;
+	varC.centre.y = 0;
+	varC.rayon = RAYON_CERCLE_PT_INT_KM;
+	int nvPtInteret = 1;
+	
+	
+	//Premiere boucle de parcours simple du trajet (repere les points où la personne passe du temps directement
+	trace * it;
+	it = parTr->premier;
+	while (it->suiv != NULL)
+	{
+		pt_interet * varNvPtInt;
+		varC.centre = it->coord;
+		if ((isInCercle(varC, it->suiv->coord)) > 0) //si le pt suivant est dans le cercle
+		{
+			if (nvPtInteret > 0) //si il est un noueau point d'interet
+			{
+				nvPtInteret = 0;
+				varNvPtInt = initPointInteret(1, it->date, it->date, it->coord, *(initAdresse()));
+			}
+			else
+			{
+				varNvPtInt->importance++;
+				varNvPtInt->fin = it->date;
+				point nvPos = varNvPtInt->position;
+				nvPos.x += it->coord.x;
+				nvPos.y += it->coord.y;
+				nvPos.x /= varNvPtInt->importance;
+				nvPos.y /= varNvPtInt->importance;
+				varNvPtInt->position = nvPos;
+			}
+		}
+		else
+		{
+			if (!(nvPtInteret > 0))
+			{
+				varNvPtInt->importance++;
+				varNvPtInt->fin = it->date;
+				point nvPos = varNvPtInt->position;
+				nvPos.x += it->coord.x;
+				nvPos.y += it->coord.y;
+				nvPos.x /= varNvPtInt->importance;
+				nvPos.y /= varNvPtInt->importance;
+				varNvPtInt->position = nvPos;
+				
+				ajoutPointInteret(varListe, varNvPtInt);
+				nvPtInteret = 1;
+			}
+		}
+		it = it->suiv;
+	}
+	
+	//Deuxieme boucle qui va reparcourir les points d'interet et les regroupés en plus gros
+	
+	return varListe;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

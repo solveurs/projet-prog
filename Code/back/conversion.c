@@ -43,6 +43,23 @@ void lambert93ToGPS(double * x, double * y)
      *y = phi * 180.0 / M_PI;
 }
 
+
+/**
+ Convertie une distance en kilometre un deplacement
+
+ @param parD   la distance en kilomètre dans les 2 directions
+ @param parLat la latitude à laquelle on se trouve
+
+ @return un point avec x-->dlat et y-->dlon
+ */
+point * kmToGPS(const point parD, double parLat)
+{
+	point * varP;
+	varP->x = (180/M_PI) * (parD.x/RAYON_TERRE_KM); //calcul dlat
+	varP->y = (180/M_PI) * (parD.y/(RAYON_TERRE_KM*cos(M_PI*parLat/180))); //calcul dLon
+	return varP;
+}
+
 /**
  convertie une date (en ms depuis 1970) en date lisible
 
