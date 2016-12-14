@@ -173,6 +173,8 @@ liste_pt_interet * calculPointInteret(trajet * parTr)
  */
 int savePointInteret(liste_pt_interet parArrPtInteret)
 {
+	//FILE * fd;
+	//fd = fopen(<#const char *restrict __filename#>, <#const char *restrict __mode#>)
 	
 	return 1;
 }
