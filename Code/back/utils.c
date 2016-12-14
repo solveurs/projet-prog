@@ -25,6 +25,12 @@ int isInCercle(const cercle parC, const point parP)
 	}
 }
 
+int dis2points(const point parP1, const point parP2, const double parDisMax)
+{
+	return (GPStoKm(parP1, parP2) < parDisMax)?1:0;
+}
+
+
 adresse * initAdresse(void)
 {
 	adresse * varAddr = malloc(sizeof(adresse));
@@ -34,4 +40,9 @@ adresse * initAdresse(void)
 	strcpy(varAddr->nom_rue, "");
 	varAddr->numero			=	0;
 	return varAddr;
+}
+
+void affichePoint(point parP)
+{
+	printf("x = %lf : y = %lf\n",parP.x,parP.y);
 }

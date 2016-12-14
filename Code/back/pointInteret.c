@@ -40,12 +40,15 @@ pt_interet * createPointInteret(void)
  */
 pt_interet * initPointInteret(int parImpor, time_t parDbt, time_t parFin, point parPt, adresse parAddr)
 {
+	static int varId = 0;
 	pt_interet* varPtInteret = createPointInteret();
+	varPtInteret->id					=	varId;
 	varPtInteret->debut					=	parDbt;
 	varPtInteret->fin					=	parFin;
 	varPtInteret->importance			=	parImpor;
 	varPtInteret->position				=	parPt;
 	varPtInteret->adresse				=	parAddr;
+	varId++;
 	return varPtInteret;
 }
 
@@ -57,10 +60,13 @@ pt_interet * initPointInteret(int parImpor, time_t parDbt, time_t parFin, point 
  */
 liste_pt_interet * initListePointInteret(void)
 {
+	static int varId = 0;
 	liste_pt_interet * varListe = malloc(sizeof(liste_pt_interet));
+	varListe->id		= varId;
 	varListe->taille	= TAILLE_TAB_DYN;
 	varListe->occupee	= 0;
 	varListe->t			=calloc(varListe->taille, sizeof(pt_interet*));
+	varId++;
 	return varListe;
 }
 
@@ -115,7 +121,8 @@ liste_pt_interet * calculPointInteret(trajet * parTr)
 	{
 		pt_interet * varNvPtInt;
 		varC.centre = it->coord;
-		if ((isInCercle(varC, it->suiv->coord)) > 0) //si le pt suivant est dans le cercle
+		//(isInCercle(varC, it->suiv->coord)) > 0
+		if (dis2points(varC.centre, it->suiv->coord, RAYON_CERCLE_PT_INT_KM) > 0) //si le pt suivant est dans le cercle
 		{
 			if (nvPtInteret > 0) //si il est un noueau point d'interet
 			{
@@ -160,7 +167,40 @@ liste_pt_interet * calculPointInteret(trajet * parTr)
 }
 
 
+/**
+ fonction de sauvegarde des points d'interet dans un fichier Liste_pt_interet
 
+ @param parArrPtInteret la liste de point d'interet à sauvgarder
+ @return >0 si reussi, 0 si echec
+ */
+int savePointInteret(liste_pt_interet parArrPtInteret)
+{
+	
+	return 1;
+}
+
+void affichePtInteret(pt_interet * parPtIntrt)
+{
+	printf("--------------------------------\n");
+	printf("Id :			%d\n",parPtIntrt->id);
+	printf("Importance :	%d\n",parPtIntrt->importance);
+	affichePoint(parPtIntrt->position);
+	printf("Heure de début :%s\n",timestampToString(parPtIntrt->debut));
+	printf("Heure de fin :	%s\n",timestampToString(parPtIntrt->fin));
+	printf("--------------------------------\n");
+}
+
+void afficheArrPtInteret(liste_pt_interet * parArrPtIntrt)
+{
+	int i;
+	printf("Id liste : %d \n", parArrPtIntrt->id);
+	printf("Taille occupee %d \n", parArrPtIntrt->occupee);
+	for (i=0; i < parArrPtIntrt->occupee; i++)
+	{
+		printf("%d",i);
+		affichePtInteret(parArrPtIntrt->t[i]);
+	}
+}
 
 
 

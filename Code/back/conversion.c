@@ -56,9 +56,20 @@ point * kmToGPS(const point parD, double parLat)
 {
 	point * varP;
 	varP->x = (180/M_PI) * (parD.x/RAYON_TERRE_KM); //calcul dlat
-	varP->y = (180/M_PI) * (parD.y/(RAYON_TERRE_KM*cos(M_PI*parLat/180))); //calcul dLon
+	varP->y = (180/M_PI) * (parD.y/(RAYON_TERRE_KM*cos(convertToRad(parLat)))); //calcul dLon
 	return varP;
 }
+
+double convertToRad(const double par)
+{
+	return (M_PI * par)/(double)180;
+}
+
+double GPStoKm(const point parP1, const point parP2)
+{
+	return RAYON_TERRE_KM * ( M_PI_2 - asin( sin(convertToRad(parP2.x)) * sin(convertToRad(parP1.x)) + cos(convertToRad(parP2.y) - convertToRad(parP1.y)) * cos(convertToRad(parP2.x)) * cos(convertToRad(parP2.x))));
+}
+
 
 /**
  convertie une date (en ms depuis 1970) en date lisible

@@ -101,6 +101,7 @@ typedef struct bdd_trace bdd_trace;
  */
 struct pt_interet
 {
+	int			id;
 	int			importance;/**<importance sur le point d'interet*/
 	time_t		debut;/**<date de debut du point d'interet*/
 	time_t		fin;/**<date de fin du point d'interet*/
@@ -114,6 +115,7 @@ typedef struct pt_interet pt_interet;
  */
 struct liste_pt_interet
 {
+	int				id;
 	int				taille;
 	int				occupee;
 	pt_interet**	t;

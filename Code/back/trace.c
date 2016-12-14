@@ -50,6 +50,7 @@ void afficheTrace(trace * parT)
 {
 	printf("--------------------------------\n");
 	printf("Id :			%d\n",parT->id);
+	printf("Visibilité :	%d\n",parT->visibilite);
 	printf("date :       %s\n",timestampToString(parT->date));
 	printf("Coordonées : %lf, %lf\n",parT->coord.x, parT->coord.y);
 	printf("--------------------------------\n");

@@ -5,6 +5,7 @@
 #include "trace.h"
 #include "trajet.h"
 #include "utils.h"
+#include "conversion.h"
 
 pt_interet * createPointInteret(void);
 pt_interet * initPointInteret(int parImpor, time_t parDbt, time_t parFin, point parPt, adresse parAddr);
@@ -12,3 +13,6 @@ liste_pt_interet * initListePointInteret(void);
 void appendListePointInteret(liste_pt_interet * parListe);
 void ajoutPointInteret(liste_pt_interet * parListe, pt_interet * parPtInteret);
 liste_pt_interet * calculPointInteret(trajet * parTr);
+int savePointInteret(liste_pt_interet parArrPtInteret);
+void affichePtInteret(pt_interet * parPtIntrt);
+void afficheArrPtInteret(liste_pt_interet * parArrPtIntrt);
