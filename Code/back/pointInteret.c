@@ -13,6 +13,7 @@
 pt_interet * createPointInteret(void)
 {
 	pt_interet* varPtInteret = malloc(sizeof(pt_interet));
+	varPtInteret->id					=	0;
 	varPtInteret->debut					=	0;
 	varPtInteret->fin					=	0;
 	varPtInteret->importance			=	0;
@@ -40,15 +41,15 @@ pt_interet * createPointInteret(void)
  */
 pt_interet * initPointInteret(int parImpor, time_t parDbt, time_t parFin, point parPt, adresse parAddr)
 {
-	static int varId = 0;
+	static int varPtId = 0;
 	pt_interet* varPtInteret = createPointInteret();
-	varPtInteret->id					=	varId;
+	varPtInteret->id					=	varPtId;
 	varPtInteret->debut					=	parDbt;
 	varPtInteret->fin					=	parFin;
 	varPtInteret->importance			=	parImpor;
 	varPtInteret->position				=	parPt;
 	varPtInteret->adresse				=	parAddr;
-	varId++;
+	varPtId++;
 	return varPtInteret;
 }
 
@@ -60,13 +61,13 @@ pt_interet * initPointInteret(int parImpor, time_t parDbt, time_t parFin, point 
  */
 liste_pt_interet * initListePointInteret(void)
 {
-	static int varId = 0;
+	//static int varArrId = 0;
 	liste_pt_interet * varListe = malloc(sizeof(liste_pt_interet));
-	varListe->id		= varId;
+	varListe->id		= 1;
 	varListe->taille	= TAILLE_TAB_DYN;
 	varListe->occupee	= 0;
 	varListe->t			=calloc(varListe->taille, sizeof(pt_interet*));
-	varId++;
+	//varArrId++;
 	return varListe;
 }
 
@@ -136,8 +137,6 @@ liste_pt_interet * calculPointInteret(trajet * parTr)
 				point nvPos = varNvPtInt->position;
 				nvPos.x += it->coord.x;
 				nvPos.y += it->coord.y;
-				nvPos.x /= varNvPtInt->importance;
-				nvPos.y /= varNvPtInt->importance;
 				varNvPtInt->position = nvPos;
 			}
 		}
@@ -162,7 +161,6 @@ liste_pt_interet * calculPointInteret(trajet * parTr)
 	}
 	
 	//Deuxieme boucle qui va reparcourir les points d'interet et les regroupés en plus gros
-	
 	return varListe;
 }
 
@@ -197,7 +195,6 @@ void afficheArrPtInteret(liste_pt_interet * parArrPtIntrt)
 	printf("Taille occupee %d \n", parArrPtIntrt->occupee);
 	for (i=0; i < parArrPtIntrt->occupee; i++)
 	{
-		printf("%d",i);
 		affichePtInteret(parArrPtIntrt->t[i]);
 	}
 }

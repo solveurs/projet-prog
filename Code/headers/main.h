@@ -9,3 +9,5 @@
 #include "pointInteret.h"
 #include "config.h"
 #include "utils.h"
+
+void debugBack(void);

@@ -54,7 +54,7 @@ void lambert93ToGPS(double * x, double * y)
  */
 point * kmToGPS(const point parD, double parLat)
 {
-	point * varP;
+	point * varP = malloc(sizeof(point));
 	varP->x = (180/M_PI) * (parD.x/RAYON_TERRE_KM); //calcul dlat
 	varP->y = (180/M_PI) * (parD.y/(RAYON_TERRE_KM*cos(convertToRad(parLat)))); //calcul dLon
 	return varP;
