@@ -123,7 +123,7 @@ liste_pt_interet * calculPointInteret(trajet * parTr)
 		pt_interet * varNvPtInt;
 		varC.centre = it->coord;
 		//(isInCercle(varC, it->suiv->coord)) > 0
-		if (dis2points(varC.centre, it->suiv->coord, RAYON_CERCLE_PT_INT_KM) > 0) //si le pt suivant est dans le cercle
+		if (dis2points(varC.centre, it->suiv->coord, varC.rayon) > 0) //si le pt suivant est dans le cercle
 		{
 			if (nvPtInteret > 0) //si il est un noueau point d'interet
 			{
@@ -160,10 +160,63 @@ liste_pt_interet * calculPointInteret(trajet * parTr)
 		it = it->suiv;
 	}
 	
-	//Deuxieme boucle qui va reparcourir les points d'interet et les regroupés en plus gros
+	//Deuxieme boucle qui va reparcourir les points d'interet et les regroupés en plus gros ==> 3ms
+	int i;
+	int j;
+	int k = 0;
+	for (i = 0; i < varListe->occupee; i++)
+	{
+		varC.centre.x = varListe->t[i]->position.x;
+		varC.centre.y = varListe->t[i]->position.y;
+		for (j = i + 1 ; j < varListe->occupee; j++)
+		{
+			if (dis2points(varC.centre, varListe->t[j]->position, varC.rayon))
+			{
+				varListe->t[i] = fusionPtInteret(varListe->t[i], varListe->t[j]);
+				for (k = j; k < varListe->occupee; k++)
+				{
+					varListe->t[k] = varListe->t[k + 1];
+				}
+				varListe->occupee--;
+				j--;
+			}
+		}
+	}
+	
 	return varListe;
 }
 
+pt_interet * fusionPtInteret(pt_interet * parPtInt1, pt_interet * parPtInt2)
+{
+	int importance = parPtInt1->importance + parPtInt2->importance;
+	time_t varDbt;
+	time_t varFin;
+	if (parPtInt1->debut < parPtInt2->debut)
+	{
+		varDbt = parPtInt1->debut;
+	}
+	else
+	{
+		varDbt = parPtInt2->debut;
+	}
+	if (parPtInt1->fin < parPtInt2->fin)
+	{
+		varFin = parPtInt2->fin;
+	}
+	else
+	{
+		varFin = parPtInt1->fin;
+	}
+	point varP;
+	varP.x = ((parPtInt1->position.x * parPtInt1->importance) + (parPtInt2->position.x * parPtInt2->importance)) / importance;
+	varP.y = (parPtInt1->position.y + parPtInt2->position.y) / 2;
+	pt_interet * varNvPtInt = initPointInteret(importance,
+											   varDbt,
+											   varFin,
+											   varP,
+											   *(initAdresse()));
+	return varNvPtInt;
+}
 
 /**
  fonction de sauvegarde des points d'interet dans un fichier Liste_pt_interet
@@ -171,10 +224,21 @@ liste_pt_interet * calculPointInteret(trajet * parTr)
  @param parArrPtInteret la liste de point d'interet à sauvgarder
  @return >0 si reussi, 0 si echec
  */
-int savePointInteret(liste_pt_interet parArrPtInteret)
+int savePointInteret(const liste_pt_interet parArrPtInteret)
 {
-	//FILE * fd;
-	//fd = fopen(<#const char *restrict __filename#>, <#const char *restrict __mode#>)
+	FILE * fd;
+	//Compilation avec gcc: ../Data/savePtInteret.frj
+	if((fd = fopen("../../Data/savePtInteret.frj", "w+")) == NULL)
+	{
+		perror("Erreur à la création du fichier de sauvegarde de pt d'interet");
+		return -1;
+	}
+	int i;
+	for (i = 0; i < parArrPtInteret.occupee; i++)
+	{
+		fprintf(fd, "imp %d:deb %ld:fin %ld:lat %lf:lon %lf\n", parArrPtInteret.t[i]->importance, parArrPtInteret.t[i]->debut, parArrPtInteret.t[i]->fin, parArrPtInteret.t[i]->position.x, parArrPtInteret.t[i]->position.y);
+	}
+	fclose(fd);
 	
 	return 1;
 }
@@ -197,6 +261,7 @@ void afficheArrPtInteret(liste_pt_interet * parArrPtIntrt)
 	printf("Taille occupee %d \n", parArrPtIntrt->occupee);
 	for (i=0; i < parArrPtIntrt->occupee; i++)
 	{
+		printf("%d",i);
 		affichePtInteret(parArrPtIntrt->t[i]);
 	}
 }

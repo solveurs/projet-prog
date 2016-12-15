@@ -1,5 +1,5 @@
 #include "headers/main.h"
-//gcc main.c back/anonymisation.c back/conversion.c back/fonctionFront.c back/parserBddGeoloc.c back/pointInteret.c back/trace.c back/trajet.c back/utils.c -o main -Wall && ./main
+//gcc main.c back/anonymisation.c back/conversion.c back/fonctionFront.c back/parserBddGeoloc.c back/pointInteret.c back/trace.c back/trajet.c back/utils.c back/ia.c -o main -Wall && ./main
 
 #define DEBUG 1
 
@@ -38,7 +38,9 @@ void debugBack(void)
 	bdd_trace * fd_trace = readGeoloc(fd);
 	trajet * _trajet = fd_trace->trajet;
 	afficheTrajet(_trajet);
-	afficheArrPtInteret(calculPointInteret(_trajet));
+	liste_pt_interet * _listePtInteret = calculPointInteret(_trajet);
+	afficheArrPtInteret(_listePtInteret);
+	savePointInteret(*_listePtInteret);
 	//	point p = { .x = 0.1, .y = 0.1};
 	//	point * varP = kmToGPS(p, 51);
 	//	printf("dlat : %lf, dlon : %lf",varP->x,varP->y);

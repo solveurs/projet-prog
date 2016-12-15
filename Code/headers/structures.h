@@ -122,6 +122,22 @@ struct liste_pt_interet
 };
 typedef struct liste_pt_interet liste_pt_interet;
 
+struct cercle_anonym
+{
+	int				id;
+	cercle			c;
+};
+typedef struct cercle_anonym cercle_anonym;
+
+struct liste_c_anonym
+{
+	int				id;
+	int				taille;
+	int				occupee;
+	cercle_anonym**	t;
+};
+typedef struct liste_c_anonym liste_c_anonym;
+
 /**
  @brief modelisation d'une carte
  */

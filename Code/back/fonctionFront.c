@@ -20,6 +20,8 @@
 	-fonction accessuer taille max de la trace
 
 +fonction de detection point d'interet
+ 
++Fonction de suggestion de point d'anonymisation
 
 */
 
@@ -34,3 +36,5 @@ trajet * IanonymisationC(const trajet parTr, const cercle parCercleAno);
 trajet * IanonymisationP(const trajet parTr, const int parIdTraceAno);
 
 trajet * IanonymisationR(const trajet parTr, const rectangle parRectAno);
+
+liste_c_anonym * IsuggestAnonymisation();
