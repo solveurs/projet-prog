@@ -7,10 +7,10 @@
 
 /*
 +fonction importation trace (open file...) --> trajet (affiche la trace)
-  
+ 
 +anonymisation des traces (
-	-manuel(zone[cercle]) -->supprime les traces dans le cercle
-	-
+	-manuel(zone[cercle]) -->plutôt que de les affacés, le temps que l'on est en mode édition on met la visiblité des points à 0. A la fin de l'édition on créé un trajet avec les points dont la visibilté est à 1.
+	- Proposer de sauvegarder le trajet
  
 +Lecture trace
 	-pause avec une step
@@ -25,16 +25,63 @@
 
 */
 
-trajet * IimportTrajet(const char * nom);
+trajet * IimportTrajet(const char * nom)
+{
+	bdd_trace * varBddTrace = readGeoloc(openGeoloc(nom));
+	return varBddTrace->trajet;
+}
 
-liste_pt_interet* IgetPtInteret(trajet * parTr);
+liste_pt_interet* IgetPtInteret(trajet * parTr)
+{
+	return calculPointInteret(parTr);
+}
 
-trajet * IlectureTrace(int parCmd, trajet * parTr);
+trajet * IlectureTrace(int parCmd, trajet * parTr)
+{
+	switch (parCmd)
+	{
+		case 0: //on fait une lecture simple
+			
+			break;
+		case 1: //on fait une lecture point par point
+			
+			break;
+		case 2: //on fait une lecture inverse
+			
+			break;
+		default:
+			break;
+	}
+	return parTr;
+}
 
-trajet * IanonymisationC(const trajet parTr, const cercle parCercleAno);
+void IModeAnonymisation();
 
-trajet * IanonymisationP(const trajet parTr, const int parIdTraceAno);
+void IfinModeAnonymisation();
 
-trajet * IanonymisationR(const trajet parTr, const rectangle parRectAno);
+void IsaveAnonymisation(const trajet parTr, const char * chemin)
+{
+	saveTrajetAnonymise(parTr, chemin, 1);
+}
+
+void IanonymisationC(trajet * parTr, const cercle parCercleAno)
+{
+	anonymisationPendantEditionC(parTr, parCercleAno);
+}
+
+void IanonymisationP(trajet * parTr, const int parIdTraceAno)
+{
+	anonymisationPendantEditionT(parTr, parIdTraceAno);
+}
+
+void IanonymisationR(trajet * parTr, const rectangle parRectAno)
+{
+	anonymisationPendantEditionR(parTr, parRectAno);
+}
 
 liste_c_anonym * IsuggestAnonymisation();
+
+
+
+
+

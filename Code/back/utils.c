@@ -25,6 +25,28 @@ int isInCercle(const cercle parC, const point parP)
 	}
 }
 
+
+/**
+ fonction qui nous dit si un point est dans un rectangle ou pas
+
+ @param parR le rectangle
+ @param parP le point
+
+ @return >0 --> dans le rectangle <0 sinon
+ */
+int isInRectangle(const rectangle parR, const point parP)
+{
+	//condition pas sûre
+	if ((parP.x < parR.origine.x) || (parP.y < parR.origine.y) || (parP.x > parR.origine.x + parR.largeur) || (parP.y > parR.origine.y + parR.hauteur))
+	{
+		return -1;
+	}
+	else
+	{
+		return 1;
+	}
+}
+
 int dis2points(const point parP1, const point parP2, const double parDisMax)
 {
 	return (GPStoKm(parP1, parP2) < parDisMax)?1:0;

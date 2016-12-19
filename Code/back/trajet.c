@@ -78,6 +78,7 @@ void supprimerTraceN(trajet * parTr, int parPos)
 		it->prec->suiv = it->suiv;
 		it->suiv->prec = it->prec;
 	}
+	parTr->taille--;
 	free(it);
 }
 
@@ -114,6 +115,32 @@ void supprimerTrajet(trajet * parTr)
 	}
 	free(parTr);
 }
+
+int saveTrajet(const trajet * parTr, const char * chemin)
+{
+	FILE * fd;
+	if((fd = fopen(chemin, "w+")) == NULL)
+	{
+		perror("Erreur à la création du fichier de sauvegarde de trajet");
+		return -1;
+	}
+	trace * it = parTr->premier;
+	while (it->suiv != NULL)
+	{
+		fprintf(fd, "date:%ld,lat:%lf,long:%lf;\n", it->date, it->coord.x, it->coord.y);
+	}
+	fclose(fd);
+	
+	return 1;
+}
+
+
+
+
+
+
+
+
 
 
 
