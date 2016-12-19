@@ -13,6 +13,6 @@ carte initCarte(char* chemin_image_carte, char* chemin_donnees_carte, rectangle 
   res.zone_latlong          = zone_latlong;
   return res;
 }
-carte carte_Cher = initCarte("../../Data/cartes/carte_Cher.png", 1037, 1920, 47.928306, 1.757813, 46.132267, 3.181915);
-carte carte_Bourges = initCarte("../../Data/cartes/carte_Bourges.png", 1877, 1080, 47.111495, 2.309103, 47.048429, 2.470207);
-carte carte_Insa = initCarte("../../Data/cartes/carte_Insa.png", 1877, 1080, 47.084895, 2.400116, 47.077012, 2.420254);
+carte carte_Cher = initCarte("../../Data/cartes/carte_Cher.png", 1013, 1920, 47.988083, 1.726227, 46.194092, 3.115997);
+carte carte_Bourges = initCarte("../../Data/cartes/carte_Bourges.png", 1850, 1079, 47.113540, 2.313738, 47.050476, 2.472610);
+carte carte_Insa = initCarte("../../Data/cartes/carte_Insa.png", 1850, 1080, 47.088723, 2.392981, 47.072957, 2.432764);
