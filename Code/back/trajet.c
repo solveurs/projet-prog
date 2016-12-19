@@ -116,7 +116,7 @@ void supprimerTrajet(trajet * parTr)
 	free(parTr);
 }
 
-int saveTrajet(const trajet * parTr, const char * chemin)
+int saveTrajet(trajet * parTr, const char * chemin)
 {
 	FILE * fd;
 	if((fd = fopen(chemin, "w+")) == NULL)
