@@ -69,9 +69,9 @@ void activate(GtkApplication *app, gpointer user_data)
   // Signaux
   g_signal_connect(boutonCarte, "clicked", G_CALLBACK(UICarte), app);
   g_signal_connect(boutonAnimation, "clicked", G_CALLBACK(UIAnim), app);
-  g_signal_connect(boutonTraces, "clicked", G_CALLBACK(UITraces), app);
+  //g_signal_connect(boutonTraces, "clicked", G_CALLBACK(UITraces), app);
   g_signal_connect(boutonAnonym, "clicked", G_CALLBACK(UIAnom), app);
-  g_signal_connect(bSurp, "clicked", G_CALLBACK(UISurprise), app);
+  //g_signal_connect(bSurp, "clicked", G_CALLBACK(UISurprise), app);
 
   // Packaging des widgets
   ajoutWidget(buttonBoxC, boutonCarte);
@@ -195,53 +195,6 @@ void UIAnim(GtkWidget* widget, gpointer user_data)
     status.animation = 0;
 }
 
-void UITraces(GtkWidget* widget, gpointer user_data)
-{
-  if(!status.traces)
-  {
-    status.traces = 1;
-    //Fenetre popup
-    GtkWidget* popupTraces;
-
-    popupTraces = gtk_application_window_new(user_data);
-    gtk_window_set_title (GTK_WINDOW (popupTraces), "Gestion des traces");
-    gtk_widget_set_parent(popupTraces, fenetre);
-    gtk_window_set_skip_taskbar_hint(GTK_WINDOW(popupTraces), TRUE);
-    gtk_window_set_transient_for(GTK_WINDOW(popupTraces), GTK_WINDOW(fenetre));
-    gtk_window_set_destroy_with_parent(GTK_WINDOW(popupTraces), TRUE);
-
-    // Box layout de la fenetre
-    GtkWidget* boxTraces;
-    GtkWidget *frameTraces;
-    boxTraces = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
-    frameTraces = gtk_frame_new("Liste des traces");
-
-    // Bouton "Importer"
-    GtkWidget *boutonImporter, *bBoxImporter;
-    bBoxImporter = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
-    boutonImporter = gtk_button_new_with_label("Importer");
-    ajoutWidget(bBoxImporter, boutonImporter);
-    gtk_box_pack_start(boxTraces, bBoxImporter, FALSE, FALSE, 5);
-
-    // Zone scrollable
-    GtkWidget *zoneScroll, *labelScroll;  
-    labelScroll = gtk_label_new("Test du scroll de la zone\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAAAAAAAA\
-      \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTCHOOOOOOOOOOM");
-    zoneScroll = gtk_scrolled_window_new (NULL, NULL);
-
-    // Packaging
-    ajoutWidget(zoneScroll, labelScroll);
-    ajoutWidget(frameTraces, zoneScroll);
-    gtk_box_pack_end(boxTraces, frameTraces, TRUE, TRUE, 5);
-    ajoutWidget(popupTraces, boxTraces);
-
-    // Affichage
-    gtk_widget_show_all(popupTraces);
-  }
-  else
-    status.traces = 0;
-}
-
 void UIAnom(GtkWidget* widget, gpointer user_data)
 {
   if(!status.anonymat)
@@ -261,28 +214,6 @@ void UIAnom(GtkWidget* widget, gpointer user_data)
   }
   else
     status.anonymat = 0;
-}
-
-void UISurprise(GtkWidget* widget, gpointer user_data)
-{
-  status.surprise = 1;
-  //Fenetre popup
-  GtkWidget* popupSurprise;
-  gtk_widget_set_parent(popupSurprise, fenetre);
-
-  popupSurprise = gtk_application_window_new(user_data);
-  gtk_window_set_title (GTK_WINDOW (popupSurprise), "SURPRISE MOZAF*CKER");
-  gtk_widget_set_parent(popupSurprise, fenetre);
-  gtk_window_set_skip_taskbar_hint(GTK_WINDOW(popupSurprise), TRUE);
-  gtk_window_set_transient_for(GTK_WINDOW(popupSurprise), GTK_WINDOW(fenetre));
-  gtk_window_set_destroy_with_parent(GTK_WINDOW(popupSurprise), TRUE);
-
-  //Image
-  GtkWidget* image;
-  image = gtk_image_new_from_file("../surprise.jpg");
-  ajoutWidget(popupSurprise, image);
-
-  gtk_widget_show_all(popupSurprise);
 }
 
 void ajoutWidget(GtkWidget* emplacement, GtkWidget* widget)

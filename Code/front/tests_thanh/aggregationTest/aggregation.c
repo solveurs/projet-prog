@@ -174,7 +174,7 @@ static void do_trace(cairo_t *cr)
     do_aggregation(XC, YC);
     cairo_move_to(cr, XC, YC);
     cairo_arc(cr, XC, XC, R, 0, 2 * M_PI);
-    cairo_fill(cr);
+    //cairo_fill(cr);
     cairo_stroke(cr); 
   }
 
