@@ -1,6 +1,7 @@
 #pragma once
 
 #include "includes.h"
+#include "uiTraces.h"
 #include "activate.h"
 
 void ajoutWidget(GtkWidget* emplacement, GtkWidget* widget)
