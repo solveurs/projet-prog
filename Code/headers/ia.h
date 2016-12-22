@@ -47,11 +47,11 @@ double initConnection(); //initialise la connection avec des valeurs aléatoires
 
 //NEURONE
 neurone * initNeur(int parId,int parNbOutput); //initialisation d'un neurone
-void feedForwardNeur(neurone * parPrevLayer);
-void calcOutputGradient(double parTargetValue);
+double feedForwardNeur(neurone * parPrevLayer, int parSizePrevLayer, int parPosLayer);
+double calcOutputGradient(double parTargetValue, neurone parNeur);
 void calcHiddenGradients(neurone * parNextLayer);
 void updateInputsPoids(neurone * parPrevLayer);
-double fctTransfert(double parSum);
+double fctTransfert(double par);
 double fctTransfertDerivee(double par);
 double sumDOW(neurone * parNextLayer);
 

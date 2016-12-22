@@ -38,12 +38,36 @@ neurone * initNeur(int parId,int parNbOutput)
 	return varNeur;
 }
 
-void feedForwardNeur(neurone * parPrevLayer);
-void calcOutputGradient(double parTargetValue);
+double feedForwardNeur(neurone * parPrevLayer, int parSizePrevLayer, int parPosLayer)
+{
+	double varSum = 0.0;
+	int i;
+	for (i = 0; i < parSizePrevLayer; i++)
+	{
+		varSum += (parPrevLayer[i].outputValue * parPrevLayer[i].outputCo[parPosLayer].poids);
+	}
+	return fctTransfert(varSum);
+}
+
+double calcOutputGradient(double parTargetValue, neurone parNeur)
+{
+	double delta = parTargetValue - parNeur.outputValue;
+	return delta * fctTransfertDerivee(parNeur.outputValue);
+}
+
 void calcHiddenGradients(neurone * parNextLayer);
 void updateInputsPoids(neurone * parPrevLayer);
-double fctTransfert(double parSum);
-double fctTransfertDerivee(double par);
+
+double fctTransfert(double par)
+{
+	return tanh(LAMBDA * par);
+}
+
+double fctTransfertDerivee(double par)
+{
+	return 1.0 - pow(fctTransfert(par), 2);
+}
+
 double sumDOW(neurone * parNextLayer);
 
 //RESEAU DE NEURONE
