@@ -10,6 +10,7 @@
 #define ERREUR				0.05
 #define NB_NEUR				10
 #define NB_COUCHE			3
+#define NB_MESURE			5
 
 
 struct connection
@@ -21,10 +22,10 @@ typedef struct connection connection;
 
 struct neurone
 {
-	double		outputValue;
-	connection	outputPoids[NB_NEUR];
-	int			nbOutput;
 	int			id;
+	double		outputValue;
+	connection	outputCo[NB_NEUR];
+	int			nbOutput;
 	double		gradient;
 	double		ETA;
 	double		ALPHA;
@@ -33,7 +34,8 @@ typedef struct neurone neurone;
 
 struct reseau
 {
-	neurone		topologie[NB_COUCHE][NB_NEUR];
+	int			topologie[NB_COUCHE];
+	neurone*	reseauNeur[NB_COUCHE][NB_NEUR];
 	double		erreur;
 	double		moyErreur;
 	int			nbMesure;
@@ -44,7 +46,7 @@ typedef struct reseau reseau;
 double initConnection(); //initialise la connection avec des valeurs aléatoires
 
 //NEURONE
-neurone initNeur(int parId,int parNbOutput); //initialisation d'un neurone
+neurone * initNeur(int parId,int parNbOutput); //initialisation d'un neurone
 void feedForwardNeur(neurone * parPrevLayer);
 void calcOutputGradient(double parTargetValue);
 void calcHiddenGradients(neurone * parNextLayer);
@@ -54,9 +56,9 @@ double fctTransfertDerivee(double par);
 double sumDOW(neurone * parNextLayer);
 
 //RESEAU DE NEURONE
-reseau initReseau(int parNbInput, int parNbOutput); //initialisation d'un reseau
-reseau nouvReseau(int parNbInput, int parNbOutput);
-reseau ouvrirReseau(const char* chemin);
+reseau * initReseau(int parNbInput, int parNbOutput); //initialisation d'un reseau
+reseau * nouvReseau(int parNbInput, int parNbOutput);
+reseau * ouvrirReseau(const char* chemin);
 void feedForwardRes(double * parInputVal);
 void backPropagation(double * parTargetVal);
 void afficherPoidsRes(reseau parRes);

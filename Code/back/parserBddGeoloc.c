@@ -16,7 +16,7 @@
  */
 FILE * openGeoloc(const char * nom)
 {
-	FILE * fd;
+	FILE * fd = NULL;
 	if((fd = fopen(nom,"r")) == NULL)
 	{
 		perror("Erreur d'ouverture de la bdd geoloc\n");
