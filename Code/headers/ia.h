@@ -49,18 +49,18 @@ double initConnection(); //initialise la connection avec des valeurs aléatoires
 neurone * initNeur(int parId,int parNbOutput); //initialisation d'un neurone
 double feedForwardNeur(neurone * parPrevLayer, int parSizePrevLayer, int parPosLayer);
 double calcOutputGradient(double parTargetValue, neurone parNeur);
-void calcHiddenGradients(neurone * parNextLayer);
-void updateInputsPoids(neurone * parPrevLayer);
+double calcHiddenGradients(neurone * parNextLayer, reseau parRes, neurone * parNeur);
+void updateInputsPoids(neurone * parPrevLayer, reseau parRes, int parPosLayerNeur);
 double fctTransfert(double par);
 double fctTransfertDerivee(double par);
-double sumDOW(neurone * parNextLayer);
+double sumDOW(neurone * parNextLayer, reseau parRes, neurone * parNeur);
 
 //RESEAU DE NEURONE
 reseau * initReseau(int parNbInput, int parNbOutput); //initialisation d'un reseau
 reseau * nouvReseau(int parNbInput, int parNbOutput);
 reseau * ouvrirReseau(const char* chemin);
-void feedForwardRes(double * parInputVal);
-void backPropagation(double * parTargetVal);
+void feedForwardRes(reseau * parRes, double * parInputVal, int parNbInput);
+void backPropagation(double * parTargetVal, reseau * parRes);
 void afficherPoidsRes(reseau parRes);
 int saveRes(const char* chemin, reseau parRes);
 

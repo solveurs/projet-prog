@@ -11,6 +11,14 @@ double initConnection()
 	return (double)rand()/(double)RAND_MAX;
 }
 
+
+
+
+
+
+
+
+
 //NEURONE
 neurone * initNeur(int parId,int parNbOutput)
 {
@@ -55,8 +63,23 @@ double calcOutputGradient(double parTargetValue, neurone parNeur)
 	return delta * fctTransfertDerivee(parNeur.outputValue);
 }
 
-void calcHiddenGradients(neurone * parNextLayer);
-void updateInputsPoids(neurone * parPrevLayer);
+double calcHiddenGradients(neurone * parNextLayer, reseau parRes, neurone * parNeur)
+{
+	double varDow = sumDOW(parNextLayer, parRes, parNeur);
+	return varDow * fctTransfertDerivee(parNeur->outputValue);
+}
+
+void updateInputsPoids(neurone * parPrevLayer, reseau parRes, int parPosLayerNeur)
+{
+	int i;
+	for (i = 0; i < parRes.topologie[NB_COUCHE - 1] ; i++)
+	{
+		double ancDeltaPoids = parPrevLayer[i].outputCo[parPosLayerNeur].deltaPoids;
+		double nvDeltaPoids = (parPrevLayer[i].ETA * parPrevLayer[i].outputValue * parPrevLayer[i].gradient) + (parPrevLayer[i].ETA * ancDeltaPoids);
+		parPrevLayer[i].outputCo[parPosLayerNeur].deltaPoids = nvDeltaPoids;
+		parPrevLayer[i].outputCo[parPosLayerNeur].poids += nvDeltaPoids;
+	}
+}
 
 double fctTransfert(double par)
 {
@@ -68,7 +91,24 @@ double fctTransfertDerivee(double par)
 	return 1.0 - pow(fctTransfert(par), 2);
 }
 
-double sumDOW(neurone * parNextLayer);
+double sumDOW(neurone * parNextLayer, reseau parRes, neurone * parNeur)
+{
+	double sum = 0.0;
+	int i;
+	for (i = 0; i < parRes.topologie[NB_COUCHE - 1]; i++)
+	{
+		sum += (parNeur->outputCo[i].poids * parNextLayer[i].gradient);
+	}
+	return sum;
+}
+
+
+
+
+
+
+
+
 
 //RESEAU DE NEURONE
 reseau * initReseau(int parNbInput, int parNbOutput)
@@ -136,9 +176,84 @@ reseau * ouvrirReseau(const char* chemin)
 	return varRes;
 }
 
-void feedForwardRes(double * parInputVal);
-void backPropagation(double * parTargetVal);
-void afficherPoidsRes(reseau parRes);
+void feedForwardRes(reseau * parRes, double * parInputVal, int parNbInput)
+{
+	int i;
+	for (i = 0; i < parNbInput; i++)
+	{
+		parRes->reseauNeur[0][i]->outputValue = parInputVal[i];
+	}
+	int j, k;
+	for (j = 1; j < NB_COUCHE; j++)
+	{
+		for (k = 0; k < parRes->topologie[j]; k++)
+		{
+			parRes->reseauNeur[j][k]->outputValue = feedForwardNeur(*parRes->reseauNeur[j - 1], parRes->topologie[j - 1], k);
+		}
+	}
+}
+
+void backPropagation(double * parTargetVal, reseau * parRes)
+{
+	parRes->erreur = 0.0;
+	int i;
+	for (i = 0; i < parRes->topologie[NB_COUCHE - 1]; i++)
+	{
+		double delta  = (double)(parTargetVal[i] - parRes->reseauNeur[3][i]->outputValue);
+		parRes->erreur += pow(delta, 2);
+	}
+	
+	parRes->erreur /= (double)(parRes->topologie[NB_COUCHE - 1]);
+	parRes->erreur = sqrt(parRes->erreur);
+	
+	parRes->moyErreur = (parRes->moyErreur * parRes->nbMesure + parRes->erreur)/ parRes->nbMesure;
+	
+	//Calcul du gradient de sortie
+	int j;
+	for (j = 0; j < parRes->topologie[NB_COUCHE - 1]; j++)
+	{
+		parRes->reseauNeur[NB_COUCHE - 1][j]->gradient = calcOutputGradient(parTargetVal[NB_COUCHE - 1], *parRes->reseauNeur[NB_COUCHE - 1][j]);
+	}
+	
+	//Calcul du gradient des couches intermédiaires
+	int k;
+	for (k = NB_COUCHE - 2; k > 0 ; k--)
+	{
+		int m;
+		for (m = 0; m < parRes->topologie[k]; m++)
+		{
+			parRes->reseauNeur[k][m]->gradient = calcHiddenGradients(*parRes->reseauNeur[k + 1], *parRes, parRes->reseauNeur[k][m]);
+		}
+	}
+	
+	//On update tout les poids
+	int l;
+	for (l = NB_COUCHE - 1; l > 0; l--)
+	{
+		int n;
+		for (n = 0; n < (NB_COUCHE - 1); n++)
+		{
+			updateInputsPoids(*parRes->reseauNeur[l - 1], *parRes, n);
+		}
+	}
+	
+}
+
+void afficherPoidsRes(reseau parRes)
+{
+	int i,j,k;
+	for (i = 0; i < NB_COUCHE; i++)
+	{
+		for (j = 0; j < parRes.topologie[i]; j++)
+		{
+			printf("[%d] Neurone[%d][%d] : ",parRes.reseauNeur[i][j]->id, i, j);
+			for (k = 0; k < parRes.reseauNeur[i][j]->nbOutput; k++)
+			{
+				printf("=[%lf]=>[%d][%d]",parRes.reseauNeur[i][j]->outputCo[k].poids, i + 1, k);
+			}
+		}
+	}
+}
 
 int saveRes(const char* chemin, reseau parRes)
 {
