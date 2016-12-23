@@ -2,7 +2,7 @@
  * \file      uiTraces.c
  * \brief     Fichier main de la GUI de gestion des traces.
  * \author    Thanh.L
- * \version   0.3a
+ * \version   0.4a
  *
  * Le fichier contient toutes les fonctions liees au PopUp de gestion des traces.
  * A savoir actuellement : uiTraces, importer
@@ -10,10 +10,11 @@
  *       TODO
  * ====================
  * ?Fonction d'envoie de la structure de trace vers la fenetre principale.
+ * Doxygen
  * ====================
  *        MaJ
  * ====================
- * Creation du fichier
+ * Nettoyage de l'ecriture du code, correction de warnings.
  *
 */
 
@@ -37,7 +38,6 @@ int uiTraces(GtkWidget* widget, gpointer user_data)
 {
   // Variable static pour eviter de reconstruire la fenetre
   static int etat = UI_TRACE_FERME;
-
   // Declaration static pour eviter un SegFault
   static tracesUI *fenetreTraces;
 
@@ -53,7 +53,10 @@ int uiTraces(GtkWidget* widget, gpointer user_data)
     /* Si on alloue manuellement, il faudrait qu'on libere avec un signal */
 
     if(fenetreTraces == NULL)
+    {
+      printf("Erreur malloc tracesUI");
       exit(EXIT_FAILURE);
+    }
 
     fenetreTraces->widget = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title(GTK_WINDOW(fenetreTraces->widget), "Gestion des traces");
@@ -62,42 +65,37 @@ int uiTraces(GtkWidget* widget, gpointer user_data)
     gtk_window_set_skip_taskbar_hint(GTK_WINDOW(fenetreTraces->widget), TRUE);
     // Sera toujours au dessus de la fenetre mere. Ici la fenetre principale.
     gtk_window_set_transient_for(GTK_WINDOW(fenetreTraces->widget), GTK_WINDOW(user_data));
-
     gtk_window_set_destroy_with_parent(GTK_WINDOW(fenetreTraces->widget), TRUE);
     gtk_window_set_default_size(GTK_WINDOW(fenetreTraces->widget), UI_TRACE_TAILLEX, UI_TRACE_TAILLEY);
 
-
-
     // ====== Layout : Box
-    fenetreTraces->boxTraces = gtk_box_new(GTK_ORIENTATION_VERTICAL, UI_TRACE_ESPACEMENT);
-    gtk_container_add(GTK_CONTAINER(fenetreTraces->widget), fenetreTraces->boxTraces);
-
+    fenetreTraces->boxPrincipale = gtk_box_new(GTK_ORIENTATION_VERTICAL, UI_TRACE_ESPACEMENT);
     // ------ Widgets : Bouton et Box 'Importer'
-    fenetreTraces->boutonBoxImporter = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
     fenetreTraces->boutonImporter = gtk_button_new_with_label("Importer");
-    gtk_container_add(GTK_CONTAINER(fenetreTraces->boutonBoxImporter), fenetreTraces->boutonImporter);  
-    gtk_box_pack_start(GTK_BOX(fenetreTraces->boxTraces), fenetreTraces->boutonBoxImporter, FALSE, FALSE, UI_TRACE_ESPACEMENT);
-
     // ===--- Layout : Frame
     fenetreTraces->frameTraces = gtk_frame_new("Liste des traces");
-    gtk_box_pack_start(GTK_BOX(fenetreTraces->boxTraces), fenetreTraces->frameTraces, TRUE, TRUE, UI_TRACE_ESPACEMENT);
-
     // --- Widget : Zone de scroll 
     fenetreTraces->zoneScroll = gtk_scrolled_window_new(NULL, NULL);
-    gtk_container_add(GTK_CONTAINER(fenetreTraces->frameTraces), fenetreTraces->zoneScroll);
-
     // --- Widget : Box des items de la zone de scroll
     fenetreTraces->zoneScrollBox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 1);
-    gtk_container_add(GTK_CONTAINER(fenetreTraces->zoneScroll), fenetreTraces->zoneScrollBox);
 
-
-    // ====== Signaux
+    // ===================== Signaux =====================
     // Desactiver/Reactiver pour tester l'importation ou la gestion des items.
     //g_signal_connect(fenetreTraces->boutonImporter, "clicked", G_CALLBACK(importer), fenetreTraces->widget);
     g_signal_connect(fenetreTraces->boutonImporter, "clicked", G_CALLBACK(ajoutItemTraces), fenetreTraces->zoneScrollBox);
     g_signal_connect(fenetreTraces->widget, "delete-event", G_CALLBACK(gtk_widget_hide_on_delete), NULL);
 
-    // ====== Processing
+    // ==================== Packaging ====================
+    // Fenetre principale <- Box principale
+    gtk_container_add(GTK_CONTAINER(fenetreTraces->widget), fenetreTraces->boxPrincipale);
+    // Box principale <- bouton importer + frame traces
+    gtk_box_pack_start(GTK_BOX(fenetreTraces->boxPrincipale), fenetreTraces->boutonImporter, FALSE, FALSE, UI_TRACE_ESPACEMENT);
+    gtk_box_pack_start(GTK_BOX(fenetreTraces->boxPrincipale), fenetreTraces->frameTraces, TRUE, TRUE, UI_TRACE_ESPACEMENT);
+      // Frame traces <- zone de scroll + box
+    gtk_container_add(GTK_CONTAINER(fenetreTraces->frameTraces), fenetreTraces->zoneScroll);
+    gtk_container_add(GTK_CONTAINER(fenetreTraces->zoneScroll), fenetreTraces->zoneScrollBox);
+
+    // ==================== Affichage ====================
     gtk_widget_show_all(fenetreTraces->widget);
   }
   else
@@ -127,44 +125,48 @@ void ajoutItemTraces(GtkWidget* widget, gpointer user_data)
 
   // ============== Initialisation widgets ==============
   // ====== Layout : Box principale
-  item->widgetBox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, UI_TRACE_ESPACEMENT);
+  item->widget = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, UI_TRACE_ESPACEMENT);
   item->details = (tdUI *)malloc(sizeof(tdUI));
-  /* Si on alloue manuellement, il faudrait qu'on libere avec un signal */
 
   if(item->details == NULL)
     exit(EXIT_FAILURE);
 
   // ===--- Layout : BoxG
   item->boxG = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, UI_TRACE_ESPACEMENT);
-  gtk_box_pack_start(GTK_BOX(item->widgetBox), item->boxG, TRUE, TRUE, UI_TRACE_ESPACEMENT);
-
   item->labelNom = gtk_label_new("Ma trace");
-  gtk_box_pack_start(GTK_BOX(item->boxG), item->labelNom, TRUE, TRUE, UI_TRACE_ESPACEMENT);
-
+  
   // ===--- Layout : BoxD
   item->boxD = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, UI_TRACE_ESPACEMENT);
-  gtk_box_pack_start(GTK_BOX(item->widgetBox), item->boxD, FALSE, FALSE, UI_TRACE_ESPACEMENT);
-
+  
   // --- Widgets : Boutons
   item->boutonRoute = gtk_button_new_with_label("Route");
-  gtk_box_pack_start(GTK_BOX(item->boxD), item->boutonRoute, TRUE, TRUE, UI_TRACE_ESPACEMENT);
   item->boutonOption = gtk_button_new_with_label("Option");
-  gtk_box_pack_start(GTK_BOX(item->boxD), item->boutonOption, TRUE, TRUE, UI_TRACE_ESPACEMENT);
   item->boutonVisible = gtk_button_new_with_label("Visible");
-  gtk_box_pack_start(GTK_BOX(item->boxD), item->boutonVisible, TRUE, TRUE, UI_TRACE_ESPACEMENT);
   item->boutonSupprimer = gtk_button_new_with_label("Supprimer");
-  gtk_box_pack_start(GTK_BOX(item->boxD), item->boutonSupprimer, TRUE, TRUE, UI_TRACE_ESPACEMENT);
 
-  // ====== Signaux
+  // ===================== Signaux =====================
   g_signal_connect(item->boutonRoute, "clicked", G_CALLBACK(traceRoute), NULL); //item->ptrTrace);
   g_signal_connect(item->boutonOption, "clicked", G_CALLBACK(optionItemTraces), item);
   g_signal_connect(item->boutonVisible, "clicked", G_CALLBACK(afficheTraces), NULL); //item->ptrTrace);
   g_signal_connect(item->boutonSupprimer, "clicked", G_CALLBACK(confirmeSupprItem), item);
 
+  // ==================== Packaging ====================
+  // Box principale <- Boxes gauche et droite
+  gtk_box_pack_start(GTK_BOX(item->widget), item->boxG, TRUE, TRUE, UI_TRACE_ESPACEMENT);
+  gtk_box_pack_start(GTK_BOX(item->widget), item->boxD, FALSE, FALSE, UI_TRACE_ESPACEMENT);
 
-  // ====== Affichage
-  gtk_widget_show_all(item->widgetBox);
-  gtk_box_pack_start(GTK_BOX(user_data), item->widgetBox, FALSE, FALSE, UI_TRACE_ESPACEMENT);
+    // Box gauche <- Label nom
+  gtk_box_pack_start(GTK_BOX(item->boxG), item->labelNom, TRUE, TRUE, UI_TRACE_ESPACEMENT);
+
+    // Box droite <- Boutons
+  gtk_box_pack_start(GTK_BOX(item->boxD), item->boutonRoute, TRUE, TRUE, UI_TRACE_ESPACEMENT);
+  gtk_box_pack_start(GTK_BOX(item->boxD), item->boutonOption, TRUE, TRUE, UI_TRACE_ESPACEMENT);
+  gtk_box_pack_start(GTK_BOX(item->boxD), item->boutonVisible, TRUE, TRUE, UI_TRACE_ESPACEMENT);
+  gtk_box_pack_start(GTK_BOX(item->boxD), item->boutonSupprimer, TRUE, TRUE, UI_TRACE_ESPACEMENT);
+
+  // ==================== Affichage ====================
+  gtk_widget_show_all(item->widget);
+  gtk_box_pack_start(GTK_BOX(user_data), item->widget, FALSE, FALSE, UI_TRACE_ESPACEMENT);
 }
 
 
@@ -247,34 +249,30 @@ void confirmeSupprItem(GtkWidget* widget, gpointer user_data)
 
   // ===--- Layout : Box principale
   popup->boxPrincipale = gtk_box_new(GTK_ORIENTATION_VERTICAL, UI_TRACE_ESPACEMENT);
-  gtk_container_add(GTK_CONTAINER(popup->widget), popup->boxPrincipale);
-
   // --- Widget : label du texte de confirmation
   popup->labelTxt = gtk_label_new(strcat(txt, gtk_label_get_text(GTK_LABEL(itemASuppr->labelNom))));
-  gtk_box_pack_start(GTK_BOX(popup->boxPrincipale), popup->labelTxt, TRUE, TRUE, UI_TRACE_ESPACEMENT);
-
   // ===--- Layout : Box des boutons 'annuler' et 'confirmer'
   popup->boxBoutons = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, UI_TRACE_ESPACEMENT);
-  gtk_box_pack_start(GTK_BOX(popup->boxPrincipale), popup->boxBoutons, TRUE, TRUE, UI_TRACE_ESPACEMENT);
-
-  // --- Widgets : boutons annuler et confirmer + leur box
-  popup->boxAnnuler = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
+  // --- Widgets : boutons annuler et confirmer
   popup->boutonAnnuler = gtk_button_new_with_label("Annuler");
-  gtk_container_add(GTK_CONTAINER(popup->boxAnnuler), popup->boutonAnnuler);
-
-  popup->boxConfirmer = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
   popup->boutonConfirmer = gtk_button_new_with_label("Confirmer");
-  gtk_container_add(GTK_CONTAINER(popup->boxConfirmer), popup->boutonConfirmer);
-
-  gtk_box_pack_start(GTK_BOX(popup->boxBoutons), popup->boxAnnuler, TRUE, TRUE, UI_TRACE_ESPACEMENT);
-  gtk_box_pack_start(GTK_BOX(popup->boxBoutons), popup->boxConfirmer, TRUE, TRUE, UI_TRACE_ESPACEMENT);  
-
-  // ====== Signaux
+  
+  // ===================== Signaux =====================
   g_signal_connect(popup->boutonAnnuler, "clicked", G_CALLBACK(annulerTD), popup->widget);
   g_signal_connect(popup->boutonConfirmer, "clicked", G_CALLBACK(supprimeItemTraces), user_data);
   g_signal_connect(popup->boutonConfirmer, "clicked", G_CALLBACK(detruireFen), popup);
 
-  // ====== Processing
+  // ==================== Packaging ====================
+  // Fenetre principale <- box principale
+  gtk_container_add(GTK_CONTAINER(popup->widget), popup->boxPrincipale);
+  // Box principale <- Label text + box des boutons
+  gtk_box_pack_start(GTK_BOX(popup->boxPrincipale), popup->labelTxt, TRUE, TRUE, UI_TRACE_ESPACEMENT);
+  gtk_box_pack_start(GTK_BOX(popup->boxPrincipale), popup->boxBoutons, TRUE, TRUE, UI_TRACE_ESPACEMENT);
+    // Box des boutons <- Boutons annuler et confirmer
+  gtk_box_pack_start(GTK_BOX(popup->boxBoutons), popup->boutonAnnuler, TRUE, TRUE, UI_TRACE_ESPACEMENT);
+  gtk_box_pack_start(GTK_BOX(popup->boxBoutons), popup->boutonConfirmer, TRUE, TRUE, UI_TRACE_ESPACEMENT);  
+
+  // ==================== Affichage ====================
   gtk_widget_show_all(popup->widget);
 }
 
@@ -345,8 +343,8 @@ void supprimeItemTraces(GtkWidget* widget, gpointer user_data)
   tracesItem *itemASuppr = (tracesItem *)user_data;
   gtk_widget_destroy(itemASuppr->details->widget);
   free(itemASuppr->details);
-  gtk_widget_hide(itemASuppr->widgetBox);
-  gtk_widget_destroy(itemASuppr->widgetBox);
+  gtk_widget_hide(itemASuppr->widget);
+  gtk_widget_destroy(itemASuppr->widget);
   free((tracesItem *)user_data);
 
   /* Supprimer aussi la liste de traces */
@@ -391,57 +389,55 @@ void optionItemTraces(GtkWidget* widget, gpointer user_data)
     gtk_window_set_keep_above(GTK_WINDOW(popupTD->widget), TRUE);
     gtk_window_set_title(GTK_WINDOW(popupTD->widget), "Option de la trace");
     gtk_window_set_skip_taskbar_hint(GTK_WINDOW(popupTD->widget), TRUE);
-    //gtk_window_set_modal(GTK_WINDOW(popupTD->widget), TRUE);
     gtk_widget_set_can_focus(popupTD->widget, TRUE);
     gtk_window_set_destroy_with_parent(GTK_WINDOW(popupTD->widget), TRUE);
 
-
     // ====== Layout : Box principale
-    popupTD->boxTD = gtk_box_new(GTK_ORIENTATION_VERTICAL, UI_TRACE_ESPACEMENT);
-    gtk_container_add(GTK_CONTAINER(popupTD->widget), popupTD->boxTD);
+    popupTD->boxPrincipale = gtk_box_new(GTK_ORIENTATION_VERTICAL, UI_TRACE_ESPACEMENT);
 
     // ===--- Layout : Frame couleur
     popupTD->frameCouleur = gtk_frame_new("Couleur");
-    gtk_box_pack_start(GTK_BOX(popupTD->boxTD), popupTD->frameCouleur, TRUE, TRUE, UI_TRACE_ESPACEMENT);
 
-    // --- Widget : bouton de modification de couleur
+       // --- Widget : bouton de modification de couleur
     popupTD->boutonModifierCouleur = gtk_color_button_new();
-    gtk_container_add(GTK_CONTAINER(popupTD->frameCouleur), popupTD->boutonModifierCouleur);
 
     // ===--- Layout : Frame du nom
     popupTD->frameNom = gtk_frame_new("Nom");
-    gtk_box_pack_start(GTK_BOX(popupTD->boxTD), popupTD->frameNom, TRUE, TRUE, UI_TRACE_ESPACEMENT);
 
-    // --- Widget : zoneEntry du nom
+       // --- Widget : zoneEntry du nom
     GtkEntryBuffer* monBuffer;
     monBuffer = gtk_entry_buffer_new(gtk_label_get_text(GTK_LABEL(itemTD->labelNom)), -1);
     popupTD->zoneEntry = gtk_entry_new_with_buffer(monBuffer);
-    gtk_container_add(GTK_CONTAINER(popupTD->frameNom), popupTD->zoneEntry);
 
     // ===--- Layout : Box des boutons
     popupTD->boxBoutonsTD = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, UI_TRACE_ESPACEMENT);
-    gtk_box_pack_start(GTK_BOX(popupTD->boxTD), popupTD->boxBoutonsTD, TRUE, TRUE, UI_TRACE_ESPACEMENT);
 
-    // ------ Widgets : boutons appliquer et annuler
-    popupTD->boutonBoxAppliquer = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
-    popupTD->boutonBoxAnnuler = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
-
+    // ------ Widgets : Boutons appliquer et annuler
     popupTD->boutonAppliquer = gtk_button_new_with_label("Appliquer");
     popupTD->boutonAnnuler = gtk_button_new_with_label("Annuler");
 
-    gtk_container_add(GTK_CONTAINER(popupTD->boutonBoxAnnuler), popupTD->boutonAnnuler);
-    gtk_container_add(GTK_CONTAINER(popupTD->boutonBoxAppliquer), popupTD->boutonAppliquer);
-
-    gtk_box_pack_start(GTK_BOX(popupTD->boxBoutonsTD), popupTD->boutonBoxAnnuler, TRUE, TRUE, UI_TRACE_ESPACEMENT);
-    gtk_box_pack_start(GTK_BOX(popupTD->boxBoutonsTD), popupTD->boutonBoxAppliquer, TRUE, TRUE, UI_TRACE_ESPACEMENT);
-    
-
-    // ====== Signaux
+    // ===================== Signaux =====================
     g_signal_connect(popupTD->boutonAppliquer, "clicked", G_CALLBACK(appliquerTD), user_data);
     g_signal_connect(popupTD->boutonAnnuler, "clicked", G_CALLBACK(annulerTD), popupTD->widget);  
     g_signal_connect(popupTD->widget, "delete-event", G_CALLBACK(gtk_widget_hide_on_delete), NULL);  
 
-    // ====== Processing
+    // ==================== Packaging ====================
+    // Fenetre principale <- Box principale
+    gtk_container_add(GTK_CONTAINER(popupTD->widget), popupTD->boxPrincipale);
+    // Box principale <- Frame couleur + Frame nom + Box boutons
+    gtk_box_pack_start(GTK_BOX(popupTD->boxPrincipale), popupTD->frameCouleur, TRUE, TRUE, UI_TRACE_ESPACEMENT);
+    gtk_box_pack_start(GTK_BOX(popupTD->boxPrincipale), popupTD->frameNom, TRUE, TRUE, UI_TRACE_ESPACEMENT);
+    gtk_box_pack_start(GTK_BOX(popupTD->boxPrincipale), popupTD->boxBoutonsTD, TRUE, TRUE, UI_TRACE_ESPACEMENT);
+
+      // Frame couleur <- Bouton modifier
+    gtk_container_add(GTK_CONTAINER(popupTD->frameCouleur), popupTD->boutonModifierCouleur);
+      // Frame nom <- Entry zone
+    gtk_container_add(GTK_CONTAINER(popupTD->frameNom), popupTD->zoneEntry);
+      // Box boutons <- Boutons annuler et appliquer
+    gtk_box_pack_start(GTK_BOX(popupTD->boxBoutonsTD), popupTD->boutonAnnuler, TRUE, TRUE, UI_TRACE_ESPACEMENT);
+    gtk_box_pack_start(GTK_BOX(popupTD->boxBoutonsTD), popupTD->boutonAppliquer, TRUE, TRUE, UI_TRACE_ESPACEMENT);
+  
+    // ==================== Affichage ====================
     gtk_widget_show_all(popupTD->widget);
   }
   else

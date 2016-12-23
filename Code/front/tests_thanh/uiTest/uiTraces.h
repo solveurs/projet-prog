@@ -14,14 +14,12 @@ typedef struct s_TracesDetailsUI
 {
   GtkWidget *widget;
 
-  GtkWidget *boxTD;
+  GtkWidget *boxPrincipale;
   GtkWidget *frameCouleur;
   GtkWidget *boutonModifierCouleur;
   GtkWidget *frameNom;
   GtkWidget *zoneEntry;
   GtkWidget *boxBoutonsTD;
-  GtkWidget *boutonBoxAppliquer;
-  GtkWidget *boutonBoxAnnuler;
   GtkWidget *boutonAppliquer;
   GtkWidget *boutonAnnuler;
 } tdUI; // td = TracesDetails
@@ -29,7 +27,7 @@ typedef struct s_TracesDetailsUI
 typedef struct s_TracesItem
 {
   // Comme c'est un item, le widget principal est une box.
-  GtkWidget *widgetBox;
+  GtkWidget *widget;
   tdUI      *details;
   int       etat;
 
@@ -49,9 +47,8 @@ typedef struct s_TracesUI
 {
   GtkWidget *widget;
 
-  GtkWidget *boxTraces;
+  GtkWidget *boxPrincipale;
   GtkWidget *frameTraces;
-  GtkWidget *boutonBoxImporter;
   GtkWidget *boutonImporter;
   GtkWidget *zoneScroll;
   GtkWidget *zoneScrollBox;
@@ -66,8 +63,6 @@ typedef struct s_confirmationTracesUI
   GtkWidget *boxBoutons;
   GtkWidget *boutonAnnuler;
   GtkWidget *boutonConfirmer;
-  GtkWidget *boxAnnuler;
-  GtkWidget *boxConfirmer;
 }confirmeTUI;
 /* ===== Fonctions ===== */
 
