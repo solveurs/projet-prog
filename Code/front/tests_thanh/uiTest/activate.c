@@ -41,21 +41,25 @@ void activate(GtkApplication *app, gpointer user_data)
 	gtk_box_pack_start(GTK_BOX(boxUI), boxMenu, FALSE, FALSE, 0);
 
 	// Toolbar fenetres flottantes
-	GtkWidget *boxFloat, *b1Box, *b2Box;
-	GtkWidget *bouton1, *bouton2;
+	GtkWidget *boxFloat, *b1Box, *b2Box, *b3Box;
+	GtkWidget *bouton1, *bouton2, *bouton3;
 
 	boxFloat = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
 
 	b1Box = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
 	b2Box = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
+	b3Box = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
 
 	bouton1 = gtk_button_new_with_label("uiTraces");
-	bouton2 = gtk_button_new_with_label("A faire");
+	bouton2 = gtk_button_new_with_label("uiAnimation");
+	bouton3 = gtk_button_new_with_label("uiAnonymite");
 
 	ajoutWidget(b1Box, bouton1);
 	ajoutWidget(b2Box, bouton2);
+	ajoutWidget(b3Box, bouton3);
 	ajoutWidget(boxFloat, b1Box);
 	ajoutWidget(boxFloat, b2Box);
+	ajoutWidget(boxFloat, b3Box);
 
 	gtk_box_pack_start(GTK_BOX(boxFloat), menuBar, FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(boxUI), boxFloat, FALSE, FALSE, 0);
@@ -85,6 +89,8 @@ void activate(GtkApplication *app, gpointer user_data)
 
 	// ====== Signaux
 	g_signal_connect(bouton1, "clicked", G_CALLBACK(uiTraces), fenetre);
+	g_signal_connect(bouton2, "clicked", G_CALLBACK(uiAnimation), fenetre);
+	g_signal_connect(bouton3, "clicked", G_CALLBACK(uiAnonymite), fenetre);
 
 	//Packaging
 	gtk_widget_show_all(fenetre);

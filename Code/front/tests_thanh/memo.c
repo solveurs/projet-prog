@@ -148,3 +148,23 @@ int main (int argc, char **argv)
 
   return status;
 }
+
+/*
+void nomFonction(GtkWidget* widget, gpointer user_data)
+{
+  static int etat = CONSTANTE_ZERO;
+  static type* popup;
+
+  if(!etat)
+  {
+    // ============== Initialisation widgets =============
+    // ===================== Signaux =====================
+    // ==================== Packaging ====================
+    // ==================== Affichage ====================
+  }
+  else
+  {
+    //
+  }
+}
+*/
