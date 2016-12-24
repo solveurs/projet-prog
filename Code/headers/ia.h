@@ -2,6 +2,7 @@
 #include "includes.h"
 #include "structures.h"
 #include "config.h"
+#include "utils.h"
 
 
 #define TAUX_ENTRAINEMENT	0.1
@@ -12,6 +13,19 @@
 #define NB_COUCHE			3
 #define NB_MESURE			5
 
+struct Data
+{
+	time_t	date;
+	point	coord;
+};
+typedef struct Data Data;
+
+struct TrainData
+{
+	int		size;
+	Data *	t;
+};
+typedef struct TrainData TrainData;
 
 struct connection
 {
@@ -41,6 +55,12 @@ struct reseau
 	int			nbMesure;
 };
 typedef struct reseau reseau;
+
+//ENTRAINEMENT DU RESEAU
+TrainData loadTrain(const char* chemin);
+void TrainReseau(reseau * parRes, TrainData parTraindata);
+pt_interet SuggestPtInteret(reseau * parRes, trajet * parTr);
+
 
 //CONNECTION
 double initConnection(); //initialise la connection avec des valeurs aléatoires

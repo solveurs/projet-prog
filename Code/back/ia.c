@@ -5,6 +5,61 @@
  Elle fonctionneras sur le principe de réseau neuronal sur des données déjà entré
 */
 
+//Programme d'entrainement IA
+TrainData loadTrain(const char* chemin)
+{
+	FILE * fd = NULL;
+	if((fd = fopen(chemin, "r")) == NULL)
+	{
+		perror("Erreur à l'ouverture des données d'entrainement");
+	}
+	
+	TrainData varData;
+	varData.t = (Data*)calloc(TAILLE_TAB_DYN, sizeof(Data));
+	varData.size = TAILLE_TAB_DYN;
+	//On lit tout les données du fichier
+	//on en selectionne 25% que l'on renvoie
+	return varData;
+}
+
+void TrainReseau(reseau * parRes, TrainData parTraindata)
+{
+	//Code d'entrainement du reseau
+}
+
+cercle_anonym SuggestCAnonymisation(reseau * parRes, trajet * parTr)
+{
+	cercle_anonym varCAno;
+	varCAno.id = -1; //Assigner une valeur si l'utilisateur le valide
+	//Selection de 10 valeur aleatoire dans la trace
+	int i;
+	int j;
+	trace * it = parTr->premier;
+	double tab[NB_NEUR];
+	for (i = 0; i < NB_NEUR/2; i+=2)
+	{
+		tab[i] = rand()%(parTr->taille) + 1;
+	}
+	for (i = 0; i < NB_NEUR; i+=2)
+	{
+		for (j = 0; j < tab[i]; j++)
+		{
+			it = it->suiv;
+		}
+		tab[i] = it->coord.x;
+		tab[i+1] = it->coord.y;
+	}
+	
+	feedForwardRes(parRes, tab, NB_NEUR);
+	varCAno.c.centre.x = parRes->reseauNeur[NB_COUCHE][0]->outputValue;
+	varCAno.c.centre.y = parRes->reseauNeur[NB_COUCHE][1]->outputValue;
+	varCAno.c.rayon = parRes->reseauNeur[NB_COUCHE][2]->outputValue;
+	
+	return varCAno;
+}
+
+
+
 //CONNECTION
 double initConnection()
 {
