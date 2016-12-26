@@ -5,7 +5,14 @@
  Elle fonctionneras sur le principe de réseau neuronal sur des données déjà entré
 */
 
-//Programme d'entrainement IA
+
+/**
+ chargement de donné d'entrainement de l'IA
+
+ @param chemin vers les données d'entrainement
+
+ @return un tableau de donnée d'entrainement
+ */
 TrainData loadTrain(const char* chemin)
 {
 	FILE * fd = NULL;
@@ -22,11 +29,27 @@ TrainData loadTrain(const char* chemin)
 	return varData;
 }
 
+
+/**
+ Entrainemetn du reseau neuronal
+
+ @param parRes	un pointeur sur le reseau à entrainer
+ @param parTraindata les données d'entrainement
+ */
 void TrainReseau(reseau * parRes, TrainData parTraindata)
 {
 	//Code d'entrainement du reseau
 }
 
+
+/**
+ Fonction de suggestion de cercle d'anonymisation
+
+ @param parRes le reseau neuronal ENTRAINE
+ @param parTr  le trajet sur lequel on doit predire un cercle d'anonymisation
+
+ @return le cercle d'anonymisation suggerer
+ */
 cercle_anonym SuggestCAnonymisation(reseau * parRes, trajet * parTr)
 {
 	cercle_anonym varCAno;
@@ -60,7 +83,12 @@ cercle_anonym SuggestCAnonymisation(reseau * parRes, trajet * parTr)
 
 
 
-//CONNECTION
+/*============CONNECTION============*/
+/**
+ initialisation de la valeur de poids aléatoire d'une connection
+
+ @return une valeur aléatoire entre 0 et 1
+ */
 double initConnection()
 {
 	return (double)rand()/(double)RAND_MAX;
@@ -74,7 +102,16 @@ double initConnection()
 
 
 
-//NEURONE
+/*============NEURONE============*/
+
+/**
+ initialisation d'un neurone
+
+ @param parId       l'id du neurone
+ @param parNbOutput le nombre de sortie qu'il a
+
+ @return un pointeur sur neurone
+ */
 neurone * initNeur(int parId,int parNbOutput)
 {
 	neurone * varNeur = (neurone*)malloc(sizeof(neurone));
@@ -101,6 +138,16 @@ neurone * initNeur(int parId,int parNbOutput)
 	return varNeur;
 }
 
+
+/**
+ calcul de la sortie du neurone avec les couches inférieur
+
+ @param parPrevLayer     un tableau sur neurone qui modélise une couche
+ @param parSizePrevLayer le nombre de neurone dans la couche inferieur
+ @param parPosLayer      la position du neurone dans sa couche
+
+ @return la valeur de sortie du neurone
+ */
 double feedForwardNeur(neurone * parPrevLayer, int parSizePrevLayer, int parPosLayer)
 {
 	double varSum = 0.0;
@@ -112,18 +159,45 @@ double feedForwardNeur(neurone * parPrevLayer, int parSizePrevLayer, int parPosL
 	return fctTransfert(varSum);
 }
 
+
+/**
+ calcul du gradient de sorite d'un neurone
+
+ @param parTargetValue la valeur de sortie attendue
+ @param parNeur        le neurone selectionne
+
+ @return la valeur du gradient de sortie
+ */
 double calcOutputGradient(double parTargetValue, neurone parNeur)
 {
 	double delta = parTargetValue - parNeur.outputValue;
 	return delta * fctTransfertDerivee(parNeur.outputValue);
 }
 
+
+/**
+ calcul du gradient des couches cachées
+
+ @param parNextLayer un pointeur sur la couche supérieur
+ @param parRes       le réseau complet
+ @param parNeur      un pointeur sur le neurone en cours
+
+ @return la valeur du gradient
+ */
 double calcHiddenGradients(neurone * parNextLayer, reseau parRes, neurone * parNeur)
 {
 	double varDow = sumDOW(parNextLayer, parRes, parNeur);
 	return varDow * fctTransfertDerivee(parNeur->outputValue);
 }
 
+
+/**
+ Update de tout les poids des connections du réseau
+
+ @param parPrevLayer    la couche inférieur
+ @param parRes          le reseau
+ @param parPosLayerNeur la position de la couche
+ */
 void updateInputsPoids(neurone * parPrevLayer, reseau parRes, int parPosLayerNeur)
 {
 	int i;
@@ -136,16 +210,42 @@ void updateInputsPoids(neurone * parPrevLayer, reseau parRes, int parPosLayerNeu
 	}
 }
 
+
+/**
+ fonction de transfert du neurone pour introduire de la continuité
+
+ @param par la valeur de sortie intermédiaire
+
+ @return la valeur de sorite du neurone
+ */
 double fctTransfert(double par)
 {
 	return tanh(LAMBDA * par);
 }
 
+
+/**
+ dérivé de la fonction de transfert
+
+ @param par valeur du gradient intermédiaire
+
+ @return le gradient
+ */
 double fctTransfertDerivee(double par)
 {
 	return 1.0 - pow(fctTransfert(par), 2);
 }
 
+
+/**
+ Sum DataOutputWeight, pour calculer les gradients
+
+ @param parNextLayer la couche suivante
+ @param parRes       le reseau
+ @param parNeur      le neurone
+
+ @return le gradient intermédiaire
+ */
 double sumDOW(neurone * parNextLayer, reseau parRes, neurone * parNeur)
 {
 	double sum = 0.0;
@@ -165,7 +265,16 @@ double sumDOW(neurone * parNextLayer, reseau parRes, neurone * parNeur)
 
 
 
-//RESEAU DE NEURONE
+/*============RESEAU NEURONAL============*/
+
+/**
+ initialisation du reseau de neurone
+
+ @param parNbInput  le nombre d'entrée dans le réseau
+ @param parNbOutput le nombre de sortie du réseau
+
+ @return un pointeur sur réseau
+ */
 reseau * initReseau(int parNbInput, int parNbOutput)
 {
 	reseau * varRes = (reseau*)malloc(sizeof(reseau));
