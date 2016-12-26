@@ -1,9 +1,17 @@
+/**
+ @file ia.c
+ 
+ @brief Fichier de suggestion de cercle d'anonymisation avec une IA basée sur un réseau neuronal
+ */
+
 #include "../headers/ia.h"
 
 /*
  L'IA (que Flavien implementeras) permetteras à parir de cercle déjà tracé par l'utilisateur de lui proposer des zones à anonymiser.
  Elle fonctionneras sur le principe de réseau neuronal sur des données déjà entré
 */
+
+
 
 
 /**
@@ -38,7 +46,38 @@ TrainData loadTrain(const char* chemin)
  */
 void TrainReseau(reseau * parRes, TrainData parTraindata)
 {
-	//Code d'entrainement du reseau
+	int i = 0;
+	int j;
+	int k = 0;
+	double varInputData[NB_NEUR];
+	while (i < parTraindata.size && i < 100 && parRes->erreur > ERREUR)
+	{
+		for (j = 0; j < parRes->topologie[0]; j++)
+		{
+			if (j%2 ==0)
+			{
+				varInputData[j] = parTraindata.t[k].coord.x;
+				k++;
+			}
+			else
+			{
+				varInputData[j] = parTraindata.t[k].coord.y;
+				k++;
+			}
+			
+		}
+		feedForwardRes(parRes, varInputData, parRes->topologie[0]);
+		cercle_anonym varTargetVal;
+		//FINIR FONCTION DE LECTURE DES VALEURS TARGET
+		varTargetVal.c.centre.x = 0.0;
+		varTargetVal.c.centre.y = 0.0;
+		varTargetVal.c.rayon = 1.0;
+		
+		backPropagation(varTargetVal, parRes);
+		
+		printf("Moyenne d'erreur %lf", parRes->moyErreur);
+
+	}
 }
 
 
@@ -59,6 +98,7 @@ cercle_anonym SuggestCAnonymisation(reseau * parRes, trajet * parTr)
 	int j;
 	trace * it = parTr->premier;
 	double tab[NB_NEUR];
+	//on choisie des positions aléatoire
 	for (i = 0; i < NB_NEUR/2; i+=2)
 	{
 		tab[i] = rand()%(parTr->taille) + 1;
@@ -290,6 +330,15 @@ reseau * initReseau(int parNbInput, int parNbOutput)
 	return varRes;
 }
 
+
+/**
+ création d'un nouveau réseau aléatoire
+
+ @param parNbInput  le nombre d'entrée dans le réseau
+ @param parNbOutput le nombre de sortie du réseau
+
+ @return un pointeur sur réseau
+ */
 reseau * nouvReseau(int parNbInput, int parNbOutput)
 {
 	reseau * varRes = initReseau(parNbInput, parNbOutput);
@@ -304,6 +353,14 @@ reseau * nouvReseau(int parNbInput, int parNbOutput)
 	return varRes;
 }
 
+
+/**
+ Ouverture d'un réseau depuis le fichier
+
+ @param chemin vers le fichier du reseau sauvegarde
+
+ @return un pointeur sur réseau, NULL si le fichier à une erreur
+ */
 reseau * ouvrirReseau(const char* chemin)
 {
 	reseau * varRes;
@@ -311,6 +368,7 @@ reseau * ouvrirReseau(const char* chemin)
 	if ((fd = fopen(chemin, "r")) == NULL)
 	{
 		perror("Erreur à l'ouverture du fichier de config de l'ia");
+		return NULL;
 	}
 	int vartopo[NB_COUCHE];
 	fscanf(fd, "topo:%d,%d,%d\n",&vartopo[0],&vartopo[1],&vartopo[2]); //A rendre plus evolutif
@@ -334,12 +392,21 @@ reseau * ouvrirReseau(const char* chemin)
 				   &varRes->reseauNeur[i][j]->outputCo[9].poids) < 0)
 			{
 				perror("Erreur à la lecture du fichier de config de l'ia");
+				return NULL;
 			}
 		}
 	}
 	return varRes;
 }
 
+
+/**
+ Calcul de la sortie du réseau
+
+ @param parRes      le pointeur dur réseau
+ @param parInputVal un tableau de valeur d'entrée
+ @param parNbInput  le nombre d'entrée = nb de neurone de la première couche
+ */
 void feedForwardRes(reseau * parRes, double * parInputVal, int parNbInput)
 {
 	int i;
@@ -357,10 +424,21 @@ void feedForwardRes(reseau * parRes, double * parInputVal, int parNbInput)
 	}
 }
 
-void backPropagation(double * parTargetVal, reseau * parRes)
+
+/**
+ la bcak propagation sur les couches inférieurs
+
+ @param parTarget	le cercle d'anonymisation attendu
+ @param parRes       le réseau
+ */
+void backPropagation(cercle_anonym parTarget, reseau * parRes)
 {
 	parRes->erreur = 0.0;
 	int i;
+	double parTargetVal[3];
+	parTargetVal[0] = parTarget.c.centre.x;
+	parTargetVal[1] = parTarget.c.centre.y;
+	parTargetVal[2] = parTarget.c.rayon;
 	for (i = 0; i < parRes->topologie[NB_COUCHE - 1]; i++)
 	{
 		double delta  = (double)(parTargetVal[i] - parRes->reseauNeur[3][i]->outputValue);
@@ -403,6 +481,12 @@ void backPropagation(double * parTargetVal, reseau * parRes)
 	
 }
 
+
+/**
+ Affichage de tout les poids
+
+ @param parRes le réseau
+ */
 void afficherPoidsRes(reseau parRes)
 {
 	int i,j,k;
@@ -419,10 +503,19 @@ void afficherPoidsRes(reseau parRes)
 	}
 }
 
+
+/**
+ Sauvegarde du réseau neuronal
+
+ @param chemin vers le fichier de sauvegarde
+ @param parRes le reseau
+
+ @return >0 si le réseau est bien sauvegardé
+ */
 int saveRes(const char* chemin, reseau parRes)
 {
 	FILE * fd = NULL;
-	if ((fd = fopen(chemin, "r")) == NULL)
+	if ((fd = fopen(chemin, "w")) == NULL)
 	{
 		perror("Erreur à la création du fichier de config de l'ia");
 		return -1;
