@@ -14,6 +14,7 @@
 #define NB_MESURE			5
 
 
+/*============STRUCTURES============*/
 /**
  @brief modele le plus simple d'une trace
  */
@@ -71,6 +72,8 @@ struct reseau
 	int			nbMesure;/**<le nombre de mesure pour le calcul de l'erreur*/
 };
 typedef struct reseau reseau;
+
+/*============PROTOTYPES============*/
 
 /*============ENTRAINEMENT ET RESULTAT============*/
 TrainData loadTrain(const char* chemin);

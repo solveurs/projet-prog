@@ -9,8 +9,33 @@
 /*
  L'IA (que Flavien implementeras) permetteras à parir de cercle déjà tracé par l'utilisateur de lui proposer des zones à anonymiser.
  Elle fonctionneras sur le principe de réseau neuronal sur des données déjà entré
+ 
+ Manque encore plus de donnée pour améliorer l'IA
 */
 
+
+/*
+ COMMENT L'IA FONCTIONNE ?
+ L'IA est basée sur un reseau neuronal simple (cours très bon à lire : http://web.stanford.edu/class/cs221/ )
+ Elle prend en entrée 10(=NB_NEUR) informations, 5 positions (x,y) de trace
+ Elle sort en sortie 3 informations, la positions x, y et le rayon du cercle
+ La structure du réseau est evolutif suivant ce que l'on met dans la topologie du réseau (/!\ NB_NEUR-->max neurone par couche et NB_COUCHE-->max couche avec E/S comprises) : 
+ X1\
+ Y1-11-\
+ X2\    \
+ Y2-12--16==>c.centre.x
+ X3-13--17==>c.centre.y
+ Y3/
+ X4-14--18==>c.rayon
+ Y4/	/
+ X5-15-/
+ Y5/
+ 
+ Le taux d'entrainement est de TAUX_ENTRAINEMENT 0.1
+ Le taux de moment est de MOMENTUM 0.1
+ La fonction de transfert est thanh() de parametre LAMBDA
+ 
+ */
 
 
 
