@@ -2,11 +2,11 @@
 #include "includes.h"
 
 /* ===== Constantes ===== */
-#define UI_ANIM_ESPACEMENT   5
-#define UI_ANIM_OUVERT      1
-#define UI_ANIM_FERME       0
-#define UI_ANIM_TAILLEX      500
-#define UI_ANIM_TAILLEY      150
+#define UI_ANIM_ESPACEMENT      5
+#define UI_ANIM_OUVERT          1
+#define UI_ANIM_FERME           0
+#define UI_ANIM_TAILLE_X      500
+#define UI_ANIM_TAILLE_Y      150
 
 /* ===== Structures ===== */
 

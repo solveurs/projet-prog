@@ -2,11 +2,11 @@
 #include "includes.h"
 
 /* ===== Constantes ===== */
-#define UI_ANON_ESPACEMENT   5
-#define UI_ANON_OUVERT  	 1
-#define UI_ANON_FERME        0
-#define UI_ANON_TAILLEX      250
-#define UI_ANON_TAILLEY      300
+#define UI_ANON_ESPACEMENT      5
+#define UI_ANON_OUVERT  	      1
+#define UI_ANON_FERME           0
+#define UI_ANON_TAILLE_X      250
+#define UI_ANON_TAILLE_Y      300
 
 /* ===== Structures ===== */
 

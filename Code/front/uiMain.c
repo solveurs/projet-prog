@@ -1,7 +1,9 @@
-#include "mainFront.h"
+#include "../headers/front.h"
+
+extern void activate(GtkApplication *app, gpointer user_data);
 
 int main (int argc, char **argv)
-  {
+{
     GtkApplication *app;
     int status;
 
@@ -11,4 +13,4 @@ int main (int argc, char **argv)
     g_object_unref (app);
 
     return status;
-  }
+}

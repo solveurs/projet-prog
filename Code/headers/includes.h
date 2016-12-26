@@ -5,7 +5,5 @@
 #include <math.h>
 #include <errno.h>
 #include <time.h>
-
-/*Problème avec ces inclusions*/
-//#include <cairo.h>
-//#include <gtk/gtk.h>
+#include <gtk/gtk.h>
+#include <cairo.h>

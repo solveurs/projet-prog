@@ -19,7 +19,7 @@
  *
 */
 
-#include "uiAnimation.h"
+#include "../headers/uiAnimation.h"
 
 /**
  * \fn      int uiAnimation(GtkWidget* widget, gpointer user_data)
@@ -57,7 +57,7 @@ int uiAnimation(GtkWidget* widget, gpointer user_data)
     gtk_window_set_skip_taskbar_hint(GTK_WINDOW(fenetreAnim->widget), TRUE);
     gtk_window_set_transient_for(GTK_WINDOW(fenetreAnim->widget), GTK_WINDOW(user_data));
     gtk_window_set_destroy_with_parent(GTK_WINDOW(fenetreAnim->widget), TRUE);
-    gtk_window_set_default_size(GTK_WINDOW(fenetreAnim->widget), UI_ANIM_TAILLEX, UI_ANIM_TAILLEY);
+    gtk_window_set_default_size(GTK_WINDOW(fenetreAnim->widget), UI_ANIM_TAILLE_X, UI_ANIM_TAILLE_Y);
 
     // ===--- Layout : Box principale
 	fenetreAnim->boxPrincipale = gtk_box_new(GTK_ORIENTATION_VERTICAL, UI_ANIM_ESPACEMENT);

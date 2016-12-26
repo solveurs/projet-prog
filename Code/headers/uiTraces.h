@@ -2,12 +2,12 @@
 #include "includes.h"
 
 /* ===== Constantes ===== */
-#define UI_TRACE_INITIALISE   1
-#define UI_TRACE_OUVERT       1
-#define UI_TRACE_FERME        0
-#define UI_TRACE_ESPACEMENT 	5
-#define UI_TRACE_TAILLEX		  300
-#define UI_TRACE_TAILLEY		  150
+#define UI_TRACE_INITIALISE     1
+#define UI_TRACE_OUVERT         1
+#define UI_TRACE_FERME          0
+#define UI_TRACE_ESPACEMENT 	  5
+#define UI_TRACE_TAILLE_X		  300
+#define UI_TRACE_TAILLE_Y		  150
 
 /* ===== Structures ===== */
 typedef struct s_TracesDetailsUI

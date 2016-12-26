@@ -18,7 +18,7 @@
  *
 */
 
-#include "uiAnonymite.h"
+#include "../headers/uiAnonymite.h"
 
 int uiAnonymite(GtkWidget* widget, gpointer user_data)
 {
@@ -45,19 +45,19 @@ int uiAnonymite(GtkWidget* widget, gpointer user_data)
     gtk_window_set_skip_taskbar_hint(GTK_WINDOW(fenetreAnon->widget), TRUE);
     gtk_window_set_transient_for(GTK_WINDOW(fenetreAnon->widget), GTK_WINDOW(user_data));
     gtk_window_set_destroy_with_parent(GTK_WINDOW(fenetreAnon->widget), TRUE);
-    gtk_window_set_default_size(GTK_WINDOW(fenetreAnon->widget), UI_ANON_TAILLEX, UI_ANON_TAILLEY);
+    gtk_window_set_default_size(GTK_WINDOW(fenetreAnon->widget), UI_ANON_TAILLE_X, UI_ANON_TAILLE_Y);
   
     fenetreAnon->boxPrincipale = gtk_box_new(GTK_ORIENTATION_VERTICAL, UI_ANON_ESPACEMENT);
   
-	fenetreAnon->boutonBoxCercle = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
-	fenetreAnon->boutonCercle = gtk_button_new_with_label("Tracer un cercle d'anonymat");
+	  fenetreAnon->boutonBoxCercle = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
+	  fenetreAnon->boutonCercle = gtk_button_new_with_label("Tracer un cercle d'anonymat");
 
-	fenetreAnon->frameCible = gtk_frame_new("Trace ciblée");
+	  fenetreAnon->frameCible = gtk_frame_new("Trace ciblée");
     fenetreAnon->menuDeroulant = gtk_combo_box_text_new();
 
-	fenetreAnon->frameScroll = gtk_frame_new("Liste des zones anonymisées");
-	fenetreAnon->zoneScroll = gtk_scrolled_window_new(NULL, NULL);
-	fenetreAnon->boxItem = gtk_box_new(GTK_ORIENTATION_VERTICAL, UI_ANON_ESPACEMENT);
+	  fenetreAnon->frameScroll = gtk_frame_new("Liste des zones anonymisées");
+	  fenetreAnon->zoneScroll = gtk_scrolled_window_new(NULL, NULL);
+	  fenetreAnon->boxItem = gtk_box_new(GTK_ORIENTATION_VERTICAL, UI_ANON_ESPACEMENT);
   
     // ===================== Signaux =====================
     g_signal_connect(fenetreAnon->widget, "delete-event", G_CALLBACK(gtk_widget_hide_on_delete), NULL);
@@ -168,7 +168,7 @@ void optionItemAnon(GtkWidget* widget, gpointer user_data)
     gtk_window_set_keep_above(GTK_WINDOW(popupAD->widget), TRUE);
     gtk_window_set_skip_taskbar_hint(GTK_WINDOW(popupAD->widget), TRUE);
     gtk_window_set_destroy_with_parent(GTK_WINDOW(popupAD->widget), TRUE);
-    gtk_window_set_default_size(GTK_WINDOW(popupAD->widget), UI_ANON_TAILLEX, UI_ANON_TAILLEY);
+    gtk_window_set_default_size(GTK_WINDOW(popupAD->widget), UI_ANON_TAILLE_X, UI_ANON_TAILLE_Y);
 
     popupAD->boxPrincipale = gtk_box_new(GTK_ORIENTATION_VERTICAL, UI_ANON_ESPACEMENT);
 

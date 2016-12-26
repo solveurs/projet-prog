@@ -18,7 +18,7 @@
  *
 */
 
-#include "uiTraces.h"
+#include "../headers/uiTraces.h"
 
 
 /**
@@ -66,7 +66,7 @@ int uiTraces(GtkWidget* widget, gpointer user_data)
     // Sera toujours au dessus de la fenetre mere. Ici la fenetre principale.
     gtk_window_set_transient_for(GTK_WINDOW(fenetreTraces->widget), GTK_WINDOW(user_data));
     gtk_window_set_destroy_with_parent(GTK_WINDOW(fenetreTraces->widget), TRUE);
-    gtk_window_set_default_size(GTK_WINDOW(fenetreTraces->widget), UI_TRACE_TAILLEX, UI_TRACE_TAILLEY);
+    gtk_window_set_default_size(GTK_WINDOW(fenetreTraces->widget), UI_TRACE_TAILLE_X, UI_TRACE_TAILLE_Y);
 
     // ====== Layout : Box
     fenetreTraces->boxPrincipale = gtk_box_new(GTK_ORIENTATION_VERTICAL, UI_TRACE_ESPACEMENT);
