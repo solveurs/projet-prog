@@ -74,7 +74,7 @@ int uiTraces(GtkWidget* widget, gpointer user_data)
     fenetreTraces->boutonImporter = gtk_button_new_with_label("Importer");
     // ===--- Layout : Frame
     fenetreTraces->frameTraces = gtk_frame_new("Liste des traces");
-    // --- Widget : Zone de scroll 
+    // --- Widget : Zone de scroll
     fenetreTraces->zoneScroll = gtk_scrolled_window_new(NULL, NULL);
     // --- Widget : Box des items de la zone de scroll
     fenetreTraces->zoneScrollBox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 1);
@@ -134,10 +134,10 @@ void ajoutItemTraces(GtkWidget* widget, gpointer user_data)
   // ===--- Layout : BoxG
   item->boxG = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, UI_TRACE_ESPACEMENT);
   item->labelNom = gtk_label_new("Ma trace");
-  
+
   // ===--- Layout : BoxD
   item->boxD = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, UI_TRACE_ESPACEMENT);
-  
+
   // --- Widgets : Boutons
   item->boutonRoute = gtk_button_new_with_label("Route");
   item->boutonOption = gtk_button_new_with_label("Option");
@@ -235,7 +235,7 @@ void confirmeSupprItem(GtkWidget* widget, gpointer user_data)
   }
 
   tracesItem* itemASuppr = (tracesItem *)user_data;
-  char txt[] = "Si vous supprimer cet ensemble de traces, vous ne pourrez plus l'utiliser.\n\nConfirmer pour supprimer ";
+  char txt[] = "Si vous supprimez cet ensemble de traces, vous ne pourrez plus l'utiliser.\n\nConfirmer pour supprimer ";
 
   // ============== Initialisation widgets ==============
   // ====== Fenetre principale
@@ -256,7 +256,7 @@ void confirmeSupprItem(GtkWidget* widget, gpointer user_data)
   // --- Widgets : boutons annuler et confirmer
   popup->boutonAnnuler = gtk_button_new_with_label("Annuler");
   popup->boutonConfirmer = gtk_button_new_with_label("Confirmer");
-  
+
   // ===================== Signaux =====================
   g_signal_connect(popup->boutonAnnuler, "clicked", G_CALLBACK(annulerTD), popup->widget);
   g_signal_connect(popup->boutonConfirmer, "clicked", G_CALLBACK(supprimeItemTraces), user_data);
@@ -270,7 +270,7 @@ void confirmeSupprItem(GtkWidget* widget, gpointer user_data)
   gtk_box_pack_start(GTK_BOX(popup->boxPrincipale), popup->boxBoutons, TRUE, TRUE, UI_TRACE_ESPACEMENT);
     // Box des boutons <- Boutons annuler et confirmer
   gtk_box_pack_start(GTK_BOX(popup->boxBoutons), popup->boutonAnnuler, TRUE, TRUE, UI_TRACE_ESPACEMENT);
-  gtk_box_pack_start(GTK_BOX(popup->boxBoutons), popup->boutonConfirmer, TRUE, TRUE, UI_TRACE_ESPACEMENT);  
+  gtk_box_pack_start(GTK_BOX(popup->boxBoutons), popup->boutonConfirmer, TRUE, TRUE, UI_TRACE_ESPACEMENT);
 
   // ==================== Affichage ====================
   gtk_widget_show_all(popup->widget);
@@ -312,7 +312,7 @@ char* importer(GtkWidget* widget, gpointer user_data)
   GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_OPEN;
   gint res;
 
-  dialog = gtk_file_chooser_dialog_new ("Open File", user_data, action, 
+  dialog = gtk_file_chooser_dialog_new ("Open File", user_data, action,
                                         ("Cancel"), GTK_RESPONSE_CANCEL,
                                         ("Open"), GTK_RESPONSE_ACCEPT, NULL);
 
@@ -418,8 +418,8 @@ void optionItemTraces(GtkWidget* widget, gpointer user_data)
 
     // ===================== Signaux =====================
     g_signal_connect(popupTD->boutonAppliquer, "clicked", G_CALLBACK(appliquerTD), user_data);
-    g_signal_connect(popupTD->boutonAnnuler, "clicked", G_CALLBACK(annulerTD), popupTD->widget);  
-    g_signal_connect(popupTD->widget, "delete-event", G_CALLBACK(gtk_widget_hide_on_delete), NULL);  
+    g_signal_connect(popupTD->boutonAnnuler, "clicked", G_CALLBACK(annulerTD), popupTD->widget);
+    g_signal_connect(popupTD->widget, "delete-event", G_CALLBACK(gtk_widget_hide_on_delete), NULL);
 
     // ==================== Packaging ====================
     // Fenetre principale <- Box principale
@@ -436,14 +436,13 @@ void optionItemTraces(GtkWidget* widget, gpointer user_data)
       // Box boutons <- Boutons annuler et appliquer
     gtk_box_pack_start(GTK_BOX(popupTD->boxBoutonsTD), popupTD->boutonAnnuler, TRUE, TRUE, UI_TRACE_ESPACEMENT);
     gtk_box_pack_start(GTK_BOX(popupTD->boxBoutonsTD), popupTD->boutonAppliquer, TRUE, TRUE, UI_TRACE_ESPACEMENT);
-  
+
     // ==================== Affichage ====================
     gtk_widget_show_all(popupTD->widget);
   }
   else
   {
-    gtk_entry_set_text(GTK_ENTRY(itemTD->details->zoneEntry), gtk_label_get_text(GTK_LABEL(itemTD->labelNom)));    
+    gtk_entry_set_text(GTK_ENTRY(itemTD->details->zoneEntry), gtk_label_get_text(GTK_LABEL(itemTD->labelNom)));
     gtk_window_present(GTK_WINDOW(itemTD->details->widget));
   }
 }
-

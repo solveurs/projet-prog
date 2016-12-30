@@ -148,7 +148,7 @@ struct carte
 	rectangle	zone_pixel; //point est un double,double et pixel int,int
 	rectangle	zone_latlong;
 	double		ratio;
-	
+
 };
 typedef struct carte carte;
 
@@ -162,4 +162,3 @@ struct utilisateur
 	char      chemin_dossier[128];
 };
 typedef struct utilisateur utilisateur;
-

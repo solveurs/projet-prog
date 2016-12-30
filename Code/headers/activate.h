@@ -24,7 +24,7 @@ typedef struct s_uiPrincipale
   GtkWidget 	*frameEntete;
   GtkWidget		*boxEntete;
 
-  GtkWidget 	*boxUI; 
+  GtkWidget 	*boxUI;
   GtkWidget		*boutonBoxTraces;
   GtkWidget		*boutonBoxAnim;
   GtkWidget		*boutonBoxAnon;
@@ -39,6 +39,7 @@ typedef struct s_uiPrincipale
   GtkWidget		*selectCarte;
 
   GtkWidget 	*scrollCarte;
+  GdkPixbuf   *bufferCarte;
   GtkWidget 	*imgCarte;
 }uiMain;
 
