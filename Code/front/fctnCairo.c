@@ -1,3 +1,22 @@
+/**
+ * \file      fctnCairo.c
+ * \brief     Fichier main de la GUI de gestion des traces.
+ * \author    Thanh.L
+ *
+ * Le fichier contient toutes les fonctions utilisees pour le dessin des traces.
+ * ====================
+ *       TODO
+ * ====================
+ * + Gerer la liberation de la memoire
+ * + Adapter la fonction d'anonymisation a la structure globale
+ * + Adapter la fonction d'aggregation avec les returns des fonctions du back.
+ * ====================
+ *        MaJ
+ * ====================
+ * Creation du fichier.
+ *
+*/
+
 #include "../headers/fctnCairo.h"
 
 void faire_tracesCher(GtkWidget *widget, cairo_t *cr, gpointer user_data)

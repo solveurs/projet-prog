@@ -1,10 +1,11 @@
 /**
- * \file    En-tête
+ * \file      activate.c
  * \brief 
- * \author    Thanh.L
- * \version
+ * \author    Thanh.L, Guillaume.F
  *
- * \details Ma description detaillee
+ * Fichier regroupant les fonctions relatives a la GUI de la fenetre principale.
+ * On y retrouve la fonction de creation de la fenetre principale et les fonctions de gestion de la carte.
+ * Les fonctions appelees depuis les UI flottantes ayant un impact sur la fenetre principale sont definies ici.
  *
 */
 

@@ -1,20 +1,20 @@
 /**
  * \file      uiTraces.c
  * \brief     Fichier main de la GUI de gestion des traces.
- * \author    Thanh.L
+ * \author    Thanh.L, Guillaume.F
  * \version   0.4a
  *
  * Le fichier contient toutes les fonctions liees au PopUp de gestion des traces.
- * A savoir actuellement : uiTraces, importer
  * ====================
  *       TODO
  * ====================
- * ?Fonction d'envoie de la structure de trace vers la fenetre principale.
- * Doxygen
+ * + Gerer la liberation de la memoire
+ * + Prendre en compte les icones de Data/
+ * + Finaliser les fonctions et les signaux des boutons des interfaces "Details"
  * ====================
  *        MaJ
  * ====================
- * Nettoyage de l'ecriture du code, correction de warnings.
+ * Prise en compte de l'importation des traces.
  *
 */
 
