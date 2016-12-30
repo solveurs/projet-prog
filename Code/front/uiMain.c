@@ -38,6 +38,7 @@ void initGlobFront(void)
 
 void libereGlob(void)
 {
+	/* Quelques erreurs, je dois encore reverifier les mallocs
 	int i;
 	for(i=0; i<NOMBRE_MAX_TRAJETS; i++)
 	{
@@ -46,4 +47,5 @@ void libereGlob(void)
 		free(globFront.zoneDessinBourges[i]);
 		free(globFront.zoneDessinInsa[i]);
 	}
+	*/
 }

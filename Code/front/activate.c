@@ -9,6 +9,7 @@
 */
 
 #include "../headers/activate.h"
+#include "../headers/structures.h"
 
 extern int uiTraces(GtkWidget* widget, gpointer user_data);
 extern int uiAnimation(GtkWidget* widget, gpointer user_data);
@@ -34,7 +35,7 @@ void activate(GtkApplication *app, gpointer user_data)
   gtk_window_set_title (GTK_WINDOW(ui->widget), "Geoloc v0.1a");
   gtk_window_set_default_size (GTK_WINDOW(ui->widget), UI_MAIN_TAILLE_X, UI_MAIN_TAILLE_Y);
   gtk_window_maximize(GTK_WINDOW(ui->widget));
-  
+
   // ===--- Layout : Box principale
   ui->boxPrincipale = gtk_box_new(GTK_ORIENTATION_VERTICAL, UI_MAIN_ESPACEMENT);
 
@@ -57,23 +58,23 @@ void activate(GtkApplication *app, gpointer user_data)
   		// On connecte les sous-menus avec les choix
   gtk_menu_shell_append(GTK_MENU_SHELL(ui->ssMenu1), ui->ssMenuItem3);
   gtk_menu_shell_append(GTK_MENU_SHELL(ui->ssMenu2), ui->ssMenuItem4);
-  
+
   		// On ajoute les items a la barre de menu
   gtk_menu_shell_append(GTK_MENU_SHELL(ui->menuBarre), ui->ssMenuItem1);
   gtk_menu_shell_append(GTK_MENU_SHELL(ui->menuBarre), ui->ssMenuItem2);
-   
+
      // ===--- Layout : Frame de l'en-tete + Box de l'en-tete (boutons + choix carte)
   ui->frameEntete = gtk_frame_new("");
   ui->boxEntete = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, UI_MAIN_ESPACEMENT);
-     // ===--- Layout : Box des boutons d'UI  
+     // ===--- Layout : Box des boutons d'UI
   ui->boxUI = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, UI_MAIN_ESPACEMENT);
-  	    // --- Widgets : Boutons des UI  
+  	    // --- Widgets : Boutons des UI
   ui->boutonBoxTraces = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
   ui->boutonBoxAnim = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
   ui->boutonBoxAnon = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
-  ui->boutonTraces = gtk_button_new_with_label("uiTraces");
-  ui->boutonAnimation = gtk_button_new_with_label("uiAnimation");
-  ui->boutonAnonymat = gtk_button_new_with_label("uiAnonymite");
+  ui->boutonTraces = gtk_button_new_with_label("Traces");
+  ui->boutonAnimation = gtk_button_new_with_label("Animation");
+  ui->boutonAnonymat = gtk_button_new_with_label("Anonymisation");
 
      // ===--- Layout : Frame du choix de la carte
   ui->frameCarte = gtk_frame_new("Carte");
@@ -86,6 +87,7 @@ void activate(GtkApplication *app, gpointer user_data)
   gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(ui->selectCarte), "0", "Cher");
   gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(ui->selectCarte), "1", "Bourges");
   gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(ui->selectCarte), "2", "Insa Bourges");
+
 
     // ===--- Layout : Zone de la carte
   ui->scrollCarteCher = gtk_scrolled_window_new(NULL, NULL);
@@ -100,14 +102,22 @@ void activate(GtkApplication *app, gpointer user_data)
   ui->imgCarteBourges = gtk_image_new_from_file("../../Data/cartes/carte_Bourges.png");
   ui->imgCarteInsa = gtk_image_new_from_file("../../Data/cartes/carte_Insa.png");
 
-  
+  /* J'ai modifié l'architecture du code du a quelques problemes avec Cairo
+   * Je mets ton travail en commentaire et j'etudierai les fonctions proposees
+    // ===--- Layout : zone de la carte
+  ui->scrollCarte = gtk_scrolled_window_new(NULL, NULL);
+  ui->bufferCarte = gdk_pixbuf_new_from_file_at_scale("../../Data/cartes/carte_Cher.png",1920-20,-1, TRUE, NULL);  //Permet de calibrer la taille la carte en passant un buffer
+  // A relier aux cartes
+  //                gdk_pixbuf_new_from_file_at_scale(cheminCarte, largeur-tailleBarreScroll, HauteurPasEnContrainte, GarderProportionnalités, MessageError)
+
+  ui->imgCarte    = gtk_image_new_from_pixbuf (ui->bufferCarte);
+  */
   // ===================== Signaux =====================
   g_signal_connect(ui->boutonTraces, "clicked", G_CALLBACK(uiTraces), ui->widget);
   g_signal_connect(ui->boutonAnimation, "clicked", G_CALLBACK(uiAnimation), ui->widget);
   g_signal_connect(ui->boutonAnonymat, "clicked", G_CALLBACK(uiAnonymite), ui->widget);
-
   g_signal_connect(ui->selectCarte, "changed", G_CALLBACK(changeCarte), ui);
-  
+
   // ==================== Packaging ====================:
   // Fenetre principale <- Box principale
   gtk_container_add(GTK_CONTAINER(ui->widget), ui->boxPrincipale);
@@ -118,7 +128,7 @@ void activate(GtkApplication *app, gpointer user_data)
   gtk_box_pack_start(GTK_BOX(ui->boxPrincipale), ui->scrollCarteBourges, TRUE, TRUE, UI_MAIN_ESPACEMENT);
   gtk_box_pack_start(GTK_BOX(ui->boxPrincipale), ui->scrollCarteInsa, TRUE, TRUE, UI_MAIN_ESPACEMENT);
 
-  	 // Box menu <- Barre de menu  
+  	 // Box menu <- Barre de menu
   gtk_box_pack_start(GTK_BOX(ui->boxMenu), ui->menuBarre, FALSE, FALSE, UI_MAIN_ESPACEMENT);
 
   	 // Frame entete <- Box entete
