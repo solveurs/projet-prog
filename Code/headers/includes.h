@@ -6,4 +6,5 @@
 #include <errno.h>
 #include <time.h>
 #include <gtk/gtk.h>
+#include <gdk/gdk.h>
 #include <cairo.h>
