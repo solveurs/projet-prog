@@ -1,5 +1,8 @@
 #pragma once
 #include "includes.h"
+#include "uiTraces.h"
+#include "globalFront.h"
+#include "fctnCairo.h"
 
 /* ===== Constantes ===== */
 #define UI_MAIN_ESPACEMENT 	  	5
@@ -34,13 +37,20 @@ typedef struct s_uiPrincipale
 
   GtkWidget		*boxCarte;
   GtkWidget		*frameCarte;
-  GtkWidget     *frameEchelle;
+  GtkWidget   *frameEchelle;
   GtkWidget		*labelEchelle;
   GtkWidget		*selectCarte;
 
-  GtkWidget 	*scrollCarte;
-  GtkWidget 	*imgCarte;
+  GtkWidget 	*scrollCarteCher;
+  GtkWidget   *scrollCarteBourges;
+  GtkWidget   *scrollCarteInsa;
+  GtkWidget 	*imgCarteCher;
+  GtkWidget   *imgCarteBourges;
+  GtkWidget   *imgCarteInsa;
 }uiMain;
 
 /* ===== Fonctions ===== */
 void activate(GtkApplication *app, gpointer user_data);
+void ajoutOverlays(tracesItem* ptrItem);
+void changeCarte(GtkWidget *widget, gpointer user_data);
+void bougeCarte(GtkWidget *widget, gpointer user_data);

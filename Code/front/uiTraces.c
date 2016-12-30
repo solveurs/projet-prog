@@ -19,7 +19,9 @@
 */
 
 #include "../headers/uiTraces.h"
-
+#include "../headers/fonctionFront.h"
+#include "../headers/activate.h"
+#include "../headers/globalFront.h"
 
 /**
  * \fn      int uiTraces(GtkWidget* widget, gpointer user_data)
@@ -80,9 +82,7 @@ int uiTraces(GtkWidget* widget, gpointer user_data)
     fenetreTraces->zoneScrollBox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 1);
 
     // ===================== Signaux =====================
-    // Desactiver/Reactiver pour tester l'importation ou la gestion des items.
-    //g_signal_connect(fenetreTraces->boutonImporter, "clicked", G_CALLBACK(importer), fenetreTraces->widget);
-    g_signal_connect(fenetreTraces->boutonImporter, "clicked", G_CALLBACK(ajoutItemTraces), fenetreTraces->zoneScrollBox);
+    g_signal_connect(fenetreTraces->boutonImporter, "clicked", G_CALLBACK(importer), fenetreTraces);
     g_signal_connect(fenetreTraces->widget, "delete-event", G_CALLBACK(gtk_widget_hide_on_delete), NULL);
 
     // ==================== Packaging ====================
@@ -115,25 +115,47 @@ int uiTraces(GtkWidget* widget, gpointer user_data)
  *
  * \return  None.
 */
-void ajoutItemTraces(GtkWidget* widget, gpointer user_data)
+void ajoutItemTraces(GtkWidget* boxScroll, const char* nomTrajet, trajet* ptrTrajet)
 {
+  static int id;
   tracesItem *item = (tracesItem *)malloc(sizeof(tracesItem));
 
   if(item == NULL)
     exit(EXIT_FAILURE);
   item->etat = 0;
+  item->id = id;
 
   // ============== Initialisation widgets ==============
   // ====== Layout : Box principale
   item->widget = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, UI_TRACE_ESPACEMENT);
   item->details = (tdUI *)malloc(sizeof(tdUI));
-
   if(item->details == NULL)
+  {
+    printf("Erreur malloc tdUI");
     exit(EXIT_FAILURE);
+  }
+
+  item->ptrTrajet = (trajet *)malloc(sizeof(trajet));
+  if(item->ptrTrajet == NULL)
+  {
+    printf("Erreur malloc ptrTrajet");
+    exit(EXIT_FAILURE);
+  }
+  item->ptrTrajet = ptrTrajet;
+
+  /* D'autres priorites
+  item->ptrCouleur = (couleur *)malloc(sizeof(couleur));
+  if(item->ptrCouleur == NULL)
+  {
+    printf("Erreur malloc ptrCouleur");
+    exit(EXIT_FAILURE);
+  }
+  initCouleur(item->ptrCouleur);
+  */
 
   // ===--- Layout : BoxG
   item->boxG = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, UI_TRACE_ESPACEMENT);
-  item->labelNom = gtk_label_new("Ma trace");
+  item->labelNom = gtk_label_new(nomTrajet);
   
   // ===--- Layout : BoxD
   item->boxD = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, UI_TRACE_ESPACEMENT);
@@ -164,9 +186,11 @@ void ajoutItemTraces(GtkWidget* widget, gpointer user_data)
   gtk_box_pack_start(GTK_BOX(item->boxD), item->boutonVisible, TRUE, TRUE, UI_TRACE_ESPACEMENT);
   gtk_box_pack_start(GTK_BOX(item->boxD), item->boutonSupprimer, TRUE, TRUE, UI_TRACE_ESPACEMENT);
 
+  ajoutOverlays(item);
+
   // ==================== Affichage ====================
   gtk_widget_show_all(item->widget);
-  gtk_box_pack_start(GTK_BOX(user_data), item->widget, FALSE, FALSE, UI_TRACE_ESPACEMENT);
+  gtk_box_pack_start(GTK_BOX(boxScroll), item->widget, FALSE, FALSE, UI_TRACE_ESPACEMENT);
 }
 
 
@@ -293,26 +317,28 @@ void detruireFen(GtkWidget* widget, gpointer user_data)
 }
 
 /**
- * \fn      char* importer(GtkWidget* widget, gpointer user_data)
+ * \fn      void importer(GtkWidget* widget, gpointer user_data)
  * \brief   Affiche une GUI pour choisir le fichier log à importer.
  *
  * \details Credits : gtk+ documentation.
  *          On donne a l'utilisateur une GUI lui permettant de naviguer dans
  *          ses differents dossiers et ici de selectionner le fichier log.
  *          Aucun test n'est effectuer pour verifier la validite du fichier.
+ *          Une fois le fichier choisi, on y extrait les traces présentes et on les affiche.
  *
  * \param   widget    Widget d'où provient le signal.
  * \param   user_data Variable passée par le signal.
  *
  * \return  Une chaine de caractere contenant le chemin absolu du fichier.
 */
-char* importer(GtkWidget* widget, gpointer user_data)
+void importer(GtkWidget* widget, gpointer user_data)
 {
+  tracesUI* fenetre = (tracesUI *)user_data;
   GtkWidget *dialog;
   GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_OPEN;
   gint res;
 
-  dialog = gtk_file_chooser_dialog_new ("Open File", user_data, action, 
+  dialog = gtk_file_chooser_dialog_new ("Open File", GTK_WINDOW(fenetre->widget), action, 
                                         ("Cancel"), GTK_RESPONSE_CANCEL,
                                         ("Open"), GTK_RESPONSE_ACCEPT, NULL);
 
@@ -320,12 +346,21 @@ char* importer(GtkWidget* widget, gpointer user_data)
   if (res == GTK_RESPONSE_ACCEPT)
     {
       char *filename;
+
       GtkFileChooser *chooser = GTK_FILE_CHOOSER(dialog);
       filename = gtk_file_chooser_get_filename(chooser);
-      printf("\nChemin absolu du fichier : \n%s", filename);
-      g_free (filename);
-    }
 
+      /* Creation du trajet */
+      //trajet* tmpTrajet = IimportTrajet(filename);
+
+      /* Sauvegarde dans le tableau global */
+      //globFront.trajet[globFront.idTrajet] = tmpTrajet;
+
+      /* Ajout du trajet en tant qu'item graphique */   
+      //ajoutItemTraces(fenetre->zoneScrollBox, (char *)g_path_get_basename(filename), tmpTrajet);
+      globFront.idTrajet++;
+      g_free(filename);
+    }
   gtk_widget_destroy (dialog);
 }
 
@@ -341,7 +376,6 @@ char* importer(GtkWidget* widget, gpointer user_data)
 void supprimeItemTraces(GtkWidget* widget, gpointer user_data)
 {
   tracesItem *itemASuppr = (tracesItem *)user_data;
-  gtk_widget_destroy(itemASuppr->details->widget);
   free(itemASuppr->details);
   gtk_widget_hide(itemASuppr->widget);
   gtk_widget_destroy(itemASuppr->widget);

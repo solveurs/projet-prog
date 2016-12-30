@@ -1,8 +1,22 @@
+/**
+ * \file    En-tête
+ * \brief 
+ * \author    Thanh.L
+ * \version
+ *
+ * \details Ma description detaillee
+ *
+*/
+
 #include "../headers/activate.h"
 
 extern int uiTraces(GtkWidget* widget, gpointer user_data);
 extern int uiAnimation(GtkWidget* widget, gpointer user_data);
 extern int uiAnonymite(GtkWidget* widget, gpointer user_data);
+extern void faire_tracesCher(GtkWidget *widget, cairo_t *cr, gpointer user_data);
+extern void faire_tracesBourges(GtkWidget *widget, cairo_t *cr, gpointer user_data);
+extern void faire_tracesInsa(GtkWidget *widget, cairo_t *cr, gpointer user_data);
+
 
 void activate(GtkApplication *app, gpointer user_data)
 {
@@ -19,6 +33,7 @@ void activate(GtkApplication *app, gpointer user_data)
   ui->widget = gtk_application_window_new(app);
   gtk_window_set_title (GTK_WINDOW(ui->widget), "Geoloc v0.1a");
   gtk_window_set_default_size (GTK_WINDOW(ui->widget), UI_MAIN_TAILLE_X, UI_MAIN_TAILLE_Y);
+  gtk_window_maximize(GTK_WINDOW(ui->widget));
   
   // ===--- Layout : Box principale
   ui->boxPrincipale = gtk_box_new(GTK_ORIENTATION_VERTICAL, UI_MAIN_ESPACEMENT);
@@ -64,7 +79,7 @@ void activate(GtkApplication *app, gpointer user_data)
   ui->frameCarte = gtk_frame_new("Carte");
   		 //--- Widgets : Elements du choix de la carte
   ui->boxCarte = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, UI_MAIN_ESPACEMENT);
-  ui->frameEchelle = gtk_frame_new(" ");
+  ui->frameEchelle = gtk_frame_new("");
   ui->labelEchelle = gtk_label_new("xEchelle");
 
   ui->selectCarte = gtk_combo_box_text_new();
@@ -72,28 +87,36 @@ void activate(GtkApplication *app, gpointer user_data)
   gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(ui->selectCarte), "1", "Bourges");
   gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(ui->selectCarte), "2", "Insa Bourges");
 
-    // ===--- Layout : zone de la carte
-  ui->scrollCarte = gtk_scrolled_window_new(NULL, NULL);
-  ui->imgCarte = gtk_image_new_from_file("../france.png");
+    // ===--- Layout : Zone de la carte
+  ui->scrollCarteCher = gtk_scrolled_window_new(NULL, NULL);
+  ui->scrollCarteBourges = gtk_scrolled_window_new(NULL, NULL);
+  ui->scrollCarteInsa = gtk_scrolled_window_new(NULL, NULL);
+
+  globFront.overlayCarteCher = gtk_overlay_new();
+  globFront.overlayCarteBourges = gtk_overlay_new();
+  globFront.overlayCarteInsa = gtk_overlay_new();
+
+  ui->imgCarteCher = gtk_image_new_from_file("../../Data/cartes/carte_Cher.png");
+  ui->imgCarteBourges = gtk_image_new_from_file("../../Data/cartes/carte_Bourges.png");
+  ui->imgCarteInsa = gtk_image_new_from_file("../../Data/cartes/carte_Insa.png");
+
   
   // ===================== Signaux =====================
   g_signal_connect(ui->boutonTraces, "clicked", G_CALLBACK(uiTraces), ui->widget);
   g_signal_connect(ui->boutonAnimation, "clicked", G_CALLBACK(uiAnimation), ui->widget);
   g_signal_connect(ui->boutonAnonymat, "clicked", G_CALLBACK(uiAnonymite), ui->widget);
 
-  /* Signaux pour les cartes
-  g_signal_connect(ui->boutonAnonymat, "clicked", G_CALLBACK(), ui->widget);
-  g_signal_connect(ui->boutonAnonymat, "clicked", G_CALLBACK(), ui->widget);
-  g_signal_connect(ui->boutonAnonymat, "clicked", G_CALLBACK(), ui->widget);
-  */
+  g_signal_connect(ui->selectCarte, "changed", G_CALLBACK(changeCarte), ui);
   
   // ==================== Packaging ====================:
   // Fenetre principale <- Box principale
   gtk_container_add(GTK_CONTAINER(ui->widget), ui->boxPrincipale);
-  // Box principale <- Box menu + Frame en-tete (UI + choix carte) + scroll image carte
+  // Box principale <- Box menu + Frame en-tete (UI + choix carte) + scrolls image carte
   gtk_box_pack_start(GTK_BOX(ui->boxPrincipale), ui->boxMenu, FALSE, FALSE, UI_MAIN_ESPACEMENT);
   gtk_box_pack_start(GTK_BOX(ui->boxPrincipale), ui->frameEntete, FALSE, FALSE, UI_MAIN_ESPACEMENT);
-  gtk_box_pack_start(GTK_BOX(ui->boxPrincipale), ui->scrollCarte, TRUE, TRUE, UI_MAIN_ESPACEMENT);
+  gtk_box_pack_start(GTK_BOX(ui->boxPrincipale), ui->scrollCarteCher, TRUE, TRUE, UI_MAIN_ESPACEMENT);
+  gtk_box_pack_start(GTK_BOX(ui->boxPrincipale), ui->scrollCarteBourges, TRUE, TRUE, UI_MAIN_ESPACEMENT);
+  gtk_box_pack_start(GTK_BOX(ui->boxPrincipale), ui->scrollCarteInsa, TRUE, TRUE, UI_MAIN_ESPACEMENT);
 
   	 // Box menu <- Barre de menu  
   gtk_box_pack_start(GTK_BOX(ui->boxMenu), ui->menuBarre, FALSE, FALSE, UI_MAIN_ESPACEMENT);
@@ -118,10 +141,84 @@ void activate(GtkApplication *app, gpointer user_data)
   gtk_container_add(GTK_CONTAINER(ui->frameEchelle), ui->labelEchelle);
   gtk_box_pack_start(GTK_BOX(ui->boxCarte), ui->selectCarte, TRUE, TRUE, UI_MAIN_ESPACEMENT);
 
-  	 // Scroll carte <- image de la carte
-  gtk_container_add(GTK_CONTAINER(ui->scrollCarte), ui->imgCarte);
+     // Scrolls image <- Overlays carte
+  gtk_container_add(GTK_CONTAINER(ui->scrollCarteCher), globFront.overlayCarteCher);
+  gtk_container_add(GTK_CONTAINER(ui->scrollCarteBourges), globFront.overlayCarteBourges);
+  gtk_container_add(GTK_CONTAINER(ui->scrollCarteInsa), globFront.overlayCarteInsa);
+     // Overlays carte <- Image de la carte
+  gtk_container_add(GTK_CONTAINER(globFront.overlayCarteCher), ui->imgCarteCher);
+  gtk_container_add(GTK_CONTAINER(globFront.overlayCarteBourges), ui->imgCarteBourges);
+  gtk_container_add(GTK_CONTAINER(globFront.overlayCarteInsa), ui->imgCarteInsa);
 
+  /* On interdit aux cartes de s'auto-centrer si elles ont en la possibilite */
+  gtk_widget_set_halign(ui->imgCarteCher, GTK_ALIGN_START);
+  gtk_widget_set_halign(ui->imgCarteBourges, GTK_ALIGN_START);
+  gtk_widget_set_halign(ui->imgCarteInsa, GTK_ALIGN_START);
+
+  gtk_widget_set_valign(ui->imgCarteCher, GTK_ALIGN_START);
+  gtk_widget_set_valign(ui->imgCarteBourges, GTK_ALIGN_START);
+  gtk_widget_set_valign(ui->imgCarteInsa, GTK_ALIGN_START);
   // ==================== Affichage ====================
   gtk_widget_show_all(ui->widget);
+  gtk_widget_hide(ui->scrollCarteCher);
+  gtk_widget_hide(ui->scrollCarteBourges);
+  gtk_widget_hide(ui->scrollCarteInsa);
 }
 
+void ajoutOverlays(tracesItem* ptrItem)
+{
+  GtkWidget* zoneDessinCher = gtk_drawing_area_new();
+  GtkWidget* zoneDessinBourges = gtk_drawing_area_new();
+  GtkWidget* zoneDessinInsa = gtk_drawing_area_new();
+
+  globFront.zoneDessinCher[globFront.idTrajet] = zoneDessinCher;
+  globFront.zoneDessinBourges[globFront.idTrajet] = zoneDessinBourges;
+  globFront.zoneDessinInsa[globFront.idTrajet] = zoneDessinInsa;
+
+  gtk_overlay_add_overlay(GTK_OVERLAY(globFront.overlayCarteCher), zoneDessinCher);
+  gtk_overlay_add_overlay(GTK_OVERLAY(globFront.overlayCarteBourges), zoneDessinBourges);
+  gtk_overlay_add_overlay(GTK_OVERLAY(globFront.overlayCarteInsa), zoneDessinInsa);
+
+  g_signal_connect(G_OBJECT(zoneDessinCher), "draw", G_CALLBACK(faire_tracesCher), ptrItem);
+  g_signal_connect(G_OBJECT(zoneDessinBourges), "draw", G_CALLBACK(faire_tracesBourges), ptrItem);
+  g_signal_connect(G_OBJECT(zoneDessinInsa), "draw", G_CALLBACK(faire_tracesInsa), ptrItem);
+
+  gtk_widget_queue_draw(zoneDessinCher);
+  gtk_widget_queue_draw(zoneDessinBourges);
+  gtk_widget_queue_draw(zoneDessinInsa);
+
+  gtk_widget_show(zoneDessinCher);
+  gtk_widget_show(zoneDessinBourges);
+  gtk_widget_show(zoneDessinInsa);
+}
+
+void changeCarte(GtkWidget *widget, gpointer user_data)
+{
+  uiMain* fenetre = (uiMain *)user_data;
+  char* idCarte = (char *)gtk_combo_box_get_active_id(GTK_COMBO_BOX(widget));
+
+  if(!strcmp(idCarte, "0"))
+  {
+    gtk_widget_hide(fenetre->scrollCarteBourges);
+    gtk_widget_hide(fenetre->scrollCarteInsa);
+    gtk_widget_show(fenetre->scrollCarteCher);
+  }
+  else if(!strcmp(idCarte, "1"))
+  {
+    gtk_widget_hide(fenetre->scrollCarteCher);
+    gtk_widget_hide(fenetre->scrollCarteInsa);
+    gtk_widget_show(fenetre->scrollCarteBourges);
+  }
+  else
+  {
+    gtk_widget_hide(fenetre->scrollCarteBourges);
+    gtk_widget_hide(fenetre->scrollCarteCher);
+    gtk_widget_show(fenetre->scrollCarteInsa);
+  }
+
+}
+
+void bougeCarte(GtkWidget *widget, gpointer user_data)
+{
+  // TODO
+}

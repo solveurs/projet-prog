@@ -1,5 +1,6 @@
 #pragma once
 #include "includes.h"
+#include "structures.h"
 
 /* ===== Constantes ===== */
 #define UI_TRACE_INITIALISE     1
@@ -28,8 +29,11 @@ typedef struct s_TracesItem
 {
   // Comme c'est un item, le widget principal est une box.
   GtkWidget *widget;
-  tdUI      *details;
+  tdUI*     details;
   int       etat;
+  int       id;
+  trajet*   ptrTrajet;
+  GdkRGBA*  ptrCouleur;
 
   GtkWidget *boxG;
   GtkWidget *boxD;
@@ -38,9 +42,6 @@ typedef struct s_TracesItem
   GtkWidget *boutonOption;
   GtkWidget *boutonVisible;
   GtkWidget *boutonSupprimer;
-
-  //trace     *ptrTrace; //Je l'ajouterai a la fusion avec le back.
-  int        couleur; 
 } tracesItem;
 
 typedef struct s_TracesUI
@@ -66,11 +67,11 @@ typedef struct s_confirmationTracesUI
 }confirmeTUI;
 /* ===== Fonctions ===== */
 
-char* importer(GtkWidget* widget, gpointer user_data);
+void importer(GtkWidget* widget, gpointer user_data);
 int uiTraces(GtkWidget* widget, gpointer user_data);
 
 void afficheTraces(GtkWidget* widget, gpointer user_data);
-void ajoutItemTraces(GtkWidget* widget, gpointer user_data);
+void ajoutItemTraces(GtkWidget* boxScroll, const char* nomTrajet, trajet* ptrTrajet);
 void appliquerTD(GtkWidget* widget, gpointer user_data);
 void annulerTD(GtkWidget* widget, gpointer user_data);
 void detruireFen(GtkWidget* widget, gpointer user_data);
