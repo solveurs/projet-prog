@@ -121,7 +121,8 @@ void ajoutItemAnon(GtkWidget* widget, gpointer user_data)
   //int       couleur;
   item->etat = UI_ANON_FERME; 
   item->id = incr;
-  gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(fenetre->menuDeroulant), &incr, "Mon cercle");
+  /* Warning a corriger */
+  gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(fenetre->menuDeroulant), NULL, "Mon cercle");
 
   item->boxG = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, UI_ANON_ESPACEMENT);
   item->labelNom = gtk_label_new("Mon cercle");

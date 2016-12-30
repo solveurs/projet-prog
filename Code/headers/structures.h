@@ -77,7 +77,7 @@ typedef struct trace trace;
 struct trajet
 {
 	int		taille;/**<nombre de trace dans le trajet*/
-	int		visiblite;/**<visibilité, 0 --> invisible, 1 --> visible*/
+	int		visibilite;/**<visibilité, 0 --> invisible, 1 --> visible*/
 	trace *	premier;/**<pointeur sur la premiere trace*/
 	trace * dernier;/**<pointeur sur la derniere trace*/
 };
