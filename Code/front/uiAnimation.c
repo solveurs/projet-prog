@@ -63,7 +63,7 @@ int uiAnimation(GtkWidget* widget, gpointer user_data)
 	fenetreAnim->boxPrincipale = gtk_box_new(GTK_ORIENTATION_VERTICAL, UI_ANIM_ESPACEMENT);
 
 	// ===--- Layout : Frame pour les dates + la box
-	fenetreAnim->frameDate = gtk_frame_new("Intervalle de visionnage");
+	fenetreAnim->frameDate = gtk_frame_new("Interval de visionnage");
 	fenetreAnim->boxFrame = gtk_box_new(GTK_ORIENTATION_VERTICAL, UI_ANIM_ESPACEMENT);
 
 		// === Layout : Box calendriers

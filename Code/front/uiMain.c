@@ -1,7 +1,7 @@
 /**
- * \file      uiMain.c
- * \brief     Fichier main de la GUI de gestion des traces.
- * \author    Thanh.L, Guillaume.F
+ * @file      uiMain.c
+ * @brief     Fichier main de la GUI de gestion des traces.
+ * @author    Thanh.L, Guillaume.F
  *
  * C'est le fichier main du front.
  * On y declare et definit la structure globale utilisée dans toute la partie Front.
@@ -40,7 +40,7 @@ void initGlobFront(void)
 {
 	int i;
 	for(i=0; i<NOMBRE_MAX_TRAJETS; i++)
-	{
+	{ //globFront est une structures ou une variable ??? -FRJ
 		globFront.trajet[i] = (trajet *) malloc(sizeof(trajet));
 		globFront.zoneDessinCher[i] = (GtkWidget *) malloc(sizeof(GtkWidget));
 		globFront.zoneDessinBourges[i] = (GtkWidget *) malloc(sizeof(GtkWidget));

@@ -92,6 +92,7 @@ int uiAnonymite(GtkWidget* widget, gpointer user_data)
   {
   	gtk_window_present(GTK_WINDOW(fenetreAnon->widget));
   }
+	return EXIT_SUCCESS;
 }
 
 void ajoutItemAnon(GtkWidget* widget, gpointer user_data)
