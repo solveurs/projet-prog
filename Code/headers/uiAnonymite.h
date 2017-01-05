@@ -1,5 +1,6 @@
 #pragma once
 #include "includes.h"
+#include "structures.h"
 
 /* ===== Constantes ===== */
 #define UI_ANON_ESPACEMENT      5
@@ -28,8 +29,10 @@ typedef struct s_AnonymiteItem
   GtkWidget *widget; // Le widget est une box car c'est un item
   adUI      *details;
   int       couleur; 
-  int		etat;
+  int		    etat;
   int       id;
+  double    rayon;
+  point     coord;
 
   GtkWidget *boxG;
   GtkWidget *labelNom;
@@ -46,8 +49,13 @@ typedef struct s_Anon
   GtkWidget *widget;
   GtkWidget *boxPrincipale;
 
-  GtkWidget *boutonBoxCercle;
   GtkWidget *boutonCercle;
+
+  GtkWidget *boxTracer;
+  GtkWidget *labelInfo;
+  GtkWidget *boxBoutons;
+  GtkWidget *boutonConfirmer;
+  GtkWidget *boutonAnnuler;
 
   GtkWidget *frameCible;
   GtkWidget *menuDeroulant;
@@ -61,3 +69,8 @@ typedef struct s_Anon
 int uiAnonymite(GtkWidget* widget, gpointer user_data);
 void ajoutItemAnon(GtkWidget* widget, gpointer user_data);
 void optionItemAnon(GtkWidget* widget, gpointer user_data);
+void traceCercle(GtkWidget* widget, gpointer user_data);
+
+void ajoutMenuTraces(const gchar* nom);
+void supprimeMenuTraces(gint id);
+void renommeMenuTraces(gint id, const gchar* nom);

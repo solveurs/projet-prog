@@ -10,7 +10,6 @@
  * ====================
  * + Gerer la liberation de la memoire
  * + Prendre en compte les icones de Data/
- * + Finaliser les fonctions et les signaux des boutons des interfaces "Details"
  * ====================
  *        MaJ
  * ====================
@@ -107,6 +106,54 @@ int uiTraces(GtkWidget* widget, gpointer user_data)
 }
 
 /**
+ * \fn      void importer(GtkWidget* widget, gpointer user_data)
+ * \brief   Affiche une GUI pour choisir le fichier log à importer.
+ *
+ * \details Credits : gtk+ documentation.
+ *          On donne a l'utilisateur une GUI lui permettant de naviguer dans
+ *          ses differents dossiers et ici de selectionner le fichier log.
+ *          Aucun test n'est effectuer pour verifier la validite du fichier.
+ *          Une fois le fichier choisi, on y extrait les traces présentes et on les affiche.
+ *
+ * \param   widget    Widget d'où provient le signal.
+ * \param   user_data Variable passée par le signal.
+ *
+ * \return  Une chaine de caractere contenant le chemin absolu du fichier.
+*/
+void importer(GtkWidget* widget, gpointer user_data)
+{
+  tracesUI* fenetre = (tracesUI *)user_data;
+  GtkWidget *dialog;
+  GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_OPEN;
+  gint res;
+
+  dialog = gtk_file_chooser_dialog_new ("Open File", GTK_WINDOW(fenetre->widget), action, 
+                                        "Cancel", GTK_RESPONSE_CANCEL,
+                                        "Open", GTK_RESPONSE_ACCEPT, NULL);
+
+  res = gtk_dialog_run(GTK_DIALOG(dialog));
+  if (res==GTK_RESPONSE_ACCEPT && globFront.idTrajet<(NOMBRE_MAX_TRAJETS-1) )
+    {
+      char *filename;
+
+      GtkFileChooser *chooser = GTK_FILE_CHOOSER(dialog);
+      filename = gtk_file_chooser_get_filename(chooser);
+
+      /* Creation du trajet */
+      //trajet* tmpTrajet = IimportTrajet(filename);
+
+      /* Sauvegarde dans le tableau global */
+      //globFront.trajet[globFront.idTrajet] = tmpTrajet;
+
+      /* Ajout du trajet en tant qu'item graphique */   
+      //ajoutItemTraces(fenetre->zoneScrollBox, (char *)g_path_get_basename(filename), tmpTrajet);
+      globFront.idTrajet++;
+      g_free(filename);
+    }
+  gtk_widget_destroy (dialog);
+}
+
+/**
  * \fn      void ajoutItemTraces(GtkWidget* widget, gpointer user_data)
  * \brief   Ajoute un item représentant un ensemble de trace issu d'un fichier log.
  *
@@ -143,15 +190,13 @@ void ajoutItemTraces(GtkWidget* boxScroll, const char* nomTrajet, trajet* ptrTra
   }
   item->ptrTrajet = ptrTrajet;
 
-  /* D'autres priorites
-  item->ptrCouleur = (couleur *)malloc(sizeof(couleur));
+
+  item->ptrCouleur = (GdkRGBA *)malloc(sizeof(GdkRGBA));
   if(item->ptrCouleur == NULL)
   {
     printf("Erreur malloc ptrCouleur");
     exit(EXIT_FAILURE);
   }
-  initCouleur(item->ptrCouleur);
-  */
 
   // ===--- Layout : BoxG
   item->boxG = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, UI_TRACE_ESPACEMENT);
@@ -161,15 +206,25 @@ void ajoutItemTraces(GtkWidget* boxScroll, const char* nomTrajet, trajet* ptrTra
   item->boxD = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, UI_TRACE_ESPACEMENT);
 
   // --- Widgets : Boutons
-  item->boutonRoute = gtk_button_new_with_label("Route");
-  item->boutonOption = gtk_button_new_with_label("Option");
-  item->boutonVisible = gtk_button_new_with_label("Visible");
-  item->boutonSupprimer = gtk_button_new_with_label("Supprimer");
+  item->boutonRoute = gtk_button_new();
+  item->boutonOption = gtk_button_new();
+  item->boutonVisible = gtk_button_new();
+  item->boutonSupprimer = gtk_button_new();
+
+  item->imgRoute = gtk_image_new_from_file("../../Data/icones/linked.png");
+  item->imgOption = gtk_image_new_from_file("../../Data/icones/gear.png");
+  item->imgVisible = gtk_image_new_from_file("../../Data/icones/eye.png");
+  item->imgSupprimer = gtk_image_new_from_file("../../Data/icones/trash.png");
+
+  gtk_button_set_image(GTK_BUTTON(item->boutonRoute), item->imgRoute);
+  gtk_button_set_image(GTK_BUTTON(item->boutonOption), item->imgOption);
+  gtk_button_set_image(GTK_BUTTON(item->boutonVisible), item->imgVisible);
+  gtk_button_set_image(GTK_BUTTON(item->boutonSupprimer), item->imgSupprimer);
 
   // ===================== Signaux =====================
-  g_signal_connect(item->boutonRoute, "clicked", G_CALLBACK(traceRoute), NULL); //item->ptrTrace);
+  g_signal_connect(item->boutonRoute, "clicked", G_CALLBACK(traceRoute), item);
   g_signal_connect(item->boutonOption, "clicked", G_CALLBACK(optionItemTraces), item);
-  g_signal_connect(item->boutonVisible, "clicked", G_CALLBACK(afficheTraces), NULL); //item->ptrTrace);
+  g_signal_connect(item->boutonVisible, "clicked", G_CALLBACK(switchVisibilite), item);
   g_signal_connect(item->boutonSupprimer, "clicked", G_CALLBACK(confirmeSupprItem), item);
 
   // ==================== Packaging ====================
@@ -195,7 +250,24 @@ void ajoutItemTraces(GtkWidget* boxScroll, const char* nomTrajet, trajet* ptrTra
 
 
 /**
- * \fn      void afficheTraces(GtkWidget* widget, gpointer user_data)
+ * \fn      void traceRoute(GtkWidget* widget, gpointer user_data)
+ * \brief   Relie les traces entre elles pour former la route.
+ *
+ * \param   widget    Widget d'où provient le signal.
+ * \param   user_data Variable passée par le signal.
+ *
+ * \return  None.
+*/
+void traceRoute(GtkWidget* widget, gpointer user_data)
+{
+  tracesItem* item = (tracesItem *)user_data;
+  item->ptrTrajet->visibilite = 1;
+
+  majCartes(item->id);
+}
+
+/**
+ * \fn      void switchVisibilite(GtkWidget* widget, gpointer user_data)
  * \brief   Affiche les traces sur la carte.
 
  * \param   widget    Widget d'où provient le signal.
@@ -203,41 +275,40 @@ void ajoutItemTraces(GtkWidget* boxScroll, const char* nomTrajet, trajet* ptrTra
  *
  * \return  None.
 */
-void afficheTraces(GtkWidget* widget, gpointer user_data)
+void switchVisibilite(GtkWidget* widget, gpointer user_data)
 {
-  printf("\nJ'affiche une trace normalement");
+  static int visible = 1;
+  tracesItem* item = (tracesItem *)user_data;
+  if(visible)
+  {
+    visible = 0;
+    gtk_image_set_from_file(GTK_IMAGE(item->imgVisible), "../../Data/icones/eye-disabled.png");
+    cacheCartes(item->id);
+  }
+  else
+  {
+    visible = 1;
+    gtk_image_set_from_file(GTK_IMAGE(item->imgVisible), "../../Data/icones/eye.png");
+    afficheCartes(item->id);
+  }
 }
 
 /**
- * \fn      void appliquerTD(GtkWidget* widget, gpointer user_data)
- * \brief   Applique les modifications des options d'un ensemble de traces.
+ * \fn      void detruireFen(GtkWidget* widget, gpointer user_data)
+ * \brief   Detruit la fenetre passée par user_data et libere la memoire.
  *
  * \param   widget    Widget d'où provient le signal.
  * \param   user_data Variable passée par le signal.
  *
  * \return  None.
 */
-void appliquerTD(GtkWidget* widget, gpointer user_data)
+void detruireFen(GtkWidget* widget, gpointer user_data)
 {
-  tracesItem* item = (tracesItem*)user_data;
-  gtk_label_set_text(GTK_LABEL(item->labelNom), gtk_entry_get_text(GTK_ENTRY(item->details->zoneEntry)));
-  printf("\nChangement de couleur");
-  gtk_widget_hide(item->details->widget);
+  confirmeTUI* fen = (confirmeTUI *) user_data;
+  gtk_widget_destroy(fen->widget);
+  free(user_data);
 }
 
-/**
- * \fn      void annulerTD(GtkWidget* widget, gpointer user_data)
- * \brief   Annule les modifications des options d'un ensemble de traces.
- *
- * \param   widget    Widget d'où provient le signal.
- * \param   user_data Variable passée par le signal.
- *
- * \return  None.
-*/
-void annulerTD(GtkWidget* widget, gpointer user_data)
-{
-  gtk_widget_hide(GTK_WIDGET(user_data));
-}
 
 /**
  * \fn      void confirmeSupprItem(GtkWidget* widget, gpointer user_data)
@@ -301,70 +372,6 @@ void confirmeSupprItem(GtkWidget* widget, gpointer user_data)
 }
 
 /**
- * \fn      void detruireFen(GtkWidget* widget, gpointer user_data)
- * \brief   Detruit la fenetre passée par user_data et libere la memoire.
- *
- * \param   widget    Widget d'où provient le signal.
- * \param   user_data Variable passée par le signal.
- *
- * \return  None.
-*/
-void detruireFen(GtkWidget* widget, gpointer user_data)
-{
-  confirmeTUI* fen = (confirmeTUI *) user_data;
-  gtk_widget_destroy(fen->widget);
-  free(user_data);
-}
-
-/**
- * \fn      void importer(GtkWidget* widget, gpointer user_data)
- * \brief   Affiche une GUI pour choisir le fichier log à importer.
- *
- * \details Credits : gtk+ documentation.
- *          On donne a l'utilisateur une GUI lui permettant de naviguer dans
- *          ses differents dossiers et ici de selectionner le fichier log.
- *          Aucun test n'est effectuer pour verifier la validite du fichier.
- *          Une fois le fichier choisi, on y extrait les traces présentes et on les affiche.
- *
- * \param   widget    Widget d'où provient le signal.
- * \param   user_data Variable passée par le signal.
- *
- * \return  Une chaine de caractere contenant le chemin absolu du fichier.
-*/
-void importer(GtkWidget* widget, gpointer user_data)
-{
-  tracesUI* fenetre = (tracesUI *)user_data;
-  GtkWidget *dialog;
-  GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_OPEN;
-  gint res;
-
-  dialog = gtk_file_chooser_dialog_new ("Open File", GTK_WINDOW(fenetre->widget), action, 
-                                        "Cancel", GTK_RESPONSE_CANCEL,
-                                        "Open", GTK_RESPONSE_ACCEPT, NULL);
-
-  res = gtk_dialog_run(GTK_DIALOG(dialog));
-  if (res == GTK_RESPONSE_ACCEPT)
-    {
-      char *filename;
-
-      GtkFileChooser *chooser = GTK_FILE_CHOOSER(dialog);
-      filename = gtk_file_chooser_get_filename(chooser);
-
-      /* Creation du trajet */
-      //trajet* tmpTrajet = IimportTrajet(filename);
-
-      /* Sauvegarde dans le tableau global */
-      //globFront.trajet[globFront.idTrajet] = tmpTrajet;
-
-      /* Ajout du trajet en tant qu'item graphique */   
-      //ajoutItemTraces(fenetre->zoneScrollBox, (char *)g_path_get_basename(filename), tmpTrajet);
-      globFront.idTrajet++;
-      g_free(filename);
-    }
-  gtk_widget_destroy (dialog);
-}
-
-/**
  * \fn      void supprimeItemTraces(GtkWidget* widget, gpointer user_data)
  * \brief   Supprime l'item représentant un ensemble de traces de la liste d'importation.
  *
@@ -382,20 +389,6 @@ void supprimeItemTraces(GtkWidget* widget, gpointer user_data)
   free((tracesItem *)user_data);
 
   /* Supprimer aussi la liste de traces */
-}
-
-/**
- * \fn      void traceRoute(GtkWidget* widget, gpointer user_data)
- * \brief   Relie les traces entre elles pour former la route.
- *
- * \param   widget    Widget d'où provient le signal.
- * \param   user_data Variable passée par le signal.
- *
- * \return  None.
-*/
-void traceRoute(GtkWidget* widget, gpointer user_data)
-{
-  printf("\nJe trace la route normalement");
 }
 
 /**
@@ -454,6 +447,7 @@ void optionItemTraces(GtkWidget* widget, gpointer user_data)
     g_signal_connect(popupTD->boutonAppliquer, "clicked", G_CALLBACK(appliquerTD), user_data);
     g_signal_connect(popupTD->boutonAnnuler, "clicked", G_CALLBACK(annulerTD), popupTD->widget);
     g_signal_connect(popupTD->widget, "delete-event", G_CALLBACK(gtk_widget_hide_on_delete), NULL);
+    g_signal_connect(popupTD->boutonModifierCouleur, "color-set", G_CALLBACK(changeCouleur), user_data);
 
     // ==================== Packaging ====================
     // Fenetre principale <- Box principale
@@ -479,4 +473,51 @@ void optionItemTraces(GtkWidget* widget, gpointer user_data)
     gtk_entry_set_text(GTK_ENTRY(itemTD->details->zoneEntry), gtk_label_get_text(GTK_LABEL(itemTD->labelNom)));
     gtk_window_present(GTK_WINDOW(itemTD->details->widget));
   }
+}
+
+/**
+ * \fn      changeCouleur(GtkWidget* widget, gpointer user_data)
+ * \brief   Appliquer la modification de la couleur des traces.
+ *
+ * \param   widget    Widget d'où provient le signal.
+ * \param   user_data Variable passée par le signal.
+ *
+ * \return  None.
+*/
+void changeCouleur(GtkWidget* widget, gpointer user_data)
+{
+  tracesItem* item = (tracesItem *)user_data;
+  gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(widget), item->ptrCouleur);
+  majCartes(item->id);
+}
+
+/**
+ * \fn      void appliquerTD(GtkWidget* widget, gpointer user_data)
+ * \brief   Applique les modifications des options d'un ensemble de traces.
+ *
+ * \param   widget    Widget d'où provient le signal.
+ * \param   user_data Variable passée par le signal.
+ *
+ * \return  None.
+*/
+void appliquerTD(GtkWidget* widget, gpointer user_data)
+{
+  tracesItem* item = (tracesItem*)user_data;
+  gtk_label_set_text(GTK_LABEL(item->labelNom), gtk_entry_get_text(GTK_ENTRY(item->details->zoneEntry)));
+  printf("\nChangement de couleur");
+  gtk_widget_hide(item->details->widget);
+}
+
+/**
+ * \fn      void annulerTD(GtkWidget* widget, gpointer user_data)
+ * \brief   Annule les modifications des options d'un ensemble de traces.
+ *
+ * \param   widget    Widget d'où provient le signal.
+ * \param   user_data Variable passée par le signal.
+ *
+ * \return  None.
+*/
+void annulerTD(GtkWidget* widget, gpointer user_data)
+{
+  gtk_widget_hide(GTK_WIDGET(user_data));
 }

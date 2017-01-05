@@ -20,5 +20,10 @@ void faire_tracesInsa(GtkWidget *widget, cairo_t *cr, gpointer user_data);
 void faire_tracer(cairo_t *cr, int carte, trajet *cible);
 
 void faire_aggregation(cairo_t *cr, cercle *cercle);
+void traceCercle(cairo_t* cr);
 
 double echelle(double valeur, int carte, int abscisse);
+
+void majCartes(int idCarte);
+void cacheCartes(int idCarte);
+void afficheCartes(int idCarte);

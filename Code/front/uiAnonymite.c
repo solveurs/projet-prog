@@ -20,10 +20,11 @@
 
 #include "../headers/uiAnonymite.h"
 
+static uiAnon* fenetreAnon;
+
 int uiAnonymite(GtkWidget* widget, gpointer user_data)
 {
   static int etat = UI_ANON_FERME;
-  static uiAnon* fenetreAnon;
 
   if(!etat)
   {
@@ -31,7 +32,7 @@ int uiAnonymite(GtkWidget* widget, gpointer user_data)
     // ====== Validation d'ouverture
     etat = UI_ANON_OUVERT;
   
-    // ====== Fenetre
+    // ====== Layout : Fenetre principale
     fenetreAnon = (uiAnon *)malloc(sizeof(uiAnon));
   
     if(fenetreAnon == NULL)
@@ -46,45 +47,67 @@ int uiAnonymite(GtkWidget* widget, gpointer user_data)
     gtk_window_set_transient_for(GTK_WINDOW(fenetreAnon->widget), GTK_WINDOW(user_data));
     gtk_window_set_destroy_with_parent(GTK_WINDOW(fenetreAnon->widget), TRUE);
     gtk_window_set_default_size(GTK_WINDOW(fenetreAnon->widget), UI_ANON_TAILLE_X, UI_ANON_TAILLE_Y);
-  
+    
+    // ====== Layout : Box principale
     fenetreAnon->boxPrincipale = gtk_box_new(GTK_ORIENTATION_VERTICAL, UI_ANON_ESPACEMENT);
-  
-	  fenetreAnon->boutonBoxCercle = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
+
+    // ------ Widget : Bouton de tracer du cercle
 	  fenetreAnon->boutonCercle = gtk_button_new_with_label("Tracer un cercle d'anonymat");
 
+    // ---=== Layout : Box de confirmation du tracer
+    fenetreAnon->boxTracer = gtk_box_new(GTK_ORIENTATION_VERTICAL, UI_ANON_ESPACEMENT);
+    fenetreAnon->labelInfo = gtk_label_new("      === Instructions ===\
+                                          \n  Click gauche : choix du centre du cercle\
+                                          \n  Click droit  : tracer du cercle\
+                                          \n  Bouger la souris pour définir le rayon\
+                                          \n\n");
+    fenetreAnon->boxBoutons = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, UI_ANON_ESPACEMENT);
+    fenetreAnon->boutonAnnuler = gtk_button_new_with_label("Annuler");
+    fenetreAnon->boutonConfirmer = gtk_button_new_with_label("Confirmer");
+
+    // ---=== Layout : Frame du choix de cible
 	  fenetreAnon->frameCible = gtk_frame_new("Trace ciblée");
+       // --- Widget : Menu deroulant du choix de cible
     fenetreAnon->menuDeroulant = gtk_combo_box_text_new();
 
+    // ---=== Layout : Frame de scroll des items
 	  fenetreAnon->frameScroll = gtk_frame_new("Liste des zones anonymisées");
+       // === Layout : Box + Zone de scroll
 	  fenetreAnon->zoneScroll = gtk_scrolled_window_new(NULL, NULL);
 	  fenetreAnon->boxItem = gtk_box_new(GTK_ORIENTATION_VERTICAL, UI_ANON_ESPACEMENT);
   
     // ===================== Signaux =====================
     g_signal_connect(fenetreAnon->widget, "delete-event", G_CALLBACK(gtk_widget_hide_on_delete), NULL);
-    //g_signal_connect(fenetreAnon->boutonCercle, "clicked", G_CALLBACK(traceCercle), ???);
-    g_signal_connect(fenetreAnon->boutonCercle, "clicked", G_CALLBACK(ajoutItemAnon), fenetreAnon);
+    g_signal_connect(fenetreAnon->boutonCercle, "clicked", G_CALLBACK(traceCercle), fenetreAnon);
+    //g_signal_connect(fenetreAnon->boutonCercle, "clicked", G_CALLBACK(ajoutItemAnon), fenetreAnon);
   
     // ==================== Packaging ====================
     // Fenetre principale <- Box principale
     gtk_container_add(GTK_CONTAINER(fenetreAnon->widget), fenetreAnon->boxPrincipale);
-    // Box principale <- Bouton cercle + Frame cible + Frame scroll
-    gtk_box_pack_start(GTK_BOX(fenetreAnon->boxPrincipale), fenetreAnon->boutonBoxCercle, FALSE, FALSE, UI_ANON_ESPACEMENT);
+    // Box principale <- Bouton cercle + Box tracer +  Frame cible + Frame scroll
+    gtk_box_pack_start(GTK_BOX(fenetreAnon->boxPrincipale), fenetreAnon->boutonCercle, FALSE, FALSE, UI_ANON_ESPACEMENT);
+    gtk_box_pack_start(GTK_BOX(fenetreAnon->boxPrincipale), fenetreAnon->boxTracer, FALSE, FALSE, UI_ANON_ESPACEMENT);
     gtk_box_pack_start(GTK_BOX(fenetreAnon->boxPrincipale), fenetreAnon->frameCible, FALSE, FALSE, UI_ANON_ESPACEMENT);
     gtk_box_pack_start(GTK_BOX(fenetreAnon->boxPrincipale), fenetreAnon->frameScroll, TRUE, TRUE, UI_ANON_ESPACEMENT);
 
-      // Bouton box <- Bouton cercle
-    gtk_container_add(GTK_CONTAINER(fenetreAnon->boutonBoxCercle), fenetreAnon->boutonCercle);
+      // Box tracer <- Label info + Box boutons
+    gtk_box_pack_start(GTK_BOX(fenetreAnon->boxTracer), fenetreAnon->labelInfo, FALSE, FALSE, UI_ANON_ESPACEMENT);
+    gtk_box_pack_start(GTK_BOX(fenetreAnon->boxTracer), fenetreAnon->boxBoutons, FALSE, FALSE, UI_ANON_ESPACEMENT);
+        // Box boutons <- Boutons
+    gtk_box_pack_start(GTK_BOX(fenetreAnon->boxBoutons), fenetreAnon->boutonAnnuler, FALSE, FALSE, UI_ANON_ESPACEMENT);
+    gtk_box_pack_start(GTK_BOX(fenetreAnon->boxBoutons), fenetreAnon->boutonConfirmer, FALSE, FALSE, UI_ANON_ESPACEMENT);
 
       // Frame cible <- Menu deroulant
     gtk_container_add(GTK_CONTAINER(fenetreAnon->frameCible), fenetreAnon->menuDeroulant);
 
-      // Frame scroll <- zone scroll
+      // Frame scroll <- Zone scroll
     gtk_container_add(GTK_CONTAINER(fenetreAnon->frameScroll), fenetreAnon->zoneScroll);
       // Zone scroll <- Box des items
     gtk_container_add(GTK_CONTAINER(fenetreAnon->zoneScroll), fenetreAnon->boxItem);
 
     // ==================== Affichage ====================
     gtk_widget_show_all(fenetreAnon->widget);
+    gtk_widget_hide(fenetreAnon->boxTracer);
 
     return EXIT_SUCCESS;
   }
@@ -204,4 +227,56 @@ void optionItemAnon(GtkWidget* widget, gpointer user_data)
   {
   	gtk_window_present(GTK_WINDOW(popupAD->widget));
   }
+}
+
+void traceCercle(GtkWidget* widget, gpointer user_data)
+{
+  // Credits Gtk+ doc pour le dialog d'erreur
+  // Function to open a dialog box with a message
+  uiAnon* parent = (uiAnon *)user_data;
+  int activeId = gtk_combo_box_get_active(GTK_COMBO_BOX(parent->menuDeroulant));
+  if(activeId==-1)
+  {
+    GtkWidget *dialog, *label, *content_area;
+    GtkDialogFlags flags;
+
+    // Create the widgets
+    flags = GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT;
+    dialog = gtk_dialog_new_with_buttons ("Message", GTK_WINDOW(parent->widget), flags,
+                                           ("OK"), GTK_RESPONSE_NONE, NULL);
+
+    content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+    label = gtk_label_new("   Erreur ! \n   Aucunes traces sélectionnées !   ");
+
+    // Ensure that the dialog box is destroyed when the user responds
+    g_signal_connect_swapped (dialog, "response",
+                              G_CALLBACK (gtk_widget_destroy), dialog);
+    gtk_container_add (GTK_CONTAINER (content_area), label);
+    gtk_widget_show_all(dialog);
+  }
+  else
+  {
+    //
+  }
+
+  // Choper contenu du menu deroulant
+  // Ajouter l'overlay du cercle
+  // Activer les signaux de souris
+  // 
+}
+
+void ajoutMenuTraces(const gchar* nom)
+{
+  gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(fenetreAnon->menuDeroulant), nom);
+}
+
+void supprimeMenuTraces(gint id)
+{
+  gtk_combo_box_text_remove(GTK_COMBO_BOX_TEXT(fenetreAnon->menuDeroulant), id);
+}
+
+void renommeMenuTraces(gint id, const gchar* nom)
+{
+  supprimeMenuTraces(id);
+  gtk_combo_box_text_insert_text(GTK_COMBO_BOX_TEXT(fenetreAnon->menuDeroulant), id, nom);
 }
