@@ -20,7 +20,6 @@ extern void faire_tracesCher(GtkWidget *widget, cairo_t *cr, gpointer user_data)
 extern void faire_tracesBourges(GtkWidget *widget, cairo_t *cr, gpointer user_data);
 extern void faire_tracesInsa(GtkWidget *widget, cairo_t *cr, gpointer user_data);
 
-
 void activate(GtkApplication *app, gpointer user_data)
 {
   // ============== Initialisation widgets =============
@@ -100,9 +99,9 @@ void activate(GtkApplication *app, gpointer user_data)
   globFront.overlayCarteBourges = gtk_overlay_new();
   globFront.overlayCarteInsa = gtk_overlay_new();
 
-  ui->imgCarteCher = gtk_image_new_from_file("../../Data/cartes/carte_Cher.png");
-  ui->imgCarteBourges = gtk_image_new_from_file("../../Data/cartes/carte_Bourges.png");
-  ui->imgCarteInsa = gtk_image_new_from_file("../../Data/cartes/carte_Insa.png");
+  ui->imgCarteCher = gtk_image_new_from_file("./Data/cartes/carte_Cher.png");
+  ui->imgCarteBourges = gtk_image_new_from_file("./Data/cartes/carte_Bourges.png");
+  ui->imgCarteInsa = gtk_image_new_from_file("./Data/cartes/carte_Insa.png");
 
   /* J'ai modifié l'architecture du code du a quelques problemes avec Cairo
    * Je mets ton travail en commentaire et j'etudierai les fonctions proposees
