@@ -1,8 +1,13 @@
 var searchData=
 [
-  ['occupee',['occupee',['../structliste__pt__interet.html#a82dbaf77600944ad8513051a80a019b0',1,'liste_pt_interet']]],
-  ['on_5fdraw_5fevent',['on_draw_event',['../_test_8c.html#af2927f3d8b5d36770e86aed1778c2959',1,'on_draw_event(GtkWidget *widget, cairo_t *cr, gpointer user_data):&#160;Test.c'],['../_u_i_cercle_anonymat_8c.html#af2927f3d8b5d36770e86aed1778c2959',1,'on_draw_event(GtkWidget *widget, cairo_t *cr, gpointer user_data):&#160;UICercleAnonymat.c'],['../cairo_trace_8c.html#af2927f3d8b5d36770e86aed1778c2959',1,'on_draw_event(GtkWidget *widget, cairo_t *cr, gpointer user_data):&#160;cairoTrace.c']]],
-  ['openbddaddr',['openBddAddr',['../parser_bdd_adresse_8c.html#aae170ceec6688e22c69bd3814178b732',1,'openBddAddr(const char *nom):&#160;parserBddAdresse.c'],['../parser_bdd_adresse_8h.html#aae170ceec6688e22c69bd3814178b732',1,'openBddAddr(const char *nom):&#160;parserBddAdresse.c']]],
-  ['opengeoloc',['openGeoloc',['../parser_bdd_geoloc_8c.html#aff4c778a97f944d6042490c5da67617b',1,'openGeoloc(const char *nom):&#160;parserBddGeoloc.c'],['../parser_bdd_geoloc_8h.html#aff4c778a97f944d6042490c5da67617b',1,'openGeoloc(const char *nom):&#160;parserBddGeoloc.c']]],
-  ['origine',['origine',['../structrectangle.html#a52a08a00d432ad1428716bbc5659e634',1,'rectangle']]]
+  ['nb_5fcouche',['NB_COUCHE',['../ia_8h.html#aebeb090cbca9fd5a309648d0446d0b60',1,'ia.h']]],
+  ['nb_5fmesure',['NB_MESURE',['../ia_8h.html#a98b38ef72a146522c9aef05c6faeb206',1,'ia.h']]],
+  ['nb_5fneur',['NB_NEUR',['../ia_8h.html#a1e8ead85817b5f7b5b4cfe0155a3d543',1,'ia.h']]],
+  ['nbmesure',['nbMesure',['../structreseau.html#acd2478d548c8b1f613ee897a16d2d82c',1,'reseau']]],
+  ['nboutput',['nbOutput',['../structneurone.html#ac5021e3f1c9b7a627b7122def5c40e58',1,'neurone']]],
+  ['neurone',['neurone',['../structneurone.html',1,'neurone'],['../ia_8h.html#a49248b9703c5389cc2ac45154bcdc2be',1,'neurone():&#160;ia.h']]],
+  ['nom_5frue',['nom_rue',['../structadresse.html#a5aafcf02ad3be5a371655c227684be8e',1,'adresse']]],
+  ['nombre_5fmax_5ftrajets',['NOMBRE_MAX_TRAJETS',['../global_front_8h.html#abf8ec70563a74e9ce484f3c8eb0b542a',1,'globalFront.h']]],
+  ['nouvreseau',['nouvReseau',['../ia_8c.html#a768aa124c93f627dbc9fd47150a4e682',1,'nouvReseau(int parNbInput, int parNbOutput):&#160;ia.c'],['../ia_8h.html#a768aa124c93f627dbc9fd47150a4e682',1,'nouvReseau(int parNbInput, int parNbOutput):&#160;ia.c']]],
+  ['numero',['numero',['../structadresse.html#a2c30f43104974e72e2809fb4569804b0',1,'adresse']]]
 ];

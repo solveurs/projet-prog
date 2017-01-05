@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['initlistepointinteret',['initListePointInteret',['../point_interet_8c.html#a2599215e4204bd4c92564a34adfd889c',1,'initListePointInteret(void):&#160;pointInteret.c'],['../point_interet_8h.html#a2599215e4204bd4c92564a34adfd889c',1,'initListePointInteret(void):&#160;pointInteret.c']]],
-  ['initpointinteret',['initPointInteret',['../point_interet_8c.html#a062e2cf2a173edce8231647347cf0311',1,'initPointInteret(int parImpor, time_t parDbt, time_t parFin, point parPt, adresse parAddr):&#160;pointInteret.c'],['../point_interet_8h.html#a062e2cf2a173edce8231647347cf0311',1,'initPointInteret(int parImpor, time_t parDbt, time_t parFin, point parPt, adresse parAddr):&#160;pointInteret.c']]],
-  ['inittrace',['initTrace',['../trace_8c.html#adba0951ae1c290405802ad1ef183c0ec',1,'initTrace(long parDate, point parCoord, trace *parPrec, trace *parSuiv):&#160;trace.c'],['../trace_8h.html#adba0951ae1c290405802ad1ef183c0ec',1,'initTrace(long parDate, point parCoord, trace *parPrec, trace *parSuiv):&#160;trace.c']]],
-  ['inittrajet',['initTrajet',['../trajet_8c.html#ab2dec46a01d6a4c2148979b8cc9fc953',1,'initTrajet(void):&#160;trajet.c'],['../trajet_8h.html#ab2dec46a01d6a4c2148979b8cc9fc953',1,'initTrajet(void):&#160;trajet.c']]]
+  ['generetrace',['genereTrace',['../aggregation_8c.html#a49c8b5d5463a35ca403245196ab37662',1,'genereTrace():&#160;aggregation.c'],['../cairo_trace_8c.html#a49c8b5d5463a35ca403245196ab37662',1,'genereTrace():&#160;cairoTrace.c']]],
+  ['gpstokm',['GPStoKm',['../conversion_8c.html#a5025e285012d467e62df1fb3a2d2f538',1,'GPStoKm(const point parP1, const point parP2):&#160;conversion.c'],['../conversion_8h.html#a5025e285012d467e62df1fb3a2d2f538',1,'GPStoKm(const point parP1, const point parP2):&#160;conversion.c']]]
 ];
