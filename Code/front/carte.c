@@ -1,3 +1,4 @@
+#include "../headers/front.h"
 #include "../headers/carte.h"
 
 

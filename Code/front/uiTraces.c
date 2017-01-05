@@ -17,6 +17,7 @@
  *
 */
 
+#include "../headers/front.h"
 #include "../headers/uiTraces.h"
 #include "../headers/fonctionFront.h"
 #include "../headers/activate.h"

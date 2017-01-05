@@ -20,6 +20,7 @@
 
 extern void activate(GtkApplication *app, gpointer user_data);
 
+/*
 int main (int argc, char **argv)
 {
     GtkApplication *app;
@@ -35,7 +36,7 @@ int main (int argc, char **argv)
     //libereGlob();
     return status;
 }
-
+*/
 void initGlobFront(void)
 {
 	int i;

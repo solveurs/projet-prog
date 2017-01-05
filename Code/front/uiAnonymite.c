@@ -18,6 +18,7 @@
  *
 */
 
+#include "../headers/front.h"
 #include "../headers/uiAnonymite.h"
 
 static uiAnon* fenetreAnon;

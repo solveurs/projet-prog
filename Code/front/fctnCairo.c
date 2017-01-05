@@ -16,7 +16,7 @@
  * Creation du fichier.
  *
 */
-
+#include "../headers/front.h"
 #include "../headers/fctnCairo.h"
 #include "../headers/globalFront.h"
 

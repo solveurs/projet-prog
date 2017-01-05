@@ -19,6 +19,7 @@
  *
 */
 
+#include "../headers/front.h"
 #include "../headers/uiAnimation.h"
 
 /**

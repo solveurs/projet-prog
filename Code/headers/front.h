@@ -18,3 +18,5 @@
 /* ====== Fonctions ====== */
 void initGlobFront(void);
 void libereGlob(void);
+
+extern void activate(GtkApplication *app, gpointer user_data);

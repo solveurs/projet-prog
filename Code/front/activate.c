@@ -9,6 +9,7 @@
  *
 */
 
+#include "../headers/front.h"
 #include "../headers/activate.h"
 #include "../headers/structures.h"
 
