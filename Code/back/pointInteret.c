@@ -228,7 +228,7 @@ int savePointInteret(const liste_pt_interet parArrPtInteret)
 {
 	FILE * fd;
 	//Compilation avec gcc: ../Data/savePtInteret.frj
-	if((fd = fopen("../../Data/savePtInteret.frj", "w+")) == NULL)
+	if((fd = fopen("../Data/savePtInteret.frj", "w+")) == NULL)
 	{
 		perror("Erreur à la création du fichier de sauvegarde de pt d'interet");
 		return -1;
