@@ -68,3 +68,21 @@ void affichePoint(point parP)
 {
 	printf("x = %lf : y = %lf\n",parP.x,parP.y);
 }
+
+rectangle initRectangle(point origine, double hauteur, double largeur)
+{
+	rectangle resR;
+	resR.origine = origine;
+	resR.hauteur = hauteur;
+	resR.largeur = largeur;
+	return resR;
+}
+
+point initPoint(double x, double y)
+{
+	point resP;
+	resP.x = x;
+	resP.y = y;
+	return resP;
+}
+

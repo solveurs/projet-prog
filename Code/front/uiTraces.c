@@ -212,10 +212,10 @@ void ajoutItemTraces(GtkWidget* boxScroll, const char* nomTrajet, trajet* ptrTra
   item->boutonVisible = gtk_button_new();
   item->boutonSupprimer = gtk_button_new();
 
-  item->imgRoute = gtk_image_new_from_file("../../Data/icones/linked.png");
-  item->imgOption = gtk_image_new_from_file("../../Data/icones/gear.png");
-  item->imgVisible = gtk_image_new_from_file("../../Data/icones/eye.png");
-  item->imgSupprimer = gtk_image_new_from_file("../../Data/icones/trash.png");
+  item->imgRoute = gtk_image_new_from_file("../Data/icones/linked.png");
+  item->imgOption = gtk_image_new_from_file("../Data/icones/gear.png");
+  item->imgVisible = gtk_image_new_from_file("../Data/icones/eye.png");
+  item->imgSupprimer = gtk_image_new_from_file("../Data/icones/trash.png");
 
   gtk_button_set_image(GTK_BUTTON(item->boutonRoute), item->imgRoute);
   gtk_button_set_image(GTK_BUTTON(item->boutonOption), item->imgOption);
@@ -283,13 +283,13 @@ void switchVisibilite(GtkWidget* widget, gpointer user_data)
   if(visible)
   {
     visible = 0;
-    gtk_image_set_from_file(GTK_IMAGE(item->imgVisible), "../../Data/icones/eye-disabled.png");
+    gtk_image_set_from_file(GTK_IMAGE(item->imgVisible), "../Data/icones/eye-disabled.png");
     cacheCartes(item->id);
   }
   else
   {
     visible = 1;
-    gtk_image_set_from_file(GTK_IMAGE(item->imgVisible), "../../Data/icones/eye.png");
+    gtk_image_set_from_file(GTK_IMAGE(item->imgVisible), "../Data/icones/eye.png");
     afficheCartes(item->id);
   }
 }
