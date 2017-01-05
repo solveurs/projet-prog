@@ -22,26 +22,26 @@
 
 void faire_tracesCher(GtkWidget *widget, cairo_t *cr, gpointer user_data)
 {
-	tracesItem* ptrTmp = (tracesItem *)user_data;
-	faire_tracer(cr, 0, ptrTmp->ptrTrajet);
+	tracesItem* ptrItem = (tracesItem *)user_data;
+	faire_tracer(cr, 0, ptrItem->ptrTrajet);
 }
 
 void faire_tracesBourges(GtkWidget *widget, cairo_t *cr, gpointer user_data)
 {
-	tracesItem* ptrTmp = (tracesItem *)user_data;
-	faire_tracer(cr, 1, ptrTmp->ptrTrajet);
+	tracesItem* ptrItem = (tracesItem *)user_data;
+	faire_tracer(cr, 1, ptrItem->ptrTrajet);
 }
 
 void faire_tracesInsa(GtkWidget *widget, cairo_t *cr, gpointer user_data)
 {
-	tracesItem* ptrTmp = (tracesItem *)user_data;
-	faire_tracer(cr, 2, ptrTmp->ptrTrajet);
+	tracesItem* ptrItem = (tracesItem *)user_data;
+	faire_tracer(cr, 2, ptrItem->ptrTrajet);
 }
 
 void faire_tracer(cairo_t *cr, int carte, trajet *cible)
 {
-	double x;
-	double y;
+	int x;
+	int y;
 	// Epaisseur des lignes
 	cairo_set_line_width(cr, 1.0);
 	// Couleur de notre point de depart ici rouge
@@ -53,14 +53,16 @@ void faire_tracer(cairo_t *cr, int carte, trajet *cible)
 	// Traces en rouge
 	
 	cairo_set_source_rgb(cr, 1, 0, 0);
-	printf("AAAAAA\n");
+
 	for(ptr=cible->premier; ptr!=cible->dernier; ptr=ptr->suiv)
 	{
-		printf("%lf\n",ptr->coord.x);
 		if(ptr->visibilite==1 /* && condition date */)
 		{
-			x = echelle(ptr->coord.x, carte, 1);
-			y = echelle(ptr->coord.y, carte, 0);
+			// Inversion longitude et latitude
+			x = (int)echelle(ptr->coord.y, carte, 1);
+			y = (int)echelle(ptr->coord.x, carte, 0);
+			//printf("%lf,%lf\n",ptr->coord.y,ptr->coord.x);
+			printf("%d,%d\n",x,y);
 			
 			// Dessin d'un petit "+"
 			cairo_move_to(cr, x, y - TAILLE_TRACE);
@@ -99,9 +101,10 @@ void faire_aggregation(cairo_t *cr, cercle *cercle)
 
 double echelle(double valeur, int carte, int longitude)
 {
+	double conversion = 0.0;
 	switch(carte)
 	{
-			double conversion;
+		
 		case 0: // Cher
 			if(longitude)
 			{
