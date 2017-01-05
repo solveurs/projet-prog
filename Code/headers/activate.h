@@ -12,42 +12,48 @@
 /* ===== Structures ===== */
 typedef struct s_uiPrincipale
 {
-  GtkWidget 	*widget; //c'est l'application
-  GtkWidget 	*boxPrincipale;
-
-  GtkWidget 	*boxMenu;
-  GtkWidget 	*menuBarre;
-  GtkWidget 	*ssMenu1;
-  GtkWidget 	*ssMenu2;
-  GtkWidget 	*ssMenuItem1;
-  GtkWidget 	*ssMenuItem2;
-  GtkWidget 	*ssMenuItem3;
-  GtkWidget 	*ssMenuItem4;
-
-  GtkWidget 	*frameEntete;
-  GtkWidget		*boxEntete;
-
-  GtkWidget 	*boxUI;
-  GtkWidget		*boutonBoxTraces;
-  GtkWidget		*boutonBoxAnim;
-  GtkWidget		*boutonBoxAnon;
-  GtkWidget 	*boutonTraces;
-  GtkWidget 	*boutonAnimation;
-  GtkWidget 	*boutonAnonymat;
-
-  GtkWidget		*boxCarte;
-  GtkWidget		*frameCarte;
-  GtkWidget   *frameEchelle;
-  GtkWidget		*labelEchelle;
-  GtkWidget		*selectCarte;
-
-  GtkWidget 	*scrollCarteCher;
-  GtkWidget   *scrollCarteBourges;
-  GtkWidget   *scrollCarteInsa;
-  GtkWidget 	*imgCarteCher;
-  GtkWidget   *imgCarteBourges;
-  GtkWidget   *imgCarteInsa;
-  /* Modification de Guillaume
+	GtkWidget 	*widget; //c'est l'application
+	GtkWidget 	*boxPrincipale;
+	
+	GtkWidget 	*boxMenu;
+	GtkWidget 	*menuBarre;
+	GtkWidget 	*ssMenu1;
+	GtkWidget 	*ssMenu2;
+	GtkWidget 	*ssMenu3;
+	GtkWidget 	*ssMenu4;
+	GtkWidget 	*ssMenuItem1;
+	GtkWidget 	*ssMenuItem2;
+	GtkWidget 	*ssMenuItem3;
+	GtkWidget 	*ssMenuItem4;
+	GtkWidget 	*ssMenuItem5;
+	GtkWidget 	*ssMenuItem6;
+	GtkWidget 	*ssMenuItem7;
+	GtkWidget 	*ssMenuItem8;
+	
+	GtkWidget 	*frameEntete;
+	GtkWidget		*boxEntete;
+	
+	GtkWidget 	*boxUI;
+	GtkWidget		*boutonBoxTraces;
+	GtkWidget		*boutonBoxAnim;
+	GtkWidget		*boutonBoxAnon;
+	GtkWidget 	*boutonTraces;
+	GtkWidget 	*boutonAnimation;
+	GtkWidget 	*boutonAnonymat;
+	
+	GtkWidget		*boxCarte;
+	GtkWidget		*frameCarte;
+	GtkWidget   *frameEchelle;
+	GtkWidget		*labelEchelle;
+	GtkWidget		*selectCarte;
+	
+	GtkWidget 	*scrollCarteCher;
+	GtkWidget   *scrollCarteBourges;
+	GtkWidget   *scrollCarteInsa;
+	GtkWidget 	*imgCarteCher;
+	GtkWidget   *imgCarteBourges;
+	GtkWidget   *imgCarteInsa;
+	/* Modification de Guillaume
   GtkWidget 	*scrollCarte;
   GdkPixbuf   *bufferCarte;
   GtkWidget 	*imgCarte;

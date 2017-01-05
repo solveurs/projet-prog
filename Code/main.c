@@ -36,7 +36,7 @@ void debugBack(void)
 	//printf("long : %lf , lat: %lf\n",x, y);
 	
 	//La lecture d'un fichier de 450 traces + création du trajet + affichage = <8ms
-	FILE * fd = openGeoloc("/Users/frj/Documents/Code/Projet_prog_3a/Data/geoloc-logs.txt");
+	FILE * fd = openGeoloc("../Data/geoloc-logs.txt");
 	bdd_trace * fd_trace = readGeoloc(fd);
 	trajet * _trajet = fd_trace->trajet;
 	afficheTrajet(_trajet);
