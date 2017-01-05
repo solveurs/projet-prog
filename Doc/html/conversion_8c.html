@@ -95,6 +95,12 @@ $(document).ready(function(){initNavTree('conversion_8c.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a264bd716a89dd4f82f430eb330207338"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="conversion_8c.html#a264bd716a89dd4f82f430eb330207338">convertToRad</a> (const double par)</td></tr>
+<tr class="separator:a264bd716a89dd4f82f430eb330207338"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5025e285012d467e62df1fb3a2d2f538"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="conversion_8c.html#a5025e285012d467e62df1fb3a2d2f538">GPStoKm</a> (const <a class="el" href="structpoint.html">point</a> parP1, const <a class="el" href="structpoint.html">point</a> parP2)</td></tr>
+<tr class="separator:a5025e285012d467e62df1fb3a2d2f538"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33522d30ebe190c4ccc9382fe8bc8ff1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structpoint.html">point</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="conversion_8c.html#a33522d30ebe190c4ccc9382fe8bc8ff1">kmToGPS</a> (const <a class="el" href="structpoint.html">point</a> parD, double parLat)</td></tr>
+<tr class="separator:a33522d30ebe190c4ccc9382fe8bc8ff1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d07bec6e0346370cf9cc58f0f86e02b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="conversion_8c.html#a8d07bec6e0346370cf9cc58f0f86e02b">lambert93ToGPS</a> (double *<a class="el" href="_u_i_cercle_anonymat_8c.html#a6150e0515f7202e2fb518f7206ed97dc">x</a>, double *<a class="el" href="_u_i_cercle_anonymat_8c.html#a0a2f84ed7838f07779ae24c5a9086d33">y</a>)</td></tr>
 <tr class="separator:a8d07bec6e0346370cf9cc58f0f86e02b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a09d4b59f9fe1ffc6eaf4f332f6901de9"><td class="memItemLeft" align="right" valign="top">struct tm *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="conversion_8c.html#a09d4b59f9fe1ffc6eaf4f332f6901de9">timestampToReadable</a> (const long parDate)</td></tr>
@@ -107,6 +113,95 @@ Functions</h2></td></tr>
 
 <p>Definition in file <a class="el" href="conversion_8c_source.html">conversion.c</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
+<a id="a264bd716a89dd4f82f430eb330207338"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a264bd716a89dd4f82f430eb330207338">&sect;&nbsp;</a></span>convertToRad()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double convertToRad </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>par</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="conversion_8c_source.html#l00063">63</a> of file <a class="el" href="conversion_8c_source.html">conversion.c</a>.</p>
+
+</div>
+</div>
+<a id="a5025e285012d467e62df1fb3a2d2f538"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5025e285012d467e62df1fb3a2d2f538">&sect;&nbsp;</a></span>GPStoKm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double GPStoKm </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structpoint.html">point</a>&#160;</td>
+          <td class="paramname"><em>parP1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structpoint.html">point</a>&#160;</td>
+          <td class="paramname"><em>parP2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="conversion_8c_source.html#l00068">68</a> of file <a class="el" href="conversion_8c_source.html">conversion.c</a>.</p>
+
+</div>
+</div>
+<a id="a33522d30ebe190c4ccc9382fe8bc8ff1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33522d30ebe190c4ccc9382fe8bc8ff1">&sect;&nbsp;</a></span>kmToGPS()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structpoint.html">point</a>* kmToGPS </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structpoint.html">point</a>&#160;</td>
+          <td class="paramname"><em>parD</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>parLat</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Convertie une distance en kilometre un deplacement</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parD</td><td>la distance en kilomètre dans les 2 directions </td></tr>
+    <tr><td class="paramname">parLat</td><td>la latitude à laquelle on se trouve</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>un point avec x&ndash;&gt;dlat et y&ndash;&gt;dlon </dd></dl>
+
+<p>Definition at line <a class="el" href="conversion_8c_source.html#l00055">55</a> of file <a class="el" href="conversion_8c_source.html">conversion.c</a>.</p>
+
+</div>
+</div>
 <a id="a8d07bec6e0346370cf9cc58f0f86e02b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8d07bec6e0346370cf9cc58f0f86e02b">&sect;&nbsp;</a></span>lambert93ToGPS()</h2>
 
@@ -169,7 +264,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>une struct tm * avec la date </dd></dl>
 
-<p>Definition at line <a class="el" href="conversion_8c_source.html#l00053">53</a> of file <a class="el" href="conversion_8c_source.html">conversion.c</a>.</p>
+<p>Definition at line <a class="el" href="conversion_8c_source.html#l00081">81</a> of file <a class="el" href="conversion_8c_source.html">conversion.c</a>.</p>
 
 </div>
 </div>
@@ -197,7 +292,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>une chaine de caractère avec la date formatée. </dd></dl>
 
-<p>Definition at line <a class="el" href="conversion_8c_source.html#l00066">66</a> of file <a class="el" href="conversion_8c_source.html">conversion.c</a>.</p>
+<p>Definition at line <a class="el" href="conversion_8c_source.html#l00094">94</a> of file <a class="el" href="conversion_8c_source.html">conversion.c</a>.</p>
 
 </div>
 </div>

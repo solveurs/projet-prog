@@ -11,10 +11,10 @@ FILE * openBddAddr(const char * nom)
 	
 }
 
-bdd_trace * readGeoloc(FILE * parFd)
+/*bdd_trace * readGeoloc(FILE * parFd)
 {
 	
-}
+}*/
 const char* recuperer_champ(char* ligne, int numero_champ)
 {
 	

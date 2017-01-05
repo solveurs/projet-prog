@@ -2,8 +2,15 @@
 \label{conversion_8h}\index{/\+Users/frj/\+Documents/\+Code/\+Projet\+\_\+prog\+\_\+3a/\+Code/headers/conversion.\+h@{/\+Users/frj/\+Documents/\+Code/\+Projet\+\_\+prog\+\_\+3a/\+Code/headers/conversion.\+h}}
 {\ttfamily \#include \char`\"{}includes.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}structures.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}config.\+h\char`\"{}}\newline
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
+\item 
+double \hyperlink{conversion_8h_a264bd716a89dd4f82f430eb330207338}{convert\+To\+Rad} (const double par)
+\item 
+double \hyperlink{conversion_8h_a5025e285012d467e62df1fb3a2d2f538}{G\+P\+Sto\+Km} (const \hyperlink{structpoint}{point} par\+P1, const \hyperlink{structpoint}{point} par\+P2)
+\item 
+\hyperlink{structpoint}{point} $\ast$ \hyperlink{conversion_8h_a33522d30ebe190c4ccc9382fe8bc8ff1}{km\+To\+G\+PS} (const \hyperlink{structpoint}{point} parD, double par\+Lat)
 \item 
 void \hyperlink{conversion_8h_a8d07bec6e0346370cf9cc58f0f86e02b}{lambert93\+To\+G\+PS} (double $\ast$\hyperlink{_u_i_cercle_anonymat_8c_a6150e0515f7202e2fb518f7206ed97dc}{x}, double $\ast$\hyperlink{_u_i_cercle_anonymat_8c_a0a2f84ed7838f07779ae24c5a9086d33}{y})
 \item 
@@ -14,6 +21,48 @@ char $\ast$ \hyperlink{conversion_8h_a734192c845ab92508ca3639ba00559ad}{timestam
 
 
 \subsection{Function Documentation}
+\hypertarget{conversion_8h_a264bd716a89dd4f82f430eb330207338}{}\label{conversion_8h_a264bd716a89dd4f82f430eb330207338} 
+\index{conversion.\+h@{conversion.\+h}!convert\+To\+Rad@{convert\+To\+Rad}}
+\index{convert\+To\+Rad@{convert\+To\+Rad}!conversion.\+h@{conversion.\+h}}
+\subsubsection{\texorpdfstring{convert\+To\+Rad()}{convertToRad()}}
+{\footnotesize\ttfamily double convert\+To\+Rad (\begin{DoxyParamCaption}\item[{const double}]{par }\end{DoxyParamCaption})}
+
+
+
+Definition at line 63 of file conversion.\+c.
+
+\hypertarget{conversion_8h_a5025e285012d467e62df1fb3a2d2f538}{}\label{conversion_8h_a5025e285012d467e62df1fb3a2d2f538} 
+\index{conversion.\+h@{conversion.\+h}!G\+P\+Sto\+Km@{G\+P\+Sto\+Km}}
+\index{G\+P\+Sto\+Km@{G\+P\+Sto\+Km}!conversion.\+h@{conversion.\+h}}
+\subsubsection{\texorpdfstring{G\+P\+Sto\+Km()}{GPStoKm()}}
+{\footnotesize\ttfamily double G\+P\+Sto\+Km (\begin{DoxyParamCaption}\item[{const \hyperlink{structpoint}{point}}]{par\+P1,  }\item[{const \hyperlink{structpoint}{point}}]{par\+P2 }\end{DoxyParamCaption})}
+
+
+
+Definition at line 68 of file conversion.\+c.
+
+\hypertarget{conversion_8h_a33522d30ebe190c4ccc9382fe8bc8ff1}{}\label{conversion_8h_a33522d30ebe190c4ccc9382fe8bc8ff1} 
+\index{conversion.\+h@{conversion.\+h}!km\+To\+G\+PS@{km\+To\+G\+PS}}
+\index{km\+To\+G\+PS@{km\+To\+G\+PS}!conversion.\+h@{conversion.\+h}}
+\subsubsection{\texorpdfstring{km\+To\+G\+P\+S()}{kmToGPS()}}
+{\footnotesize\ttfamily \hyperlink{structpoint}{point}$\ast$ km\+To\+G\+PS (\begin{DoxyParamCaption}\item[{const \hyperlink{structpoint}{point}}]{parD,  }\item[{double}]{par\+Lat }\end{DoxyParamCaption})}
+
+Convertie une distance en kilometre un deplacement
+
+
+\begin{DoxyParams}{Parameters}
+{\em parD} & la distance en kilomètre dans les 2 directions \\
+\hline
+{\em par\+Lat} & la latitude à laquelle on se trouve\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+un point avec x--$>$dlat et y--$>$dlon 
+\end{DoxyReturn}
+
+
+Definition at line 55 of file conversion.\+c.
+
 \hypertarget{conversion_8h_a8d07bec6e0346370cf9cc58f0f86e02b}{}\label{conversion_8h_a8d07bec6e0346370cf9cc58f0f86e02b} 
 \index{conversion.\+h@{conversion.\+h}!lambert93\+To\+G\+PS@{lambert93\+To\+G\+PS}}
 \index{lambert93\+To\+G\+PS@{lambert93\+To\+G\+PS}!conversion.\+h@{conversion.\+h}}
@@ -51,7 +100,7 @@ une struct tm $\ast$ avec la date
 \end{DoxyReturn}
 
 
-Definition at line 53 of file conversion.\+c.
+Definition at line 81 of file conversion.\+c.
 
 \hypertarget{conversion_8h_a734192c845ab92508ca3639ba00559ad}{}\label{conversion_8h_a734192c845ab92508ca3639ba00559ad} 
 \index{conversion.\+h@{conversion.\+h}!timestamp\+To\+String@{timestamp\+To\+String}}
@@ -71,5 +120,5 @@ une chaine de caractère avec la date formatée.
 \end{DoxyReturn}
 
 
-Definition at line 66 of file conversion.\+c.
+Definition at line 94 of file conversion.\+c.
 

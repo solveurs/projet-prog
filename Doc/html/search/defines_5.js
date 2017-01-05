@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['size_5fmax',['SIZE_MAX',['../libcsv_8c.html#a3c75bb398badb69c7577b21486f9963f',1,'libcsv.c']]],
-  ['submit_5fchar',['SUBMIT_CHAR',['../libcsv_8c.html#aa04efa0e1db1fb2103914c191fcfa221',1,'libcsv.c']]],
-  ['submit_5ffield',['SUBMIT_FIELD',['../libcsv_8c.html#a7a2f81e24c40f0acaa9b9124d9e462fb',1,'libcsv.c']]],
-  ['submit_5frow',['SUBMIT_ROW',['../libcsv_8c.html#ae1cde301a29f28acd4bae1c16b857b77',1,'libcsv.c']]]
+  ['r',['R',['../aggregation_8c.html#a5c71a5e59a53413cd6c270266d63b031',1,'aggregation.c']]],
+  ['rayon_5fcercle_5fpt_5fint_5fkm',['RAYON_CERCLE_PT_INT_KM',['../config_8h.html#a0370fdf2f1ad5915a172e0a60e544069',1,'config.h']]],
+  ['rayon_5fterre_5fkm',['RAYON_TERRE_KM',['../config_8h.html#a5a79850fcc5b31f1fd69f0d920dd6693',1,'config.h']]]
 ];
