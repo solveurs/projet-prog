@@ -140,13 +140,13 @@ void importer(GtkWidget* widget, gpointer user_data)
       filename = gtk_file_chooser_get_filename(chooser);
 
       /* Creation du trajet */
-      //trajet* tmpTrajet = IimportTrajet(filename);
+      trajet* tmpTrajet = IimportTrajet(filename);
 
       /* Sauvegarde dans le tableau global */
-      //globFront.trajet[globFront.idTrajet] = tmpTrajet;
+      globFront.trajet[globFront.idTrajet] = tmpTrajet;
 
       /* Ajout du trajet en tant qu'item graphique */   
-      //ajoutItemTraces(fenetre->zoneScrollBox, (char *)g_path_get_basename(filename), tmpTrajet);
+      ajoutItemTraces(fenetre->zoneScrollBox, (char *)g_path_get_basename(filename), tmpTrajet);
       globFront.idTrajet++;
       g_free(filename);
     }

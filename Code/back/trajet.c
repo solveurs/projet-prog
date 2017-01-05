@@ -16,7 +16,7 @@ trajet * initTrajet(void)
 {
 	trajet * varTr = (trajet*)malloc(sizeof(trajet));
 	varTr->taille	=	0;
-	varTr->visiblite=	1;
+	varTr->visibilite=	1;
 	varTr->premier	=	NULL;
 	varTr->dernier	=	NULL;
 	return varTr;
