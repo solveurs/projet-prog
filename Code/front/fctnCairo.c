@@ -18,6 +18,7 @@
 */
 
 #include "../headers/fctnCairo.h"
+#include "../headers/globalFront.h"
 
 void faire_tracesCher(GtkWidget *widget, cairo_t *cr, gpointer user_data)
 {
@@ -125,4 +126,25 @@ double echelle(double valeur, int carte, int longitude)
       conversion = (-1.0 * (valeur - 47.088723) * TAILLE_Y_INSA / 0.015766);
       return conversion;
   }
+}
+
+void majCartes(int idCarte)
+{
+  gtk_widget_queue_draw(globFront.zoneDessinCher[idCarte]);
+  gtk_widget_queue_draw(globFront.zoneDessinBourges[idCarte]);
+  gtk_widget_queue_draw(globFront.zoneDessinInsa[idCarte]);
+}
+
+void cacheCartes(int idCarte)
+{
+  gtk_widget_hide(globFront.zoneDessinCher[idCarte]);
+  gtk_widget_hide(globFront.zoneDessinBourges[idCarte]);
+  gtk_widget_hide(globFront.zoneDessinInsa[idCarte]);
+}
+
+void afficheCartes(int idCarte)
+{
+  gtk_widget_show(globFront.zoneDessinCher[idCarte]);
+  gtk_widget_show(globFront.zoneDessinBourges[idCarte]);
+  gtk_widget_show(globFront.zoneDessinInsa[idCarte]);
 }

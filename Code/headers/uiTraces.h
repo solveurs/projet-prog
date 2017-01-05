@@ -38,10 +38,16 @@ typedef struct s_TracesItem
   GtkWidget *boxG;
   GtkWidget *boxD;
   GtkWidget *labelNom;
+
   GtkWidget *boutonRoute;
   GtkWidget *boutonOption;
   GtkWidget *boutonVisible;
   GtkWidget *boutonSupprimer;
+
+  GtkWidget *imgRoute;
+  GtkWidget *imgOption;
+  GtkWidget *imgVisible;
+  GtkWidget *imgSupprimer;
 } tracesItem;
 
 typedef struct s_TracesUI
@@ -68,15 +74,17 @@ typedef struct s_confirmationTracesUI
 /* ===== Fonctions ===== */
 
 void importer(GtkWidget* widget, gpointer user_data);
-int uiTraces(GtkWidget* widget, gpointer user_data);
-
-void afficheTraces(GtkWidget* widget, gpointer user_data);
 void ajoutItemTraces(GtkWidget* boxScroll, const char* nomTrajet, trajet* ptrTrajet);
-void appliquerTD(GtkWidget* widget, gpointer user_data);
-void annulerTD(GtkWidget* widget, gpointer user_data);
-void detruireFen(GtkWidget* widget, gpointer user_data);
-void confirmeSupprItem(GtkWidget* widget, gpointer user_data);
-void supprimeItemTraces(GtkWidget* widget, gpointer user_data);
+
+int uiTraces(GtkWidget* widget, gpointer user_data);
+void switchVisibilite(GtkWidget* widget, gpointer user_data);
 void traceRoute(GtkWidget* widget, gpointer user_data);
 void optionItemTraces(GtkWidget* widget, gpointer user_data);
+void supprimeItemTraces(GtkWidget* widget, gpointer user_data);
 
+void changeCouleur(GtkWidget* widget, gpointer user_data);
+void appliquerTD(GtkWidget* widget, gpointer user_data);
+void annulerTD(GtkWidget* widget, gpointer user_data);
+
+void detruireFen(GtkWidget* widget, gpointer user_data);
+void confirmeSupprItem(GtkWidget* widget, gpointer user_data);
