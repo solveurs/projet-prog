@@ -95,9 +95,9 @@ void activate(GtkApplication *app, gpointer user_data)
   ui->scrollCarteBourges = gtk_scrolled_window_new(NULL, NULL);
   ui->scrollCarteInsa = gtk_scrolled_window_new(NULL, NULL);
 
-  globFront.overlayCarteCher = gtk_overlay_new();
-  globFront.overlayCarteBourges = gtk_overlay_new();
-  globFront.overlayCarteInsa = gtk_overlay_new();
+  varGlobFront.overlayCarteCher = gtk_overlay_new();
+  varGlobFront.overlayCarteBourges = gtk_overlay_new();
+  varGlobFront.overlayCarteInsa = gtk_overlay_new();
 
   ui->imgCarteCher = gtk_image_new_from_file("./Data/cartes/carte_Cher.png");
   ui->imgCarteBourges = gtk_image_new_from_file("./Data/cartes/carte_Bourges.png");
@@ -153,13 +153,13 @@ void activate(GtkApplication *app, gpointer user_data)
   gtk_box_pack_start(GTK_BOX(ui->boxCarte), ui->selectCarte, TRUE, TRUE, UI_MAIN_ESPACEMENT);
 
      // Scrolls image <- Overlays carte
-  gtk_container_add(GTK_CONTAINER(ui->scrollCarteCher), globFront.overlayCarteCher);
-  gtk_container_add(GTK_CONTAINER(ui->scrollCarteBourges), globFront.overlayCarteBourges);
-  gtk_container_add(GTK_CONTAINER(ui->scrollCarteInsa), globFront.overlayCarteInsa);
+  gtk_container_add(GTK_CONTAINER(ui->scrollCarteCher), varGlobFront.overlayCarteCher);
+  gtk_container_add(GTK_CONTAINER(ui->scrollCarteBourges), varGlobFront.overlayCarteBourges);
+  gtk_container_add(GTK_CONTAINER(ui->scrollCarteInsa), varGlobFront.overlayCarteInsa);
      // Overlays carte <- Image de la carte
-  gtk_container_add(GTK_CONTAINER(globFront.overlayCarteCher), ui->imgCarteCher);
-  gtk_container_add(GTK_CONTAINER(globFront.overlayCarteBourges), ui->imgCarteBourges);
-  gtk_container_add(GTK_CONTAINER(globFront.overlayCarteInsa), ui->imgCarteInsa);
+  gtk_container_add(GTK_CONTAINER(varGlobFront.overlayCarteCher), ui->imgCarteCher);
+  gtk_container_add(GTK_CONTAINER(varGlobFront.overlayCarteBourges), ui->imgCarteBourges);
+  gtk_container_add(GTK_CONTAINER(varGlobFront.overlayCarteInsa), ui->imgCarteInsa);
 
   /* On interdit aux cartes de s'auto-centrer si elles ont en la possibilite */
   gtk_widget_set_halign(ui->imgCarteCher, GTK_ALIGN_START);
@@ -182,13 +182,13 @@ void ajoutOverlays(tracesItem* ptrItem)
   GtkWidget* zoneDessinBourges = gtk_drawing_area_new();
   GtkWidget* zoneDessinInsa = gtk_drawing_area_new();
 
-  globFront.zoneDessinCher[globFront.idTrajet] = zoneDessinCher;
-  globFront.zoneDessinBourges[globFront.idTrajet] = zoneDessinBourges;
-  globFront.zoneDessinInsa[globFront.idTrajet] = zoneDessinInsa;
+  varGlobFront.zoneDessinCher[varGlobFront.idTrajet] = zoneDessinCher;
+  varGlobFront.zoneDessinBourges[varGlobFront.idTrajet] = zoneDessinBourges;
+  varGlobFront.zoneDessinInsa[varGlobFront.idTrajet] = zoneDessinInsa;
 
-  gtk_overlay_add_overlay(GTK_OVERLAY(globFront.overlayCarteCher), zoneDessinCher);
-  gtk_overlay_add_overlay(GTK_OVERLAY(globFront.overlayCarteBourges), zoneDessinBourges);
-  gtk_overlay_add_overlay(GTK_OVERLAY(globFront.overlayCarteInsa), zoneDessinInsa);
+  gtk_overlay_add_overlay(GTK_OVERLAY(varGlobFront.overlayCarteCher), zoneDessinCher);
+  gtk_overlay_add_overlay(GTK_OVERLAY(varGlobFront.overlayCarteBourges), zoneDessinBourges);
+  gtk_overlay_add_overlay(GTK_OVERLAY(varGlobFront.overlayCarteInsa), zoneDessinInsa);
 
   g_signal_connect(G_OBJECT(zoneDessinCher), "draw", G_CALLBACK(faire_tracesCher), ptrItem);
   g_signal_connect(G_OBJECT(zoneDessinBourges), "draw", G_CALLBACK(faire_tracesBourges), ptrItem);

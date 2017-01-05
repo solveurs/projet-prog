@@ -8,7 +8,7 @@
 #define NOMBRE_MAX_TRAJETS	32
 
 /* ====== Var. Glob ====== */
-struct
+struct globFront
 {
 	trajet*			trajet[NOMBRE_MAX_TRAJETS];
 	int				idTrajet;
@@ -24,4 +24,6 @@ struct
   	carte 			carte_Cher;
   	carte 			carte_Bourges;
   	carte 			carte_Insa;
-}globFront;
+};
+
+extern struct globFront varGlobFront;

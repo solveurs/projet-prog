@@ -1,5 +1,6 @@
 #include "headers/main.h"
 //gcc main.c back/anonymisation.c back/conversion.c back/fonctionFront.c back/parserBddGeoloc.c back/pointInteret.c back/trace.c back/trajet.c back/utils.c back/ia.c -o main -Wall && ./main
+struct globFront varGlobFront;
 
 #define DEBUG 1
 
@@ -63,20 +64,20 @@ void debugFront(int argc, char* argv[])
 
 void initGlobFront(void)
 {
-	int i;
+		int i;
 	for(i=0; i<NOMBRE_MAX_TRAJETS; i++)
-	{ //globFront est une structures ou une variable ??? -FRJ
-		globFront.trajet[i] = (trajet *) malloc(sizeof(trajet));
-		globFront.zoneDessinCher[i] = (GtkWidget *) malloc(sizeof(GtkWidget));
-		globFront.zoneDessinBourges[i] = (GtkWidget *) malloc(sizeof(GtkWidget));
-		globFront.zoneDessinInsa[i] = (GtkWidget *) malloc(sizeof(GtkWidget));
+	{ //varGlobFront est une structures ou une variable ??? -FRJ
+		varGlobFront.trajet[i] = (trajet *) malloc(sizeof(trajet));
+		varGlobFront.zoneDessinCher[i] = (GtkWidget *) malloc(sizeof(GtkWidget));
+		varGlobFront.zoneDessinBourges[i] = (GtkWidget *) malloc(sizeof(GtkWidget));
+		varGlobFront.zoneDessinInsa[i] = (GtkWidget *) malloc(sizeof(GtkWidget));
 	}
-	globFront.idTrajet = 0;
+	varGlobFront.idTrajet = 0;
 	
 	/* Problemes au niveau de tes arguments ? J'ai des erreurs a la compilation*/
-	//globFront.carte_Cher = initCarte("../../Data/cartes/carte_Cher.png", 1013, 1920, 47.988083, 1.726227, 46.194092, 3.115997);
-	//globFront.carte_Bourges = initCarte("../../Data/cartes/carte_Bourges.png", 1850, 1079, 47.113540, 2.313738, 47.050476, 2.472610);
-	//globFront.carte_Insa = initCarte("../../Data/cartes/carte_Insa.png", 1850, 1080, 47.088723, 2.392981, 47.072957, 2.432764);
+	//varGlobFront.carte_Cher = initCarte("../../Data/cartes/carte_Cher.png", 1013, 1920, 47.988083, 1.726227, 46.194092, 3.115997);
+	//varGlobFront.carte_Bourges = initCarte("../../Data/cartes/carte_Bourges.png", 1850, 1079, 47.113540, 2.313738, 47.050476, 2.472610);
+	//varGlobFront.carte_Insa = initCarte("../../Data/cartes/carte_Insa.png", 1850, 1080, 47.088723, 2.392981, 47.072957, 2.432764);
 }
 
 void libereGlob(void)
@@ -85,10 +86,10 @@ void libereGlob(void)
 	 int i;
 	 for(i=0; i<NOMBRE_MAX_TRAJETS; i++)
 	 {
-		free(globFront.trajet[i]);
-		free(globFront.zoneDessinCher[i]);
-		free(globFront.zoneDessinBourges[i]);
-		free(globFront.zoneDessinInsa[i]);
+		free(varGlobFront.trajet[i]);
+		free(varGlobFront.zoneDessinCher[i]);
+		free(varGlobFront.zoneDessinBourges[i]);
+		free(varGlobFront.zoneDessinInsa[i]);
 	 }
 	 */
 }

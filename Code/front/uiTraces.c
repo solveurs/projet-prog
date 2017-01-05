@@ -133,7 +133,7 @@ void importer(GtkWidget* widget, gpointer user_data)
                                         "Open", GTK_RESPONSE_ACCEPT, NULL);
 
   res = gtk_dialog_run(GTK_DIALOG(dialog));
-  if (res==GTK_RESPONSE_ACCEPT && globFront.idTrajet<(NOMBRE_MAX_TRAJETS-1) )
+  if (res==GTK_RESPONSE_ACCEPT && varGlobFront.idTrajet<(NOMBRE_MAX_TRAJETS-1) )
     {
       char *filename;
 
@@ -144,11 +144,11 @@ void importer(GtkWidget* widget, gpointer user_data)
       trajet* tmpTrajet = IimportTrajet(filename);
 
       /* Sauvegarde dans le tableau global */
-      globFront.trajet[globFront.idTrajet] = tmpTrajet;
+      varGlobFront.trajet[varGlobFront.idTrajet] = tmpTrajet;
 
       /* Ajout du trajet en tant qu'item graphique */   
       ajoutItemTraces(fenetre->zoneScrollBox, (char *)g_path_get_basename(filename), tmpTrajet);
-      globFront.idTrajet++;
+      varGlobFront.idTrajet++;
       g_free(filename);
     }
   gtk_widget_destroy (dialog);
