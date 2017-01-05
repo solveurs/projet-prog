@@ -16,19 +16,18 @@ FILE * openBddAddr(const char * nom)
 	
 }
 
-
-/*
-bdd_trace * readGeoloc(FILE * parFd)
+/**
+ * \fn bdd_addr * readAddr(FILE * fd)
+ * \brief Lit le fichier d'adresse .csv et renvoit un tableau d'adresses
+ * \param *fd descripteur sur le fichier d'adresse
+ */
+adresse * readAddr(FILE * fd)
 {
-	
-}*/
-bdd_addr * readAddr(FILE * fd)
-{
-adresse ** varBddAddr=(adresse**)malloc(sizeof(adresse));
+adresse * varBddAddr=(adresse*)malloc(sizeof(adresse));
 int compteurvirgule = 0;
 adresse varAddr; //avant insertion dans la BDD
 
-        while (fscanf(fd,"id:%s,id_tr:%s,methode:%s,numero:%i,rep:%s,compl:%s,nom_voie:%s,alias:%s,nom_ld:%s,insee:%i,c_postal:%i,type:%s,cote:%s,x_lambert:%i,y_lambert:%f" ) > 0)
+        while (fscanf(fd,"id:%s,id_tr:%s,methode:%s,numero:%i,rep:%s,compl:%s,nom_voie:%s,alias:%s,nom_ld:%s,insee:%i,c_postal:%i,type:%s,cote:%s,x:%lf,y:%lf" ) > 0)
         {
                 vardAddr.numero=numero;
                 varAddr.nom_rue=nom_voie;
@@ -37,10 +36,45 @@ adresse varAddr; //avant insertion dans la BDD
                 {
                         strncat(var.Addr.nom_rue,nom_ld);
                 }
-                varAddr.code_postal=c_postal;
+		varAddr.code_postal=c_postal;
+		lambert93ToGPS(&x,&y);
+		varAddr.coord.x=x;
+		varAddr.coord.y=y;
         }
 
+/* //Tentative avec un switch :
+                int compteurvirgule = 0;
+        while (fscanf(fd) != '\0')
+        {
+                switch (compteurvirgule){
+                        case 1;//Non utilisé
+                        case 2;//Non utilisé
+                        //Numéro
+                        case 3:
+                                while(fscanf(fd) != ",")
+                                {
+                                // /!\ Vérifier string.h
+                                
+                                }
+                                compteurvirgule++;
+                        break;
+                        //Nom rue
+                        case [5,7]
+                                while(fscanf(fd) != ",")
+                                {
 
+                                }
+                                compteurvirgule++;
+                        break;
+                        //Nom rue suite (alias)
+                        //Nom rue suite (nom LDC)
+                        default;
+                                compteurvirgule++;
+
+                }
+        }
+*/
+}
 
 /* const char* recuperer_champ(char* ligne, int numero_champ)
 {
@@ -54,5 +88,11 @@ adresse varAddr; //avant insertion dans la BDD
     }
   }
   return NULL;
+	
+}*/
+	
+/*
+bdd_trace * readGeoloc(FILE * parFd)
+{
 	
 }*/
