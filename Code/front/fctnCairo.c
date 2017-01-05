@@ -40,8 +40,8 @@ void faire_tracesInsa(GtkWidget *widget, cairo_t *cr, gpointer user_data)
 
 void faire_tracer(cairo_t *cr, int carte, trajet *cible)
 {
-	double x;
-	double y;
+	int x;
+	int y;
 	// Epaisseur des lignes
 	cairo_set_line_width(cr, 1.0);
 	// Couleur de notre point de depart ici rouge
@@ -59,8 +59,10 @@ void faire_tracer(cairo_t *cr, int carte, trajet *cible)
 		if(ptr->visibilite==1 /* && condition date */)
 		{
 			// Inversion longitude et latitude
-			x = echelle(ptr->coord.y, carte, 1);
-			y = echelle(ptr->coord.x, carte, 0);
+			x = (int)echelle(ptr->coord.y, carte, 1);
+			y = (int)echelle(ptr->coord.x, carte, 0);
+			//printf("%lf,%lf\n",ptr->coord.y,ptr->coord.x);
+			printf("%d,%d\n",x,y);
 			
 			// Dessin d'un petit "+"
 			cairo_move_to(cr, x, y - TAILLE_TRACE);
@@ -99,9 +101,10 @@ void faire_aggregation(cairo_t *cr, cercle *cercle)
 
 double echelle(double valeur, int carte, int longitude)
 {
+	double conversion = 0.0;
 	switch(carte)
 	{
-			double conversion;
+		
 		case 0: // Cher
 			if(longitude)
 			{
