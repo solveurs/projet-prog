@@ -1,5 +1,5 @@
 #include "../headers/front.h"
-#include "../headers/rectangle.h"
+//#include "../headers/rectangle.h"
 
 rectangle initRectangle(point origine, double hauteur, double largeur)
 {

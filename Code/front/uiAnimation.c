@@ -20,7 +20,7 @@
 */
 
 #include "../headers/front.h"
-#include "../headers/uiAnimation.h"
+//#include "../headers/uiAnimation.h"
 
 /**
  * \fn      int uiAnimation(GtkWidget* widget, gpointer user_data)

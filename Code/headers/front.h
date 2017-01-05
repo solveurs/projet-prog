@@ -3,6 +3,9 @@
 #include "includes.h"
 #include "signal.h"
 #include "globalFront.h"
+#include "fctnCairo.h"
+#include "activate.h"
+#include "fonctionFront.h"
 
 /* ====== UI.h ====== */
 #include "uiTraces.h"
@@ -16,7 +19,6 @@
 #include "rectangle.h"
 
 /* ====== Fonctions ====== */
-void initGlobFront(void);
-void libereGlob(void);
+
 
 extern void activate(GtkApplication *app, gpointer user_data);

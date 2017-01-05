@@ -1,5 +1,5 @@
 #include "../headers/front.h"
-#include "../headers/carte.h"
+//#include "../headers/carte.h"
 
 
 carte initCarte(char* chemin_image_carte, char* chemin_donnees_carte, int hauteur, int largeur, double latitudeHautGauche, double longitudeHautGauche, double latitudeBasDroite, double longitudeBasDroite)

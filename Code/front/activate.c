@@ -10,8 +10,8 @@
 */
 
 #include "../headers/front.h"
-#include "../headers/activate.h"
-#include "../headers/structures.h"
+/*#include "../headers/activate.h"
+#include "../headers/structures.h"*/
 
 extern int uiTraces(GtkWidget* widget, gpointer user_data);
 extern int uiAnimation(GtkWidget* widget, gpointer user_data);

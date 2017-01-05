@@ -17,8 +17,8 @@
  *
 */
 #include "../headers/front.h"
-#include "../headers/fctnCairo.h"
-#include "../headers/globalFront.h"
+/*#include "../headers/fctnCairo.h"
+#include "../headers/globalFront.h"*/
 
 void faire_tracesCher(GtkWidget *widget, cairo_t *cr, gpointer user_data)
 {

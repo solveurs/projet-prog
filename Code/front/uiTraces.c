@@ -18,10 +18,10 @@
 */
 
 #include "../headers/front.h"
-#include "../headers/uiTraces.h"
+/*#include "../headers/uiTraces.h"
 #include "../headers/fonctionFront.h"
 #include "../headers/activate.h"
-#include "../headers/globalFront.h"
+#include "../headers/globalFront.h"*/
 
 /**
  * \fn      int uiTraces(GtkWidget* widget, gpointer user_data)

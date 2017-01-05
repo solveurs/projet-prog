@@ -1,5 +1,5 @@
 #include "../headers/front.h"
-#include "../headers/point.h"
+//#include "../headers/point.h"
 
 point initPoint(double x, double y)
 {
