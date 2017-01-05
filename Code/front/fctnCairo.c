@@ -130,21 +130,21 @@ double echelle(double valeur, int carte, int longitude)
 
 void majCartes(int idCarte)
 {
-  gtk_widget_queue_draw(globFront.zoneDessinCher[idCarte]);
-  gtk_widget_queue_draw(globFront.zoneDessinBourges[idCarte]);
-  gtk_widget_queue_draw(globFront.zoneDessinInsa[idCarte]);
+  gtk_widget_queue_draw(varGlobFront.zoneDessinCher[idCarte]);
+  gtk_widget_queue_draw(varGlobFront.zoneDessinBourges[idCarte]);
+  gtk_widget_queue_draw(varGlobFront.zoneDessinInsa[idCarte]);
 }
 
 void cacheCartes(int idCarte)
 {
-  gtk_widget_hide(globFront.zoneDessinCher[idCarte]);
-  gtk_widget_hide(globFront.zoneDessinBourges[idCarte]);
-  gtk_widget_hide(globFront.zoneDessinInsa[idCarte]);
+  gtk_widget_hide(varGlobFront.zoneDessinCher[idCarte]);
+  gtk_widget_hide(varGlobFront.zoneDessinBourges[idCarte]);
+  gtk_widget_hide(varGlobFront.zoneDessinInsa[idCarte]);
 }
 
 void afficheCartes(int idCarte)
 {
-  gtk_widget_show(globFront.zoneDessinCher[idCarte]);
-  gtk_widget_show(globFront.zoneDessinBourges[idCarte]);
-  gtk_widget_show(globFront.zoneDessinInsa[idCarte]);
+  gtk_widget_show(varGlobFront.zoneDessinCher[idCarte]);
+  gtk_widget_show(varGlobFront.zoneDessinBourges[idCarte]);
+  gtk_widget_show(varGlobFront.zoneDessinInsa[idCarte]);
 }
