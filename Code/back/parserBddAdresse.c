@@ -8,6 +8,11 @@
 
 FILE * openBddAddr(const char * nom)
 {
+	FILE * fd = NULL;
+	if((fd = fopen(nom,"r")) == NULL){
+		perror("Erreur lors de l'ouverture de la base de donnees adresses\n");
+	}
+	return fd;
 	
 }
 
