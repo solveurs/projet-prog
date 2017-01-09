@@ -11,6 +11,7 @@
 #include "uiTraces.h"
 #include "uiAnimation.h"
 #include "uiAnonymite.h"
+#include "uiAide.h"
 
 /* ====== Structures ====== */
 #include "structures.h"
