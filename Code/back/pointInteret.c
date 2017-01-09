@@ -225,9 +225,42 @@ pt_interet * fusionPtInteret(pt_interet * parPtInt1, pt_interet * parPtInt2)
 liste_pt_interet * calculPointInteretFreq(trajet * parTr)
 {
 	liste_pt_interet * varListe = initListePointInteret();
-	point * varTab;
+	point * varTab = calloc(parTr->taille, sizeof(point));
+	int i;
+	trace * it = parTr->premier;
+	//remplissage du tableau
+	for (i = 0; i < parTr->taille; i++)
+	{
+		varTab[i].x = it->coord.x;
+		varTab[i].y = it->coord.y;
+	}
 	
+	//tri du tableau suivant x puis y
+	quicksort(varTab, 0, parTr->taille, 1);
+	int j = 0;
+	int k;
+	while(j < parTr->taille)
+	{
+		k = j;
+		while (varTab[k].x == varTab[j].x)
+		{
+			k++;
+		}
+		quicksort(varTab, j, k, 0);
+		j = k;
+	}
 	
+	int n = 0;
+	int m;
+	while (n < parTr->taille)
+	{
+		m = 0;
+		while ((varTab[n].x == varTab[n+1].x) && (varTab[n].y == varTab[n+1].y))
+		{
+			m++;
+		}
+		ajoutPointInteret(varListe, initPointInteret(m, 0, 1, varTab[n], *(initAdresse())));
+	}
 	
 	return varListe;
 }
