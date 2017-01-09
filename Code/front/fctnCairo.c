@@ -45,14 +45,14 @@ void faire_tracer(cairo_t *cr, int carte, trajet *cible)
 	// Epaisseur des lignes
 	cairo_set_line_width(cr, 1.0);
 	// Couleur de notre point de depart ici rouge
-	cairo_set_source_rgb(cr, 1, 0, 0);
+	cairo_set_source_rgb(cr, 0, 0, 1);
 	
 	// Tracer des points
 	trace* ptr;
 	
 	// Traces en rouge
 	
-	cairo_set_source_rgb(cr, 1, 0, 0);
+	cairo_set_source_rgb(cr, 0, 0, 1);
 
 	for(ptr=cible->premier; ptr!=cible->dernier; ptr=ptr->suiv)
 	{
@@ -62,7 +62,7 @@ void faire_tracer(cairo_t *cr, int carte, trajet *cible)
 			x = (int)echelle(ptr->coord.y, carte, 1);
 			y = (int)echelle(ptr->coord.x, carte, 0);
 			//printf("%lf,%lf\n",ptr->coord.y,ptr->coord.x);
-			printf("%d,%d\n",x,y);
+			
 			
 			// Dessin d'un petit "+"
 			cairo_move_to(cr, x, y - TAILLE_TRACE);
@@ -74,8 +74,8 @@ void faire_tracer(cairo_t *cr, int carte, trajet *cible)
 			if(cible->visibilite) //si le trajet est visible
 			{
 				cairo_move_to(cr, x, y);
-				x = echelle(ptr->suiv->coord.x, carte, 1);
-				y = echelle(ptr->suiv->coord.y, carte, 0);
+				x = (int)echelle(ptr->suiv->coord.y, carte, 1);
+				y = (int)echelle(ptr->suiv->coord.x, carte, 0);
 				cairo_line_to(cr, x, y);
 			}
 		}

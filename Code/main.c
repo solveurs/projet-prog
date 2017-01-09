@@ -40,7 +40,7 @@ void debugBack(void)
 	bdd_trace * fd_trace = readGeoloc(fd);
 	trajet * _trajet = fd_trace->trajet;
 	afficheTrajet(_trajet);
-	liste_pt_interet * _listePtInteret = calculPointInteret(_trajet);
+	liste_pt_interet * _listePtInteret = calculPointInteretTemp(_trajet);
 	afficheArrPtInteret(_listePtInteret);
 	savePointInteret(*_listePtInteret);
 	//	point p = { .x = 0.1, .y = 0.1};

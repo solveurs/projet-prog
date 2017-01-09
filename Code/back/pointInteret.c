@@ -105,7 +105,7 @@ void ajoutPointInteret(liste_pt_interet * parListe, pt_interet * parPtInteret)
 }
 
 
-liste_pt_interet * calculPointInteret(trajet * parTr)
+liste_pt_interet * calculPointInteretSpatial(trajet * parTr)
 {
 	liste_pt_interet * varListe = initListePointInteret();
 	cercle varC;
@@ -159,8 +159,13 @@ liste_pt_interet * calculPointInteret(trajet * parTr)
 		}
 		it = it->suiv;
 	}
-	
-	//Deuxieme boucle qui va reparcourir les points d'interet et les regroupés en plus gros ==> 3ms
+	return varListe;
+}
+
+liste_pt_interet * calculPointInteretTemp(trajet * parTr)
+{
+	liste_pt_interet * varListe = calculPointInteretSpatial(parTr);
+	cercle varC;
 	int i;
 	int j;
 	int k = 0;
@@ -182,7 +187,6 @@ liste_pt_interet * calculPointInteret(trajet * parTr)
 			}
 		}
 	}
-	
 	return varListe;
 }
 
@@ -216,6 +220,16 @@ pt_interet * fusionPtInteret(pt_interet * parPtInt1, pt_interet * parPtInt2)
 											   varP,
 											   *(initAdresse()));
 	return varNvPtInt;
+}
+
+liste_pt_interet * calculPointInteretFreq(trajet * parTr)
+{
+	liste_pt_interet * varListe = initListePointInteret();
+	point * varTab;
+	
+	
+	
+	return varListe;
 }
 
 /**

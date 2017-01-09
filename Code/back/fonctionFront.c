@@ -33,7 +33,7 @@ trajet * IimportTrajet(const char * nom)
 
 liste_pt_interet* IgetPtInteret(trajet * parTr)
 {
-	return calculPointInteret(parTr);
+	return calculPointInteretTemp(parTr);
 }
 
 trajet * IlectureTrace(int parCmd, trajet * parTr)
