@@ -57,6 +57,7 @@ typedef struct s_TracesUI
   GtkWidget *boxPrincipale;
   GtkWidget *frameTraces;
   GtkWidget *boutonImporter;
+  GtkWidget *imgImport;
   GtkWidget *zoneScroll;
   GtkWidget *zoneScrollBox;
 } tracesUI;

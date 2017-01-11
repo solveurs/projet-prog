@@ -72,8 +72,14 @@ int uiTraces(GtkWidget* widget, gpointer user_data)
 
     // ====== Layout : Box
     fenetreTraces->boxPrincipale = gtk_box_new(GTK_ORIENTATION_VERTICAL, UI_TRACE_ESPACEMENT);
+
     // ------ Widgets : Bouton et Box 'Importer'
-    fenetreTraces->boutonImporter = gtk_button_new_with_label("Importer");
+    //fenetreTraces->boutonImporter = gtk_button_new_with_label("Importer");
+    fenetreTraces->boutonImporter = gtk_button_new();
+    fenetreTraces->imgImport = gtk_image_new_from_file("../Data/icones/download-64.png");
+    gtk_button_set_image(GTK_BUTTON(fenetreTraces->boutonImporter), fenetreTraces->imgImport);
+
+
     // ===--- Layout : Frame
     fenetreTraces->frameTraces = gtk_frame_new("Liste des traces");
     // --- Widget : Zone de scroll
