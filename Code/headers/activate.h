@@ -14,7 +14,7 @@ typedef struct s_uiPrincipale
 {
 	GtkWidget 	*widget; //c'est l'application
 	GtkWidget 	*boxPrincipale;
-	
+
 	GtkWidget 	*boxMenu;
 	GtkWidget 	*menuBarre;
 	GtkWidget 	*ssMenu1;
@@ -29,10 +29,10 @@ typedef struct s_uiPrincipale
 	GtkWidget 	*ssMenuItem6;
 	GtkWidget 	*ssMenuItem7;
 	GtkWidget 	*ssMenuItem8;
-	
+
 	GtkWidget 	*frameEntete;
 	GtkWidget		*boxEntete;
-	
+
 	GtkWidget 	*boxUI;
 	GtkWidget		*boutonBoxTraces;
 	GtkWidget		*boutonBoxAnim;
@@ -40,13 +40,13 @@ typedef struct s_uiPrincipale
 	GtkWidget 	*boutonTraces;
 	GtkWidget 	*boutonAnimation;
 	GtkWidget 	*boutonAnonymat;
-	
+
 	GtkWidget		*boxCarte;
 	GtkWidget		*frameCarte;
-	GtkWidget   *frameEchelle;
-	GtkWidget		*labelEchelle;
+	GtkWidget   *frameImageCarte;
+	GtkWidget		*imgCarte;
 	GtkWidget		*selectCarte;
-	
+
 	GtkWidget 	*scrollCarteCher;
 	GtkWidget   *scrollCarteBourges;
 	GtkWidget   *scrollCarteInsa;
