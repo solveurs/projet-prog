@@ -28,7 +28,7 @@ typedef struct s_AnonymiteItem
 {
   GtkWidget *widget; // Le widget est une box car c'est un item
   adUI      *details;
-  int       couleur; 
+  int       couleur;
   int		    etat;
   int       id;
   double    rayon;
@@ -50,6 +50,7 @@ typedef struct s_Anon
   GtkWidget *boxPrincipale;
 
   GtkWidget *boutonCercle;
+  GtkWidget *imgCercle;
 
   GtkWidget *boxTracer;
   GtkWidget *labelInfo;
