@@ -331,7 +331,7 @@ void confirmeSupprItem(GtkWidget* widget, gpointer user_data)
   }
 
   tracesItem* itemASuppr = (tracesItem *)user_data;
-  char txt[] = "Si vous supprimez cet ensemble de traces, vous ne pourrez plus l'utiliser.\n\nConfirmer pour supprimer ";
+  char txt[] = "Si vous supprimez cet ensemble de traces, vous ne pourrez plus l'utiliser.\n\n \t\t\t\tConfirmer pour supprimer ";
 
   // ============== Initialisation widgets ==============
   // ====== Fenetre principale
