@@ -64,12 +64,12 @@ int uiAnimation(GtkWidget* widget, gpointer user_data)
 	fenetreAnim->boxPrincipale = gtk_box_new(GTK_ORIENTATION_VERTICAL, UI_ANIM_ESPACEMENT);
 
 	// ===--- Layout : Frame pour les dates + la box
-	fenetreAnim->frameDate = gtk_frame_new("Interval de visionnage");
+	fenetreAnim->frameDate = gtk_frame_new("Intervalle de visionnage");
 	fenetreAnim->boxFrame = gtk_box_new(GTK_ORIENTATION_VERTICAL, UI_ANIM_ESPACEMENT);
 
 		// === Layout : Box calendriers
 	fenetreAnim->boxPH = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, UI_ANIM_ESPACEMENT);
-	
+
 			// === Layout : Grille debut + Grille fin
 	fenetreAnim->gridPHG = gtk_grid_new();
 	fenetreAnim->gridPHD = gtk_grid_new();
@@ -94,7 +94,8 @@ int uiAnimation(GtkWidget* widget, gpointer user_data)
   	gtk_widget_set_can_focus(fenetreAnim->entryZoneDeb, FALSE);
 
   	fenetreAnim->boutonCalG = gtk_button_new();
-
+    fenetreAnim->imgCalG = gtk_image_new_from_file("../Data/icones/calendar-Time-16.png");
+    gtk_button_set_image(GTK_BUTTON(fenetreAnim->boutonCalG), fenetreAnim->imgCalG);
 			// --- Widgets : Calendrier de fin (droite)
 	/* Initialisation de la date */
 	fenetreAnim->dateFin = malloc(sizeof(dateAnim));
@@ -115,6 +116,9 @@ int uiAnimation(GtkWidget* widget, gpointer user_data)
   	gtk_entry_set_text(GTK_ENTRY(fenetreAnim->entryZoneFin), "01/01/2018");
 
   	fenetreAnim->boutonCalD = gtk_button_new();
+    fenetreAnim->imgCalD = gtk_image_new_from_file("../Data/icones/calendar-Time-16.png");
+    gtk_button_set_image(GTK_BUTTON(fenetreAnim->boutonCalD), fenetreAnim->imgCalD);
+
 
 		//=== Box : vitesse
 	fenetreAnim->boxPB = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, UI_ANIM_ESPACEMENT);
@@ -126,11 +130,21 @@ int uiAnimation(GtkWidget* widget, gpointer user_data)
 	// ===--- Layout : Box contenant les boutons d'animation
 	fenetreAnim->boxBoutons = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, UI_ANIM_ESPACEMENT);
 
-	fenetreAnim->boutonArriere = gtk_button_new_with_label("Arriere");	
-	fenetreAnim->boutonStop = gtk_button_new_with_label("Stop");
-	fenetreAnim->boutonPlay = gtk_button_new_with_label("Play");
-	fenetreAnim->boutonAvance = gtk_button_new_with_label("Avance");
-	
+  fenetreAnim->boutonArriere = gtk_button_new();
+  fenetreAnim->boutonStop = gtk_button_new();
+  fenetreAnim->boutonPlayPause = gtk_button_new();
+  fenetreAnim->boutonAvance = gtk_button_new();
+
+  fenetreAnim->imgArriere = gtk_image_new_from_file("../Data/icones/skipbackward-32.png");
+  fenetreAnim->imgStop = gtk_image_new_from_file("../Data/icones/stop-32.png");
+  fenetreAnim->imgPlayPause = gtk_image_new_from_file("../Data/icones/play-32.png");
+  fenetreAnim->imgAvance = gtk_image_new_from_file("../Data/icones/skipforward-32.png");
+
+  gtk_button_set_image(GTK_BUTTON(fenetreAnim->boutonArriere), fenetreAnim->imgArriere);
+  gtk_button_set_image(GTK_BUTTON(fenetreAnim->boutonStop), fenetreAnim->imgStop);
+  gtk_button_set_image(GTK_BUTTON(fenetreAnim->boutonPlayPause), fenetreAnim->imgPlayPause);
+  gtk_button_set_image(GTK_BUTTON(fenetreAnim->boutonAvance), fenetreAnim->imgAvance);
+
 	// ===--- Widget : Barre de selection
 	fenetreAnim->select = gtk_scale_new_with_range(GTK_ORIENTATION_HORIZONTAL, 1, 100, 1);
 
@@ -145,6 +159,12 @@ int uiAnimation(GtkWidget* widget, gpointer user_data)
     g_signal_connect(fenetreAnim->widget, "delete-event", G_CALLBACK(gtk_widget_hide_on_delete), NULL);
     g_signal_connect(fenetreAnim->boutonCalG, "clicked", G_CALLBACK(setCalendrier), fenetreAnim->entryZoneDeb);
     g_signal_connect(fenetreAnim->boutonCalD, "clicked", G_CALLBACK(setCalendrier), fenetreAnim->entryZoneFin);
+
+    g_signal_connect(fenetreAnim->boutonArriere, "clicked", G_CALLBACK(arriere), fenetreAnim);
+    g_signal_connect(fenetreAnim->boutonStop, "clicked", G_CALLBACK(stop), fenetreAnim);
+    g_signal_connect(fenetreAnim->boutonPlayPause, "clicked", G_CALLBACK(playPause), fenetreAnim);
+    g_signal_connect(fenetreAnim->boutonAvance, "clicked", G_CALLBACK(avance), fenetreAnim);
+
 
     // ==================== Packaging ====================
     // Fenetre principale <- Box principale
@@ -179,7 +199,7 @@ int uiAnimation(GtkWidget* widget, gpointer user_data)
 		// Box bouton <- Boutons
 	gtk_box_pack_start(GTK_BOX(fenetreAnim->boxBoutons), fenetreAnim->boutonArriere, TRUE, FALSE, UI_ANIM_ESPACEMENT);
 	gtk_box_pack_start(GTK_BOX(fenetreAnim->boxBoutons), fenetreAnim->boutonStop, TRUE, FALSE, UI_ANIM_ESPACEMENT);
-	gtk_box_pack_start(GTK_BOX(fenetreAnim->boxBoutons), fenetreAnim->boutonPlay, TRUE, FALSE, UI_ANIM_ESPACEMENT);
+	gtk_box_pack_start(GTK_BOX(fenetreAnim->boxBoutons), fenetreAnim->boutonPlayPause, TRUE, FALSE, UI_ANIM_ESPACEMENT);
 	gtk_box_pack_start(GTK_BOX(fenetreAnim->boxBoutons), fenetreAnim->boutonAvance, TRUE, FALSE, UI_ANIM_ESPACEMENT);
 
 		// Box d'affichage <- Case de gauche + Case de droite
@@ -269,5 +289,47 @@ void annulerCal(GtkWidget* widget, gpointer user_data)
 
 void confirmerCal(GtkWidget* widget, gpointer user_data)
 {
+  animUI* fenetreAnim = (animUI *)user_data;
+	// TODO
+}
+
+void arriere(GtkWidget* widget, gpointer user_data)
+{
+  animUI* fenetreAnim = (animUI *)user_data;
+	// TODO
+}
+
+void stop(GtkWidget* widget, gpointer user_data)
+{
+  animUI* fenetreAnim = (animUI *)user_data;
+	// TODO
+}
+
+void playPause(GtkWidget* widget, gpointer user_data)
+{
+  static int active = 1;
+  animUI* fenetreAnim = (animUI *)user_data;
+  if(active)
+  {
+    active = 0;
+    gtk_image_set_from_file(GTK_IMAGE(fenetreAnim->imgPlayPause), "../Data/icones/pause-32.png");
+
+    // TODO
+
+  }
+  else
+  {
+    active = 1;
+    gtk_image_set_from_file(GTK_IMAGE(fenetreAnim->imgPlayPause), "../Data/icones/play-32.png");
+
+    // TODO
+
+
+  }
+}
+
+void avance(GtkWidget* widget, gpointer user_data)
+{
+  animUI* fenetreAnim = (animUI *)user_data;
 	// TODO
 }

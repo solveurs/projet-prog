@@ -28,28 +28,38 @@ typedef struct s_AnimUI
 
   GtkWidget   *frameDate;
   GtkWidget   *boxFrame;
-    // Calendriers
+  // Calendriers
   GtkWidget   *boxPH;
-      // Gauche == Debut
+  // Gauche == Debut
   GtkWidget   *gridPHG;
   GtkWidget   *labelPHG;
   GtkWidget   *entryZoneDeb;
   GtkWidget   *boutonCalG;
-      // Droite == Fin
+  GtkWidget   *imgCalG;
+
+  // Droite == Fin
   GtkWidget   *gridPHD;
   GtkWidget   *labelPHD;
   GtkWidget   *entryZoneFin;
   GtkWidget   *boutonCalD;
-    // Vitesse
+  GtkWidget   *imgCalD;
+  // Vitesse
   GtkWidget   *boxPB;
   GtkWidget   *label;
   GtkWidget   *vitesse;
 
+  //Boutons d'animation
   GtkWidget   *boxBoutons;
   GtkWidget   *boutonArriere;
   GtkWidget   *boutonStop;
-  GtkWidget   *boutonPlay;
+  GtkWidget   *boutonPlayPause;
   GtkWidget   *boutonAvance;
+
+  //Icones des boutons d'animation
+  GtkWidget   *imgArriere;
+  GtkWidget   *imgStop;
+  GtkWidget   *imgPlayPause;
+  GtkWidget   *imgAvance;
 
   GtkWidget   *select;
 
@@ -77,3 +87,7 @@ int uiAnimation(GtkWidget* widget, gpointer user_data);
 void setCalendrier(GtkWidget* widget, gpointer user_data);
 void annulerCal(GtkWidget* widget, gpointer user_data);
 void confirmerCal(GtkWidget* widget, gpointer user_data);
+void arriere(GtkWidget* widget, gpointer user_data);
+void stop(GtkWidget* widget, gpointer user_data);
+void playPause(GtkWidget* widget, gpointer user_data);
+void avance(GtkWidget* widget, gpointer user_data);
