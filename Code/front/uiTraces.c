@@ -128,7 +128,7 @@ void importer(GtkWidget* widget, gpointer user_data)
   GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_OPEN;
   gint res;
 
-  dialog = gtk_file_chooser_dialog_new ("Open File", GTK_WINDOW(fenetre->widget), action, 
+  dialog = gtk_file_chooser_dialog_new ("Open File", GTK_WINDOW(fenetre->widget), action,
                                         "Cancel", GTK_RESPONSE_CANCEL,
                                         "Open", GTK_RESPONSE_ACCEPT, NULL);
 
@@ -146,7 +146,7 @@ void importer(GtkWidget* widget, gpointer user_data)
       /* Sauvegarde dans le tableau global */
       varGlobFront.trajet[varGlobFront.idTrajet] = tmpTrajet;
 
-      /* Ajout du trajet en tant qu'item graphique */   
+      /* Ajout du trajet en tant qu'item graphique */
       ajoutItemTraces(fenetre->zoneScrollBox, (char *)g_path_get_basename(filename), tmpTrajet);
       varGlobFront.idTrajet++;
       g_free(filename);
@@ -212,10 +212,10 @@ void ajoutItemTraces(GtkWidget* boxScroll, const char* nomTrajet, trajet* ptrTra
   item->boutonVisible = gtk_button_new();
   item->boutonSupprimer = gtk_button_new();
 
-  item->imgRoute = gtk_image_new_from_file("../Data/icones/linked.png");
-  item->imgOption = gtk_image_new_from_file("../Data/icones/gear.png");
-  item->imgVisible = gtk_image_new_from_file("../Data/icones/eye.png");
-  item->imgSupprimer = gtk_image_new_from_file("../Data/icones/trash.png");
+  item->imgRoute = gtk_image_new_from_file("../Data/icones/linked-16.png");
+  item->imgOption = gtk_image_new_from_file("../Data/icones/gear-16.png");
+  item->imgVisible = gtk_image_new_from_file("../Data/icones/eye-16.png");
+  item->imgSupprimer = gtk_image_new_from_file("../Data/icones/trash-16.png");
 
   gtk_button_set_image(GTK_BUTTON(item->boutonRoute), item->imgRoute);
   gtk_button_set_image(GTK_BUTTON(item->boutonOption), item->imgOption);
@@ -283,13 +283,13 @@ void switchVisibilite(GtkWidget* widget, gpointer user_data)
   if(visible)
   {
     visible = 0;
-    gtk_image_set_from_file(GTK_IMAGE(item->imgVisible), "../Data/icones/eye-disabled.png");
+    gtk_image_set_from_file(GTK_IMAGE(item->imgVisible), "../Data/icones/eye-disabled-16.png");
     cacheCartes(item->id);
   }
   else
   {
     visible = 1;
-    gtk_image_set_from_file(GTK_IMAGE(item->imgVisible), "../Data/icones/eye.png");
+    gtk_image_set_from_file(GTK_IMAGE(item->imgVisible), "../Data/icones/eye-16.png");
     afficheCartes(item->id);
   }
 }
