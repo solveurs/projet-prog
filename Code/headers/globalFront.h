@@ -10,7 +10,7 @@
 /* ====== Var. Glob ====== */
 struct globFront
 {
-	trajet*			trajet[NOMBRE_MAX_TRAJETS];
+	int				trajetId[NOMBRE_MAX_TRAJETS];
 	int				idTrajet;
 
 	GtkWidget*		zoneDessinCher[NOMBRE_MAX_TRAJETS];
