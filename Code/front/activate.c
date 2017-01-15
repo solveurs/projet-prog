@@ -13,18 +13,22 @@
 /*#include "../headers/activate.h"
  #include "../headers/structures.h"*/
 
+/*
 extern int uiTraces(GtkWidget* widget, gpointer user_data);
 extern int uiAnimation(GtkWidget* widget, gpointer user_data);
 extern int uiAnonymite(GtkWidget* widget, gpointer user_data);
 extern void faire_tracesCher(GtkWidget *widget, cairo_t *cr, gpointer user_data);
 extern void faire_tracesBourges(GtkWidget *widget, cairo_t *cr, gpointer user_data);
 extern void faire_tracesInsa(GtkWidget *widget, cairo_t *cr, gpointer user_data);
+*/
+
+static uiMain* ui;
 
 void activate(GtkApplication *app, gpointer user_data)
 {
 	// ============== Initialisation widgets =============
 	// ====== Validation malloc
-	uiMain* ui = (uiMain *)malloc(sizeof(uiMain));
+	ui = (uiMain *)malloc(sizeof(uiMain));
 	if(ui == NULL)
 	{
 		printf("Erreur malloc uiMain");
@@ -37,7 +41,6 @@ void activate(GtkApplication *app, gpointer user_data)
 	gtk_window_set_icon_from_file(GTK_WINDOW(ui->widget),"../Data/icones/logo_solveur-200.png",NULL);
 	gtk_window_set_default_size (GTK_WINDOW(ui->widget), UI_MAIN_TAILLE_X, UI_MAIN_TAILLE_Y);
 	gtk_window_maximize(GTK_WINDOW(ui->widget));
-
 	
 	// ===--- Layout : Box principale
 	ui->boxPrincipale = gtk_box_new(GTK_ORIENTATION_VERTICAL, UI_MAIN_ESPACEMENT);
@@ -102,6 +105,7 @@ void activate(GtkApplication *app, gpointer user_data)
 	gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(ui->selectCarte), "0", "Cher");
 	gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(ui->selectCarte), "1", "Bourges");
 	gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(ui->selectCarte), "2", "Insa Bourges");
+	gtk_combo_box_set_active(GTK_COMBO_BOX(ui->selectCarte), -1);
 	
 	
 	// ===--- Layout : Zone de la carte
@@ -116,6 +120,9 @@ void activate(GtkApplication *app, gpointer user_data)
 	ui->imgCarteCher = gtk_image_new_from_file("../Data/cartes/carte_Cher.png");
 	ui->imgCarteBourges = gtk_image_new_from_file("../Data/cartes/carte_Bourges.png");
 	ui->imgCarteInsa = gtk_image_new_from_file("../Data/cartes/carte_Insa.png");
+
+	gtk_widget_set_events(varGlobFront.overlayCarteCher, GDK_ENTER_NOTIFY_MASK);
+    gtk_widget_set_events(varGlobFront.overlayCarteCher, GDK_POINTER_MOTION_MASK);
 	
 	/* J'ai modifié l'architecture du code du a quelques problemes avec Cairo
 	 * Je mets ton travail en commentaire et j'etudierai les fonctions proposees
@@ -132,8 +139,12 @@ void activate(GtkApplication *app, gpointer user_data)
 	g_signal_connect(ui->boutonAnimation, "clicked", G_CALLBACK(uiAnimation), ui->widget);
 	g_signal_connect(ui->boutonAnonymat, "clicked", G_CALLBACK(uiAnonymite), ui->widget);
 	g_signal_connect(ui->selectCarte, "changed", G_CALLBACK(changeCarte), ui);
+
+	// On instance les fenetres auxiliaires pour les creer puis on les cache
+	g_signal_emit_by_name(ui->boutonAnonymat, "clicked", ui->widget);
+	g_signal_emit_by_name(ui->boutonAnimation,  "clicked", ui->widget);
 	
-	// ==================== Packaging ====================:
+	// ==================== Packaging ====================
 	// Fenetre principale <- Box principale
 	gtk_container_add(GTK_CONTAINER(ui->widget), ui->boxPrincipale);
 	// Box principale <- Box menu + Frame en-tete (UI + choix carte) + scrolls image carte
@@ -208,10 +219,6 @@ void ajoutOverlays(tracesItem* ptrItem)
 	g_signal_connect(G_OBJECT(zoneDessinBourges), "draw", G_CALLBACK(faire_tracesBourges), ptrItem);
 	g_signal_connect(G_OBJECT(zoneDessinInsa), "draw", G_CALLBACK(faire_tracesInsa), ptrItem);
 	
-	gtk_widget_queue_draw(zoneDessinCher);
-	gtk_widget_queue_draw(zoneDessinBourges);
-	gtk_widget_queue_draw(zoneDessinInsa);
-	
 	gtk_widget_show(zoneDessinCher);
 	gtk_widget_show(zoneDessinBourges);
 	gtk_widget_show(zoneDessinInsa);
@@ -220,15 +227,15 @@ void ajoutOverlays(tracesItem* ptrItem)
 void changeCarte(GtkWidget *widget, gpointer user_data)
 {
 	uiMain* fenetre = (uiMain *)user_data;
-	char* idCarte = (char *)gtk_combo_box_get_active_id(GTK_COMBO_BOX(widget));
+	int idCarte = gtk_combo_box_get_active(GTK_COMBO_BOX(widget));
 	
-	if(!strcmp(idCarte, "0"))
+	if(idCarte==0)
 	{
 		gtk_widget_hide(fenetre->scrollCarteBourges);
 		gtk_widget_hide(fenetre->scrollCarteInsa);
 		gtk_widget_show(fenetre->scrollCarteCher);
 	}
-	else if(!strcmp(idCarte, "1"))
+	else if(idCarte==1)
 	{
 		gtk_widget_hide(fenetre->scrollCarteCher);
 		gtk_widget_hide(fenetre->scrollCarteInsa);
@@ -246,4 +253,142 @@ void changeCarte(GtkWidget *widget, gpointer user_data)
 void bougeCarte(GtkWidget *widget, gpointer user_data)
 {
 	// TODO
+}
+
+int overlayTempAjout(GtkWidget* zoneCercle, GtkWidget* eventBox, int id)
+{
+	int idCarte = gtk_combo_box_get_active(GTK_COMBO_BOX(ui->selectCarte));
+	int i;
+	if(idCarte==-1)
+	{
+		GtkWidget *dialog, *label, *content_area;
+	    GtkDialogFlags flags;
+
+	    // Create the widgets
+	    flags = GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT;
+	    dialog = gtk_dialog_new_with_buttons("Message", GTK_WINDOW(ui->widget), flags,
+	                                        "OK", GTK_RESPONSE_NONE, NULL);
+
+	    content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+	    label = gtk_label_new("   Erreur ! \n   Aucune carte n'est sélectionnée !   ");
+
+	    // Ensure that the dialog box is destroyed when the user responds
+	    g_signal_connect_swapped (dialog, "response",
+	                              G_CALLBACK (gtk_widget_destroy), dialog);
+	    gtk_container_add (GTK_CONTAINER (content_area), label);
+	    gtk_widget_show_all(dialog);
+	    return 0;
+	}
+	else if(idCarte==0)
+	{
+		gtk_widget_realize(eventBox);
+		g_signal_connect(G_OBJECT(zoneCercle), "draw", G_CALLBACK(traceCercle), NULL);
+		g_signal_connect(G_OBJECT(eventBox), "motion-notify-event", G_CALLBACK(deplacementSouris), NULL);
+		g_signal_connect(eventBox, "button-press-event", G_CALLBACK(clickCercle), NULL);
+
+		gtk_container_add(GTK_CONTAINER(eventBox), zoneCercle);
+		gtk_overlay_add_overlay(GTK_OVERLAY(varGlobFront.overlayCarteCher), eventBox);
+		gtk_widget_add_events(eventBox, GDK_POINTER_MOTION_MASK);
+		gtk_widget_set_events(eventBox, GDK_POINTER_MOTION_MASK);
+		gtk_widget_show_all(eventBox);
+	    for(i=0; i<NOMBRE_MAX_TRAJETS; i++)
+	    {
+	      if(i!=id && varGlobFront.trajetId[i]!=-1)
+	      {
+	        gtk_widget_hide(varGlobFront.zoneDessinCher[i]);
+	      }
+	    }
+	}
+	else if(idCarte==1)
+	{
+		g_signal_connect(G_OBJECT(zoneCercle), "draw", G_CALLBACK(traceCercle), NULL);
+		g_signal_connect(G_OBJECT(eventBox), "motion-notify-event", G_CALLBACK(deplacementSouris), NULL);
+		g_signal_connect(eventBox, "button-press-event", G_CALLBACK(clickCercle), NULL);
+
+		gtk_container_add(GTK_CONTAINER(eventBox), zoneCercle);
+		gtk_overlay_add_overlay(GTK_OVERLAY(varGlobFront.overlayCarteBourges), eventBox);
+		gtk_widget_add_events(eventBox, GDK_POINTER_MOTION_MASK);
+		gtk_widget_set_events(eventBox, GDK_POINTER_MOTION_MASK);
+		gtk_widget_show_all(eventBox);
+		for(i=0; i<NOMBRE_MAX_TRAJETS; i++)
+	    {
+	      if(i!=id && varGlobFront.trajetId[i]!=-1)
+	      {
+	        gtk_widget_hide(varGlobFront.zoneDessinBourges[i]);
+	      }
+	    }
+	}
+	else
+	{
+		g_signal_connect(G_OBJECT(zoneCercle), "draw", G_CALLBACK(traceCercle), NULL);
+		g_signal_connect(G_OBJECT(eventBox), "motion-notify-event", G_CALLBACK(deplacementSouris), NULL);
+		g_signal_connect(eventBox, "button-press-event", G_CALLBACK(clickCercle), NULL);
+
+		gtk_container_add(GTK_CONTAINER(eventBox), zoneCercle);
+		gtk_overlay_add_overlay(GTK_OVERLAY(varGlobFront.overlayCarteInsa), eventBox);
+		gtk_widget_add_events(eventBox, GDK_POINTER_MOTION_MASK);
+		gtk_widget_set_events(eventBox, GDK_POINTER_MOTION_MASK);
+		gtk_widget_show_all(eventBox);
+		for(i=0; i<NOMBRE_MAX_TRAJETS; i++)
+	    {
+	      if(i!=id && varGlobFront.trajetId[i]!=-1)
+	      {
+	        gtk_widget_hide(varGlobFront.zoneDessinInsa[i]);
+	      }
+	    }
+	}
+	return 1;
+}
+
+void overlayTempSuppr(GtkWidget* eventBox, int id)
+{
+	int idCarte = gtk_combo_box_get_active(GTK_COMBO_BOX(ui->selectCarte));
+	int i;
+	if(idCarte==0) // Cher
+	{
+		gtk_container_remove(GTK_CONTAINER(varGlobFront.overlayCarteCher), eventBox);
+		for(i=0; i<NOMBRE_MAX_TRAJETS; i++)
+	    {
+	      if(i!=id && varGlobFront.trajetId[i]!=-1)
+	      {
+	        gtk_widget_show(varGlobFront.zoneDessinCher[i]);
+	      }
+	    }
+	}
+	else if(idCarte==1) // Bourges
+	{
+		gtk_container_remove(GTK_CONTAINER(varGlobFront.overlayCarteBourges), eventBox);
+		for(i=0; i<NOMBRE_MAX_TRAJETS; i++)
+	    {
+	      if(i!=id && varGlobFront.trajetId[i]!=-1)
+	      {
+	        gtk_widget_show(varGlobFront.zoneDessinInsa[i]);
+	      }
+	    }
+	}
+	else // Insa
+	{
+		gtk_container_remove(GTK_CONTAINER(varGlobFront.overlayCarteInsa), eventBox);
+		for(i=0; i<NOMBRE_MAX_TRAJETS; i++)
+	    {
+	      if(i!=id && varGlobFront.trajetId[i]!=-1)
+	      {
+	        gtk_widget_show(varGlobFront.zoneDessinInsa[i]);
+	      }
+	    }
+	}
+}
+
+void bloqueCarte()
+{
+	gtk_widget_set_sensitive(ui->boutonTraces, FALSE);
+	gtk_widget_set_sensitive(ui->boutonAnimation, FALSE);
+	gtk_widget_set_sensitive(ui->selectCarte, FALSE);
+}
+
+void debloqueCarte()
+{
+	gtk_widget_set_sensitive(ui->boutonTraces, TRUE);
+	gtk_widget_set_sensitive(ui->boutonAnimation, TRUE);
+	gtk_widget_set_sensitive(ui->selectCarte, TRUE);
 }

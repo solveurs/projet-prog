@@ -31,22 +31,23 @@ typedef struct s_uiPrincipale
 	GtkWidget 	*ssMenuItem8;
 	
 	GtkWidget 	*frameEntete;
-	GtkWidget		*boxEntete;
+	GtkWidget	*boxEntete;
 	
 	GtkWidget 	*boxUI;
-	GtkWidget		*boutonBoxTraces;
-	GtkWidget		*boutonBoxAnim;
-	GtkWidget		*boutonBoxAnon;
+	GtkWidget	*boutonBoxTraces;
+	GtkWidget	*boutonBoxAnim;
+	GtkWidget	*boutonBoxAnon;
 	GtkWidget 	*boutonTraces;
 	GtkWidget 	*boutonAnimation;
 	GtkWidget 	*boutonAnonymat;
 	
-	GtkWidget		*boxCarte;
-	GtkWidget		*frameCarte;
+	GtkWidget	*boxCarte;
+	GtkWidget	*frameCarte;
 	GtkWidget   *frameEchelle;
-	GtkWidget		*labelEchelle;
-	GtkWidget		*selectCarte;
-	
+	GtkWidget	*labelEchelle;
+	GtkWidget	*selectCarte;
+
+	GtkWidget	*boxScrolls;	
 	GtkWidget 	*scrollCarteCher;
 	GtkWidget   *scrollCarteBourges;
 	GtkWidget   *scrollCarteInsa;
@@ -65,3 +66,7 @@ void activate(GtkApplication *app, gpointer user_data);
 void ajoutOverlays(tracesItem* ptrItem);
 void changeCarte(GtkWidget *widget, gpointer user_data);
 void bougeCarte(GtkWidget *widget, gpointer user_data);
+int overlayTempAjout(GtkWidget* zoneCercle, GtkWidget* eventBox, int id);
+void overlayTempSuppr(GtkWidget* eventBox, int id);
+void bloqueCarte();
+void debloqueCarte();
