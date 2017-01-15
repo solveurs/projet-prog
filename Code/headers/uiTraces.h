@@ -7,8 +7,8 @@
 #define UI_TRACE_OUVERT         1
 #define UI_TRACE_FERME          0
 #define UI_TRACE_ESPACEMENT 	  5
-#define UI_TRACE_TAILLE_X		  300
-#define UI_TRACE_TAILLE_Y		  150
+#define UI_TRACE_TAILLE_X		  400
+#define UI_TRACE_TAILLE_Y		  300
 
 /* ===== Structures ===== */
 typedef struct s_TracesDetailsUI
@@ -57,6 +57,7 @@ typedef struct s_TracesUI
   GtkWidget *boxPrincipale;
   GtkWidget *frameTraces;
   GtkWidget *boutonImporter;
+  GtkWidget *imgImport;
   GtkWidget *zoneScroll;
   GtkWidget *zoneScrollBox;
 } tracesUI;

@@ -71,8 +71,14 @@ int uiTraces(GtkWidget* widget, gpointer user_data)
 
     // ====== Layout : Box
     fenetreTraces->boxPrincipale = gtk_box_new(GTK_ORIENTATION_VERTICAL, UI_TRACE_ESPACEMENT);
+
     // ------ Widgets : Bouton et Box 'Importer'
-    fenetreTraces->boutonImporter = gtk_button_new_with_label("Importer");
+    //fenetreTraces->boutonImporter = gtk_button_new_with_label("Importer");
+    fenetreTraces->boutonImporter = gtk_button_new();
+    fenetreTraces->imgImport = gtk_image_new_from_file("../Data/icones/download-64.png");
+    gtk_button_set_image(GTK_BUTTON(fenetreTraces->boutonImporter), fenetreTraces->imgImport);
+
+
     // ===--- Layout : Frame
     fenetreTraces->frameTraces = gtk_frame_new("Liste des traces");
     // --- Widget : Zone de scroll
@@ -128,7 +134,7 @@ void importer(GtkWidget* widget, gpointer user_data)
   GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_OPEN;
   gint res;
 
-  dialog = gtk_file_chooser_dialog_new ("Open File", GTK_WINDOW(fenetre->widget), action, 
+  dialog = gtk_file_chooser_dialog_new ("Open File", GTK_WINDOW(fenetre->widget), action,
                                         "Cancel", GTK_RESPONSE_CANCEL,
                                         "Open", GTK_RESPONSE_ACCEPT, NULL);
 
@@ -142,7 +148,7 @@ void importer(GtkWidget* widget, gpointer user_data)
 
       /* Creation du trajet */
       trajet* tmpTrajet = IimportTrajet(filename);
-
+      
       /* Ajout du trajet en tant qu'item graphique */
       ajoutItemTraces(fenetre->zoneScrollBox, (char *)g_path_get_basename(filename), tmpTrajet);
       varGlobFront.idTrajet++;
@@ -211,10 +217,10 @@ void ajoutItemTraces(GtkWidget* boxScroll, const char* nomTrajet, trajet* ptrTra
   item->boutonVisible = gtk_button_new();
   item->boutonSupprimer = gtk_button_new();
 
-  item->imgRoute = gtk_image_new_from_file("../Data/icones/linked.png");
-  item->imgOption = gtk_image_new_from_file("../Data/icones/gear.png");
-  item->imgVisible = gtk_image_new_from_file("../Data/icones/eye.png");
-  item->imgSupprimer = gtk_image_new_from_file("../Data/icones/trash.png");
+  item->imgRoute = gtk_image_new_from_file("../Data/icones/linked-16.png");
+  item->imgOption = gtk_image_new_from_file("../Data/icones/gear-16.png");
+  item->imgVisible = gtk_image_new_from_file("../Data/icones/eye-16.png");
+  item->imgSupprimer = gtk_image_new_from_file("../Data/icones/trash-16.png");
 
   gtk_button_set_image(GTK_BUTTON(item->boutonRoute), item->imgRoute);
   gtk_button_set_image(GTK_BUTTON(item->boutonOption), item->imgOption);
@@ -293,13 +299,13 @@ void switchVisibilite(GtkWidget* widget, gpointer user_data)
   if(visible)
   {
     visible = 0;
-    gtk_image_set_from_file(GTK_IMAGE(item->imgVisible), "../Data/icones/eye-disabled.png");
+    gtk_image_set_from_file(GTK_IMAGE(item->imgVisible), "../Data/icones/eye-disabled-16.png");
     cacheCartes(item->id);
   }
   else
   {
     visible = 1;
-    gtk_image_set_from_file(GTK_IMAGE(item->imgVisible), "../Data/icones/eye.png");
+    gtk_image_set_from_file(GTK_IMAGE(item->imgVisible), "../Data/icones/eye-16.png");
     afficheCartes(item->id);
   }
 }
@@ -341,7 +347,7 @@ void confirmeSupprItem(GtkWidget* widget, gpointer user_data)
   }
 
   tracesItem* itemASuppr = (tracesItem *)user_data;
-  char txt[] = "Si vous supprimez cet ensemble de traces, vous ne pourrez plus l'utiliser.\n\nConfirmer pour supprimer ";
+  char txt[] = "Si vous supprimez cet ensemble de traces, vous ne pourrez plus l'utiliser.\n\n \t\t\t\tConfirmer pour supprimer ";
 
   // ============== Initialisation widgets ==============
   // ====== Fenetre principale
