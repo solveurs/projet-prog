@@ -188,6 +188,7 @@ int uiAnimation(GtkWidget* widget, gpointer user_data)
 
     // ==================== Affichage ====================
     gtk_widget_show_all(fenetreAnim->widget);
+    gtk_widget_hide(fenetreAnim->widget);
   }
   else
   {
