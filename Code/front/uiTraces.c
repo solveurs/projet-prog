@@ -43,7 +43,6 @@ int uiTraces(GtkWidget* widget, gpointer user_data)
   // Declaration static pour eviter un SegFault
   static tracesUI *fenetreTraces;
 
-  //gtk_init(&argc, &argv);
   if(!etat)
   {
     // ============== Initialisation widgets ==============
@@ -123,6 +122,7 @@ int uiTraces(GtkWidget* widget, gpointer user_data)
 */
 void importer(GtkWidget* widget, gpointer user_data)
 {
+  
   tracesUI* fenetre = (tracesUI *)user_data;
   GtkWidget *dialog;
   GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_OPEN;
@@ -143,10 +143,7 @@ void importer(GtkWidget* widget, gpointer user_data)
       /* Creation du trajet */
       trajet* tmpTrajet = IimportTrajet(filename);
 
-      /* Sauvegarde dans le tableau global */
-      varGlobFront.trajet[varGlobFront.idTrajet] = tmpTrajet;
-
-      /* Ajout du trajet en tant qu'item graphique */   
+      /* Ajout du trajet en tant qu'item graphique */
       ajoutItemTraces(fenetre->zoneScrollBox, (char *)g_path_get_basename(filename), tmpTrajet);
       varGlobFront.idTrajet++;
       g_free(filename);
@@ -172,6 +169,8 @@ void ajoutItemTraces(GtkWidget* boxScroll, const char* nomTrajet, trajet* ptrTra
     exit(EXIT_FAILURE);
   item->etat = 0;
   item->id = id;
+  varGlobFront.trajetId[varGlobFront.idTrajet] = id;
+  id++;
 
   // ============== Initialisation widgets ==============
   // ====== Layout : Box principale
@@ -243,6 +242,7 @@ void ajoutItemTraces(GtkWidget* boxScroll, const char* nomTrajet, trajet* ptrTra
   gtk_box_pack_start(GTK_BOX(item->boxD), item->boutonSupprimer, TRUE, TRUE, UI_TRACE_ESPACEMENT);
 
   ajoutOverlays(item);
+  ajoutMenuTraces(nomTrajet, item->id);
 
   // ==================== Affichage ====================
   gtk_widget_show_all(item->widget);
@@ -261,8 +261,18 @@ void ajoutItemTraces(GtkWidget* boxScroll, const char* nomTrajet, trajet* ptrTra
 */
 void traceRoute(GtkWidget* widget, gpointer user_data)
 {
+  static int visible = 1;
   tracesItem* item = (tracesItem *)user_data;
-  item->ptrTrajet->visibilite = 1;
+  if(visible)
+  {
+    item->ptrTrajet->visibilite = 0;    
+    visible = 0;
+  }
+  else
+  {
+    item->ptrTrajet->visibilite = 1;
+    visible = 1;
+  }
 
   majCartes(item->id);
 }
@@ -384,8 +394,12 @@ void confirmeSupprItem(GtkWidget* widget, gpointer user_data)
 void supprimeItemTraces(GtkWidget* widget, gpointer user_data)
 {
   tracesItem *itemASuppr = (tracesItem *)user_data;
+
+  gtk_container_remove(GTK_CONTAINER(varGlobFront.overlayCarteCher), varGlobFront.zoneDessinCher[itemASuppr->id]);
+  gtk_container_remove(GTK_CONTAINER(varGlobFront.overlayCarteBourges), varGlobFront.zoneDessinBourges[itemASuppr->id]);
+  gtk_container_remove(GTK_CONTAINER(varGlobFront.overlayCarteInsa), varGlobFront.zoneDessinInsa[itemASuppr->id]);
+  supprimeMenuTraces(itemASuppr->id);
   free(itemASuppr->details);
-  gtk_widget_hide(itemASuppr->widget);
   gtk_widget_destroy(itemASuppr->widget);
   free((tracesItem *)user_data);
 
@@ -505,7 +519,7 @@ void appliquerTD(GtkWidget* widget, gpointer user_data)
 {
   tracesItem* item = (tracesItem*)user_data;
   gtk_label_set_text(GTK_LABEL(item->labelNom), gtk_entry_get_text(GTK_ENTRY(item->details->zoneEntry)));
-  printf("\nChangement de couleur");
+  renommeMenuTraces(item->id, gtk_label_get_text(GTK_LABEL(item->labelNom)));
   gtk_widget_hide(item->details->widget);
 }
 

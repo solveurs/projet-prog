@@ -23,37 +23,35 @@
 void faire_tracesCher(GtkWidget *widget, cairo_t *cr, gpointer user_data)
 {
 	tracesItem* ptrItem = (tracesItem *)user_data;
-	faire_tracer(cr, 0, ptrItem->ptrTrajet);
+	//printf("\nSignal Cher provenant de : %d", ptrItem->id);
+	faire_tracer(cr, 0, ptrItem->ptrTrajet, ptrItem->ptrCouleur);
 }
 
 void faire_tracesBourges(GtkWidget *widget, cairo_t *cr, gpointer user_data)
 {
 	tracesItem* ptrItem = (tracesItem *)user_data;
-	faire_tracer(cr, 1, ptrItem->ptrTrajet);
+	//printf("\nSignal Bourges provenant de : %d", ptrItem->id);
+	faire_tracer(cr, 1, ptrItem->ptrTrajet, ptrItem->ptrCouleur);
 }
 
 void faire_tracesInsa(GtkWidget *widget, cairo_t *cr, gpointer user_data)
 {
 	tracesItem* ptrItem = (tracesItem *)user_data;
-	faire_tracer(cr, 2, ptrItem->ptrTrajet);
+	//printf("\nSignal Insa provenant de : %d", ptrItem->id);
+	faire_tracer(cr, 2, ptrItem->ptrTrajet, ptrItem->ptrCouleur);
 }
 
-void faire_tracer(cairo_t *cr, int carte, trajet *cible)
+void faire_tracer(cairo_t *cr, int carte, trajet *cible, GdkRGBA* couleur)
 {
 	int x;
 	int y;
 	// Epaisseur des lignes
 	cairo_set_line_width(cr, 1.0);
-	// Couleur de notre point de depart ici rouge
-	cairo_set_source_rgb(cr, 0, 0, 1);
+	// Traces en bleu
+	cairo_set_source_rgb(cr, couleur->red, couleur->green, couleur->blue);
 	
 	// Tracer des points
 	trace* ptr;
-	
-	// Traces en rouge
-	
-	cairo_set_source_rgb(cr, 0, 0, 1);
-
 	for(ptr=cible->premier; ptr!=cible->dernier; ptr=ptr->suiv)
 	{
 		if(ptr->visibilite==1 /* && condition date */)
