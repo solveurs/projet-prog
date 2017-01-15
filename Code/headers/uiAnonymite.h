@@ -69,8 +69,16 @@ typedef struct s_Anon
 int uiAnonymite(GtkWidget* widget, gpointer user_data);
 void ajoutItemAnon(GtkWidget* widget, gpointer user_data);
 void optionItemAnon(GtkWidget* widget, gpointer user_data);
-void traceCercle(GtkWidget* widget, gpointer user_data);
 
-void ajoutMenuTraces(const gchar* nom);
+void traceCercle(GtkWidget* widget, cairo_t* cr, gpointer user_data);
+void ajouteCercle(GtkWidget* widget, gpointer user_data);
+void annulerCercle(GtkWidget* widget, gpointer user_data);
+void confirmerCercle(GtkWidget* widget, gpointer user_data);
+
+void ajoutMenuTraces(const gchar* nom, int idItem);
 void supprimeMenuTraces(gint id);
 void renommeMenuTraces(gint id, const gchar* nom);
+void deplacementSouris(GtkWidget *widget, GdkEvent *event, gpointer user_data);
+double rayonAnon(int centreX, int centreY, int rayonX, int rayonY);
+void clickCercle(GtkWidget *widget, GdkEventButton *event, gpointer user_data);
+void decaleIdGauche(int id);
