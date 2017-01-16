@@ -36,15 +36,15 @@ void debugBack(void)
 	//printf("long : %lf , lat: %lf\n",x, y);
 	
 	//La lecture d'un fichier de 450 traces + création du trajet + affichage = <8ms
-	/*
-	FILE * fd = openGeoloc("../Data/geoloc-logs.txt");
+
+	FILE * fd = openGeoloc("../Data/geoloc-logs-2.txt");
 	bdd_trace * fd_trace = readGeoloc(fd);
 	trajet * _trajet = fd_trace->trajet;
 	afficheTrajet(_trajet);
 	liste_pt_interet * _listePtInteret = calculPointInteretTemp(_trajet);
 	afficheArrPtInteret(_listePtInteret);
 	savePointInteret(*_listePtInteret);
-	*/
+
 	//	point p = { .x = 0.1, .y = 0.1};
 	//	point * varP = kmToGPS(p, 51);
 	//	printf("dlat : %lf, dlon : %lf",varP->x,varP->y);
