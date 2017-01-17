@@ -37,7 +37,7 @@ void debugBack(void)
 	
 	//La lecture d'un fichier de 450 traces + création du trajet + affichage = <8ms
 
-	FILE * fd = openGeoloc("../Data/geoloc-logs-2.txt");
+	FILE * fd = openGeoloc("../Data/geoloc.txt");
 	bdd_trace * fd_trace = readGeoloc(fd);
 	trajet * _trajet = fd_trace->trajet;
 	afficheTrajet(_trajet);
