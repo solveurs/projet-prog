@@ -52,6 +52,18 @@ int dis2points(const point parP1, const point parP2, const double parDisMax)
 	return (GPStoKm(parP1, parP2) < parDisMax)?1:0;
 }
 
+double distanceTrajet(const trajet parTr)
+{
+	double dis = 0;
+	trace * it = parTr.premier;
+	
+	while (it->suiv != NULL)
+	{
+		dis += GPStoKm(it->coord, it->suiv->coord);
+		it = it->suiv;
+	}
+	return dis;
+}
 
 adresse * initAdresse(void)
 {
@@ -156,12 +168,3 @@ void quicksort(point * parTab, int m, int n, int isX)
 		quicksort(parTab,j+1,n, isX);
 	}
 }
-
-
-
-
-
-
-
-
-

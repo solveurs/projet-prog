@@ -7,7 +7,7 @@
 
 trajet * IimportTrajet(const char * nom);
 liste_pt_interet* IgetPtInteret(trajet * parTr);
-trajet * IlectureTrace(int parCmd, trajet * parTr);
+int IlectureTrace(int parCmd, trajet * parTr);
 void IModeAnonymisation();
 void IfinModeAnonymisation();
 void IsaveAnonymisation(const trajet parTr, const char * chemin);

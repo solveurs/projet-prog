@@ -36,12 +36,13 @@ liste_pt_interet* IgetPtInteret(trajet * parTr)
 	return calculPointInteretTemp(parTr);
 }
 
-trajet * IlectureTrace(int parCmd, trajet * parTr)
+int IlectureTrace(int parCmd, trajet * parTr)
 {
 	switch (parCmd)
 	{
 		case 0: //on fait une lecture simple
 			
+			return 1;
 			break;
 		case 1: //on fait une lecture point par point
 			
@@ -52,12 +53,15 @@ trajet * IlectureTrace(int parCmd, trajet * parTr)
 		default:
 			break;
 	}
-	return parTr;
+	return -1;
 }
 
 void IModeAnonymisation();
 
-void IfinModeAnonymisation();
+void IfinModeAnonymisation(const trajet parTr)
+{
+	IsaveAnonymisation(parTr, "");
+}
 
 void IsaveAnonymisation(const trajet parTr, const char * chemin)
 {

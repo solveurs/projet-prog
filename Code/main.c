@@ -44,6 +44,7 @@ void debugBack(void)
 	liste_pt_interet * _listePtInteret = calculPointInteretTemp(_trajet);
 	afficheArrPtInteret(_listePtInteret);
 	savePointInteret(*_listePtInteret);
+	printf("Distance du trajet : %f", distanceTrajet(*_trajet));
 
 	//	point p = { .x = 0.1, .y = 0.1};
 	//	point * varP = kmToGPS(p, 51);
