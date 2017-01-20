@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
 	
 	//fnDebug = debugBack;
 	debugBack();
-	//debugFront(argc,argv);
+	debugFront(argc,argv);
 	
 #endif
 	//printf("toujours\n");

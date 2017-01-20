@@ -29,6 +29,7 @@ typedef struct s_uiPrincipale
 	GtkWidget 	*ssMenuItem6;
 	GtkWidget 	*ssMenuItem7;
 	GtkWidget 	*ssMenuItem8;
+	GtkWidget 	*ssMenuItem9;
 
 	GtkWidget 	*frameEntete;
 	GtkWidget	*boxEntete;
@@ -54,6 +55,7 @@ typedef struct s_uiPrincipale
 	GtkWidget 	*imgCarteCher;
 	GtkWidget   *imgCarteBourges;
 	GtkWidget   *imgCarteInsa;
+	
 }uiMain;
 
 /* ===== Fonctions ===== */
