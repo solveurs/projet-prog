@@ -98,73 +98,58 @@ point initPoint(double x, double y)
 	return resP;
 }
 
-void swap(point * x, point * y)
+void quicksortLat(point * parTab, int len)
 {
-	void * tmp;
-	tmp = x;
-	x = y;
-	y = tmp;
-	free(tmp);
-}
-
-int pivot(int x, int y)
-{
-	return (int)((x+y)/2);
-}
-
-void quicksort(point * parTab, int m, int n, int isX)
-{
-	int k,i,j,piv;
-	if (m<n)
+	
+	if (len < 2) return;
+	
+	double pivot = parTab[len/2].x;
+	int i, j;
+	for (i=0, j = len - 1; ;i++, j--)
 	{
-		piv = pivot(m,n);
-		swap(&parTab[m], &parTab[j]);
-		if (isX)
+		while (parTab[i].x < pivot)
 		{
-			k = parTab[m].x;
-			i = m+1;
-			j = n;
-			while (i<=j)
-			{
-				while((i <= n) && (parTab[i].x <= k))
-				{
-					i++;
-				}
-				while((j >= m) && (parTab[j].x > k))
-				{
-					j--;
-				}
-				if (i < j)
-				{
-					swap(&parTab[i], &parTab[j]);
-				}
-			}
+			i++;
 		}
-		else
+		while (parTab[j].x >pivot)
 		{
-			k = parTab[m].y;
-			i = m+1;
-			j = n;
-			while (i<=j)
-			{
-				while((i <= n) && (parTab[i].y <= k))
-				{
-					i++;
-				}
-				while((j >= m) && (parTab[j].y > k))
-				{
-					j--;
-				}
-				if (i < j)
-				{
-					swap(&parTab[i], &parTab[j]);
-				}
-			}
+			j--;
 		}
-
-		swap(&parTab[m],&parTab[j]);
+		if (i >= j) break;
 		
-		quicksort(parTab,m,j-1, isX);
-		quicksort(parTab,j+1,n, isX);
+		point tmp = parTab[i];
+		parTab[i] = parTab[j];
+		parTab[j] = tmp;
 	}
+	//affichePoint(parTab[i]);
+	quicksortLat(parTab, i);
+	quicksortLat(&parTab[i], len -i);
+}
+
+void quicksortLon(point * parTab, int len)
+{
+	
+	if (len < 2) return;
+	
+	double pivot = parTab[len/2].y;
+	int i, j;
+	for (i=0, j = len - 1; ;i++, j--)
+	{
+		while (parTab[i].y < pivot)
+		{
+			i++;
+		}
+		while (parTab[j].y >pivot)
+		{
+			j--;
+		}
+		if (i >= j) break;
+		
+		point tmp = parTab[i];
+		parTab[i] = parTab[j];
+		parTab[j] = tmp;
+	}
+	
+	quicksortLon(parTab, i);
+	quicksortLon(&parTab[i], len -i);
 }

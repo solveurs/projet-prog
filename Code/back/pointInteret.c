@@ -233,33 +233,64 @@ liste_pt_interet * calculPointInteretFreq(trajet * parTr)
 	{
 		varTab[i].x = it->coord.x;
 		varTab[i].y = it->coord.y;
+		it = it->suiv;
 	}
-	
+	/*for (i = 0; i < parTr->taille; i++)
+	{
+		affichePoint(varTab[i]);
+	}*/
 	//tri du tableau suivant x puis y
-	quicksort(varTab, 0, parTr->taille, 1);
+	quicksortLat(varTab, parTr->taille);
 	int j = 0;
 	int k;
-	while(j < parTr->taille)
+	while (j < parTr->taille)
 	{
-		k = j;
-		while (varTab[k].x == varTab[j].x)
+		if (j > parTr->taille) break;
+		printf("j:%d\n",j);
+		i = 0;
+		point * tmp;
+		while (varTab[i].x == varTab[i+1].x)
 		{
-			k++;
+			//printf("%lf:%lf\n",varTab[i].x,varTab[i+1].x);
+			i++;
 		}
-		quicksort(varTab, j, k, 0);
-		j = k;
+		printf("i:%d\n",i);
+		tmp = calloc(i, sizeof(point));
+		for (k = 0; k < i; k++)
+		{
+			tmp[k] = varTab[j+k];
+		}
+		
+		quicksortLon(tmp, i);
+		for (k = 0; k < i; k++)
+		{
+			varTab[j+k] = tmp[k];
+		}
+		j += i;
+		free(tmp);
 	}
+	
 	
 	int n = 0;
 	int m;
 	while (n < parTr->taille)
 	{
 		m = 0;
-		while ((varTab[n].x == varTab[n+1].x) && (varTab[n].y == varTab[n+1].y))
+		while ((varTab[m+n].x == varTab[m+n+1].x) && (varTab[m+n].y == varTab[m+n+1].y))
 		{
 			m++;
+			
 		}
-		ajoutPointInteret(varListe, initPointInteret(m, 0, 1, varTab[n], *(initAdresse())));
+		if (m > parTr->taille/10)
+		{
+			ajoutPointInteret(varListe, initPointInteret(m, 0, 1, varTab[n], *(initAdresse())));
+			n += m;
+		}
+		else
+		{
+			n++;
+		}
+
 	}
 	
 	return varListe;

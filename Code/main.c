@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
 	
 	//fnDebug = debugBack;
 	debugBack();
-	debugFront(argc,argv);
+	//debugFront(argc,argv);
 	
 #endif
 	//printf("toujours\n");
@@ -37,11 +37,12 @@ void debugBack(void)
 	
 	//La lecture d'un fichier de 450 traces + création du trajet + affichage = <8ms
 
-	FILE * fd = openGeoloc("../Data/geoloc.txt");
+	FILE * fd = openGeoloc("../Data/geoloc-logs.txt");
 	bdd_trace * fd_trace = readGeoloc(fd);
 	trajet * _trajet = fd_trace->trajet;
 	afficheTrajet(_trajet);
-	liste_pt_interet * _listePtInteret = calculPointInteretTemp(_trajet);
+	//liste_pt_interet * _listePtInteret = calculPointInteretTemp(_trajet);
+	liste_pt_interet * _listePtInteret = calculPointInteretFreq(_trajet);
 	afficheArrPtInteret(_listePtInteret);
 	savePointInteret(*_listePtInteret);
 	printf("Distance du trajet : %f", distanceTrajet(*_trajet));

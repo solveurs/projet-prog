@@ -11,7 +11,5 @@ adresse * initAdresse(void);
 void affichePoint(point parP);
 rectangle initRectangle(point origine, double hauteur, double largeur);
 point initPoint(double x, double y);
-//fonction de tri quicksort
-void swap(point * x, point * y);
-int pivot(int x, int y);
-void quicksort(point * parTab, int m, int n, int isX);
+void quicksortLat(point * parTab, int len);
+void quicksortLon(point * parTab, int len);
