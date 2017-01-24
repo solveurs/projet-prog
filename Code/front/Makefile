@@ -1,3 +1,0 @@
-all: uiMain.c activate.c uiTraces.c uiAnimation.c uiAnonymite.c fctnCairo.c carte.c rectangle.c point.c
-		gcc `pkg-config --cflags gtk+-3.0` -o main uiMain.c activate.c uiTraces.c uiAnimation.c uiAnonymite.c fctnCairo.c carte.c rectangle.c point.c ../back/anonymisation.c ../back/conversion.c ../back/fonctionFront.c ../back/ia.c ../back/parserBddGeoloc.c ../back/pointInteret.c ../back/trace.c ../back/trajet.c ../back/utils.c `pkg-config --libs gtk+-3.0` -lm
-		
