@@ -4,7 +4,6 @@ int uiAide(GtkWidget* widget, gpointer user_data)
 {
 	// Variable static pour eviter de reconstruire la fenetre
 	static int etat = 0;
-
 	if(!etat)
 	{
 		etat = 1;
@@ -26,7 +25,7 @@ int uiAide(GtkWidget* widget, gpointer user_data)
 		page[5].widget = gtk_label_new ("Test6");
 		page[7].widget = gtk_label_new ("Test7");
 		
-		GtkWidget * UIassistant = gtk_new_assistant();
+		GtkWidget * UIassistant = gtk_assistant_new();
 		gtk_window_set_title (GTK_WINDOW (UIassistant), "Aides au logiciel Geoloc");
 		g_signal_connect (G_OBJECT (UIassistant), "destroy",
 						  G_CALLBACK (gtk_main_quit), NULL);
@@ -34,6 +33,7 @@ int uiAide(GtkWidget* widget, gpointer user_data)
 		int i;
 		for (i = 0; i < NB_PAGE; i++)
 		{
+		
 			page[i].id = gtk_assistant_append_page(GTK_ASSISTANT(UIassistant),
 													page[i].widget);
 			gtk_assistant_set_page_title(GTK_ASSISTANT (UIassistant),

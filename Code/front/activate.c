@@ -50,7 +50,8 @@ void activate(GtkApplication *app, gpointer user_data)
 	ui->ssMenuItem5 = gtk_menu_item_new_with_label("A faire Fichier");
 	ui->ssMenuItem6 = gtk_menu_item_new_with_label("A faire Edition");
 	ui->ssMenuItem7 = gtk_menu_item_new_with_label("A faire Affichage");
-	ui->ssMenuItem8 = gtk_menu_item_new_with_label("A faire Aide & credit");
+	ui->ssMenuItem8 = gtk_menu_item_new_with_label("A faire Aide");
+	ui->ssMenuItem9 = gtk_menu_item_new_with_label("A faire Credits");
 
 	// On définit les noms des sous-menus en tant qu'item
 	gtk_menu_item_set_submenu(GTK_MENU_ITEM(ui->ssMenuItem1), ui->ssMenu1);
@@ -63,6 +64,7 @@ void activate(GtkApplication *app, gpointer user_data)
 	gtk_menu_shell_append(GTK_MENU_SHELL(ui->ssMenu2), ui->ssMenuItem6);
 	gtk_menu_shell_append(GTK_MENU_SHELL(ui->ssMenu3), ui->ssMenuItem7);
 	gtk_menu_shell_append(GTK_MENU_SHELL(ui->ssMenu4), ui->ssMenuItem8);
+	gtk_menu_shell_append(GTK_MENU_SHELL(ui->ssMenu4), ui->ssMenuItem9);
 
 	// On ajoute les items a la barre de menu
 	gtk_menu_shell_append(GTK_MENU_SHELL(ui->menuBarre), ui->ssMenuItem1);
@@ -133,6 +135,7 @@ void activate(GtkApplication *app, gpointer user_data)
 	g_signal_connect(ui->boutonAnimation, "clicked", G_CALLBACK(uiAnimation), ui->widget);
 	g_signal_connect(ui->boutonAnonymat, "clicked", G_CALLBACK(uiAnonymite), ui->widget);
 	g_signal_connect(ui->selectCarte, "changed", G_CALLBACK(changeCarte), ui);
+	g_signal_connect(ui->ssMenuItem8, "activate", G_CALLBACK(uiAide), NULL);
 
 	// On instance les fenetres auxiliaires pour les creer puis on les cache
 	g_signal_emit_by_name(ui->boutonAnonymat, "clicked", ui->widget);

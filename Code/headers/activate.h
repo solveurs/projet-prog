@@ -29,6 +29,7 @@ typedef struct s_uiPrincipale
 	GtkWidget 	*ssMenuItem6;
 	GtkWidget 	*ssMenuItem7;
 	GtkWidget 	*ssMenuItem8;
+	GtkWidget 	*ssMenuItem9;
 
 	GtkWidget 	*frameEntete;
 	GtkWidget	*boxEntete;
@@ -70,5 +71,8 @@ int overlayTempAjout(GtkWidget* zoneCercle, GtkWidget* eventBox, int id);
 void overlayTempSuppr(GtkWidget* eventBox, int id);
 void bloqueCarte();
 void debloqueCarte();
+<<<<<<< HEAD
 int getCarte();
 void getPosSouris(GtkWidget* widget, GdkEvent *event, gpointer user_data);
+=======
+>>>>>>> a60ad3c2c67718922d1a94162570743ce8447f91

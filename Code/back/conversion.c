@@ -67,7 +67,13 @@ double convertToRad(const double par)
 
 double GPStoKm(const point parP1, const point parP2)
 {
-	return RAYON_TERRE_KM * ( M_PI_2 - asin( sin(convertToRad(parP2.x)) * sin(convertToRad(parP1.x)) + cos(convertToRad(parP2.y) - convertToRad(parP1.y)) * cos(convertToRad(parP2.x)) * cos(convertToRad(parP2.x))));
+	double phi1 = convertToRad(parP1.x);
+	double phi2 = convertToRad(parP2.x);
+	double deltaPhi = convertToRad(parP2.x - parP1.x);
+	double deltaLambda = convertToRad(parP2.y - parP1.y);
+	double a = pow(sin(deltaPhi/2),2) + (cos(phi1) * cos(phi2) * pow(sin(deltaLambda/2),2));
+	double c = 2 * atan2(sqrt(a), sqrt(1-a));
+	return (RAYON_TERRE_KM * c);
 }
 
 
