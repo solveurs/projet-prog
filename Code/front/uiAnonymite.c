@@ -22,16 +22,14 @@
 //#include "../headers/uiAnonymite.h"
 
 static uiAnon* fenetreAnon;
-static GtkWidget* fenetrePrincipale;
+//static GtkWidget* fenetrePrincipale;
 static GtkWidget* ZONE_CERCLE;
 static GtkWidget* EVENT_BOX;
 
-static int listId[NOMBRE_MAX_TRAJETS];
+static point CERCLE_BORD;
 static cercle CERCLE_UTILISATEUR;
-
-static int CERCLE_DEFINI = 0;
 static int CLICKED = 0;
-static int iter = 0;
+
 
 int uiAnonymite(GtkWidget* widget, gpointer user_data)
 {
@@ -42,12 +40,6 @@ int uiAnonymite(GtkWidget* widget, gpointer user_data)
     // ============== Initialisation widgets =============
     // ====== Validation d'ouverture
     etat = UI_ANON_OUVERT;
-    int i;
-    for(i=0; i<NOMBRE_MAX_TRAJETS; i++)
-    {
-      listId[i] = -1;
-    }
-    fenetrePrincipale = (GtkWidget *)user_data;
 
     // ====== Layout : Fenetre principale
     fenetreAnon = (uiAnon *)malloc(sizeof(uiAnon));
@@ -61,7 +53,7 @@ int uiAnonymite(GtkWidget* widget, gpointer user_data)
     fenetreAnon->widget = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title(GTK_WINDOW(fenetreAnon->widget), "Gestion de l'anonymat");
     gtk_window_set_skip_taskbar_hint(GTK_WINDOW(fenetreAnon->widget), TRUE);
-    gtk_window_set_transient_for(GTK_WINDOW(fenetreAnon->widget), GTK_WINDOW(fenetrePrincipale));
+    gtk_window_set_transient_for(GTK_WINDOW(fenetreAnon->widget), GTK_WINDOW(user_data));
     gtk_window_set_destroy_with_parent(GTK_WINDOW(fenetreAnon->widget), TRUE);
     gtk_window_set_default_size(GTK_WINDOW(fenetreAnon->widget), UI_ANON_TAILLE_X, UI_ANON_TAILLE_Y);
 
@@ -99,8 +91,8 @@ int uiAnonymite(GtkWidget* widget, gpointer user_data)
     // ===================== Signaux =====================
     g_signal_connect(fenetreAnon->widget, "delete-event", G_CALLBACK(gtk_widget_hide_on_delete), NULL);
     g_signal_connect(fenetreAnon->boutonCercle, "clicked", G_CALLBACK(ajouteCercle), fenetreAnon);
-    g_signal_connect(fenetreAnon->boutonAnnuler, "clicked", G_CALLBACK(annulerCercle), fenetreAnon);
-    g_signal_connect(fenetreAnon->boutonConfirmer, "clicked", G_CALLBACK(confirmerCercle), fenetreAnon);
+    g_signal_connect(fenetreAnon->boutonAnnuler, "clicked", G_CALLBACK(annulerCercle), NULL);
+    g_signal_connect(fenetreAnon->boutonConfirmer, "clicked", G_CALLBACK(confirmerCercle), NULL);
     //g_signal_connect(fenetreAnon->boutonCercle, "clicked", G_CALLBACK(ajoutItemAnon), fenetreAnon);
 
     // ==================== Packaging ====================
@@ -143,20 +135,38 @@ int uiAnonymite(GtkWidget* widget, gpointer user_data)
 
 void annulerCercle(GtkWidget* widget, gpointer user_data)
 {
-  uiAnon* parent = (uiAnon *)user_data;
-  int activeId = gtk_combo_box_get_active(GTK_COMBO_BOX(parent->menuDeroulant));
-  uiAnon* fenetre = (uiAnon *)user_data;
-  overlayTempSuppr(EVENT_BOX, listId[activeId]);
-  gtk_widget_hide(fenetre->boxTracer);
-  gtk_widget_show(fenetre->boutonCercle);
+  int idTraces = gtk_combo_box_get_active(GTK_COMBO_BOX(fenetreAnon->menuDeroulant));
+  overlayTempSuppr(EVENT_BOX, idTraces);
+
+  gtk_widget_hide(fenetreAnon->boxTracer);
+  gtk_widget_show(fenetreAnon->boutonCercle);
+  CERCLE_UTILISATEUR.centre.x = 0.0;
+  CERCLE_UTILISATEUR.centre.y = 0.0;
   CERCLE_UTILISATEUR.rayon = 0.0;
   debloqueCarte();
 }
 
 void confirmerCercle(GtkWidget* widget, gpointer user_data)
 {
-  annulerCercle(widget, user_data);
-  /* envoie du centre */
+  int idTraces = gtk_combo_box_get_active(GTK_COMBO_BOX(fenetreAnon->menuDeroulant));
+  overlayTempSuppr(EVENT_BOX, idTraces);
+
+  CERCLE_UTILISATEUR.centre.x = conversionGPS(CERCLE_UTILISATEUR.centre.x, getCarte(), 1);
+  CERCLE_UTILISATEUR.centre.y = conversionGPS(CERCLE_UTILISATEUR.centre.y, getCarte(), 0);
+  CERCLE_UTILISATEUR.rayon = rayonGPS(CERCLE_UTILISATEUR.rayon, getCarte());
+
+  int nb = anonymisationPendantEditionC(varGlobFront.traces[idTraces]->ptrTrajet, CERCLE_UTILISATEUR);
+  majCartes(idTraces);
+  char msg[64];
+  sprintf(msg, "%d traces ont ete anonymisees !", nb);
+  popupMessage("Succes !", msg, fenetreAnon->widget);
+
+  gtk_widget_hide(fenetreAnon->boxTracer);
+  gtk_widget_show(fenetreAnon->boutonCercle);
+  CERCLE_UTILISATEUR.centre.x = 0.0;
+  CERCLE_UTILISATEUR.centre.y = 0.0;
+  CERCLE_UTILISATEUR.rayon = 0.0;
+  debloqueCarte();
 }
 
 void ajoutItemAnon(GtkWidget* widget, gpointer user_data)
@@ -301,7 +311,7 @@ void ajouteCercle(GtkWidget* widget, gpointer user_data)
   {
     ZONE_CERCLE = gtk_drawing_area_new();
     EVENT_BOX = gtk_event_box_new();
-    if(overlayTempAjout(ZONE_CERCLE, EVENT_BOX, listId[activeId]))
+    if(overlayTempAjout(ZONE_CERCLE, EVENT_BOX, activeId))
     {
       gtk_widget_queue_draw(ZONE_CERCLE);
       gtk_widget_hide(parent->boutonCercle);
@@ -328,34 +338,20 @@ void traceCercle(GtkWidget* widget, cairo_t* cr, gpointer user_data)
   cairo_stroke(cr); 
 }
 
-void ajoutMenuTraces(const gchar* nom, int idItem)
+void ajoutMenuTraces(const gchar* nom)
 {
-  gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(fenetreAnon->menuDeroulant), nom);
-  listId[iter] = idItem;
-  iter++;
+  gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(fenetreAnon->menuDeroulant), NULL, nom);
 }
 
 void supprimeMenuTraces(gint id)
 {
   gtk_combo_box_text_remove(GTK_COMBO_BOX_TEXT(fenetreAnon->menuDeroulant), id);
-  decaleIdGauche((int)id);
-  iter--;
 }
 
 void renommeMenuTraces(gint id, const gchar* nom)
 {
   supprimeMenuTraces(id);
   gtk_combo_box_text_insert_text(GTK_COMBO_BOX_TEXT(fenetreAnon->menuDeroulant), id, nom);
-}
-
-void decaleIdGauche(int id)
-{
-  int i;
-  for(i=id; i<(NOMBRE_MAX_TRAJETS-1); i++)
-  {
-    listId[i] = listId[i+1];
-  }
-  listId[(NOMBRE_MAX_TRAJETS-1)] = -1;
 }
 
 void deplacementSouris(GtkWidget *widget, GdkEvent *event, gpointer user_data)
@@ -366,7 +362,7 @@ void deplacementSouris(GtkWidget *widget, GdkEvent *event, gpointer user_data)
     // On recupere la position du curseur
     GdkEventMotion* e = (GdkEventMotion*)event;
     // Calcul du rayon puis tracer
-    CERCLE_UTILISATEUR.rayon = rayonAnon(CERCLE_UTILISATEUR.centre.x, CERCLE_UTILISATEUR.centre.y, (int)(e->x), (int)(e->y));
+    CERCLE_UTILISATEUR.rayon = rayonAnon(CERCLE_UTILISATEUR.centre, (int)(e->x), (int)(e->y));
     gtk_widget_queue_draw(ZONE_CERCLE); 
   }
 }
@@ -381,11 +377,11 @@ void deplacementSouris(GtkWidget *widget, GdkEvent *event, gpointer user_data)
  * \param   rayonY Coordonnees Y du rayon du cercle.
  * \return  Retourne la longueur du rayon.
 */
-double rayonAnon(int centreX, int centreY, int rayonX, int rayonY)
+double rayonAnon(point centre, int rayonX, int rayonY)
 {
   double hyp;
-  double AB = abs(rayonX - centreX);
-  double BC = abs(rayonY - centreY);
+  double AB = abs(rayonX - centre.x);
+  double BC = abs(rayonY - centre.y);
 
   // Pythagore, je t'invoque !!!!
   hyp = sqrt((AB*AB + BC*BC));
@@ -408,15 +404,16 @@ void clickCercle(GtkWidget *widget, GdkEventButton *event, gpointer user_data)
   {
     if(CLICKED)           // Normalement au deuxieme, on anonymise.
     {
-      CERCLE_DEFINI = 1;
+      //CERCLE_BORD.x = (double)event->x;
+      //CERCLE_BORD.y = (double)event->y;
       CLICKED = 0;         
     }
     else                  // Au premier click, on definit le cercle.
     {
-      CERCLE_UTILISATEUR.centre.x = event->x;
-      CERCLE_UTILISATEUR.centre.y = event->y;
-      CERCLE_DEFINI = 0;
+      CERCLE_UTILISATEUR.centre.x = (double)event->x;
+      CERCLE_UTILISATEUR.centre.y = (double)event->y;
       CLICKED = 1;
     }
   }
 }
+

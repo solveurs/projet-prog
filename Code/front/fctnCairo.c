@@ -17,41 +17,48 @@
  *
  */
 #include "../headers/front.h"
-/*#include "../headers/fctnCairo.h"
- #include "../headers/globalFront.h"*/
 
 void faire_tracesCher(GtkWidget *widget, cairo_t *cr, gpointer user_data)
 {
 	tracesItem* ptrItem = (tracesItem *)user_data;
-	//printf("\nSignal Cher provenant de : %d", ptrItem->id);
 	faire_tracer(cr, 0, ptrItem->ptrTrajet, ptrItem->ptrCouleur);
 }
 
 void faire_tracesBourges(GtkWidget *widget, cairo_t *cr, gpointer user_data)
 {
 	tracesItem* ptrItem = (tracesItem *)user_data;
-	//printf("\nSignal Bourges provenant de : %d", ptrItem->id);
 	faire_tracer(cr, 1, ptrItem->ptrTrajet, ptrItem->ptrCouleur);
 }
 
 void faire_tracesInsa(GtkWidget *widget, cairo_t *cr, gpointer user_data)
 {
 	tracesItem* ptrItem = (tracesItem *)user_data;
-	//printf("\nSignal Insa provenant de : %d", ptrItem->id);
 	faire_tracer(cr, 2, ptrItem->ptrTrajet, ptrItem->ptrCouleur);
 }
 
 void faire_tracer(cairo_t *cr, int carte, trajet *cible, GdkRGBA* couleur)
 {
-	int x;
-	int y;
 	// Epaisseur des lignes
 	cairo_set_line_width(cr, 1.0);
 	// Traces en bleu
 	cairo_set_source_rgb(cr, couleur->red, couleur->green, couleur->blue);
+	// Taille des traces
+	double TAILLE_TRACE;
+	switch(carte)
+	{
+		case 0:
+			TAILLE_TRACE = TAILLE_TRACE_CHER;
+			break;
+		case 1:
+			TAILLE_TRACE = TAILLE_TRACE_BOURGES;
+			break;
+		default:
+			TAILLE_TRACE = TAILLE_TRACE_INSA;
+	}
 	
 	// Tracer des points
 	trace* ptr;
+	int x, y;
 	for(ptr=cible->premier; ptr!=cible->dernier; ptr=ptr->suiv)
 	{
 		if(ptr->visibilite==1 /* && condition date */)
@@ -102,34 +109,84 @@ double echelle(double valeur, int carte, int longitude)
 	double conversion = 0.0;
 	switch(carte)
 	{
-		
 		case 0: // Cher
 			if(longitude)
 			{
-				conversion = ((valeur - 1.726227) * TAILLE_X_CHER / 1.389770);
+				conversion = ((valeur - LON_HG_CHER) * TAILLE_X_CHER / (LON_BD_CHER - LON_HG_CHER));
 				return conversion;
 			}
-			conversion = (-1.0 * (valeur - 47.988083) * TAILLE_Y_CHER / 1.793991);
+			conversion = ((valeur - LAT_HG_CHER) * TAILLE_Y_CHER / (LAT_BD_CHER - LAT_HG_CHER));
 			return conversion;
 			
 		case 1: // Bourges
 			if(longitude)
 			{
-				conversion = ((valeur - 2.313738) * TAILLE_X_BOURGES / 0.158872);
+				conversion = ((valeur - LON_HG_BOURGES) * TAILLE_X_BOURGES / (LON_BD_BOURGES - LON_HG_BOURGES));
 				return conversion;
 			}
-			conversion = (-1.0 * (valeur - 47.113540) * TAILLE_Y_BOURGES / 0.063064);
+			conversion = ((valeur - LAT_HG_BOURGES) * TAILLE_Y_BOURGES / (LAT_BD_BOURGES - LAT_HG_BOURGES));
 			return conversion;
 			
 		default: // Insa
 			if(longitude)
 			{
-				conversion = ((valeur - 2.392981) * TAILLE_X_INSA / 0.039783);
+				conversion = ((valeur - LON_HG_INSA) * TAILLE_X_INSA / (LON_BD_INSA - LON_HG_INSA));
 				return conversion;
 			}
-			conversion = (-1.0 * (valeur - 47.088723) * TAILLE_Y_INSA / 0.015766);
+			conversion = ((valeur - LAT_HG_INSA) * TAILLE_Y_INSA / (LAT_BD_INSA - LAT_HG_INSA));
 			return conversion;
 	}
+}
+
+double conversionGPS(double valeur, int carte, int longitude)
+{
+	double conversion = 0.0;
+	switch(carte)
+	{
+	  	case 0: // Cher
+			if(longitude)
+			{
+				conversion = ( ((valeur * (LON_BD_CHER - LON_HG_CHER) / TAILLE_X_CHER)) + LON_HG_CHER );
+				return conversion;
+			}
+			conversion = ( ((valeur * (LAT_BD_CHER - LAT_HG_CHER) / TAILLE_Y_CHER)) + LAT_HG_CHER );
+			return conversion;	
+
+		case 1: // Bourges
+			if(longitude)
+			{
+				conversion = ( ((valeur * (LON_BD_BOURGES - LON_HG_BOURGES) / TAILLE_X_BOURGES)) + LON_HG_BOURGES );
+				return conversion;
+			}
+			conversion = ( ((valeur * (LAT_BD_BOURGES - LAT_HG_BOURGES) / TAILLE_Y_BOURGES)) + LAT_HG_BOURGES );
+			return conversion;	
+
+		default: // Insa
+			if(longitude)
+			{
+				conversion = ( ((valeur * (LON_BD_INSA - LON_HG_INSA) / TAILLE_X_INSA)) + LON_HG_INSA );
+				return conversion;
+			}
+			conversion = ( ((valeur * (LAT_BD_INSA - LAT_HG_INSA) / TAILLE_Y_INSA)) + LAT_HG_INSA );
+			return conversion;	
+	}
+}
+
+double rayonGPS(double rayonAConv, int carte)
+{
+	double r;
+	switch(carte)
+	{
+		case 0:
+			r = ((LON_BD_CHER - LON_HG_CHER) * rayonAConv / TAILLE_X_CHER );
+			break;
+		case 1:
+			r = ((LON_BD_BOURGES - LON_HG_BOURGES) * rayonAConv / TAILLE_X_BOURGES );
+			break;
+		default:
+			r = ((LON_BD_INSA - LON_HG_INSA) * rayonAConv / TAILLE_X_INSA );
+	}
+  	return r;
 }
 
 void majCartes(int idCarte)
