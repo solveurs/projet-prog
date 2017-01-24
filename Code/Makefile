@@ -1,3 +1,3 @@
-all: main.c front/activate.c front/uiTraces.c front/uiAnimation.c front/uiAnonymite.c front/fctnCairo.c front/carte.c back/anonymisation.c back/conversion.c back/fonctionFront.c back/ia.c back/parserBddGeoloc.c back/pointInteret.c back/trace.c back/trajet.c back/utils.c
-		gcc `pkg-config --cflags gtk+-3.0` -o main main.c front/activate.c front/uiTraces.c front/uiAnimation.c front/uiAnonymite.c front/fctnCairo.c front/carte.c back/anonymisation.c back/conversion.c back/fonctionFront.c back/ia.c back/parserBddGeoloc.c back/pointInteret.c back/trace.c back/trajet.c back/utils.c `pkg-config --libs gtk+-3.0` -lm
+all: main.c front/*.c back/anonymisation.c back/conversion.c back/fonctionFront.c back/ia.c back/parserBddGeoloc.c back/pointInteret.c back/trace.c back/trajet.c back/utils.c
+		gcc `pkg-config --cflags gtk+-3.0` -o main main.c front/*.c back/anonymisation.c back/conversion.c back/fonctionFront.c back/ia.c back/parserBddGeoloc.c back/pointInteret.c back/trace.c back/trajet.c back/utils.c `pkg-config --libs gtk+-3.0` -lm
 		
