@@ -3,16 +3,23 @@
 int anonymisationPendantEditionC(trajet * parTr, const cercle parC)
 {
 	int nb = 0;
+	int na = 0;
 	trace * it = parTr->premier;
 	while (it->suiv != NULL)
 	{
-		if (isInCercle(parC, it->coord))
+		int tmp = isInCercle(parC, it->coord);
+		if(tmp>0)
 		{
 			it->visibilite = 0;
 			nb++;
 		}
+		else
+		{
+			na++;
+		}
 		it = it->suiv;
 	}
+	printf("\n%d", na);
 	return nb;
 }
 

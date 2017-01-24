@@ -16,7 +16,11 @@
  */
 int isInCercle(const cercle parC, const point parP)
 {
-	if (pow((parP.x - parC.centre.x),2) + pow((parP.x - parC.centre.y),2) < parC.rayon) {
+	/* NB : Inversion longitude et latitude corrigee */
+	long double diff = (pow((parP.x - parC.centre.y),2) + pow((parP.y - parC.centre.x),2));
+	long double rayon = pow(parC.rayon,2);
+	if(diff < rayon) 
+	{
 		return 1;
 	}
 	else
