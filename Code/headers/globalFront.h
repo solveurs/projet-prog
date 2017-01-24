@@ -3,6 +3,7 @@
 #include "includes.h"
 #include "structures.h"
 #include "carte.h"
+#include "uiTraces.h"
 
 /* ====== CONSTANTES ====== */
 #define NOMBRE_MAX_TRAJETS	32
@@ -10,7 +11,7 @@
 /* ====== Var. Glob ====== */
 struct globFront
 {
-	int				trajetId[NOMBRE_MAX_TRAJETS];
+	tracesItem*		traces[NOMBRE_MAX_TRAJETS];
 	int				idTrajet;
 
 	GtkWidget*		zoneDessinCher[NOMBRE_MAX_TRAJETS];

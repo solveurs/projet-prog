@@ -43,17 +43,22 @@ typedef struct s_uiPrincipale
 	
 	GtkWidget	*boxCarte;
 	GtkWidget	*frameCarte;
-	GtkWidget   *frameImageCarte;
 	GtkWidget	*imgCarte;
 	GtkWidget	*selectCarte;
 
-
+	GtkWidget	*boxEventCher;
+	GtkWidget	*boxEventBourges;
+	GtkWidget	*boxEventInsa;
+	GtkWidget	*boxScrolls;
 	GtkWidget 	*scrollCarteCher;
 	GtkWidget   *scrollCarteBourges;
 	GtkWidget   *scrollCarteInsa;
 	GtkWidget 	*imgCarteCher;
 	GtkWidget   *imgCarteBourges;
 	GtkWidget   *imgCarteInsa;
+
+	GtkWidget	*boxFooter;
+	GtkWidget	*labelPos;
 }uiMain;
 
 /* ===== Fonctions ===== */
@@ -65,3 +70,5 @@ int overlayTempAjout(GtkWidget* zoneCercle, GtkWidget* eventBox, int id);
 void overlayTempSuppr(GtkWidget* eventBox, int id);
 void bloqueCarte();
 void debloqueCarte();
+int getCarte();
+void getPosSouris(GtkWidget* widget, GdkEvent *event, gpointer user_data);
