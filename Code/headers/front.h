@@ -12,6 +12,7 @@
 #include "uiAnimation.h"
 #include "uiAnonymite.h"
 #include "uiAide.h"
+#include "uiMenu.h"
 
 /* ====== Structures ====== */
 #include "structures.h"

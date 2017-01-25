@@ -113,8 +113,8 @@ liste_pt_interet * calculPointInteretSpatial(trajet * parTr)
 	varC.centre.y = 0;
 	varC.rayon = RAYON_CERCLE_PT_INT_KM;
 	int nvPtInteret = 1;
-	
-	
+
+
 	//Premiere boucle de parcours simple du trajet (repere les points où la personne passe du temps directement
 	trace * it;
 	it = parTr->premier;
@@ -152,7 +152,7 @@ liste_pt_interet * calculPointInteretSpatial(trajet * parTr)
 				nvPos.x /= varNvPtInt->importance;
 				nvPos.y /= varNvPtInt->importance;
 				varNvPtInt->position = nvPos;
-				
+
 				ajoutPointInteret(varListe, varNvPtInt);
 				nvPtInteret = 1;
 			}
@@ -260,7 +260,7 @@ liste_pt_interet * calculPointInteretFreq(trajet * parTr)
 		{
 			tmp[k] = varTab[j+k];
 		}
-		
+
 		quicksortLon(tmp, i);
 		for (k = 0; k < i; k++)
 		{
@@ -269,8 +269,8 @@ liste_pt_interet * calculPointInteretFreq(trajet * parTr)
 		j += i;
 		free(tmp);
 	}
-	
-	
+
+
 	int n = 0;
 	int m;
 	while (n < parTr->taille)
@@ -279,7 +279,7 @@ liste_pt_interet * calculPointInteretFreq(trajet * parTr)
 		while ((varTab[m+n].x == varTab[m+n+1].x) && (varTab[m+n].y == varTab[m+n+1].y))
 		{
 			m++;
-			
+
 		}
 		if (m > parTr->taille/10)
 		{
@@ -292,7 +292,7 @@ liste_pt_interet * calculPointInteretFreq(trajet * parTr)
 		}
 
 	}
-	
+
 	return varListe;
 }
 
@@ -317,7 +317,7 @@ int savePointInteret(const liste_pt_interet parArrPtInteret)
 		fprintf(fd, "imp %d:deb %ld:fin %ld:lat %lf:lon %lf\n", parArrPtInteret.t[i]->importance, parArrPtInteret.t[i]->debut, parArrPtInteret.t[i]->fin, parArrPtInteret.t[i]->position.x, parArrPtInteret.t[i]->position.y);
 	}
 	fclose(fd);
-	
+
 	return 1;
 }
 
@@ -343,14 +343,3 @@ void afficheArrPtInteret(liste_pt_interet * parArrPtIntrt)
 		affichePtInteret(parArrPtIntrt->t[i]);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-

@@ -1,6 +1,6 @@
 
 
-carte_Cher.png 		(1013 x 1920)
+carte_Cher.png 		(1850x 3506)
 
 	47.988083			
 	 1.726227

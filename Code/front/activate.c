@@ -45,43 +45,8 @@ void activate(GtkApplication *app, gpointer user_data)
 	// ===--- Layout : Box principale
 	ui->boxPrincipale = gtk_box_new(GTK_ORIENTATION_VERTICAL, UI_MAIN_ESPACEMENT);
 
-	// ===--- Layout : Box des menus
-	ui->boxMenu = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, UI_MAIN_ESPACEMENT);
-	// --- Widgets : Barre de menu + items
-	ui->menuBarre = gtk_menu_bar_new();
-	ui->ssMenu1 = gtk_menu_new();
-	ui->ssMenu2 = gtk_menu_new();
-	ui->ssMenu3 = gtk_menu_new();
-	ui->ssMenu4 = gtk_menu_new();
-
-	ui->ssMenuItem1 = gtk_menu_item_new_with_label("Fichier");
-	ui->ssMenuItem2 = gtk_menu_item_new_with_label("Edition");
-	ui->ssMenuItem3 = gtk_menu_item_new_with_label("Affichage");
-	ui->ssMenuItem4 = gtk_menu_item_new_with_label("Aide");
-	ui->ssMenuItem5 = gtk_menu_item_new_with_label("A faire Fichier");
-	ui->ssMenuItem6 = gtk_menu_item_new_with_label("A faire Edition");
-	ui->ssMenuItem7 = gtk_menu_item_new_with_label("A faire Affichage");
-	ui->ssMenuItem8 = gtk_menu_item_new_with_label("A faire Aide");
-	ui->ssMenuItem9 = gtk_menu_item_new_with_label("A faire Credits");
-
-	// On définit les noms des sous-menus en tant qu'item
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(ui->ssMenuItem1), ui->ssMenu1);
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(ui->ssMenuItem2), ui->ssMenu2);
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(ui->ssMenuItem3), ui->ssMenu3);
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(ui->ssMenuItem4), ui->ssMenu4);
-
-	// On connecte les sous-menus avec les choix
-	gtk_menu_shell_append(GTK_MENU_SHELL(ui->ssMenu1), ui->ssMenuItem5);
-	gtk_menu_shell_append(GTK_MENU_SHELL(ui->ssMenu2), ui->ssMenuItem6);
-	gtk_menu_shell_append(GTK_MENU_SHELL(ui->ssMenu3), ui->ssMenuItem7);
-	gtk_menu_shell_append(GTK_MENU_SHELL(ui->ssMenu4), ui->ssMenuItem8);
-	gtk_menu_shell_append(GTK_MENU_SHELL(ui->ssMenu4), ui->ssMenuItem9);
-
-	// On ajoute les items a la barre de menu
-	gtk_menu_shell_append(GTK_MENU_SHELL(ui->menuBarre), ui->ssMenuItem1);
-	gtk_menu_shell_append(GTK_MENU_SHELL(ui->menuBarre), ui->ssMenuItem2);
-	gtk_menu_shell_append(GTK_MENU_SHELL(ui->menuBarre), ui->ssMenuItem3);
-	gtk_menu_shell_append(GTK_MENU_SHELL(ui->menuBarre), ui->ssMenuItem4);
+	// Barre de menu
+	initialisation_menu(ui);
 
 	// ===--- Layout : Frame de l'en-tete + Box de l'en-tete (boutons + choix carte)
 	ui->frameEntete = gtk_frame_new("");
@@ -108,7 +73,7 @@ void activate(GtkApplication *app, gpointer user_data)
 	gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(ui->selectCarte), "1", "Bourges");
 	gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(ui->selectCarte), "2", "Insa Bourges");
 	gtk_combo_box_set_active(GTK_COMBO_BOX(ui->selectCarte), -1);
-	
+
 	// ===--- Layout : Zone de la carte
 	ui->scrollCarteCher = gtk_scrolled_window_new(NULL, NULL);
 	ui->scrollCarteBourges = gtk_scrolled_window_new(NULL, NULL);
@@ -127,7 +92,7 @@ void activate(GtkApplication *app, gpointer user_data)
 	g_signal_connect(ui->boutonAnimation, "clicked", G_CALLBACK(uiAnimation), ui->widget);
 	g_signal_connect(ui->boutonAnonymat, "clicked", G_CALLBACK(uiAnonymite), ui->widget);
 	g_signal_connect(ui->selectCarte, "changed", G_CALLBACK(changeCarte), ui);
-	g_signal_connect(ui->ssMenuItem8, "activate", G_CALLBACK(uiAide), NULL);
+
 
 	// On instance les fenetres auxiliaires pour les creer puis on les cache
 	g_signal_emit_by_name(ui->boutonAnonymat, "clicked", ui->widget);
@@ -223,7 +188,7 @@ void changeCarte(GtkWidget *widget, gpointer user_data)
 {
 	uiMain* fenetre = (uiMain *)user_data;
 	int idCarte = gtk_combo_box_get_active(GTK_COMBO_BOX(widget));
-	
+
 	if(idCarte==0)
 	{
 		gtk_widget_hide(fenetre->scrollCarteBourges);

@@ -21,30 +21,36 @@ typedef struct s_uiPrincipale
 	GtkWidget 	*ssMenu2;
 	GtkWidget 	*ssMenu3;
 	GtkWidget 	*ssMenu4;
-	GtkWidget 	*ssMenuItem1;
-	GtkWidget 	*ssMenuItem2;
-	GtkWidget 	*ssMenuItem3;
-	GtkWidget 	*ssMenuItem4;
-	GtkWidget 	*ssMenuItem5;
-	GtkWidget 	*ssMenuItem6;
-	GtkWidget 	*ssMenuItem7;
-	GtkWidget 	*ssMenuItem8;
-	GtkWidget 	*ssMenuItem9;
 
-	GtkWidget 	*frameEntete;
+	GtkWidget 	*ssMenuItem1;
+	GtkWidget 	*ssMenuItem1_1;
+	GtkWidget 	*ssMenuItem1_2;
+
+	GtkWidget 	*ssMenuItem2;
+	GtkWidget 	*ssMenuItem2_1;
+	GtkWidget 	*ssMenuItem2_2;
+	GtkWidget 	*ssMenuItem2_3;
+
+	GtkWidget 	*ssMenuItem3;
+	GtkWidget 	*ssMenuItem3_1;
+	GtkWidget 	*ssMenuItem3_2;
+
+	GtkWidget 	*ssMenuItem4;
+
+	GtkWidget *frameEntete;
 	GtkWidget	*boxEntete;
 
-	GtkWidget 	*boxUI;
+	GtkWidget *boxUI;
 	GtkWidget	*boutonBoxTraces;
 	GtkWidget	*boutonBoxAnim;
 	GtkWidget	*boutonBoxAnon;
-	GtkWidget 	*boutonTraces;
-	GtkWidget 	*boutonAnimation;
-	GtkWidget 	*boutonAnonymat;
-	
+	GtkWidget *boutonTraces;
+	GtkWidget *boutonAnimation;
+	GtkWidget *boutonAnonymat;
+
 	GtkWidget	*boxCarte;
 	GtkWidget	*frameCarte;
-	GtkWidget   *frameImageCarte;
+	GtkWidget *frameImageCarte;
 	GtkWidget	*imgCarte;
 	GtkWidget	*selectCarte;
 
@@ -55,7 +61,7 @@ typedef struct s_uiPrincipale
 	GtkWidget 	*imgCarteCher;
 	GtkWidget   *imgCarteBourges;
 	GtkWidget   *imgCarteInsa;
-	
+
 }uiMain;
 
 /* ===== Fonctions ===== */
