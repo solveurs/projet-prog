@@ -4,13 +4,12 @@ https://drive.google.com/drive/folders/0B9PAP6wWgCxDMjNfTmxPdmJVZU0
 Schéma organisation BDD (lecture seulement)
 https://drive.google.com/drive/folders/0B3mYt3ngMk23WVZQS3BQX2xvbnM?usp=sharing
 
-<<<<<<< HEAD
 Documentation GTK+
 https://developer.gnome.org/gtk3/stable/index.html
 
 Documentation Cairo
 https://www.cairographics.org/manual/index.html
-=======
+
 Diagramme de séquence
 https://drive.google.com/open?id=0B9PAP6wWgCxDRC16cVdsQ0NsOGs
 
@@ -19,4 +18,3 @@ https://drive.google.com/open?id=0B9PAP6wWgCxDclBkUjNFNi1mRW8
 
 Use case
 https://drive.google.com/open?id=0B9PAP6wWgCxDTzc5OUNQLTlEems
->>>>>>> 66935ca56e62cf0a76d1aeec0c5f41113c8bb9cb

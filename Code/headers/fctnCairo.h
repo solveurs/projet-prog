@@ -5,7 +5,9 @@
 #include "uiTraces.h"
 
 /* ====== CONSTANTES ====== */
-#define TAILLE_TRACE           5.0
+#define TAILLE_TRACE_CHER      2.0
+#define TAILLE_TRACE_BOURGES   5.0
+#define TAILLE_TRACE_INSA      5.0
 
 #define TAILLE_X_CHER       1013.0
 #define TAILLE_Y_CHER       1920.0
@@ -37,6 +39,8 @@ void faire_tracer(cairo_t *cr, int carte, trajet *cible, GdkRGBA* couleur);
 void faire_aggregation(cairo_t *cr, cercle *cercle);
 
 double echelle(double valeur, int carte, int abscisse);
+double conversionGPS(double coord, int carte, int longitude);
+double rayonGPS(double rayonAConver, int carte);
 
 void majCartes(int idCarte);
 void cacheCartes(int idCarte);

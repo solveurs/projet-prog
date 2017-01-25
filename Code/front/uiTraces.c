@@ -168,15 +168,12 @@ void importer(GtkWidget* widget, gpointer user_data)
 */
 void ajoutItemTraces(GtkWidget* boxScroll, const char* nomTrajet, trajet* ptrTrajet)
 {
-  static int id;
   tracesItem *item = (tracesItem *)malloc(sizeof(tracesItem));
 
   if(item == NULL)
     exit(EXIT_FAILURE);
   item->etat = 0;
-  item->id = id;
-  varGlobFront.trajetId[varGlobFront.idTrajet] = id;
-  id++;
+  item->id = varGlobFront.idTrajet;
 
   // ============== Initialisation widgets ==============
   // ====== Layout : Box principale
@@ -247,8 +244,9 @@ void ajoutItemTraces(GtkWidget* boxScroll, const char* nomTrajet, trajet* ptrTra
   gtk_box_pack_start(GTK_BOX(item->boxD), item->boutonVisible, TRUE, TRUE, UI_TRACE_ESPACEMENT);
   gtk_box_pack_start(GTK_BOX(item->boxD), item->boutonSupprimer, TRUE, TRUE, UI_TRACE_ESPACEMENT);
 
+  varGlobFront.traces[varGlobFront.idTrajet] = item;
   ajoutOverlays(item);
-  ajoutMenuTraces(nomTrajet, item->id);
+  ajoutMenuTraces(nomTrajet);
 
   // ==================== Affichage ====================
   gtk_widget_show_all(item->widget);
@@ -347,7 +345,8 @@ void confirmeSupprItem(GtkWidget* widget, gpointer user_data)
   }
 
   tracesItem* itemASuppr = (tracesItem *)user_data;
-  char txt[] = "Si vous supprimez cet ensemble de traces, vous ne pourrez plus l'utiliser.\n\n \t\t\t\tConfirmer pour supprimer ";
+  char txt[256];
+  char* msg = "Si vous supprimez cet ensemble de traces, vous ne pourrez plus l'utiliser.\n\n \t\t\t\tConfirmer pour supprimer ";
 
   // ============== Initialisation widgets ==============
   // ====== Fenetre principale
@@ -362,7 +361,9 @@ void confirmeSupprItem(GtkWidget* widget, gpointer user_data)
   // ===--- Layout : Box principale
   popup->boxPrincipale = gtk_box_new(GTK_ORIENTATION_VERTICAL, UI_TRACE_ESPACEMENT);
   // --- Widget : label du texte de confirmation
-  popup->labelTxt = gtk_label_new(strcat(txt, gtk_label_get_text(GTK_LABEL(itemASuppr->labelNom))));
+  strcat(txt, msg);
+  strcat(txt, gtk_label_get_text(GTK_LABEL(itemASuppr->labelNom)));
+  popup->labelTxt = gtk_label_new(txt);
   // ===--- Layout : Box des boutons 'annuler' et 'confirmer'
   popup->boxBoutons = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, UI_TRACE_ESPACEMENT);
   // --- Widgets : boutons annuler et confirmer
@@ -405,11 +406,27 @@ void supprimeItemTraces(GtkWidget* widget, gpointer user_data)
   gtk_container_remove(GTK_CONTAINER(varGlobFront.overlayCarteBourges), varGlobFront.zoneDessinBourges[itemASuppr->id]);
   gtk_container_remove(GTK_CONTAINER(varGlobFront.overlayCarteInsa), varGlobFront.zoneDessinInsa[itemASuppr->id]);
   supprimeMenuTraces(itemASuppr->id);
+
+  int i;
+  for(i=itemASuppr->id; i<(varGlobFront.idTrajet-1); i++)
+  {
+    varGlobFront.traces[i] = varGlobFront.traces[i+1];
+    varGlobFront.traces[i]->id--;
+    varGlobFront.zoneDessinCher[i] = varGlobFront.zoneDessinCher[i+1];
+    varGlobFront.zoneDessinBourges[i] = varGlobFront.zoneDessinBourges[i+1];
+    varGlobFront.zoneDessinInsa[i] = varGlobFront.zoneDessinInsa[i+1];
+  }
+
+  varGlobFront.traces[varGlobFront.idTrajet] = NULL;
+  varGlobFront.zoneDessinCher[varGlobFront.idTrajet] = NULL;
+  varGlobFront.zoneDessinBourges[varGlobFront.idTrajet] = NULL;
+  varGlobFront.zoneDessinInsa[varGlobFront.idTrajet] = NULL;
+
+  varGlobFront.idTrajet--;
+
   free(itemASuppr->details);
   gtk_widget_destroy(itemASuppr->widget);
   free((tracesItem *)user_data);
-
-  /* Supprimer aussi la liste de traces */
 }
 
 /**

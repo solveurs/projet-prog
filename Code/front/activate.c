@@ -10,17 +10,6 @@
  */
 
 #include "../headers/front.h"
-/*#include "../headers/activate.h"
- #include "../headers/structures.h"*/
-
-/*
-extern int uiTraces(GtkWidget* widget, gpointer user_data);
-extern int uiAnimation(GtkWidget* widget, gpointer user_data);
-extern int uiAnonymite(GtkWidget* widget, gpointer user_data);
-extern void faire_tracesCher(GtkWidget *widget, cairo_t *cr, gpointer user_data);
-extern void faire_tracesBourges(GtkWidget *widget, cairo_t *cr, gpointer user_data);
-extern void faire_tracesInsa(GtkWidget *widget, cairo_t *cr, gpointer user_data);
-*/
 
 static uiMain* ui;
 
@@ -65,16 +54,31 @@ void activate(GtkApplication *app, gpointer user_data)
 	ui->frameCarte = gtk_frame_new("Carte");
 	//--- Widgets : Elements du choix de la carte
 	ui->boxCarte = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, UI_MAIN_ESPACEMENT);
-	ui->frameImageCarte = gtk_frame_new("");
 	ui->imgCarte = gtk_image_new_from_file("../Data/icones/map-32.png");
 
 	ui->selectCarte = gtk_combo_box_text_new();
 	gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(ui->selectCarte), "0", "Cher");
 	gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(ui->selectCarte), "1", "Bourges");
 	gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(ui->selectCarte), "2", "Insa Bourges");
-	gtk_combo_box_set_active(GTK_COMBO_BOX(ui->selectCarte), -1);
+	gtk_combo_box_set_active(GTK_COMBO_BOX(ui->selectCarte), 0);
 
 	// ===--- Layout : Zone de la carte
+	ui->boxEventCher = gtk_event_box_new();
+	g_signal_connect(G_OBJECT(ui->boxEventCher), "motion-notify-event", G_CALLBACK(getPosSouris), NULL);
+	gtk_widget_add_events(ui->boxEventCher, GDK_POINTER_MOTION_MASK);
+	gtk_widget_set_events(ui->boxEventCher, GDK_POINTER_MOTION_MASK);
+
+	ui->boxEventBourges = gtk_event_box_new();
+	g_signal_connect(G_OBJECT(ui->boxEventBourges), "motion-notify-event", G_CALLBACK(getPosSouris), NULL);
+	gtk_widget_add_events(ui->boxEventBourges, GDK_POINTER_MOTION_MASK);
+	gtk_widget_set_events(ui->boxEventBourges, GDK_POINTER_MOTION_MASK);
+
+	ui->boxEventInsa = gtk_event_box_new();
+	g_signal_connect(G_OBJECT(ui->boxEventInsa), "motion-notify-event", G_CALLBACK(getPosSouris), NULL);
+	gtk_widget_add_events(ui->boxEventInsa, GDK_POINTER_MOTION_MASK);
+	gtk_widget_set_events(ui->boxEventInsa, GDK_POINTER_MOTION_MASK);
+
+	ui->boxScrolls = gtk_box_new(GTK_ORIENTATION_VERTICAL, UI_MAIN_ESPACEMENT);
 	ui->scrollCarteCher = gtk_scrolled_window_new(NULL, NULL);
 	ui->scrollCarteBourges = gtk_scrolled_window_new(NULL, NULL);
 	ui->scrollCarteInsa = gtk_scrolled_window_new(NULL, NULL);
@@ -86,6 +90,10 @@ void activate(GtkApplication *app, gpointer user_data)
 	ui->imgCarteCher = gtk_image_new_from_file("../Data/cartes/carte_Cher.png");
 	ui->imgCarteBourges = gtk_image_new_from_file("../Data/cartes/carte_Bourges.png");
 	ui->imgCarteInsa = gtk_image_new_from_file("../Data/cartes/carte_Insa.png");
+
+	// ===--- Layout : Box footer
+	ui->boxFooter = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, UI_MAIN_ESPACEMENT);
+	ui->labelPos = gtk_label_new(" TEST");
 
 	// ===================== Signaux =====================
 	g_signal_connect(ui->boutonTraces, "clicked", G_CALLBACK(uiTraces), ui->widget);
@@ -101,12 +109,13 @@ void activate(GtkApplication *app, gpointer user_data)
 	// ==================== Packaging ====================:
 	// Fenetre principale <- Box principale
 	gtk_container_add(GTK_CONTAINER(ui->widget), ui->boxPrincipale);
-	// Box principale <- Box menu + Frame en-tete (UI + choix carte) + scrolls image carte
-	gtk_box_pack_start(GTK_BOX(ui->boxPrincipale), ui->boxMenu, FALSE, FALSE, UI_MAIN_ESPACEMENT);
-	gtk_box_pack_start(GTK_BOX(ui->boxPrincipale), ui->frameEntete, FALSE, FALSE, UI_MAIN_ESPACEMENT);
-	gtk_box_pack_start(GTK_BOX(ui->boxPrincipale), ui->scrollCarteCher, TRUE, TRUE, UI_MAIN_ESPACEMENT);
-	gtk_box_pack_start(GTK_BOX(ui->boxPrincipale), ui->scrollCarteBourges, TRUE, TRUE, UI_MAIN_ESPACEMENT);
-	gtk_box_pack_start(GTK_BOX(ui->boxPrincipale), ui->scrollCarteInsa, TRUE, TRUE, UI_MAIN_ESPACEMENT);
+	// Box principale <- Box menu + Frame en-tete (UI + choix carte) + Scrolls + Box footer
+	gtk_box_pack_start(GTK_BOX(ui->boxPrincipale), ui->boxMenu, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(ui->boxPrincipale), ui->frameEntete, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(ui->boxPrincipale), ui->scrollCarteCher, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(ui->boxPrincipale), ui->scrollCarteBourges, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(ui->boxPrincipale), ui->scrollCarteInsa, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(ui->boxPrincipale), ui->boxFooter, FALSE, FALSE, 0);
 
 	// Box menu <- Barre de menu
 	gtk_box_pack_start(GTK_BOX(ui->boxMenu), ui->menuBarre, FALSE, FALSE, UI_MAIN_ESPACEMENT);
@@ -127,20 +136,18 @@ void activate(GtkApplication *app, gpointer user_data)
 	// Frame carte <- Box carte
 	gtk_container_add(GTK_CONTAINER(ui->frameCarte), ui->boxCarte);
 
-/* AVANT
-	// Box carte <- Frame echelle + Label echelle + menu deroulant
-	gtk_box_pack_start(GTK_BOX(ui->boxCarte), ui->frameEchelle, FALSE, FALSE, UI_MAIN_ESPACEMENT);
-	gtk_container_add(GTK_CONTAINER(ui->frameEchelle), ui->labelEchelle);
-	gtk_box_pack_start(GTK_BOX(ui->boxCarte), ui->selectCarte, TRUE, TRUE, UI_MAIN_ESPACEMENT);
-*/
-	// Box carte <- Frame ImageCarte + Image + menu deroulant
+	// Box carte <-Image + menu deroulant
 	gtk_box_pack_start(GTK_BOX(ui->boxCarte), ui->imgCarte, FALSE, FALSE, UI_MAIN_ESPACEMENT);
 	gtk_box_pack_start(GTK_BOX(ui->boxCarte), ui->selectCarte, TRUE, TRUE, UI_MAIN_ESPACEMENT);
 
-	// Scrolls image <- Overlays carte
-	gtk_container_add(GTK_CONTAINER(ui->scrollCarteCher), varGlobFront.overlayCarteCher);
-	gtk_container_add(GTK_CONTAINER(ui->scrollCarteBourges), varGlobFront.overlayCarteBourges);
-	gtk_container_add(GTK_CONTAINER(ui->scrollCarteInsa), varGlobFront.overlayCarteInsa);
+	// Scrolls <- Box event
+	gtk_container_add(GTK_CONTAINER(ui->scrollCarteCher), ui->boxEventCher);
+	gtk_container_add(GTK_CONTAINER(ui->scrollCarteBourges), ui->boxEventBourges);
+	gtk_container_add(GTK_CONTAINER(ui->scrollCarteInsa), ui->boxEventInsa);
+	// Box events <- Overlays carte
+	gtk_container_add(GTK_CONTAINER(ui->boxEventCher), varGlobFront.overlayCarteCher);
+	gtk_container_add(GTK_CONTAINER(ui->boxEventBourges), varGlobFront.overlayCarteBourges);
+	gtk_container_add(GTK_CONTAINER(ui->boxEventInsa), varGlobFront.overlayCarteInsa);
 	// Overlays carte <- Image de la carte
 	gtk_container_add(GTK_CONTAINER(varGlobFront.overlayCarteCher), ui->imgCarteCher);
 	gtk_container_add(GTK_CONTAINER(varGlobFront.overlayCarteBourges), ui->imgCarteBourges);
@@ -154,11 +161,16 @@ void activate(GtkApplication *app, gpointer user_data)
 	gtk_widget_set_valign(ui->imgCarteCher, GTK_ALIGN_START);
 	gtk_widget_set_valign(ui->imgCarteBourges, GTK_ALIGN_START);
 	gtk_widget_set_valign(ui->imgCarteInsa, GTK_ALIGN_START);
+
+	/* Box footer <- Label pos */
+	gtk_box_pack_start(GTK_BOX(ui->boxFooter), ui->labelPos, FALSE, FALSE, UI_MAIN_ESPACEMENT);
+
 	// ==================== Affichage ====================
 	gtk_widget_show_all(ui->widget);
 	gtk_widget_hide(ui->scrollCarteCher);
 	gtk_widget_hide(ui->scrollCarteBourges);
 	gtk_widget_hide(ui->scrollCarteInsa);
+	changeCarte(ui->selectCarte, ui);
 }
 
 void ajoutOverlays(tracesItem* ptrItem)
@@ -241,7 +253,6 @@ int overlayTempAjout(GtkWidget* zoneCercle, GtkWidget* eventBox, int id)
 	}
 	else if(idCarte==0)
 	{
-		gtk_widget_realize(eventBox);
 		g_signal_connect(G_OBJECT(zoneCercle), "draw", G_CALLBACK(traceCercle), NULL);
 		g_signal_connect(G_OBJECT(eventBox), "motion-notify-event", G_CALLBACK(deplacementSouris), NULL);
 		g_signal_connect(eventBox, "button-press-event", G_CALLBACK(clickCercle), NULL);
@@ -253,7 +264,7 @@ int overlayTempAjout(GtkWidget* zoneCercle, GtkWidget* eventBox, int id)
 		gtk_widget_show_all(eventBox);
 	    for(i=0; i<NOMBRE_MAX_TRAJETS; i++)
 	    {
-	      if(i!=id && varGlobFront.trajetId[i]!=-1)
+	      if(i!=id)
 	      {
 	        gtk_widget_hide(varGlobFront.zoneDessinCher[i]);
 	      }
@@ -272,7 +283,7 @@ int overlayTempAjout(GtkWidget* zoneCercle, GtkWidget* eventBox, int id)
 		gtk_widget_show_all(eventBox);
 		for(i=0; i<NOMBRE_MAX_TRAJETS; i++)
 	    {
-	      if(i!=id && varGlobFront.trajetId[i]!=-1)
+	      if(i!=id)
 	      {
 	        gtk_widget_hide(varGlobFront.zoneDessinBourges[i]);
 	      }
@@ -291,7 +302,7 @@ int overlayTempAjout(GtkWidget* zoneCercle, GtkWidget* eventBox, int id)
 		gtk_widget_show_all(eventBox);
 		for(i=0; i<NOMBRE_MAX_TRAJETS; i++)
 	    {
-	      if(i!=id && varGlobFront.trajetId[i]!=-1)
+	      if(i!=id)
 	      {
 	        gtk_widget_hide(varGlobFront.zoneDessinInsa[i]);
 	      }
@@ -309,7 +320,7 @@ void overlayTempSuppr(GtkWidget* eventBox, int id)
 		gtk_container_remove(GTK_CONTAINER(varGlobFront.overlayCarteCher), eventBox);
 		for(i=0; i<NOMBRE_MAX_TRAJETS; i++)
 	    {
-	      if(i!=id && varGlobFront.trajetId[i]!=-1)
+	      if(i!=id)
 	      {
 	        gtk_widget_show(varGlobFront.zoneDessinCher[i]);
 	      }
@@ -320,7 +331,7 @@ void overlayTempSuppr(GtkWidget* eventBox, int id)
 		gtk_container_remove(GTK_CONTAINER(varGlobFront.overlayCarteBourges), eventBox);
 		for(i=0; i<NOMBRE_MAX_TRAJETS; i++)
 	    {
-	      if(i!=id && varGlobFront.trajetId[i]!=-1)
+	      if(i!=id)
 	      {
 	        gtk_widget_show(varGlobFront.zoneDessinInsa[i]);
 	      }
@@ -331,9 +342,9 @@ void overlayTempSuppr(GtkWidget* eventBox, int id)
 		gtk_container_remove(GTK_CONTAINER(varGlobFront.overlayCarteInsa), eventBox);
 		for(i=0; i<NOMBRE_MAX_TRAJETS; i++)
 	    {
-	      if(i!=id && varGlobFront.trajetId[i]!=-1)
+	      if(i!=id)
 	      {
-	        gtk_widget_show(varGlobFront.zoneDessinInsa[i]);
+	        gtk_widget_hide(varGlobFront.zoneDessinInsa[i]);
 	      }
 	    }
 	}
@@ -351,4 +362,19 @@ void debloqueCarte()
 	gtk_widget_set_sensitive(ui->boutonTraces, TRUE);
 	gtk_widget_set_sensitive(ui->boutonAnimation, TRUE);
 	gtk_widget_set_sensitive(ui->selectCarte, TRUE);
+}
+
+int getCarte()
+{
+	return gtk_combo_box_get_active(GTK_COMBO_BOX(ui->selectCarte));
+}
+
+void getPosSouris(GtkWidget* widget, GdkEvent *event, gpointer user_data)
+{
+  /* Credits StackOverflow forum */
+  /* On recupere la position du curseur */
+  GdkEventMotion* e = (GdkEventMotion*)event;
+  char text[64];
+  sprintf(text, "Longitude : %lf,\t Latitude : %lf", conversionGPS(e->x, getCarte(), 1), conversionGPS(e->y, getCarte(), 0));
+  gtk_label_set_text(GTK_LABEL(ui->labelPos), text);
 }

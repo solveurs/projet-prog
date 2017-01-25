@@ -43,6 +43,7 @@ typedef struct s_TracesItem
   GtkWidget *boutonOption;
   GtkWidget *boutonVisible;
   GtkWidget *boutonSupprimer;
+  GtkWidget *boutonInteret;
 
   GtkWidget *imgRoute;
   GtkWidget *imgOption;
