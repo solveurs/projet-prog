@@ -28,27 +28,31 @@ typedef struct s_TracesDetailsUI
 typedef struct s_TracesItem
 {
   // Comme c'est un item, le widget principal est une box.
-  GtkWidget *widget;
-  tdUI*     details;
-  int       etat;
-  int       id;
-  trajet*   ptrTrajet;
-  GdkRGBA*  ptrCouleur;
-
-  GtkWidget *boxG;
-  GtkWidget *boxD;
-  GtkWidget *labelNom;
-
-  GtkWidget *boutonRoute;
-  GtkWidget *boutonOption;
-  GtkWidget *boutonVisible;
-  GtkWidget *boutonSupprimer;
-  GtkWidget *boutonInteret;
-
-  GtkWidget *imgRoute;
-  GtkWidget *imgOption;
-  GtkWidget *imgVisible;
-  GtkWidget *imgSupprimer;
+  GtkWidget         *widget;
+  tdUI*             details;
+  int               interet;
+  int               etat;
+  int               visible;
+  int               id;
+  liste_pt_interet* ptrInteret;
+  trajet*           ptrTrajet;
+  GdkRGBA*          ptrCouleur;
+        
+  GtkWidget         *boxG;
+  GtkWidget         *boxD;
+  GtkWidget         *labelNom;
+        
+  GtkWidget         *boutonRoute;
+  GtkWidget         *boutonInteret;
+  GtkWidget         *boutonOption;
+  GtkWidget         *boutonVisible;
+  GtkWidget         *boutonSupprimer;
+        
+  GtkWidget         *imgRoute;
+  GtkWidget         *imgInteret;
+  GtkWidget         *imgOption;
+  GtkWidget         *imgVisible;
+  GtkWidget         *imgSupprimer;
 } tracesItem;
 
 typedef struct s_TracesUI
@@ -81,6 +85,7 @@ void ajoutItemTraces(GtkWidget* boxScroll, const char* nomTrajet, trajet* ptrTra
 int uiTraces(GtkWidget* widget, gpointer user_data);
 void switchVisibilite(GtkWidget* widget, gpointer user_data);
 void traceRoute(GtkWidget* widget, gpointer user_data);
+void traceInteret(GtkWidget* widget, gpointer user_data);
 void optionItemTraces(GtkWidget* widget, gpointer user_data);
 void supprimeItemTraces(GtkWidget* widget, gpointer user_data);
 

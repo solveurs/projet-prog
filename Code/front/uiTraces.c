@@ -173,11 +173,12 @@ void ajoutItemTraces(GtkWidget* boxScroll, const char* nomTrajet, trajet* ptrTra
   if(item == NULL)
     exit(EXIT_FAILURE);
   item->etat = 0;
+  item->visible = 1;
+  item->interet = 0;
   item->id = varGlobFront.idTrajet;
 
   // ============== Initialisation widgets ==============
-  // ====== Layout : Box principale
-  item->widget = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, UI_TRACE_ESPACEMENT);
+  /* Attribution de l'espace memoire */
   item->details = (tdUI *)malloc(sizeof(tdUI));
   if(item->details == NULL)
   {
@@ -201,6 +202,17 @@ void ajoutItemTraces(GtkWidget* boxScroll, const char* nomTrajet, trajet* ptrTra
     exit(EXIT_FAILURE);
   }
 
+  item->ptrInteret = (liste_pt_interet*)malloc(sizeof(liste_pt_interet));
+  if(item->ptrInteret == NULL)
+  {
+    printf("Erreur malloc ptrInteret");
+    exit(EXIT_FAILURE);
+  }
+  item->ptrInteret = calculPointInteretTemp(item->ptrTrajet);
+
+  // ====== Layout : Box principale
+  item->widget = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, UI_TRACE_ESPACEMENT);
+
   // ===--- Layout : BoxG
   item->boxG = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, UI_TRACE_ESPACEMENT);
   item->labelNom = gtk_label_new(nomTrajet);
@@ -210,11 +222,13 @@ void ajoutItemTraces(GtkWidget* boxScroll, const char* nomTrajet, trajet* ptrTra
 
   // --- Widgets : Boutons
   item->boutonRoute = gtk_button_new();
+  item->boutonInteret = gtk_button_new();
   item->boutonOption = gtk_button_new();
   item->boutonVisible = gtk_button_new();
   item->boutonSupprimer = gtk_button_new();
 
   item->imgRoute = gtk_image_new_from_file("../Data/icones/linked-16.png");
+  item->imgInteret = gtk_image_new_from_file("");
   item->imgOption = gtk_image_new_from_file("../Data/icones/gear-16.png");
   item->imgVisible = gtk_image_new_from_file("../Data/icones/eye-16.png");
   item->imgSupprimer = gtk_image_new_from_file("../Data/icones/trash-16.png");
@@ -226,6 +240,7 @@ void ajoutItemTraces(GtkWidget* boxScroll, const char* nomTrajet, trajet* ptrTra
 
   // ===================== Signaux =====================
   g_signal_connect(item->boutonRoute, "clicked", G_CALLBACK(traceRoute), item);
+  g_signal_connect(item->boutonInteret, "clicked", G_CALLBACK(traceInteret), item);
   g_signal_connect(item->boutonOption, "clicked", G_CALLBACK(optionItemTraces), item);
   g_signal_connect(item->boutonVisible, "clicked", G_CALLBACK(switchVisibilite), item);
   g_signal_connect(item->boutonSupprimer, "clicked", G_CALLBACK(confirmeSupprItem), item);
@@ -240,6 +255,7 @@ void ajoutItemTraces(GtkWidget* boxScroll, const char* nomTrajet, trajet* ptrTra
 
     // Box droite <- Boutons
   gtk_box_pack_start(GTK_BOX(item->boxD), item->boutonRoute, TRUE, TRUE, UI_TRACE_ESPACEMENT);
+  gtk_box_pack_start(GTK_BOX(item->boxD), item->boutonInteret, TRUE, TRUE, UI_TRACE_ESPACEMENT);
   gtk_box_pack_start(GTK_BOX(item->boxD), item->boutonOption, TRUE, TRUE, UI_TRACE_ESPACEMENT);
   gtk_box_pack_start(GTK_BOX(item->boxD), item->boutonVisible, TRUE, TRUE, UI_TRACE_ESPACEMENT);
   gtk_box_pack_start(GTK_BOX(item->boxD), item->boutonSupprimer, TRUE, TRUE, UI_TRACE_ESPACEMENT);
@@ -265,17 +281,31 @@ void ajoutItemTraces(GtkWidget* boxScroll, const char* nomTrajet, trajet* ptrTra
 */
 void traceRoute(GtkWidget* widget, gpointer user_data)
 {
-  static int visible = 1;
   tracesItem* item = (tracesItem *)user_data;
-  if(visible)
+  if(item->ptrTrajet->visibilite)
   {
     item->ptrTrajet->visibilite = 0;    
-    visible = 0;
   }
   else
   {
     item->ptrTrajet->visibilite = 1;
-    visible = 1;
+  }
+
+  majCartes(item->id);
+}
+
+void traceInteret(GtkWidget* widget, gpointer user_data)
+{
+  tracesItem* item = (tracesItem *)user_data;  
+
+  /* Switch de la visibilite de l'interet */
+  if(item->interet)
+  {
+    item->interet = 0;
+  }
+  else
+  {
+    item->interet = 1;
   }
 
   majCartes(item->id);
@@ -292,17 +322,16 @@ void traceRoute(GtkWidget* widget, gpointer user_data)
 */
 void switchVisibilite(GtkWidget* widget, gpointer user_data)
 {
-  static int visible = 1;
   tracesItem* item = (tracesItem *)user_data;
-  if(visible)
+  if(item->visible)
   {
-    visible = 0;
+    item->visible = 0;
     gtk_image_set_from_file(GTK_IMAGE(item->imgVisible), "../Data/icones/eye-disabled-16.png");
     cacheCartes(item->id);
   }
   else
   {
-    visible = 1;
+    item->visible = 1;
     gtk_image_set_from_file(GTK_IMAGE(item->imgVisible), "../Data/icones/eye-16.png");
     afficheCartes(item->id);
   }
