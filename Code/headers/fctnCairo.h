@@ -9,8 +9,8 @@
 #define TAILLE_TRACE_BOURGES   5.0
 #define TAILLE_TRACE_INSA      5.0
 
-#define TAILLE_X_CHER       1013.0
-#define TAILLE_Y_CHER       1920.0
+#define TAILLE_X_CHER       1850.0
+#define TAILLE_Y_CHER       3506.0
 #define LAT_HG_CHER      47.988083
 #define LON_HG_CHER       1.726227
 #define LAT_BD_CHER      46.194092
