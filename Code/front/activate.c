@@ -350,11 +350,18 @@ void overlayTempSuppr(GtkWidget* eventBox, int id)
 	}
 }
 
-void bloqueCarte()
+void bloqueCarte(int mode)
 {
 	gtk_widget_set_sensitive(ui->boutonTraces, FALSE);
-	gtk_widget_set_sensitive(ui->boutonAnimation, FALSE);
 	gtk_widget_set_sensitive(ui->selectCarte, FALSE);
+	if(mode) // Mode anonymite
+	{
+		gtk_widget_set_sensitive(ui->boutonAnimation, FALSE);
+	}
+	else     // Mode animation
+	{
+		gtk_widget_set_sensitive(ui->boutonAnonymat, FALSE);
+	}
 }
 
 void debloqueCarte()
@@ -362,6 +369,7 @@ void debloqueCarte()
 	gtk_widget_set_sensitive(ui->boutonTraces, TRUE);
 	gtk_widget_set_sensitive(ui->boutonAnimation, TRUE);
 	gtk_widget_set_sensitive(ui->selectCarte, TRUE);
+	gtk_widget_set_sensitive(ui->boutonAnonymat, TRUE);
 }
 
 int getCarte()
@@ -377,4 +385,68 @@ void getPosSouris(GtkWidget* widget, GdkEvent *event, gpointer user_data)
   char text[64];
   sprintf(text, "Longitude : %lf,\t Latitude : %lf", conversionGPS(e->x, getCarte(), 1), conversionGPS(e->y, getCarte(), 0));
   gtk_label_set_text(GTK_LABEL(ui->labelPos), text);
+}
+
+void focusTrajet(int carte, int id)
+{
+	int i;
+	switch(carte)
+	{
+		case 0: //Cher
+			for(i=0; i<NOMBRE_MAX_TRAJETS; i++)
+			{
+		      	if(i!=id)
+		      	{
+		        	gtk_widget_hide(varGlobFront.zoneDessinCher[i]);
+		      	}
+			}
+		case 1: //Bourges
+			for(i=0; i<NOMBRE_MAX_TRAJETS; i++)
+			{
+		      	if(i!=id)
+		      	{
+		        	gtk_widget_hide(varGlobFront.zoneDessinBourges[i]);
+		      	}
+			}
+		default: //Insa
+			for(i=0; i<NOMBRE_MAX_TRAJETS; i++)
+			{
+		      	if(i!=id)
+		      	{
+		        	gtk_widget_hide(varGlobFront.zoneDessinInsa[i]);
+		      	}
+			}
+	}
+}
+
+void defocusTrajet(int carte, int id)
+{
+	int i;
+	switch(carte)
+	{
+		case 0: //Cher
+			for(i=0; i<NOMBRE_MAX_TRAJETS; i++)
+			{
+		      	if(i!=id)
+		      	{
+		        	gtk_widget_show(varGlobFront.zoneDessinCher[i]);
+		      	}
+			}
+		case 1: //Bourges
+		for(i=0; i<NOMBRE_MAX_TRAJETS; i++)
+			{
+		      	if(i!=id)
+		      	{
+		        	gtk_widget_show(varGlobFront.zoneDessinBourges[i]);
+		      	}
+			}
+		case 2: //Insa
+		for(i=0; i<NOMBRE_MAX_TRAJETS; i++)
+			{
+		      	if(i!=id)
+		      	{
+		        	gtk_widget_show(varGlobFront.zoneDessinInsa[i]);
+		      	}
+			}
+	}
 }

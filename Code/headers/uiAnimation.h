@@ -5,24 +5,16 @@
 #define UI_ANIM_ESPACEMENT      5
 #define UI_ANIM_OUVERT          1
 #define UI_ANIM_FERME           0
-#define UI_ANIM_TAILLE_X      500
-#define UI_ANIM_TAILLE_Y      150
+#define UI_ANIM_TAILLE_X      400
+#define UI_ANIM_TAILLE_Y      100
 
 /* ===== Structures ===== */
-
-typedef struct s_date
-{
-  int jour;
-  int mois;
-  int annee;
-}dateAnim;
 
 typedef struct s_AnimUI
 {
   GtkWidget   *widget;
-  char        buffer[11];
-  dateAnim    *dateDeb;
-  dateAnim    *dateFin;
+  GtkWidget   *calendrierDeb;
+  GtkWidget   *calendrierFin;
 
   GtkWidget   *boxPrincipale;
 
@@ -36,17 +28,30 @@ typedef struct s_AnimUI
   GtkWidget   *entryZoneDeb;
   GtkWidget   *boutonCalG;
   GtkWidget   *imgCalG;
-
+  GtkWidget   *boxComboG;
+  GtkWidget   *comboHG;
+  GtkWidget   *comboMG;
+  GtkWidget   *comboSG;
   // Droite == Fin
   GtkWidget   *gridPHD;
   GtkWidget   *labelPHD;
   GtkWidget   *entryZoneFin;
   GtkWidget   *boutonCalD;
+  GtkWidget   *boxComboD;
   GtkWidget   *imgCalD;
+  GtkWidget   *comboHD;
+  GtkWidget   *comboMD;
+  GtkWidget   *comboSD;
+
   // Vitesse
   GtkWidget   *boxPB;
   GtkWidget   *label;
   GtkWidget   *vitesse;
+
+  GtkWidget   *frameCible;
+  GtkWidget   *boxFrameCible;
+  GtkWidget   *boutonMode;
+  GtkWidget   *menuDeroulant;
 
   //Boutons d'animation
   GtkWidget   *boxBoutons;
@@ -61,20 +66,17 @@ typedef struct s_AnimUI
   GtkWidget   *imgPlayPause;
   GtkWidget   *imgAvance;
 
-  GtkWidget   *select;
-
   GtkWidget   *boxAffichage;
-  GtkWidget   *caseG;
-  GtkWidget   *caseD;
+  GtkWidget   *labelDate;
+  GtkWidget   *labelHeure;
 } animUI;
 
 typedef struct s_Calendrier
 {
   GtkWidget *widget;
+  int       type;
 
   GtkWidget *boxPrincipale;
-
-  GtkWidget *calendrier;
 
   GtkWidget *boxBoutons;
   GtkWidget *boutonAnnuler;
@@ -84,10 +86,24 @@ typedef struct s_Calendrier
 
 /* ===== Fonctions ===== */
 int uiAnimation(GtkWidget* widget, gpointer user_data);
-void setCalendrier(GtkWidget* widget, gpointer user_data);
+void setCalendrierDebut(GtkWidget* widget, gpointer user_data);
+void setCalendrierFin(GtkWidget* widget, gpointer user_data);
 void annulerCal(GtkWidget* widget, gpointer user_data);
-void confirmerCal(GtkWidget* widget, gpointer user_data);
+void confirmerCalDebut(GtkWidget* widget, gpointer user_data);
+void confirmerCalFin(GtkWidget* widget, gpointer user_data);
 void arriere(GtkWidget* widget, gpointer user_data);
 void stop(GtkWidget* widget, gpointer user_data);
 void playPause(GtkWidget* widget, gpointer user_data);
 void avance(GtkWidget* widget, gpointer user_data);
+int avanceAux(gpointer user_data);
+
+void initCombo();
+void changeMode(GtkWidget* widget, gpointer user_data);
+void getHeure();
+void ajoutMenuTracesAnim(const gchar* nom);
+void supprimeMenuTracesAnim(gint id);
+void renommeMenuTracesAnim(gint id, const gchar* nom);
+
+void bloqueInterfaceAnim();
+void debloqueInterfaceAnim();
+int compareTps(time_t date);

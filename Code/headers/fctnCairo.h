@@ -5,6 +5,9 @@
 #include "uiTraces.h"
 
 /* ====== CONSTANTES ====== */
+#define MODE_ANIMATION         0
+#define MODE_NORMAL            1
+
 #define TAILLE_TRACE_CHER      5.0
 #define TAILLE_TRACE_BOURGES   5.0
 #define TAILLE_TRACE_INSA      5.0
@@ -44,3 +47,9 @@ double rayonGPS(double rayonAConver, int carte);
 void majCartes(int idCarte);
 void cacheCartes(int idCarte);
 void afficheCartes(int idCarte);
+void switchMode(int type);
+void setLimite(int max);
+void setVitesse(int vit);
+void incrLimite(int add, int taille);
+void decrLimite(int sub);
+void resetOnce();

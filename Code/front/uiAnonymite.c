@@ -8,7 +8,11 @@
  * ====================
  *       TODO
  * ====================
- * Faire les fonctions relatives aux boutons.
+ * Spin button
+ * Fonction calendrier
+ * Modifier faire_trace en fonction du temps
+ * Fonction avancer, reculer
+ * Doxygen
  *
  * ====================
  *        MaJ
@@ -318,7 +322,7 @@ void ajouteCercle(GtkWidget* widget, gpointer user_data)
       gtk_widget_queue_draw(ZONE_CERCLE);
       gtk_widget_hide(parent->boutonCercle);
       gtk_widget_show(parent->boxTracer);
-      bloqueCarte();
+      bloqueCarte(1);
     }
   }
 }
@@ -340,19 +344,19 @@ void traceCercle(GtkWidget* widget, cairo_t* cr, gpointer user_data)
   cairo_stroke(cr); 
 }
 
-void ajoutMenuTraces(const gchar* nom)
+void ajoutMenuTracesAnon(const gchar* nom)
 {
   gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(fenetreAnon->menuDeroulant), NULL, nom);
 }
 
-void supprimeMenuTraces(gint id)
+void supprimeMenuTracesAnon(gint id)
 {
   gtk_combo_box_text_remove(GTK_COMBO_BOX_TEXT(fenetreAnon->menuDeroulant), id);
 }
 
-void renommeMenuTraces(gint id, const gchar* nom)
+void renommeMenuTracesAnon(gint id, const gchar* nom)
 {
-  supprimeMenuTraces(id);
+  supprimeMenuTracesAnon(id);
   gtk_combo_box_text_insert_text(GTK_COMBO_BOX_TEXT(fenetreAnon->menuDeroulant), id, nom);
 }
 

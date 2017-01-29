@@ -262,7 +262,8 @@ void ajoutItemTraces(GtkWidget* boxScroll, const char* nomTrajet, trajet* ptrTra
 
   varGlobFront.traces[varGlobFront.idTrajet] = item;
   ajoutOverlays(item);
-  ajoutMenuTraces(nomTrajet);
+  ajoutMenuTracesAnon(nomTrajet);
+  ajoutMenuTracesAnim(nomTrajet);
 
   // ==================== Affichage ====================
   gtk_widget_show_all(item->widget);
@@ -434,7 +435,8 @@ void supprimeItemTraces(GtkWidget* widget, gpointer user_data)
   gtk_container_remove(GTK_CONTAINER(varGlobFront.overlayCarteCher), varGlobFront.zoneDessinCher[itemASuppr->id]);
   gtk_container_remove(GTK_CONTAINER(varGlobFront.overlayCarteBourges), varGlobFront.zoneDessinBourges[itemASuppr->id]);
   gtk_container_remove(GTK_CONTAINER(varGlobFront.overlayCarteInsa), varGlobFront.zoneDessinInsa[itemASuppr->id]);
-  supprimeMenuTraces(itemASuppr->id);
+  supprimeMenuTracesAnon(itemASuppr->id);
+  supprimeMenuTracesAnim(itemASuppr->id);
 
   int i;
   for(i=itemASuppr->id; i<(varGlobFront.idTrajet-1); i++)
@@ -571,7 +573,8 @@ void appliquerTD(GtkWidget* widget, gpointer user_data)
 {
   tracesItem* item = (tracesItem*)user_data;
   gtk_label_set_text(GTK_LABEL(item->labelNom), gtk_entry_get_text(GTK_ENTRY(item->details->zoneEntry)));
-  renommeMenuTraces(item->id, gtk_label_get_text(GTK_LABEL(item->labelNom)));
+  renommeMenuTracesAnon(item->id, gtk_label_get_text(GTK_LABEL(item->labelNom)));
+  renommeMenuTracesAnim(item->id, gtk_label_get_text(GTK_LABEL(item->labelNom)));
   gtk_widget_hide(item->details->widget);
 }
 

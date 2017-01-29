@@ -76,9 +76,9 @@ void ajouteCercle(GtkWidget* widget, gpointer user_data);
 void annulerCercle(GtkWidget* widget, gpointer user_data);
 void confirmerCercle(GtkWidget* widget, gpointer user_data);
 
-void ajoutMenuTraces(const gchar* nom);
-void supprimeMenuTraces(gint id);
-void renommeMenuTraces(gint id, const gchar* nom);
+void ajoutMenuTracesAnon(const gchar* nom);
+void supprimeMenuTracesAnon(gint id);
+void renommeMenuTracesAnon(gint id, const gchar* nom);
 void deplacementSouris(GtkWidget *widget, GdkEvent *event, gpointer user_data);
 double rayonAnon(point centre, int rayonX, int rayonY);
 void clickCercle(GtkWidget *widget, GdkEventButton *event, gpointer user_data);

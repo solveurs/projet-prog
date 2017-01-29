@@ -18,6 +18,11 @@
  */
 #include "../headers/front.h"
 
+static int vitesse;
+static int mode = MODE_NORMAL;
+static int limite;
+static int once = 0;
+
 void faire_tracesCher(GtkWidget *widget, cairo_t *cr, gpointer user_data)
 {
 	tracesItem* ptrItem = (tracesItem *)user_data;
@@ -38,80 +43,161 @@ void faire_tracesInsa(GtkWidget *widget, cairo_t *cr, gpointer user_data)
 
 void faire_tracer(cairo_t *cr, int carte, tracesItem* item)
 {
-	// Epaisseur des lignes
-	cairo_set_line_width(cr, 1.0);
-	// Traces en bleu
-	cairo_set_source_rgb(cr, item->ptrCouleur->red, item->ptrCouleur->green, item->ptrCouleur->blue);
-	// Taille des traces
-	double TAILLE_TRACE;
-	switch(carte)
+	if(mode == MODE_NORMAL)
 	{
-		case 0:
-			TAILLE_TRACE = TAILLE_TRACE_CHER;
-			break;
-		case 1:
-			TAILLE_TRACE = TAILLE_TRACE_BOURGES;
-			break;
-		default:
-			TAILLE_TRACE = TAILLE_TRACE_INSA;
-	}
-	
-	// Tracer des points
-	trace* ptr;
-	int x, y;
-	for(ptr=item->ptrTrajet->premier; ptr!=item->ptrTrajet->dernier; ptr=ptr->suiv)
-	{
-		if(ptr->visibilite==1 /* && condition date */)
+		// Epaisseur des lignes
+		cairo_set_line_width(cr, 1.0);
+		// Traces en bleu
+		cairo_set_source_rgb(cr, item->ptrCouleur->red, item->ptrCouleur->green, item->ptrCouleur->blue);
+		// Taille des traces
+		double TAILLE_TRACE;
+		switch(carte)
 		{
-			// Inversion longitude et latitude
-			x = (int)echelle(ptr->coord.y, carte, 1);
-			y = (int)echelle(ptr->coord.x, carte, 0);
-			//printf("%lf,%lf\n",ptr->coord.y,ptr->coord.x);
-			
-			
-			// Dessin d'un petit "+"
+			case 0:
+				TAILLE_TRACE = TAILLE_TRACE_CHER;
+				break;
+			case 1:
+				TAILLE_TRACE = TAILLE_TRACE_BOURGES;
+				break;
+			default:
+				TAILLE_TRACE = TAILLE_TRACE_INSA;
+		}
+		
+		// Tracer des points
+		trace* ptr;
+		int x, y;
+		for(ptr=item->ptrTrajet->premier; ptr!=item->ptrTrajet->dernier; ptr=ptr->suiv)
+		{
+			if(ptr->visibilite==1)
+			{
+				// Inversion longitude et latitude
+				x = (int)echelle(ptr->coord.y, carte, 1);
+				y = (int)echelle(ptr->coord.x, carte, 0);
+				//printf("%lf,%lf\n",ptr->coord.y,ptr->coord.x);
+				
+				
+				// Dessin d'un petit "+"
+				cairo_move_to(cr, x, y - TAILLE_TRACE);
+				cairo_line_to(cr, x, y + TAILLE_TRACE);
+				
+				cairo_move_to(cr, x - TAILLE_TRACE, y);
+				cairo_line_to(cr, x + TAILLE_TRACE, y);
+				
+				if(item->ptrTrajet->visibilite) //si le trajet est visible
+				{
+					cairo_move_to(cr, x, y);
+					x = (int)echelle(ptr->suiv->coord.y, carte, 1);
+					y = (int)echelle(ptr->suiv->coord.x, carte, 0);
+					cairo_line_to(cr, x, y);
+				}
+			}
+		}
+		if(ptr->visibilite==1)
+		{
+			x = echelle(item->ptrTrajet->dernier->coord.x, carte, 1);
+			y = echelle(item->ptrTrajet->dernier->coord.y, carte, 0);
 			cairo_move_to(cr, x, y - TAILLE_TRACE);
 			cairo_line_to(cr, x, y + TAILLE_TRACE);
 			
 			cairo_move_to(cr, x - TAILLE_TRACE, y);
 			cairo_line_to(cr, x + TAILLE_TRACE, y);
-			
-			if(item->ptrTrajet->visibilite) //si le trajet est visible
+		}
+
+		cairo_stroke_preserve(cr);
+
+		if(item->interet)
+		{
+			int i;
+			for(i=0; i<(item->ptrInteret->occupee); i++)
 			{
-				cairo_move_to(cr, x, y);
-				x = (int)echelle(ptr->suiv->coord.y, carte, 1);
-				y = (int)echelle(ptr->suiv->coord.x, carte, 0);
-				cairo_line_to(cr, x, y);
+				point centre = item->ptrInteret->t[i]->position;
+				centre.x = echelle(centre.x, carte, 0);
+				centre.y = echelle(centre.y, carte, 1);
+				double rayon = item->ptrInteret->t[i]->importance;
+				rayon = rayon / 2.0;
+				faire_aggregation(cr, centre, rayon);
 			}
 		}
 	}
-	if(ptr->visibilite==1 /* && condition date */)
+	else
 	{
-		x = echelle(item->ptrTrajet->dernier->coord.x, carte, 1);
-		y = echelle(item->ptrTrajet->dernier->coord.y, carte, 0);
-		cairo_move_to(cr, x, y - TAILLE_TRACE);
-		cairo_line_to(cr, x, y + TAILLE_TRACE);
-		
-		cairo_move_to(cr, x - TAILLE_TRACE, y);
-		cairo_line_to(cr, x + TAILLE_TRACE, y);
-	}
-
-	cairo_stroke_preserve(cr);
-
-	if(item->interet)
-	{
-		int i;
-		for(i=0; i<(item->ptrInteret->occupee); i++)
+		// Epaisseur des lignes
+		cairo_set_line_width(cr, 1.0);
+		// Traces en bleu
+		cairo_set_source_rgb(cr, item->ptrCouleur->red, item->ptrCouleur->green, item->ptrCouleur->blue);
+		// Taille des traces
+		double TAILLE_TRACE;
+		switch(carte)
 		{
-			point centre = item->ptrInteret->t[i]->position;
-			centre.x = echelle(centre.x, carte, 0);
-			centre.y = echelle(centre.y, carte, 1);
-			double rayon = item->ptrInteret->t[i]->importance;
-			rayon = rayon / 2.0;
-			faire_aggregation(cr, centre, rayon);
+			case 0:
+				TAILLE_TRACE = TAILLE_TRACE_CHER;
+				break;
+			case 1:
+				TAILLE_TRACE = TAILLE_TRACE_BOURGES;
+				break;
+			default:
+				TAILLE_TRACE = TAILLE_TRACE_INSA;
 		}
-	}
+		
+		// Tracer des points
+		trace* ptr = item->ptrTrajet->premier;
+		int x, y;
+		int incr = 0;
+		int i;
+		while(incr<limite)
+		{
+			for(i=0; i<vitesse; i++)
+			{
+				if(ptr == item->ptrTrajet->dernier)
+				{
+					break;
+				}
 
+				else if(ptr->visibilite==1 && compareTps(ptr->date))
+				{
+					// Inversion longitude et latitude
+					x = (int)echelle(ptr->coord.y, carte, 1);
+					y = (int)echelle(ptr->coord.x, carte, 0);				
+					
+					// Dessin d'un petit "+"
+					cairo_move_to(cr, x, y - TAILLE_TRACE);
+					cairo_line_to(cr, x, y + TAILLE_TRACE);
+					
+					cairo_move_to(cr, x - TAILLE_TRACE, y);
+					cairo_line_to(cr, x + TAILLE_TRACE, y);
+					
+					if(item->ptrTrajet->visibilite)
+					{
+						cairo_move_to(cr, x, y);
+						x = (int)echelle(ptr->suiv->coord.y, carte, 1);
+						y = (int)echelle(ptr->suiv->coord.x, carte, 0);
+						cairo_line_to(cr, x, y);
+					}
+				}
+
+				ptr = ptr->suiv;
+			}
+
+			if(ptr == item->ptrTrajet->dernier)
+			{
+				cairo_move_to(cr, x, y - TAILLE_TRACE);
+				cairo_line_to(cr, x, y + TAILLE_TRACE);
+					
+				cairo_move_to(cr, x - TAILLE_TRACE, y);
+				cairo_line_to(cr, x + TAILLE_TRACE, y);
+
+				if(!once)
+				{
+					popupMessage("Information", "Vous avez atteint la fin du trajet !", NULL);
+					once++;
+				}
+			}
+
+			incr += vitesse;
+		}
+
+		cairo_stroke_preserve(cr);
+	}
 }
 
 void faire_aggregation(cairo_t *cr, point centre, double r)
@@ -228,4 +314,42 @@ void afficheCartes(int idCarte)
 	gtk_widget_show(varGlobFront.zoneDessinCher[idCarte]);
 	gtk_widget_show(varGlobFront.zoneDessinBourges[idCarte]);
 	gtk_widget_show(varGlobFront.zoneDessinInsa[idCarte]);
+}
+
+void switchMode(int type)
+{
+	mode = type;
+}
+
+void setLimite(int max)
+{
+	limite = max;
+}
+
+void setVitesse(int vit)
+{
+	vitesse = vit;
+}
+
+void incrLimite(int add, int taille)
+{
+	limite += add;
+	if(limite>taille)
+	{
+		limite = taille;
+	}
+}
+
+void decrLimite(int sub)
+{
+	limite -= sub;
+	if(limite<0)
+	{
+		limite = 0;
+	}
+}
+
+void resetOnce()
+{
+	once = 0;
 }
