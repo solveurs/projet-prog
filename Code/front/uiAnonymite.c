@@ -386,8 +386,8 @@ void deplacementSouris(GtkWidget *widget, GdkEvent *event, gpointer user_data)
 double rayonAnon(point centre, int rayonX, int rayonY)
 {
   double hyp;
-  double AB = abs(rayonX - centre.x);
-  double BC = abs(rayonY - centre.y);
+  double AB = fabs(rayonX - centre.x);
+  double BC = fabs(rayonY - centre.y);
 
   // Pythagore, je t'invoque !!!!
   hyp = sqrt((AB*AB + BC*BC));
