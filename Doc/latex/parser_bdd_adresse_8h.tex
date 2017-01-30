@@ -2,13 +2,14 @@
 \label{parser_bdd_adresse_8h}\index{/\+Users/frj/\+Documents/\+Code/\+Projet\+\_\+prog\+\_\+3a/\+Code/headers/parser\+Bdd\+Adresse.\+h@{/\+Users/frj/\+Documents/\+Code/\+Projet\+\_\+prog\+\_\+3a/\+Code/headers/parser\+Bdd\+Adresse.\+h}}
 {\ttfamily \#include \char`\"{}includes.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}structures.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}conversion.\+h\char`\"{}}\newline
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 F\+I\+LE $\ast$ \hyperlink{parser_bdd_adresse_8h_aae170ceec6688e22c69bd3814178b732}{open\+Bdd\+Addr} (const char $\ast$nom)
 \item 
-\hyperlink{structbdd__trace}{bdd\+\_\+trace} $\ast$ \hyperlink{parser_bdd_adresse_8h_a21f5a5c496514cc62740a76070097c6e}{read\+Geoloc} (F\+I\+LE $\ast$par\+Fd)
-\end{DoxyCompactItemize}
+bdd\+\_\+addr $\ast$ \hyperlink{parser_bdd_adresse_8h_a39505a1b49ce254802eb28af71dc1e24}{read\+Addr} (F\+I\+LE $\ast$fd)
+\begin{DoxyCompactList}\small\item\em Lit le fichier d\textquotesingle{}adresse .csv et renvoit un tableau d\textquotesingle{}adresses. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}
@@ -22,23 +23,22 @@ F\+I\+LE $\ast$ \hyperlink{parser_bdd_adresse_8h_aae170ceec6688e22c69bd3814178b7
 
 Definition at line 9 of file parser\+Bdd\+Adresse.\+c.
 
-\hypertarget{parser_bdd_adresse_8h_a21f5a5c496514cc62740a76070097c6e}{}\label{parser_bdd_adresse_8h_a21f5a5c496514cc62740a76070097c6e} 
-\index{parser\+Bdd\+Adresse.\+h@{parser\+Bdd\+Adresse.\+h}!read\+Geoloc@{read\+Geoloc}}
-\index{read\+Geoloc@{read\+Geoloc}!parser\+Bdd\+Adresse.\+h@{parser\+Bdd\+Adresse.\+h}}
-\subsubsection{\texorpdfstring{read\+Geoloc()}{readGeoloc()}}
-{\footnotesize\ttfamily \hyperlink{structbdd__trace}{bdd\+\_\+trace}$\ast$ read\+Geoloc (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{par\+Fd }\end{DoxyParamCaption})}
+\hypertarget{parser_bdd_adresse_8h_a39505a1b49ce254802eb28af71dc1e24}{}\label{parser_bdd_adresse_8h_a39505a1b49ce254802eb28af71dc1e24} 
+\index{parser\+Bdd\+Adresse.\+h@{parser\+Bdd\+Adresse.\+h}!read\+Addr@{read\+Addr}}
+\index{read\+Addr@{read\+Addr}!parser\+Bdd\+Adresse.\+h@{parser\+Bdd\+Adresse.\+h}}
+\subsubsection{\texorpdfstring{read\+Addr()}{readAddr()}}
+{\footnotesize\ttfamily bdd\+\_\+addr$\ast$ read\+Addr (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{fd }\end{DoxyParamCaption})}
 
-ouverture d\textquotesingle{}une bdd geoloc
+
+
+Lit le fichier d\textquotesingle{}adresse .csv et renvoit un tableau d\textquotesingle{}adresses. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em par\+Fd} & le descripteur sur le fichier de log geoloc\\
+{\em $\ast$fd} & descripteur sur le fichier d\textquotesingle{}adresse \\
 \hline
 \end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-un pointeur du \hyperlink{structbdd__trace}{bdd\+\_\+trace} 
-\end{DoxyReturn}
 
 
-Definition at line 14 of file parser\+Bdd\+Adresse.\+c.
+Definition at line 24 of file parser\+Bdd\+Adresse.\+c.
 

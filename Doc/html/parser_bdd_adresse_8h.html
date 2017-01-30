@@ -88,6 +88,7 @@ $(document).ready(function(){initNavTree('parser_bdd_adresse_8h.html','');});
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="includes_8h_source.html">includes.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="structures_8h_source.html">structures.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="conversion_8h_source.html">conversion.h</a>&quot;</code><br />
 </div>
 <p><a href="parser_bdd_adresse_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -95,8 +96,9 @@ $(document).ready(function(){initNavTree('parser_bdd_adresse_8h.html','');});
 Functions</h2></td></tr>
 <tr class="memitem:aae170ceec6688e22c69bd3814178b732"><td class="memItemLeft" align="right" valign="top">FILE *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_bdd_adresse_8h.html#aae170ceec6688e22c69bd3814178b732">openBddAddr</a> (const char *nom)</td></tr>
 <tr class="separator:aae170ceec6688e22c69bd3814178b732"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21f5a5c496514cc62740a76070097c6e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structbdd__trace.html">bdd_trace</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_bdd_adresse_8h.html#a21f5a5c496514cc62740a76070097c6e">readGeoloc</a> (FILE *parFd)</td></tr>
-<tr class="separator:a21f5a5c496514cc62740a76070097c6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39505a1b49ce254802eb28af71dc1e24"><td class="memItemLeft" align="right" valign="top">bdd_addr *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_bdd_adresse_8h.html#a39505a1b49ce254802eb28af71dc1e24">readAddr</a> (FILE *fd)</td></tr>
+<tr class="memdesc:a39505a1b49ce254802eb28af71dc1e24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lit le fichier d'adresse .csv et renvoit un tableau d'adresses.  <a href="#a39505a1b49ce254802eb28af71dc1e24">More...</a><br /></td></tr>
+<tr class="separator:a39505a1b49ce254802eb28af71dc1e24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="aae170ceec6688e22c69bd3814178b732"></a>
@@ -119,31 +121,31 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a21f5a5c496514cc62740a76070097c6e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a21f5a5c496514cc62740a76070097c6e">&sect;&nbsp;</a></span>readGeoloc()</h2>
+<a id="a39505a1b49ce254802eb28af71dc1e24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39505a1b49ce254802eb28af71dc1e24">&sect;&nbsp;</a></span>readAddr()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structbdd__trace.html">bdd_trace</a>* readGeoloc </td>
+          <td class="memname">bdd_addr* readAddr </td>
           <td>(</td>
           <td class="paramtype">FILE *&#160;</td>
-          <td class="paramname"><em>parFd</em></td><td>)</td>
+          <td class="paramname"><em>fd</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>ouverture d'une bdd geoloc</p>
+
+<p>Lit le fichier d'adresse .csv et renvoit un tableau d'adresses. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">parFd</td><td>le descripteur sur le fichier de log geoloc</td></tr>
+    <tr><td class="paramname">*fd</td><td>descripteur sur le fichier d'adresse </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>un pointeur du <a class="el" href="structbdd__trace.html" title="modelisation de la base de donnée de trace ">bdd_trace</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="parser_bdd_adresse_8c_source.html#l00014">14</a> of file <a class="el" href="parser_bdd_adresse_8c_source.html">parserBddAdresse.c</a>.</p>
+<p>Definition at line <a class="el" href="parser_bdd_adresse_8c_source.html#l00024">24</a> of file <a class="el" href="parser_bdd_adresse_8c_source.html">parserBddAdresse.c</a>.</p>
 
 </div>
 </div>

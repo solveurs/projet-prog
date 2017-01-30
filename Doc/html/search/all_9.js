@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['jour',['jour',['../structs__date.html#aec8e61b4e27d935e47eba0485425da38',1,'s_date']]]
+  ['kmtogps',['kmToGPS',['../conversion_8c.html#a33522d30ebe190c4ccc9382fe8bc8ff1',1,'kmToGPS(const point parD, double parLat):&#160;conversion.c'],['../conversion_8h.html#a33522d30ebe190c4ccc9382fe8bc8ff1',1,'kmToGPS(const point parD, double parLat):&#160;conversion.c']]]
 ];

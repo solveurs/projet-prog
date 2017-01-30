@@ -94,11 +94,9 @@ $(document).ready(function(){initNavTree('parser_bdd_adresse_8c.html','');});
 Functions</h2></td></tr>
 <tr class="memitem:aae170ceec6688e22c69bd3814178b732"><td class="memItemLeft" align="right" valign="top">FILE *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_bdd_adresse_8c.html#aae170ceec6688e22c69bd3814178b732">openBddAddr</a> (const char *nom)</td></tr>
 <tr class="separator:aae170ceec6688e22c69bd3814178b732"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21f5a5c496514cc62740a76070097c6e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structbdd__trace.html">bdd_trace</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_bdd_adresse_8c.html#a21f5a5c496514cc62740a76070097c6e">readGeoloc</a> (FILE *parFd)</td></tr>
-<tr class="separator:a21f5a5c496514cc62740a76070097c6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a09609ede281d911f36a199b35d299a"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_bdd_adresse_8c.html#a6a09609ede281d911f36a199b35d299a">recuperer_champ</a> (char *ligne, int numero_champ)</td></tr>
-<tr class="memdesc:a6a09609ede281d911f36a199b35d299a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Récupère un champ dans un fichier csv.  <a href="#a6a09609ede281d911f36a199b35d299a">More...</a><br /></td></tr>
-<tr class="separator:a6a09609ede281d911f36a199b35d299a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ec9923898c3552561eec7447261ea7f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structadresse.html">adresse</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_bdd_adresse_8c.html#a0ec9923898c3552561eec7447261ea7f">readAddr</a> (FILE *fd)</td></tr>
+<tr class="memdesc:a0ec9923898c3552561eec7447261ea7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lit le fichier d'adresse .csv et renvoit un tableau d'adresses.  <a href="#a0ec9923898c3552561eec7447261ea7f">More...</a><br /></td></tr>
+<tr class="separator:a0ec9923898c3552561eec7447261ea7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="aae170ceec6688e22c69bd3814178b732"></a>
@@ -121,62 +119,31 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a21f5a5c496514cc62740a76070097c6e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a21f5a5c496514cc62740a76070097c6e">&sect;&nbsp;</a></span>readGeoloc()</h2>
+<a id="a0ec9923898c3552561eec7447261ea7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ec9923898c3552561eec7447261ea7f">&sect;&nbsp;</a></span>readAddr()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structbdd__trace.html">bdd_trace</a>* readGeoloc </td>
+          <td class="memname">bdd_addr * readAddr </td>
           <td>(</td>
           <td class="paramtype">FILE *&#160;</td>
-          <td class="paramname"><em>parFd</em></td><td>)</td>
+          <td class="paramname"><em>fd</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="parser_bdd_adresse_8c_source.html#l00014">14</a> of file <a class="el" href="parser_bdd_adresse_8c_source.html">parserBddAdresse.c</a>.</p>
-
-</div>
-</div>
-<a id="a6a09609ede281d911f36a199b35d299a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6a09609ede281d911f36a199b35d299a">&sect;&nbsp;</a></span>recuperer_champ()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void const char * recuperer_champ </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>ligne</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>numero_champ</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Récupère un champ dans un fichier csv. </p>
+<p>Lit le fichier d'adresse .csv et renvoit un tableau d'adresses. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">ligne</td><td>numéro de ligne </td></tr>
-    <tr><td class="paramname">numero_champ</td><td>numéro de champ </td></tr>
+    <tr><td class="paramname">*fd</td><td>descripteur sur le fichier d'adresse </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="parser_bdd_adresse_8c_source.html#l00018">18</a> of file <a class="el" href="parser_bdd_adresse_8c_source.html">parserBddAdresse.c</a>.</p>
+<p>Definition at line <a class="el" href="parser_bdd_adresse_8c_source.html#l00024">24</a> of file <a class="el" href="parser_bdd_adresse_8c_source.html">parserBddAdresse.c</a>.</p>
 
 </div>
 </div>

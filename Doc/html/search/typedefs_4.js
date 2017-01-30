@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['fenetre_5fprincipale',['fenetre_principale',['../fenetres_8h.html#a040b8b548797c8ed84192df86bc9f2da',1,'fenetres.h']]]
+  ['liste_5fc_5fanonym',['liste_c_anonym',['../structures_8h.html#a06b5c527e28be9f10a0f141ebc5bc463',1,'structures.h']]],
+  ['liste_5fpt_5finteret',['liste_pt_interet',['../structures_8h.html#afb6afa555765d8390e4f6397a819940f',1,'structures.h']]]
 ];

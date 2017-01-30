@@ -6,10 +6,8 @@
 \item 
 F\+I\+LE $\ast$ \hyperlink{parser_bdd_adresse_8c_aae170ceec6688e22c69bd3814178b732}{open\+Bdd\+Addr} (const char $\ast$nom)
 \item 
-\hyperlink{structbdd__trace}{bdd\+\_\+trace} $\ast$ \hyperlink{parser_bdd_adresse_8c_a21f5a5c496514cc62740a76070097c6e}{read\+Geoloc} (F\+I\+LE $\ast$par\+Fd)
-\item 
-const char $\ast$ \hyperlink{parser_bdd_adresse_8c_a6a09609ede281d911f36a199b35d299a}{recuperer\+\_\+champ} (char $\ast$ligne, int numero\+\_\+champ)
-\begin{DoxyCompactList}\small\item\em Récupère un champ dans un fichier csv. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\hyperlink{structadresse}{adresse} $\ast$ \hyperlink{parser_bdd_adresse_8c_a0ec9923898c3552561eec7447261ea7f}{read\+Addr} (F\+I\+LE $\ast$fd)
+\begin{DoxyCompactList}\small\item\em Lit le fichier d\textquotesingle{}adresse .csv et renvoit un tableau d\textquotesingle{}adresses. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}
@@ -23,34 +21,22 @@ const char $\ast$ \hyperlink{parser_bdd_adresse_8c_a6a09609ede281d911f36a199b35d
 
 Definition at line 9 of file parser\+Bdd\+Adresse.\+c.
 
-\hypertarget{parser_bdd_adresse_8c_a21f5a5c496514cc62740a76070097c6e}{}\label{parser_bdd_adresse_8c_a21f5a5c496514cc62740a76070097c6e} 
-\index{parser\+Bdd\+Adresse.\+c@{parser\+Bdd\+Adresse.\+c}!read\+Geoloc@{read\+Geoloc}}
-\index{read\+Geoloc@{read\+Geoloc}!parser\+Bdd\+Adresse.\+c@{parser\+Bdd\+Adresse.\+c}}
-\subsubsection{\texorpdfstring{read\+Geoloc()}{readGeoloc()}}
-{\footnotesize\ttfamily \hyperlink{structbdd__trace}{bdd\+\_\+trace}$\ast$ read\+Geoloc (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{par\+Fd }\end{DoxyParamCaption})}
+\hypertarget{parser_bdd_adresse_8c_a0ec9923898c3552561eec7447261ea7f}{}\label{parser_bdd_adresse_8c_a0ec9923898c3552561eec7447261ea7f} 
+\index{parser\+Bdd\+Adresse.\+c@{parser\+Bdd\+Adresse.\+c}!read\+Addr@{read\+Addr}}
+\index{read\+Addr@{read\+Addr}!parser\+Bdd\+Adresse.\+c@{parser\+Bdd\+Adresse.\+c}}
+\subsubsection{\texorpdfstring{read\+Addr()}{readAddr()}}
+{\footnotesize\ttfamily bdd\+\_\+addr $\ast$ read\+Addr (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{fd }\end{DoxyParamCaption})}
 
 
 
-Definition at line 14 of file parser\+Bdd\+Adresse.\+c.
-
-\hypertarget{parser_bdd_adresse_8c_a6a09609ede281d911f36a199b35d299a}{}\label{parser_bdd_adresse_8c_a6a09609ede281d911f36a199b35d299a} 
-\index{parser\+Bdd\+Adresse.\+c@{parser\+Bdd\+Adresse.\+c}!recuperer\+\_\+champ@{recuperer\+\_\+champ}}
-\index{recuperer\+\_\+champ@{recuperer\+\_\+champ}!parser\+Bdd\+Adresse.\+c@{parser\+Bdd\+Adresse.\+c}}
-\subsubsection{\texorpdfstring{recuperer\+\_\+champ()}{recuperer\_champ()}}
-{\footnotesize\ttfamily void const char $\ast$ recuperer\+\_\+champ (\begin{DoxyParamCaption}\item[{char $\ast$}]{ligne,  }\item[{int}]{numero\+\_\+champ }\end{DoxyParamCaption})}
-
-
-
-Récupère un champ dans un fichier csv. 
+Lit le fichier d\textquotesingle{}adresse .csv et renvoit un tableau d\textquotesingle{}adresses. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em ligne} & numéro de ligne \\
-\hline
-{\em numero\+\_\+champ} & numéro de champ \\
+{\em $\ast$fd} & descripteur sur le fichier d\textquotesingle{}adresse \\
 \hline
 \end{DoxyParams}
 
 
-Definition at line 18 of file parser\+Bdd\+Adresse.\+c.
+Definition at line 24 of file parser\+Bdd\+Adresse.\+c.
 
