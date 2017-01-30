@@ -23,6 +23,10 @@
 #include "../headers/activate.h"
 #include "../headers/globalFront.h"*/
 
+
+// Declaration static pour eviter un SegFault
+static tracesUI *fenetreTraces;
+
 /**
  * \fn      int uiTraces(GtkWidget* widget, gpointer user_data)
  * \brief   Affiche une GUI pour la gestion des traces.
@@ -40,8 +44,6 @@ int uiTraces(GtkWidget* widget, gpointer user_data)
 {
   // Variable static pour eviter de reconstruire la fenetre
   static int etat = UI_TRACE_FERME;
-  // Declaration static pour eviter un SegFault
-  static tracesUI *fenetreTraces;
 
   if(!etat)
   {
@@ -72,8 +74,8 @@ int uiTraces(GtkWidget* widget, gpointer user_data)
     // ====== Layout : Box
     fenetreTraces->boxPrincipale = gtk_box_new(GTK_ORIENTATION_VERTICAL, UI_TRACE_ESPACEMENT);
 
-    // ------ Widgets : Bouton et Box 'Importer'
-    //fenetreTraces->boutonImporter = gtk_button_new_with_label("Importer");
+    // ------ Widgets : Bouton et Box 'Importer' + Frame
+    fenetreTraces->frameImporter = gtk_frame_new("Importer un ensemble de traces");
     fenetreTraces->boutonImporter = gtk_button_new();
     fenetreTraces->imgImport = gtk_image_new_from_file("../Data/icones/download-64.png");
     gtk_button_set_image(GTK_BUTTON(fenetreTraces->boutonImporter), fenetreTraces->imgImport);
@@ -94,7 +96,8 @@ int uiTraces(GtkWidget* widget, gpointer user_data)
     // Fenetre principale <- Box principale
     gtk_container_add(GTK_CONTAINER(fenetreTraces->widget), fenetreTraces->boxPrincipale);
     // Box principale <- bouton importer + frame traces
-    gtk_box_pack_start(GTK_BOX(fenetreTraces->boxPrincipale), fenetreTraces->boutonImporter, FALSE, FALSE, UI_TRACE_ESPACEMENT);
+    gtk_box_pack_start(GTK_BOX(fenetreTraces->boxPrincipale), fenetreTraces->frameImporter, FALSE, FALSE, UI_TRACE_ESPACEMENT);
+    gtk_container_add(GTK_CONTAINER(fenetreTraces->frameImporter), fenetreTraces->boutonImporter);
     gtk_box_pack_start(GTK_BOX(fenetreTraces->boxPrincipale), fenetreTraces->frameTraces, TRUE, TRUE, UI_TRACE_ESPACEMENT);
       // Frame traces <- zone de scroll + box
     gtk_container_add(GTK_CONTAINER(fenetreTraces->frameTraces), fenetreTraces->zoneScroll);
@@ -590,4 +593,9 @@ void appliquerTD(GtkWidget* widget, gpointer user_data)
 void annulerTD(GtkWidget* widget, gpointer user_data)
 {
   gtk_widget_hide(GTK_WIDGET(user_data));
+}
+
+void appelImporter()
+{
+  gtk_button_clicked(GTK_BUTTON(fenetreTraces->boutonImporter));  
 }

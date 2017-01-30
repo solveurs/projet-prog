@@ -103,6 +103,7 @@ void activate(GtkApplication *app, gpointer user_data)
 
 
 	// On instance les fenetres auxiliaires pour les creer puis on les cache
+	g_signal_emit_by_name(ui->boutonTraces, "clicked", ui->widget);
 	g_signal_emit_by_name(ui->boutonAnonymat, "clicked", ui->widget);
 	g_signal_emit_by_name(ui->boutonAnimation,  "clicked", ui->widget);
 
@@ -262,7 +263,7 @@ int overlayTempAjout(GtkWidget* zoneCercle, GtkWidget* eventBox, int id)
 		gtk_widget_add_events(eventBox, GDK_POINTER_MOTION_MASK);
 		gtk_widget_set_events(eventBox, GDK_POINTER_MOTION_MASK);
 		gtk_widget_show_all(eventBox);
-	    for(i=0; i<NOMBRE_MAX_TRAJETS; i++)
+	    for(i=0; i<varGlobFront.idTrajet; i++)
 	    {
 	      if(i!=id)
 	      {
@@ -281,7 +282,7 @@ int overlayTempAjout(GtkWidget* zoneCercle, GtkWidget* eventBox, int id)
 		gtk_widget_add_events(eventBox, GDK_POINTER_MOTION_MASK);
 		gtk_widget_set_events(eventBox, GDK_POINTER_MOTION_MASK);
 		gtk_widget_show_all(eventBox);
-		for(i=0; i<NOMBRE_MAX_TRAJETS; i++)
+		for(i=0; i<varGlobFront.idTrajet; i++)
 	    {
 	      if(i!=id)
 	      {
@@ -300,7 +301,7 @@ int overlayTempAjout(GtkWidget* zoneCercle, GtkWidget* eventBox, int id)
 		gtk_widget_add_events(eventBox, GDK_POINTER_MOTION_MASK);
 		gtk_widget_set_events(eventBox, GDK_POINTER_MOTION_MASK);
 		gtk_widget_show_all(eventBox);
-		for(i=0; i<NOMBRE_MAX_TRAJETS; i++)
+		for(i=0; i<varGlobFront.idTrajet; i++)
 	    {
 	      if(i!=id)
 	      {
@@ -318,7 +319,7 @@ void overlayTempSuppr(GtkWidget* eventBox, int id)
 	if(idCarte==0) // Cher
 	{
 		gtk_container_remove(GTK_CONTAINER(varGlobFront.overlayCarteCher), eventBox);
-		for(i=0; i<NOMBRE_MAX_TRAJETS; i++)
+		for(i=0; i<varGlobFront.idTrajet; i++)
 	    {
 	      if(i!=id)
 	      {
@@ -329,7 +330,7 @@ void overlayTempSuppr(GtkWidget* eventBox, int id)
 	else if(idCarte==1) // Bourges
 	{
 		gtk_container_remove(GTK_CONTAINER(varGlobFront.overlayCarteBourges), eventBox);
-		for(i=0; i<NOMBRE_MAX_TRAJETS; i++)
+		for(i=0; i<varGlobFront.idTrajet; i++)
 	    {
 	      if(i!=id)
 	      {
@@ -340,7 +341,7 @@ void overlayTempSuppr(GtkWidget* eventBox, int id)
 	else // Insa
 	{
 		gtk_container_remove(GTK_CONTAINER(varGlobFront.overlayCarteInsa), eventBox);
-		for(i=0; i<NOMBRE_MAX_TRAJETS; i++)
+		for(i=0; i<varGlobFront.idTrajet; i++)
 	    {
 	      if(i!=id)
 	      {
@@ -393,7 +394,7 @@ void focusTrajet(int carte, int id)
 	switch(carte)
 	{
 		case 0: //Cher
-			for(i=0; i<NOMBRE_MAX_TRAJETS; i++)
+			for(i=0; i<varGlobFront.idTrajet; i++)
 			{
 		      	if(i!=id)
 		      	{
@@ -401,7 +402,7 @@ void focusTrajet(int carte, int id)
 		      	}
 			}
 		case 1: //Bourges
-			for(i=0; i<NOMBRE_MAX_TRAJETS; i++)
+			for(i=0; i<varGlobFront.idTrajet; i++)
 			{
 		      	if(i!=id)
 		      	{
@@ -409,7 +410,7 @@ void focusTrajet(int carte, int id)
 		      	}
 			}
 		default: //Insa
-			for(i=0; i<NOMBRE_MAX_TRAJETS; i++)
+			for(i=0; i<varGlobFront.idTrajet; i++)
 			{
 		      	if(i!=id)
 		      	{
@@ -425,7 +426,7 @@ void defocusTrajet(int carte, int id)
 	switch(carte)
 	{
 		case 0: //Cher
-			for(i=0; i<NOMBRE_MAX_TRAJETS; i++)
+			for(i=0; i<varGlobFront.idTrajet; i++)
 			{
 		      	if(i!=id)
 		      	{
@@ -433,7 +434,7 @@ void defocusTrajet(int carte, int id)
 		      	}
 			}
 		case 1: //Bourges
-		for(i=0; i<NOMBRE_MAX_TRAJETS; i++)
+		for(i=0; i<varGlobFront.idTrajet; i++)
 			{
 		      	if(i!=id)
 		      	{
@@ -441,7 +442,7 @@ void defocusTrajet(int carte, int id)
 		      	}
 			}
 		case 2: //Insa
-		for(i=0; i<NOMBRE_MAX_TRAJETS; i++)
+		for(i=0; i<varGlobFront.idTrajet; i++)
 			{
 		      	if(i!=id)
 		      	{
@@ -449,4 +450,20 @@ void defocusTrajet(int carte, int id)
 		      	}
 			}
 	}
+}
+
+
+void affUITraces()
+{
+	g_signal_emit_by_name(ui->boutonTraces, "clicked", ui->widget);
+}
+
+void affUIAnim()
+{
+	g_signal_emit_by_name(ui->boutonAnonymat, "clicked", ui->widget);
+}
+
+void affUIAnon()
+{
+	g_signal_emit_by_name(ui->boutonAnimation,  "clicked", ui->widget);
 }

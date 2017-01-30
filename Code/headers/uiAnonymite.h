@@ -49,6 +49,7 @@ typedef struct s_Anon
   GtkWidget *widget;
   GtkWidget *boxPrincipale;
 
+  GtkWidget *frameFigure;
   GtkWidget *boutonCercle;
   GtkWidget *imgCercle;
 
