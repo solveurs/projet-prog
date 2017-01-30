@@ -128,6 +128,7 @@ int saveTrajet(trajet * parTr, const char * chemin)
 	while (it->suiv != NULL)
 	{
 		fprintf(fd, "date:%ld,lat:%lf,long:%lf;\n", it->date, it->coord.x, it->coord.y);
+		it = it->suiv;
 	}
 	fclose(fd);
 	

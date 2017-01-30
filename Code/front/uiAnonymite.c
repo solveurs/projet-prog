@@ -172,7 +172,7 @@ void confirmerCercle(GtkWidget* widget, gpointer user_data)
   CERCLE_UTILISATEUR.centre.y = 0.0;
   CERCLE_UTILISATEUR.rayon = 0.0;
   debloqueCarte();
-  //IfinModeAnonymisation(varGlobFront.traces[idTraces]->ptrTrajet);
+  IfinModeAnonymisation(*(varGlobFront.traces[idTraces]->ptrTrajet));
 }
 
 void ajoutItemAnon(GtkWidget* widget, gpointer user_data)

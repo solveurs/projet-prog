@@ -10,3 +10,5 @@ int anonymisationPendantEditionT(trajet * parTr, const int parIdTrace);
 int anonymisationApresEdition(trajet * parTr);
 
 bdd_trace * saveTrajetAnonymise(const trajet parTr, const char * chemin, const int visibilite);
+
+//extern int inAnonymisation;

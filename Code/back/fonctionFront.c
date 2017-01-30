@@ -56,11 +56,15 @@ int IlectureTrace(int parCmd, trajet * parTr)
 	return -1;
 }
 
-void IModeAnonymisation();
+void IModeAnonymisation()
+{
+	//inAnonymisation = 1;
+}
 
 void IfinModeAnonymisation(const trajet parTr)
 {
-	IsaveAnonymisation(parTr, "");
+	IsaveAnonymisation(parTr, "../Data/geoloc-logs-save.txt");
+	//inAnonymisation = 0;
 }
 
 void IsaveAnonymisation(const trajet parTr, const char * chemin)
