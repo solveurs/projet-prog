@@ -84,3 +84,7 @@ int getCarte();
 void getPosSouris(GtkWidget* widget, GdkEvent *event, gpointer user_data);
 void focusTrajet(int carte, int id);
 void defocusTrajet(int carte, int id);
+
+void affUITraces();
+void affUIAnim();
+void affUIAnon();

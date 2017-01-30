@@ -61,6 +61,7 @@ typedef struct s_TracesUI
 
   GtkWidget *boxPrincipale;
   GtkWidget *frameTraces;
+  GtkWidget *frameImporter;
   GtkWidget *boutonImporter;
   GtkWidget *imgImport;
   GtkWidget *zoneScroll;
@@ -95,3 +96,5 @@ void annulerTD(GtkWidget* widget, gpointer user_data);
 
 void detruireFen(GtkWidget* widget, gpointer user_data);
 void confirmeSupprItem(GtkWidget* widget, gpointer user_data);
+
+void appelImporter();

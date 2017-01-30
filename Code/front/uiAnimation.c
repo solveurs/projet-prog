@@ -144,6 +144,7 @@ int uiAnimation(GtkWidget* widget, gpointer user_data)
 	// ===--- Layout : Frame pour la trace ciblee
     fenetreAnim->frameCible = gtk_frame_new("Trace ciblée");
     fenetreAnim->menuDeroulant = gtk_combo_box_text_new();
+    gtk_combo_box_set_active(GTK_COMBO_BOX(fenetreAnim->menuDeroulant), -1);
     fenetreAnim->boxFrameCible = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, UI_ANIM_ESPACEMENT);
     fenetreAnim->boutonMode = gtk_button_new_with_label("Valider");
 
@@ -405,56 +406,57 @@ void confirmerCalFin(GtkWidget* widget, gpointer user_data)
 void changeMode(GtkWidget* widget, gpointer user_data)
 {
 	// Credits Gtk+ doc pour le dialog d'erreur
-    // Function to open a dialog box with a message
-    int activeId = gtk_combo_box_get_active(GTK_COMBO_BOX(fenetreAnim->menuDeroulant));
-    if(activeId==-1)
-    {
-        GtkWidget *dialog, *label, *content_area;
-        GtkDialogFlags flags;
+  // Function to open a dialog box with a message
+  int activeId = gtk_combo_box_get_active(GTK_COMBO_BOX(fenetreAnim->menuDeroulant));
+  if(activeId==-1)
+  {
+    GtkWidget *dialog, *label, *content_area;
+    GtkDialogFlags flags;
 
-        // Create the widgets
-        flags = GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT;
-        dialog = gtk_dialog_new_with_buttons ("Message", GTK_WINDOW(fenetreAnim->widget), flags,
-                                              "OK", GTK_RESPONSE_NONE, NULL);
+    // Create the widgets
+    flags = GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT;
+    dialog = gtk_dialog_new_with_buttons ("Message", GTK_WINDOW(fenetreAnim->widget), flags,
+                                          "OK", GTK_RESPONSE_NONE, NULL);
 
-        content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
-        label = gtk_label_new("   Erreur ! \n   Aucunes traces sélectionnées !   ");
+    content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+    label = gtk_label_new("   Erreur ! \n   Aucunes traces sélectionnées !   ");
 
-    	// Ensure that the dialog box is destroyed when the user responds
-    	g_signal_connect_swapped (dialog, "response",
-                              G_CALLBACK (gtk_widget_destroy), dialog);
-    	gtk_container_add (GTK_CONTAINER (content_area), label);
-    	gtk_widget_show_all(dialog);
-    }
-    else
-    {
-		static active = 1;
-		if(active)
-		{
-			gtk_button_set_label(GTK_BUTTON(fenetreAnim->boutonMode), "Terminer");
-			getHeure();
-			bloqueCarte(0);
-			bloqueInterfaceAnim();
-			focusTrajet(getCarte(), gtk_combo_box_get_active(GTK_COMBO_BOX(fenetreAnim->menuDeroulant)));
+  	// Ensure that the dialog box is destroyed when the user responds
+  	g_signal_connect_swapped (dialog, "response",
+                            G_CALLBACK (gtk_widget_destroy), dialog);
+  	gtk_container_add (GTK_CONTAINER (content_area), label);
+  	gtk_widget_show_all(dialog);
+  }
+  else
+  {
+  	static active = 1;
+  	if(active)
+  	{
+  		gtk_button_set_label(GTK_BUTTON(fenetreAnim->boutonMode), "Terminer");
+  		getHeure();
+  		bloqueCarte(0);
+  		bloqueInterfaceAnim();
+  		focusTrajet(getCarte(), gtk_combo_box_get_active(GTK_COMBO_BOX(fenetreAnim->menuDeroulant)));
 
-			setLimite(0);
-			VITESSE_SPIN = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(fenetreAnim->vitesse));
-			setVitesse(VITESSE_SPIN);
+  		setLimite(0);
+  		VITESSE_SPIN = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(fenetreAnim->vitesse));
+  		setVitesse(VITESSE_SPIN);
 
-			switchMode(MODE_ANIMATION);
-			active = 0;
-		}
-		else
-		{
-			gtk_button_set_label(GTK_BUTTON(fenetreAnim->boutonMode), "Valider");
-			debloqueCarte();
-			debloqueInterfaceAnim();
-			defocusTrajet(getCarte(), gtk_combo_box_get_active(GTK_COMBO_BOX(fenetreAnim->menuDeroulant)));
+  		switchMode(MODE_ANIMATION);
+  		active = 0;
+  	}
+  	else
+  	{
+      printf("\nNON LAAAA");
+  		gtk_button_set_label(GTK_BUTTON(fenetreAnim->boutonMode), "Valider");
+  		debloqueCarte();
+  		debloqueInterfaceAnim();
+  		defocusTrajet(getCarte(), gtk_combo_box_get_active(GTK_COMBO_BOX(fenetreAnim->menuDeroulant)));
 
       majCartes(activeId);
-			switchMode(MODE_NORMAL);
-			active = 1;
-		}
+  		switchMode(MODE_NORMAL);
+  		active = 1;
+  	}
 	}
 }
 

@@ -65,7 +65,7 @@ int uiAnonymite(GtkWidget* widget, gpointer user_data)
     fenetreAnon->boxPrincipale = gtk_box_new(GTK_ORIENTATION_VERTICAL, UI_ANON_ESPACEMENT);
 
     // ------ Widget : Bouton de tracer du cercle
-	  //fenetreAnon->boutonCercle = gtk_button_new_with_label("Tracer un cercle d'anonymat");
+	  fenetreAnon->frameFigure = gtk_frame_new("Tracer une zone d'anonymat");
     fenetreAnon->boutonCercle = gtk_button_new();
     fenetreAnon->imgCercle = gtk_image_new_from_file("../Data/icones/circle-outline-64.png");
     gtk_button_set_image(GTK_BUTTON(fenetreAnon->boutonCercle), fenetreAnon->imgCercle);
@@ -102,12 +102,14 @@ int uiAnonymite(GtkWidget* widget, gpointer user_data)
     // ==================== Packaging ====================
     // Fenetre principale <- Box principale
     gtk_container_add(GTK_CONTAINER(fenetreAnon->widget), fenetreAnon->boxPrincipale);
-    // Box principale <- Bouton cercle + Box tracer +  Frame cible + Frame scroll
-    gtk_box_pack_start(GTK_BOX(fenetreAnon->boxPrincipale), fenetreAnon->boutonCercle, FALSE, FALSE, UI_ANON_ESPACEMENT);
+    // Box principale <- Frame figre + Box tracer +  Frame cible + Frame scroll
+    gtk_box_pack_start(GTK_BOX(fenetreAnon->boxPrincipale), fenetreAnon->frameFigure, FALSE, FALSE, UI_ANON_ESPACEMENT);
     gtk_box_pack_start(GTK_BOX(fenetreAnon->boxPrincipale), fenetreAnon->boxTracer, FALSE, FALSE, UI_ANON_ESPACEMENT);
     gtk_box_pack_start(GTK_BOX(fenetreAnon->boxPrincipale), fenetreAnon->frameCible, FALSE, FALSE, UI_ANON_ESPACEMENT);
     gtk_box_pack_start(GTK_BOX(fenetreAnon->boxPrincipale), fenetreAnon->frameScroll, TRUE, TRUE, UI_ANON_ESPACEMENT);
 
+      // Frame figure <- Bouton cercle
+    gtk_container_add(GTK_CONTAINER(fenetreAnon->frameFigure), fenetreAnon->boutonCercle);
       // Box tracer <- Label info + Box boutons
     gtk_box_pack_start(GTK_BOX(fenetreAnon->boxTracer), fenetreAnon->labelInfo, FALSE, TRUE, UI_ANON_ESPACEMENT);
     gtk_box_pack_start(GTK_BOX(fenetreAnon->boxTracer), fenetreAnon->boxBoutons, FALSE, TRUE, UI_ANON_ESPACEMENT);

@@ -153,7 +153,7 @@ void faire_tracer(cairo_t *cr, int carte, tracesItem* item)
 					break;
 				}
 
-				else if(ptr->visibilite==1 && compareTps(ptr->date))
+				else if(ptr->visibilite==1 /*&& compareTps(ptr->date)*/)
 				{
 					// Inversion longitude et latitude
 					x = (int)echelle(ptr->coord.y, carte, 1);
