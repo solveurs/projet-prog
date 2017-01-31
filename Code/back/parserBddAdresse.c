@@ -34,14 +34,43 @@ void addAddr(bdd_addr *  bdd, adresse addr, int intervalle, int index)
 		}
 		if(bdd->addr[index + intervalle%2].coord.x == addr.coord.x)
 		{
+			int index_trouve=0;
+			index=index + intervalle%2;
 			//Tri selon les y
-			if(bdd->addr[index + intervalle%2 ].coord.y > addr.coord.y){
-			
+			while((bdd->addr[index].coord.x == addr.coord.x) && (index_trouve=0))
+			{
+				if (bdd->addr[index].coord.y > addr.coord.y)
+				{
+					if (bdd->addr[index -1].coord.y < addr.coord.y)
+					{
+						index_trouve=1;
+					}
+					else {
+						index--;
+					}
+				}	
+				if (bdd->addr[index].coord.y < addr.coord.y)
+				{
+					 if (bdd->addr[index +1].coord.y > addr.coord.y)
+                                        {
+                                                index_trouve=1;
+                                        }
+                                        else 
+					{
+						index++;
+					}
+				}
+				if (bdd->addr[index + intervalle %2].coord.y==addr.coord.y)
+				{
+					index_trouve=1;
+				}
 			}
+			addAddr(bdd, addr, 1, index);
 		}
 		else {
 			addAddr(bdd,addr,intervalle%2+1, intervalle%2);
 		}
+		
 	}
 	else 
 	{
