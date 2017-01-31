@@ -56,6 +56,15 @@ struct adresse
 };
 typedef struct adresse adresse;
 
+/**
+@brief table d'adresse
+*/
+struct bdd_addr
+{
+	adresse * addr;
+	int taille;
+};
+typedef struct bdd_addr bdd_addr;
 
 /**
  @brief modélisation d'une trace

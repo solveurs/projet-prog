@@ -9,6 +9,7 @@
 #include "pointInteret.h"
 #include "config.h"
 #include "utils.h"
+#include "parserBddAdresse.h"
 
 #include "front.h"
 //#include "globalFront.h"
