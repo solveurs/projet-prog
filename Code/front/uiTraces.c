@@ -63,7 +63,7 @@ int uiTraces(GtkWidget* widget, gpointer user_data)
 
     fenetreTraces->widget = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title(GTK_WINDOW(fenetreTraces->widget), "Gestion des traces");
-
+    gtk_window_set_position(GTK_WINDOW(fenetreTraces->widget), GTK_WIN_POS_MOUSE);
     // On n'affiche pas la fenetre dans la barre des taches
     gtk_window_set_skip_taskbar_hint(GTK_WINDOW(fenetreTraces->widget), TRUE);
     // Sera toujours au dessus de la fenetre mere. Ici la fenetre principale.

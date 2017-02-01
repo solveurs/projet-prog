@@ -63,6 +63,7 @@ int uiAnimation(GtkWidget* widget, gpointer user_data)
 
     fenetreAnim->widget = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title(GTK_WINDOW(fenetreAnim->widget), "Animation des traces");
+    gtk_window_set_position(GTK_WINDOW(fenetreAnim->widget), GTK_WIN_POS_MOUSE);
     gtk_window_set_skip_taskbar_hint(GTK_WINDOW(fenetreAnim->widget), TRUE);
     gtk_window_set_transient_for(GTK_WINDOW(fenetreAnim->widget), GTK_WINDOW(user_data));
     gtk_window_set_destroy_with_parent(GTK_WINDOW(fenetreAnim->widget), TRUE);
@@ -86,19 +87,19 @@ int uiAnimation(GtkWidget* widget, gpointer user_data)
 
 
     // ===--- Layout : Box principale
-	fenetreAnim->boxPrincipale = gtk_box_new(GTK_ORIENTATION_VERTICAL, UI_ANIM_ESPACEMENT);
+	   fenetreAnim->boxPrincipale = gtk_box_new(GTK_ORIENTATION_VERTICAL, UI_ANIM_ESPACEMENT);
     
 
-	// ===--- Layout : Frame pour les dates + la box
-	fenetreAnim->frameDate = gtk_frame_new("Intervalle de visionnage");
-	fenetreAnim->boxFrame = gtk_box_new(GTK_ORIENTATION_VERTICAL, UI_ANIM_ESPACEMENT);
+	   // ===--- Layout : Frame pour les dates + la box
+	   fenetreAnim->frameDate = gtk_frame_new("Intervalle de visionnage");
+	   fenetreAnim->boxFrame = gtk_box_new(GTK_ORIENTATION_VERTICAL, UI_ANIM_ESPACEMENT);
 
 		// === Layout : Box calendriers
-	fenetreAnim->boxPH = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, UI_ANIM_ESPACEMENT);
+	   fenetreAnim->boxPH = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, UI_ANIM_ESPACEMENT);
 
 			// === Layout : Grille debut + Grille fin
-	fenetreAnim->gridPHG = gtk_grid_new();
-	fenetreAnim->gridPHD = gtk_grid_new();
+	   fenetreAnim->gridPHG = gtk_grid_new();
+	   fenetreAnim->gridPHD = gtk_grid_new();
 
 			// --- Widgets : Calendrier de debut (gauche)
   	fenetreAnim->labelPHG = gtk_label_new("Debut                           ");

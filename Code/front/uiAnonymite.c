@@ -56,6 +56,7 @@ int uiAnonymite(GtkWidget* widget, gpointer user_data)
 
     fenetreAnon->widget = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title(GTK_WINDOW(fenetreAnon->widget), "Gestion de l'anonymat");
+    gtk_window_set_position(GTK_WINDOW(fenetreAnon->widget), GTK_WIN_POS_MOUSE);
     gtk_window_set_skip_taskbar_hint(GTK_WINDOW(fenetreAnon->widget), TRUE);
     gtk_window_set_transient_for(GTK_WINDOW(fenetreAnon->widget), GTK_WINDOW(user_data));
     gtk_window_set_destroy_with_parent(GTK_WINDOW(fenetreAnon->widget), TRUE);
@@ -249,6 +250,7 @@ void optionItemAnon(GtkWidget* widget, gpointer user_data)
     item->etat = UI_ANON_OUVERT;
 	  popupAD->widget = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title(GTK_WINDOW(popupAD->widget), "Mon cercle");
+    gtk_window_set_position(GTK_WINDOW(popupAD->widget), GTK_WIN_POS_MOUSE);
     gtk_window_set_keep_above(GTK_WINDOW(popupAD->widget), TRUE);
     gtk_window_set_skip_taskbar_hint(GTK_WINDOW(popupAD->widget), TRUE);
     gtk_window_set_destroy_with_parent(GTK_WINDOW(popupAD->widget), TRUE);
