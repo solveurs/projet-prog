@@ -118,6 +118,7 @@ struct liste_pt_interet
 	int				id;
 	int				taille;
 	int				occupee;
+	int             importance_max;
 	pt_interet**	t;
 };
 typedef struct liste_pt_interet liste_pt_interet;

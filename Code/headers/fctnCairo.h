@@ -5,12 +5,16 @@
 #include "uiTraces.h"
 
 /* ====== CONSTANTES ====== */
-#define MODE_ANIMATION         0
-#define MODE_NORMAL            1
+#define MODE_ANIMATION           0
+#define MODE_NORMAL              1
 
 #define TAILLE_TRACE_CHER      5.0
 #define TAILLE_TRACE_BOURGES   5.0
 #define TAILLE_TRACE_INSA      5.0
+
+#define TAILLE_RAYON_CHER     50.0
+#define TAILLE_RAYON_BOURGES  40.0
+#define TAILLE_RAYON_INSA     25.0
 
 #define TAILLE_X_CHER       1850.0
 #define TAILLE_Y_CHER       3506.0
@@ -39,6 +43,8 @@ void faire_tracesBourges(GtkWidget *widget, cairo_t *cr, gpointer user_data);
 void faire_tracesInsa(GtkWidget *widget, cairo_t *cr, gpointer user_data);
 void faire_tracer(cairo_t *cr, int carte, tracesItem* item);
 void faire_aggregation(cairo_t *cr, point centre, double r);
+
+double calculRayon(int carte, int importance_max);
 
 double echelle(double valeur, int carte, int abscisse);
 double conversionGPS(double coord, int carte, int longitude);

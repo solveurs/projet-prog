@@ -105,6 +105,7 @@ int uiTraces(GtkWidget* widget, gpointer user_data)
 
     // ==================== Affichage ====================
     gtk_widget_show_all(fenetreTraces->widget);
+    gtk_widget_hide(fenetreTraces->widget);
   }
   else
   {
@@ -231,12 +232,13 @@ void ajoutItemTraces(GtkWidget* boxScroll, const char* nomTrajet, trajet* ptrTra
   item->boutonSupprimer = gtk_button_new();
 
   item->imgRoute = gtk_image_new_from_file("../Data/icones/linked-16.png");
-  item->imgInteret = gtk_image_new_from_file("");
+  item->imgInteret = gtk_image_new_from_file("../Data/icones/information-16.png");
   item->imgOption = gtk_image_new_from_file("../Data/icones/gear-16.png");
   item->imgVisible = gtk_image_new_from_file("../Data/icones/eye-16.png");
   item->imgSupprimer = gtk_image_new_from_file("../Data/icones/trash-16.png");
 
   gtk_button_set_image(GTK_BUTTON(item->boutonRoute), item->imgRoute);
+  gtk_button_set_image(GTK_BUTTON(item->boutonInteret), item->imgInteret);
   gtk_button_set_image(GTK_BUTTON(item->boutonOption), item->imgOption);
   gtk_button_set_image(GTK_BUTTON(item->boutonVisible), item->imgVisible);
   gtk_button_set_image(GTK_BUTTON(item->boutonSupprimer), item->imgSupprimer);
@@ -309,6 +311,8 @@ void traceInteret(GtkWidget* widget, gpointer user_data)
   }
   else
   {
+    item->ptrInteret = calculPointInteretTemp(item->ptrTrajet);
+    printf("\nImportance max : %d", item->ptrInteret->importance_max);
     item->interet = 1;
   }
 
@@ -379,7 +383,7 @@ void confirmeSupprItem(GtkWidget* widget, gpointer user_data)
 
   tracesItem* itemASuppr = (tracesItem *)user_data;
   char txt[256];
-  char* msg = "Si vous supprimez cet ensemble de traces, vous ne pourrez plus l'utiliser.\n\n \t\t\t\tConfirmer pour supprimer ";
+  sprintf(txt, "Si vous supprimez '%s', vous ne pourrez plus l'utiliser.\n\n \t\t\t\tConfirmer pour supprimer.", gtk_label_get_text(GTK_LABEL(itemASuppr->labelNom)));
 
   // ============== Initialisation widgets ==============
   // ====== Fenetre principale
@@ -394,8 +398,6 @@ void confirmeSupprItem(GtkWidget* widget, gpointer user_data)
   // ===--- Layout : Box principale
   popup->boxPrincipale = gtk_box_new(GTK_ORIENTATION_VERTICAL, UI_TRACE_ESPACEMENT);
   // --- Widget : label du texte de confirmation
-  strcat(txt, msg);
-  strcat(txt, gtk_label_get_text(GTK_LABEL(itemASuppr->labelNom)));
   popup->labelTxt = gtk_label_new(txt);
   // ===--- Layout : Box des boutons 'annuler' et 'confirmer'
   popup->boxBoutons = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, UI_TRACE_ESPACEMENT);
@@ -504,8 +506,8 @@ void optionItemTraces(GtkWidget* widget, gpointer user_data)
     popupTD->frameInfo = gtk_frame_new("Informations");
     popupTD->labelInfo = gtk_label_new("");
 
-    char info[64];
-    sprintf(info, "Nombre de traces : %d\nDistance du trajet : %.2lf km", itemTD->ptrTrajet->taille, distanceTrajet(*(itemTD->ptrTrajet)));
+    char info[256];
+    sprintf(info, "Nombre de traces : %d\nDistance du trajet : %.2lf km\nTemps du trajet : %s\nVitesse moyenne du trajet : %.2f Km/h", itemTD->ptrTrajet->taille, distanceTrajet(*(itemTD->ptrTrajet)), tempsTrajetHeure(*(itemTD->ptrTrajet)), vitesseMoyenneTrajet(*(itemTD->ptrTrajet)));
     gtk_label_set_text(GTK_LABEL(popupTD->labelInfo), info);
 
     // ===--- Layout : Frame du nom
