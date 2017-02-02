@@ -58,7 +58,7 @@ int dis2points(const point parP1, const point parP2, const double parDisMax)
 
 double distanceTrajet(const trajet parTr)
 {
-	double dis = 0;
+	double dis = 0.0;
 	trace * it = parTr.premier;
 	
 	while (it->suiv != NULL)
@@ -67,6 +67,27 @@ double distanceTrajet(const trajet parTr)
 		it = it->suiv;
 	}
 	return dis;
+}
+
+double vitesseMoyenneTrajet(const trajet parTr)
+{
+	double varVitesse = 0.0;	
+	varVitesse = distanceTrajet(parTr)/tempsTrajet(parTr);
+	varVitesse *= (double)(10000);
+	return varVitesse;
+}
+
+long tempsTrajet(const trajet parTr)
+{
+	return (parTr.dernier->date - parTr.premier->date);
+}
+
+char* tempsTrajetHeure(const trajet parTr)
+{
+	char * buf;
+	buf = (char*)calloc(80,sizeof(char));
+	strftime(buf, 80, "%H:%M:%S", timestampToReadable(tempsTrajet(parTr)));
+	return buf;
 }
 
 adresse * initAdresse(void)
