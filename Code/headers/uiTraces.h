@@ -16,8 +16,13 @@ typedef struct s_TracesDetailsUI
   GtkWidget *widget;
 
   GtkWidget *boxPrincipale;
+
+  GtkWidget *frameInfo;
+  GtkWidget *labelInfo;
+
   GtkWidget *frameCouleur;
   GtkWidget *boutonModifierCouleur;
+
   GtkWidget *frameNom;
   GtkWidget *zoneEntry;
   GtkWidget *boxBoutonsTD;

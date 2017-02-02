@@ -500,6 +500,14 @@ void optionItemTraces(GtkWidget* widget, gpointer user_data)
        // --- Widget : bouton de modification de couleur
     popupTD->boutonModifierCouleur = gtk_color_button_new();
 
+    // ===--- Layout : Frame des informations
+    popupTD->frameInfo = gtk_frame_new("Informations");
+    popupTD->labelInfo = gtk_label_new("");
+
+    char info[64];
+    sprintf(info, "Nombre de traces : %d\nDistance du trajet : %.2lf km", itemTD->ptrTrajet->taille, distanceTrajet(*(itemTD->ptrTrajet)));
+    gtk_label_set_text(GTK_LABEL(popupTD->labelInfo), info);
+
     // ===--- Layout : Frame du nom
     popupTD->frameNom = gtk_frame_new("Nom");
 
@@ -525,10 +533,13 @@ void optionItemTraces(GtkWidget* widget, gpointer user_data)
     // Fenetre principale <- Box principale
     gtk_container_add(GTK_CONTAINER(popupTD->widget), popupTD->boxPrincipale);
     // Box principale <- Frame couleur + Frame nom + Box boutons
+    gtk_box_pack_start(GTK_BOX(popupTD->boxPrincipale), popupTD->frameInfo, TRUE, TRUE, UI_TRACE_ESPACEMENT);
     gtk_box_pack_start(GTK_BOX(popupTD->boxPrincipale), popupTD->frameCouleur, TRUE, TRUE, UI_TRACE_ESPACEMENT);
     gtk_box_pack_start(GTK_BOX(popupTD->boxPrincipale), popupTD->frameNom, TRUE, TRUE, UI_TRACE_ESPACEMENT);
     gtk_box_pack_start(GTK_BOX(popupTD->boxPrincipale), popupTD->boxBoutonsTD, TRUE, TRUE, UI_TRACE_ESPACEMENT);
 
+      // Frame info <- Label info
+    gtk_container_add(GTK_CONTAINER(popupTD->frameInfo), popupTD->labelInfo);
       // Frame couleur <- Bouton modifier
     gtk_container_add(GTK_CONTAINER(popupTD->frameCouleur), popupTD->boutonModifierCouleur);
       // Frame nom <- Entry zone

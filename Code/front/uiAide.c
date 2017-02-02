@@ -45,6 +45,10 @@ int uiAide(GtkWidget* widget, gpointer user_data)
 		}
 		
 	}
+	else
+	{
+		//gtk_window_present(GTK_WINDOW())
+	}
 	
 	return EXIT_SUCCESS;
 }

@@ -23,6 +23,11 @@ static int mode = MODE_NORMAL;
 static int limite;
 static int once = 0;
 
+void faire_Interet(cairo_t *cr, pt_interet *point)
+{
+	//
+}
+
 void faire_tracesCher(GtkWidget *widget, cairo_t *cr, gpointer user_data)
 {
 	tracesItem* ptrItem = (tracesItem *)user_data;
@@ -85,10 +90,13 @@ void faire_tracer(cairo_t *cr, int carte, tracesItem* item)
 				
 				if(item->ptrTrajet->visibilite) //si le trajet est visible
 				{
-					cairo_move_to(cr, x, y);
-					x = (int)echelle(ptr->suiv->coord.y, carte, 1);
-					y = (int)echelle(ptr->suiv->coord.x, carte, 0);
-					cairo_line_to(cr, x, y);
+					if(ptr->suiv != NULL && ptr->suiv->visibilite)
+					{
+						cairo_move_to(cr, x, y);
+						x = (int)echelle(ptr->suiv->coord.y, carte, 1);
+						y = (int)echelle(ptr->suiv->coord.x, carte, 0);
+						cairo_line_to(cr, x, y);
+					}
 				}
 			}
 		}
@@ -107,6 +115,7 @@ void faire_tracer(cairo_t *cr, int carte, tracesItem* item)
 
 		if(item->interet)
 		{
+			cairo_set_source_rgba(cr, item->ptrCouleur->red, item->ptrCouleur->green, item->ptrCouleur->blue, 0.25);
 			int i;
 			for(i=0; i<(item->ptrInteret->occupee); i++)
 			{
@@ -166,12 +175,15 @@ void faire_tracer(cairo_t *cr, int carte, tracesItem* item)
 					cairo_move_to(cr, x - TAILLE_TRACE, y);
 					cairo_line_to(cr, x + TAILLE_TRACE, y);
 					
-					if(item->ptrTrajet->visibilite)
+					if(item->ptrTrajet->visibilite) //si le trajet est visible
 					{
-						cairo_move_to(cr, x, y);
-						x = (int)echelle(ptr->suiv->coord.y, carte, 1);
-						y = (int)echelle(ptr->suiv->coord.x, carte, 0);
-						cairo_line_to(cr, x, y);
+						if(ptr->suiv != NULL && ptr->suiv->visibilite)
+						{
+							cairo_move_to(cr, x, y);
+							x = (int)echelle(ptr->suiv->coord.y, carte, 1);
+							y = (int)echelle(ptr->suiv->coord.x, carte, 0);
+							cairo_line_to(cr, x, y);
+						}
 					}
 				}
 
@@ -205,7 +217,7 @@ void faire_aggregation(cairo_t *cr, point centre, double r)
     cairo_set_line_width(cr, 2);  
 
     // Trace du cercle
-    cairo_arc(cr, centre.y, centre.x, r, 0, 2 * M_PI);
+    cairo_arc(cr, centre.y, centre.x, 50, 0, 2 * M_PI);
     cairo_fill(cr);
     cairo_stroke_preserve(cr); 
 }

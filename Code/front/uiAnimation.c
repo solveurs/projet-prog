@@ -448,7 +448,6 @@ void changeMode(GtkWidget* widget, gpointer user_data)
   	}
   	else
   	{
-      printf("\nNON LAAAA");
   		gtk_button_set_label(GTK_BUTTON(fenetreAnim->boutonMode), "Valider");
   		debloqueCarte();
   		debloqueInterfaceAnim();
