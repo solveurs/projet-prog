@@ -40,7 +40,7 @@ void faire_tracesInsa(GtkWidget *widget, cairo_t *cr, gpointer user_data);
 void faire_tracer(cairo_t *cr, int carte, tracesItem* item);
 void faire_aggregation(cairo_t *cr, point centre, double r);
 
-void calculRayon(double rayon, int carte);
+double calculRayon(double rayon, int carte);
 
 double echelle(double valeur, int carte, int abscisse);
 double conversionGPS(double coord, int carte, int longitude);

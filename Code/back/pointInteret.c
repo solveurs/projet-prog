@@ -63,10 +63,11 @@ liste_pt_interet * initListePointInteret(void)
 {
 	//static int varArrId = 0;
 	liste_pt_interet * varListe = malloc(sizeof(liste_pt_interet));
-	varListe->id		= 1;
-	varListe->taille	= TAILLE_TAB_DYN;
-	varListe->occupee	= 0;
-	varListe->t			=calloc(varListe->taille, sizeof(pt_interet*));
+	varListe->id		        = 1;
+	varListe->taille	        = TAILLE_TAB_DYN;
+	varListe->occupee	        = 0;
+	varListe->importance_max    = 0;
+	varListe->t			        = calloc(varListe->taille, sizeof(pt_interet*));
 	//varArrId++;
 	return varListe;
 }
@@ -184,6 +185,10 @@ liste_pt_interet * calculPointInteretTemp(trajet * parTr)
 				varListe->t[i] = fusionPtInteret(varListe->t[i], varListe->t[j]);
 				for (k = j; k < varListe->occupee; k++)
 				{
+					if (varListe->importance_max < varListe->t[k]->importance)
+					{
+						varListe->importance_max = varListe->t[k]->importance;
+					}
 					varListe->t[k] = varListe->t[k + 1];
 				}
 				varListe->occupee--;

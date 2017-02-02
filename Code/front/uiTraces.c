@@ -312,6 +312,7 @@ void traceInteret(GtkWidget* widget, gpointer user_data)
   else
   {
     item->ptrInteret = calculPointInteretTemp(item->ptrTrajet);
+    printf("\nImportance max : %d", item->ptrInteret->importance_max);
     item->interet = 1;
   }
 
@@ -505,8 +506,8 @@ void optionItemTraces(GtkWidget* widget, gpointer user_data)
     popupTD->frameInfo = gtk_frame_new("Informations");
     popupTD->labelInfo = gtk_label_new("");
 
-    char info[64];
-    sprintf(info, "Nombre de traces : %d\nDistance du trajet : %.2lf km", itemTD->ptrTrajet->taille, distanceTrajet(*(itemTD->ptrTrajet)));
+    char info[256];
+    sprintf(info, "Nombre de traces : %d\nDistance du trajet : %.2lf km\nTemps du trajet : %s\nVitesse moyenne du trajet : %.2f Km/h", itemTD->ptrTrajet->taille, distanceTrajet(*(itemTD->ptrTrajet)), tempsTrajetHeure(*(itemTD->ptrTrajet)), vitesseMoyenneTrajet(*(itemTD->ptrTrajet)));
     gtk_label_set_text(GTK_LABEL(popupTD->labelInfo), info);
 
     // ===--- Layout : Frame du nom

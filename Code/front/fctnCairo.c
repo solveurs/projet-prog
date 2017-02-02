@@ -119,12 +119,14 @@ void faire_tracer(cairo_t *cr, int carte, tracesItem* item)
 			int i;
 			for(i=0; i<(item->ptrInteret->occupee); i++)
 			{
+				/*
 				point centre = item->ptrInteret->t[i]->position;
 				centre.x = echelle(centre.x, carte, 0);
 				centre.y = echelle(centre.y, carte, 1);
-				double rayon = item->ptrInteret->t[i]->importance;
-				rayon = rayon / 2.0;
+				double rayon;
+				rayon =calculRayon(cr, item->ptrInteret->t[i]->importance)
 				faire_aggregation(cr, centre, rayon);
+				*/
 			}
 		}
 	}
@@ -212,7 +214,7 @@ void faire_tracer(cairo_t *cr, int carte, tracesItem* item)
 	}
 }
 
-void calculRayon(double rayon, int carte)
+double calculRayon(double rayon, int carte)
 {
 	// TODO
 }
