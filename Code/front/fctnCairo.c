@@ -212,6 +212,12 @@ void faire_tracer(cairo_t *cr, int carte, tracesItem* item)
 	}
 }
 
+void calculRayon(double rayon, int carte)
+{
+	// TODO
+}
+
+
 void faire_aggregation(cairo_t *cr, point centre, double r)
 {
     cairo_set_line_width(cr, 2);  
