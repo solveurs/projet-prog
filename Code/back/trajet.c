@@ -127,7 +127,10 @@ int saveTrajet(trajet * parTr, const char * chemin)
 	trace * it = parTr->premier;
 	while (it->suiv != NULL)
 	{
-		fprintf(fd, "date:%ld,lat:%lf,long:%lf;\n", it->date, it->coord.x, it->coord.y);
+		if (it->visibilite == 1)
+		{
+					fprintf(fd, "date:%ld,lat:%lf,long:%lf;\n", it->date, it->coord.x, it->coord.y);
+		}
 		it = it->suiv;
 	}
 	fclose(fd);

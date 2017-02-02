@@ -1,5 +1,6 @@
 #include "headers/main.h"
 //gcc main.c back/anonymisation.c back/conversion.c back/fonctionFront.c back/parserBddGeoloc.c back/pointInteret.c back/trace.c back/trajet.c back/utils.c back/ia.c -o main -Wall && ./main
+//5370 lignes de code
 struct globFront varGlobFront;
 
 #define DEBUG 1
