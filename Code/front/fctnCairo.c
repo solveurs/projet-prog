@@ -124,7 +124,7 @@ void faire_tracer(cairo_t *cr, int carte, tracesItem* item)
 				centre.x = echelle(centre.x, carte, 0);
 				centre.y = echelle(centre.y, carte, 1);
 				double rayon;
-				rayon =calculRayon(cr, item->ptrInteret->t[i]->importance)
+				rayon = calculRayon(getCarte() ,item->ptrInteret->importance_max)
 				faire_aggregation(cr, centre, rayon);
 				*/
 			}
@@ -214,9 +214,20 @@ void faire_tracer(cairo_t *cr, int carte, tracesItem* item)
 	}
 }
 
-double calculRayon(double rayon, int carte)
+double calculRayon(int carte, int importance_max)
 {
-	// TODO
+	switch(carte)
+	{
+		case 0: // Cher
+			// TODO
+			printf("");
+		case 1: // Bourges
+			// TODO
+			printf("");
+		default: // Insa
+			// TODO
+			printf("");
+	}
 }
 
 
