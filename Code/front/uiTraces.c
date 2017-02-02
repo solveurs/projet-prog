@@ -105,6 +105,7 @@ int uiTraces(GtkWidget* widget, gpointer user_data)
 
     // ==================== Affichage ====================
     gtk_widget_show_all(fenetreTraces->widget);
+    gtk_widget_hide(fenetreTraces->widget);
   }
   else
   {
@@ -309,6 +310,7 @@ void traceInteret(GtkWidget* widget, gpointer user_data)
   }
   else
   {
+    item->ptrInteret = calculPointInteretTemp(item->ptrTrajet);
     item->interet = 1;
   }
 
