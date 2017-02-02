@@ -120,6 +120,10 @@ liste_pt_interet * calculPointInteretSpatial(trajet * parTr)
 	it = parTr->premier;
 	while (it->suiv != NULL)
 	{
+		if (it->visibilite == 0)
+		{
+			continue;
+		}
 		pt_interet * varNvPtInt;
 		varC.centre = it->coord;
 		//(isInCercle(varC, it->suiv->coord)) > 0
