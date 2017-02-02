@@ -238,6 +238,7 @@ void ajoutItemTraces(GtkWidget* boxScroll, const char* nomTrajet, trajet* ptrTra
   item->imgSupprimer = gtk_image_new_from_file("../Data/icones/trash-16.png");
 
   gtk_button_set_image(GTK_BUTTON(item->boutonRoute), item->imgRoute);
+  gtk_button_set_image(GTK_BUTTON(item->boutonInteret), item->imgInteret);
   gtk_button_set_image(GTK_BUTTON(item->boutonOption), item->imgOption);
   gtk_button_set_image(GTK_BUTTON(item->boutonVisible), item->imgVisible);
   gtk_button_set_image(GTK_BUTTON(item->boutonSupprimer), item->imgSupprimer);
