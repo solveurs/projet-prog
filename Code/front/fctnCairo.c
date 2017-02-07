@@ -228,6 +228,7 @@ double calculRayon(int carte, int importance_max)
 			// TODO
 			printf("");
 	}
+	return 0;
 }
 
 
