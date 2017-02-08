@@ -170,6 +170,7 @@ bdd_addr* recherche_intervalle(bdd_addr* racine, point rech,float intervalle){
 
     //A FAIRE APRES LA LOGIQUE
         //idée a voir : récursion sur un intervalle plus grand au lieu de p=NULL
+        //utilisation de isInCercle ou dis2points ?
 }
 
 /**

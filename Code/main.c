@@ -51,8 +51,17 @@ void debugBack(void)
 	//	point * varP = kmToGPS(p, 51);
 	//	printf("dlat : %lf, dlon : %lf",varP->x,varP->y);
 	printf("\n\n\n TEST ADDR TEST ADDR \n\n\n");
-	//Initialisation
 	
+		//A FAIRE : - FONCTION unifiée qui vérifie ADRESSE2.csv, bdd_adresse.txt 
+		//			  existent et appelle les fonctions en conséquence
+		//			- Faire un nouveau fichier/passer certaines fonctions dans utils ?
+		//			- FONCTION pour que l'utilisateur ajoute à la main des adresses/précisions 
+		//			  sur une adresse ?
+		//			- FONCTION recherche_intervalle pour trouver l'adresse la plus proche
+		//			- Nettoyer le code : virer les printf, les commentaires inutiles, renommer 
+		//			-l es variables/fonctions
+
+	//Initialisation : 
 	FILE * fd2 = pretreat_bddaddr("../Data/ADRESSE.csv","../Data/ADRESSE2.csv");
 	printf("\n Apres pretreatBddAddr\n");
 	bdd_addr * base_addr = readAddr(fd2);
