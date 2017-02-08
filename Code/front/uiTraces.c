@@ -311,7 +311,7 @@ void traceInteret(GtkWidget* widget, gpointer user_data)
   }
   else
   {
-    item->ptrInteret = calculPointInteretTemp(item->ptrTrajet);
+    item->ptrInteret = IgetPtInteret(item->ptrTrajet);
     printf("\nImportance max : %d", item->ptrInteret->importance_max);
     item->interet = 1;
   }

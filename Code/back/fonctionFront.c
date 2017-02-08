@@ -33,7 +33,13 @@ trajet * IimportTrajet(const char * nom)
 
 liste_pt_interet* IgetPtInteret(trajet * parTr)
 {
-	return calculPointInteretTemp(parTr);
+	clock_t debut, fin;
+	debut = clock();
+	liste_pt_interet* varListe = calculPointInteretTemp(parTr);
+	fin = clock();
+	printf("Temps d'excution : %.2f ms \n",(double)(fin - debut) / (CLOCKS_PER_SEC/1000));
+	return varListe;
+
 }
 
 int IlectureTrace(int parCmd, trajet * parTr)
