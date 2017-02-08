@@ -93,7 +93,7 @@ void activate(GtkApplication *app, gpointer user_data)
 
 	// ===--- Layout : Box footer
 	ui->boxFooter = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, UI_MAIN_ESPACEMENT);
-	ui->labelPos = gtk_label_new(" TEST");
+	ui->labelPos = gtk_label_new("");
 
 	// ===================== Signaux =====================
 	g_signal_connect(ui->boutonTraces, "clicked", G_CALLBACK(uiTraces), ui->widget);
@@ -221,11 +221,6 @@ void changeCarte(GtkWidget *widget, gpointer user_data)
 		gtk_widget_show(fenetre->scrollCarteInsa);
 	}
 
-}
-
-void bougeCarte(GtkWidget *widget, gpointer user_data)
-{
-	// TODO
 }
 
 int overlayTempAjout(GtkWidget* zoneCercle, GtkWidget* eventBox, int id)

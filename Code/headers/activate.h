@@ -75,7 +75,6 @@ typedef struct s_uiPrincipale
 void activate(GtkApplication *app, gpointer user_data);
 void ajoutOverlays(tracesItem* ptrItem);
 void changeCarte(GtkWidget *widget, gpointer user_data);
-void bougeCarte(GtkWidget *widget, gpointer user_data);
 int overlayTempAjout(GtkWidget* zoneCercle, GtkWidget* eventBox, int id);
 void overlayTempSuppr(GtkWidget* eventBox, int id);
 void bloqueCarte(int mode);

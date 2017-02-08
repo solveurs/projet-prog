@@ -35,6 +35,7 @@ typedef struct s_TracesItem
   // Comme c'est un item, le widget principal est une box.
   GtkWidget         *widget;
   tdUI*             details;
+  int               option;
   int               interet;
   int               etat;
   int               visible;

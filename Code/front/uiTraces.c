@@ -2,18 +2,17 @@
  * \file      uiTraces.c
  * \brief     Fichier main de la GUI de gestion des traces.
  * \author    Thanh.L, Guillaume.F
- * \version   0.4a
+ * \version   1.0
  *
  * Le fichier contient toutes les fonctions liees au PopUp de gestion des traces.
  * ====================
  *       TODO
  * ====================
- * + Gerer la liberation de la memoire
- * + Prendre en compte les icones de Data/
  * ====================
  *        MaJ
  * ====================
- * Prise en compte de l'importation des traces.
+ * + Doxygen
+ * + Correction de SegFault
  *
 */
 
@@ -179,6 +178,7 @@ void ajoutItemTraces(GtkWidget* boxScroll, const char* nomTrajet, trajet* ptrTra
   item->etat = 0;
   item->visible = 1;
   item->interet = 0;
+  item->option  = 0;
   item->id = varGlobFront.idTrajet;
 
   // ============== Initialisation widgets ==============
@@ -232,7 +232,7 @@ void ajoutItemTraces(GtkWidget* boxScroll, const char* nomTrajet, trajet* ptrTra
   item->boutonSupprimer = gtk_button_new();
 
   item->imgRoute = gtk_image_new_from_file("../Data/icones/linked-16.png");
-  item->imgInteret = gtk_image_new_from_file("../Data/icones/information-16.png");
+  item->imgInteret = gtk_image_new_from_file("../Data/icones/information-outline-16.png");
   item->imgOption = gtk_image_new_from_file("../Data/icones/gear-16.png");
   item->imgVisible = gtk_image_new_from_file("../Data/icones/eye-16.png");
   item->imgSupprimer = gtk_image_new_from_file("../Data/icones/trash-16.png");
@@ -300,6 +300,15 @@ void traceRoute(GtkWidget* widget, gpointer user_data)
   majCartes(item->id);
 }
 
+/**
+ * \fn      void traceInteret(GtkWidget* widget, gpointer user_data)
+ * \brief   Afficha ou cache les points d'interets du trajet.
+ *
+ * \param   widget    Widget d'où provient le signal.
+ * \param   user_data Variable passée par le signal.
+ *
+ * \return  None.
+*/
 void traceInteret(GtkWidget* widget, gpointer user_data)
 {
   tracesItem* item = (tracesItem *)user_data;  
@@ -308,11 +317,12 @@ void traceInteret(GtkWidget* widget, gpointer user_data)
   if(item->interet)
   {
     item->interet = 0;
+    gtk_image_set_from_file(GTK_IMAGE(item->imgInteret), "../Data/icones/information-outline-16.png");
   }
   else
   {
     item->ptrInteret = IgetPtInteret(item->ptrTrajet);
-    printf("\nImportance max : %d", item->ptrInteret->importance_max);
+    gtk_image_set_from_file(GTK_IMAGE(item->imgInteret), "../Data/icones/information-16.png");
     item->interet = 1;
   }
 
@@ -382,6 +392,12 @@ void confirmeSupprItem(GtkWidget* widget, gpointer user_data)
   }
 
   tracesItem* itemASuppr = (tracesItem *)user_data;
+
+  if(itemASuppr->option == 1)
+  {
+    gtk_button_clicked(GTK_BUTTON(itemASuppr->details->boutonAnnuler));
+  }
+
   char txt[256];
   sprintf(txt, "Si vous supprimez '%s', vous ne pourrez plus l'utiliser.\n\n \t\t\t\tConfirmer pour supprimer.", gtk_label_get_text(GTK_LABEL(itemASuppr->labelNom)));
 
@@ -484,6 +500,7 @@ void optionItemTraces(GtkWidget* widget, gpointer user_data)
     // ====== Validation d'ouverture
     itemTD->etat = UI_TRACE_OUVERT;
     tdUI* popupTD = itemTD->details;
+    itemTD->option = 1;
 
     // ====== Fenetre
     popupTD->widget = gtk_window_new(GTK_WINDOW_TOPLEVEL);
@@ -557,6 +574,7 @@ void optionItemTraces(GtkWidget* widget, gpointer user_data)
   {
     gtk_entry_set_text(GTK_ENTRY(itemTD->details->zoneEntry), gtk_label_get_text(GTK_LABEL(itemTD->labelNom)));
     gtk_window_present(GTK_WINDOW(itemTD->details->widget));
+    itemTD->option = 1;
   }
 }
 
@@ -587,7 +605,8 @@ void changeCouleur(GtkWidget* widget, gpointer user_data)
 */
 void appliquerTD(GtkWidget* widget, gpointer user_data)
 {
-  tracesItem* item = (tracesItem*)user_data;
+  tracesItem* item = (tracesItem *)user_data;
+  item->option = 0;
   gtk_label_set_text(GTK_LABEL(item->labelNom), gtk_entry_get_text(GTK_ENTRY(item->details->zoneEntry)));
   renommeMenuTracesAnon(item->id, gtk_label_get_text(GTK_LABEL(item->labelNom)));
   renommeMenuTracesAnim(item->id, gtk_label_get_text(GTK_LABEL(item->labelNom)));
