@@ -20,12 +20,12 @@ int main(int argc, char* argv[])
 
 	//fnDebug = debugBack;
 	debugBack();
-	debugFront(argc,argv);
+	//debugFront(argc,argv);
 
 #endif
 	//printf("toujours\n");
 	fin = clock();
-	printf("Temps d'excution : %.2f ms \n",(double)(fin - debut) / (CLOCKS_PER_SEC/1000));
+	printf("Temps d'execution : %.2f ms \n",(double)(fin - debut) / (CLOCKS_PER_SEC/1000));
 	return 0;
 }
 
@@ -50,7 +50,27 @@ void debugBack(void)
 	//	point p = { .x = 0.1, .y = 0.1};
 	//	point * varP = kmToGPS(p, 51);
 	//	printf("dlat : %lf, dlon : %lf",varP->x,varP->y);
-
+	printf("\n\n\n TEST ADDR TEST ADDR \n\n\n");
+	//Initialisation
+	
+	FILE * fd2 = pretreat_bddaddr("../Data/ADRESSE.csv","../Data/ADRESSE2.csv");
+	printf("\n Apres pretreatBddAddr\n");
+	bdd_addr * base_addr = readAddr(fd2);
+	FILE * fd3 = openBddAddr("../Data/bdd_adresse.csv");
+	write_infixe_bddAddr(base_addr, fd3);
+	fclose(fd2);
+	fclose(fd3);
+	
+	//Si déjà initialisée
+	/*
+	FILE * fd2 = openGeoloc("../Data/bdd_adresse.txt");
+	bdd_addr * base_addr = readAddr2(fd2);
+	fclose(fd2);
+	FILE * fd3 = openBddAddr("../Data/bdd_adresse.txt");
+	write_infixe_bddAddr(base_addr, fd3);
+	fclose(fd3);
+	*/
+	printf("\n\n\n TEST ADDR TEST ADDR FINI \n\n\n");
 }
 
 void debugFront(int argc, char* argv[])

@@ -61,8 +61,9 @@ typedef struct adresse adresse;
 */
 struct bdd_addr
 {
-	adresse * addr;
-	int taille;
+	adresse addr;
+  	struct bdd_addr* FDroit;
+  	struct bdd_addr* FGauche;
 };
 typedef struct bdd_addr bdd_addr;
 
