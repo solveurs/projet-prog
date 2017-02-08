@@ -134,6 +134,45 @@ void addAddr(bdd_addr* racine, bdd_addr* new_addr)
  * \param point le point que l'on cherche
  */
 bdd_addr* recherche_exacte(bdd_addr* racine, point rech){
+
+    if ((racine->addr.coord.x==rech.x) && (racine->addr.coord.y==rech.y))
+    {
+            return racine;
+    }
+    else
+    {   
+        if ((racine->addr.coord.x > rech.x && racine->FGauche==NULL) || (racine->addr.coord.x < rech.x && racine->FDroit==NULL))
+        {
+            return NULL;
+        }
+        else
+        {
+            if ((racine->addr.coord.x > rech.x) || ((racine->addr.coord.x == rech.x) && (racine->addr.coord.y > rech.y)))
+            {
+                return recherche_exacte(racine->FGauche,rech);
+            }
+            else
+            {
+                return recherche_exacte(racine->FDroit,rech);
+            }
+        }
+    }
+
+    //return p;
+}
+/**
+ * \fn bdd_addr* recherche_intervalle(bdd_addr* racine, point rech,float intervalle,bdd_addr* proche)
+ * \brief Recherche dans la bdd l'adresse la plus proche (s'il y a) d'un point dans un intervalle donné
+ * \param *racine la racine de la bdd dans laquelle on cherche
+ * \param point le point que l'on cherche
+ * \param intervalle l'intervalle donné
+ */
+bdd_addr* recherche_intervalle(bdd_addr* racine, point rech,float intervalle,bdd_addr* proche){
+
+    //A FAIRE APRES LA LOGIQUE
+        //idée a voir : récursion sur un intervalle plus grand au lieu de p=NULL
+        //utilisation de isInCercle ou dis2points ?
+   
     bdd_addr* p;
     if (racine!=NULL)
     {
@@ -143,34 +182,27 @@ bdd_addr* recherche_exacte(bdd_addr* racine, point rech){
         }
         else
         {
+            int distance_courante=GPStoKm(racine->addr.coord,rech);
+            if ( distance_courante< intervalle)
+            {
+                intervalle=distance_courante;
+                proche=racine;
+            }
             if ((racine->addr.coord.x > rech.x) || ((racine->addr.coord.x == rech.x) && (racine->addr.coord.y > rech.y)))
             {
-                p=recherche_exacte(racine->FGauche,rech);
+                p=recherche_intervalle(racine->FGauche,rech,intervalle,proche);
             }
             else
             {
-                p=recherche_exacte(racine->FDroit,rech);
+                p=recherche_intervalle(racine->FDroit,rech,intervalle,proche);
             }
         }
     }
     else
     {
-        p=NULL;
+        p=proche;
     }
     return p;
-}
-/**
- * \fn bdd_addr* recherche_intervalle(bdd_addr* racine, point rech, float intervalle)
- * \brief Recherche dans la bdd l'adresse la plus proche (s'il y a) d'un point dans un intervalle donné
- * \param *racine la racine de la bdd dans laquelle on cherche
- * \param point le point que l'on cherche
- * \param intervalle l'intervalle donné
- */
-bdd_addr* recherche_intervalle(bdd_addr* racine, point rech,float intervalle){
-
-    //A FAIRE APRES LA LOGIQUE
-        //idée a voir : récursion sur un intervalle plus grand au lieu de p=NULL
-        //utilisation de isInCercle ou dis2points ?
 }
 
 /**
@@ -249,11 +281,11 @@ void replace_char(char s_origine[], char s_remp[],int c_origine, int c_remp)
 }
 
 /**
- * \fn bdd_addr * readAddr(FILE * fd)
- * \brief Lit le fichier d'adresse .csv et renvoit la racine de l'arbre d'adresses correspondant
- * \param *fd descripteur sur le fichier au format d'ADRESSE2.csv
+ * \fn bdd_addr * initBddAddr(void)
+ * \brief Initialise la racine pour un arbre d'adresse
+ * \param *varBddAddr la racine à initialiser
  */
-bdd_addr * readAddr(FILE * fd)
+bdd_addr * initBddAddr(void)
 {
     bdd_addr *varBddAddr=(bdd_addr*)malloc(sizeof(bdd_addr));
     varBddAddr->addr.coord.x=47.096689;
@@ -263,7 +295,52 @@ bdd_addr * readAddr(FILE * fd)
     varBddAddr->FGauche=NULL;
     varBddAddr->FDroit=NULL;
     strcpy(varBddAddr->addr.nom_rue,"Valeur de reference bdd");
+    return varBddAddr;
+}
+
+/**
+ * \fn bdd_addr * readAddr(FILE * fd, bdd_addr* bddAddr_Bourges, bdd_addr* bddAddr_INSA)
+ * \brief Lit le fichier d'adresse .csv et renvoit la racine de l'arbre global d'adresse
+ * \param *fd descripteur sur le fichier au format d'ADRESSE2.csv
+ * \param *bddAddr_Bourges racine de l'arbre d'adresse de Bourges (vide au départ)
+ * \param *bddAddr_INSA racine de l'arbre d'adresse de l'INSA (vide au départ)
+ */
+bdd_addr * readAddr(FILE * fd, bdd_addr* bddAddr_Bourges, bdd_addr* bddAddr_INSA)
+{
+    
+    bdd_addr* varBddAddr=initBddAddr();
+   /* bddAddr_Bourges=initBddAddr();
+    bddAddr_INSA=initBddAddr();
     afficheAdresse(varBddAddr->addr);
+
+    rectangle r_Bourges;
+    r_Bourges.origine.x=47.113540;
+    r_Bourges.origine.y=2.313738;
+    point c_sup_d;
+    c_sup_d.x=47.050476;
+    c_sup_d.y=2.313738;
+    double lar1=GPStoKm(r_Bourges.origine,c_sup_d);
+    point c_inf_g;
+    c_inf_g.x=47.113540;
+    c_inf_g.y=2.472610;
+    double haut1=GPStoKm(r_Bourges.origine,c_inf_g);
+    r_Bourges.largeur=lar1;
+    r_Bourges.hauteur=haut1;
+
+    rectangle r_INSA;
+    r_INSA.origine.x=47.088723;
+    r_INSA.origine.y=2.392981;
+    c_sup_d.x=47.072957;
+    c_sup_d.y=2.392981;
+    lar1=GPStoKm(r_Bourges.origine,c_sup_d);
+    c_inf_g.x=47.088723;
+    c_inf_g.y=2.432764;
+    haut1=GPStoKm(r_Bourges.origine,c_inf_g);
+    r_INSA.largeur=lar1;
+    r_INSA.hauteur=haut1;*/
+
+   // rectangle r_Bourges=initRectangle(initPoint(47.113540, 2.313738), GPStoKm(initPoint(47.113540, 2.313738),initPoint(47.113540, 2.472610)), GPStoKm(initPoint(47.113540, 2.313738), initPoint(47.050476, 2.313738)));
+    //rectangle r_INSA=initRectangle(initPoint(47.088723, 2.392981), GPStoKm(initPoint(47.088723, 2.392981), initPoint(47.088723, 2.432764)), GPStoKm(initPoint(47.088723, 2.392981), initPoint(47.072957, 2.392981)));
 
     char id[24], id_tr[24], methode[7], rep[9], compl[38], nom_rue[40], alias[30], nom_ld[42], type[16], cote[6], line[206];
     int numero, c_insee, c_postal;
@@ -272,7 +349,7 @@ bdd_addr * readAddr(FILE * fd)
     float compteur=1;
     adresse varAddr;
     fscanf(fd,"%[^\n]\n",&line);
-    printf("Première Ligne : %s\n",line);
+    //printf("Première Ligne : %s\n",line);
 
     //for(i=0;i<4;i++) 
     //{ 
@@ -284,57 +361,56 @@ bdd_addr * readAddr(FILE * fd)
             //printf("\n%s|%s|%s|%d|%s|%s|%s|%s|%s|%d|%d|%s|%s|%lf|%lf\n",&id, &id_tr, &methode, numero, &rep, &compl, &nom_rue, &alias, &nom_ld, c_insee, c_postal, &type, &cote, x, y);
         
             varAddr.numero=numero;
-            //printf("\nnumero : %i\n",numero);
             //Remplacement des '.' par des ' '
             char nom_voie[40];
             replace_char(nom_rue,nom_voie,'_',' ');
             strcpy(varAddr.nom_rue,nom_voie);//strcpy avant strcat sinon problème de string non initialisée
-            //printf("Nom rue : %s\n", varAddr.nom_rue);
-            if(strcmp(".",alias) != 0)
+            if(strcmp("_",alias) != 0)
             {
                 strcat(varAddr.nom_rue,", ");
                 char alias2[30];
                 replace_char(alias,alias2,'_',' ');
                 strcat(varAddr.nom_rue,alias2);
-                //printf("Avec Alias : %s\n",varAddr.nom_rue);
             }
-            if ((strcmp(nom_rue,nom_ld) != 0) && (strcmp("_",nom_ld) != 0))
+            if ((strcmp(nom_rue,nom_ld) != 0) && (strcmp("_",nom_ld) != 0) && (strcmp("__",nom_ld) != 0))
             {
                 strcat(varAddr.nom_rue,", ");
                 char nom_ld2[42];
                 replace_char(nom_ld,nom_ld2,'.',' ');
                 strcat(varAddr.nom_rue,nom_ld2);
-                //printf("Avec Nom LD : %s\n",varAddr.nom_rue);
             }
             varAddr.code_postal=c_postal;
-            //printf("Code Postal : %i\n",varAddr.code_postal);
             lambert93ToGPS(&x,&y);
-            // DIRE A FLAVIEN QUE C'EST PAS LOGIQUE COMME RETOUR AVEC LES CONVENTIONS DU PROJET
             varAddr.coord.x=y;
             varAddr.coord.y=x;
-            //printf("Coordonnées X: %lf, Y: %lf\n",varAddr.coord.x, varAddr.coord.y);
             //afficheAdresse(varAddr);  //A mettre en commentaire si l'on veut faire toute la base : ajoute du temps pour rien (1m10)
 
             bdd_addr *new=(bdd_addr*)malloc(sizeof(bdd_addr));
             new->addr=varAddr;
-            /*
-            bdd_addr *new2=(bdd_addr*)malloc(sizeof(bdd_addr));
-            new2->addr.coord.x=47.0;
-            new2->addr.coord.y=2.0;
-            new2->addr.numero=42;
-            new2->addr.code_postal=18000;
-            new2->FGauche=NULL;
-            new2->FDroit=NULL;
-            strcpy(new2->addr.nom_rue,"Test");
-            printf("avant affectation\n");
-            printf("avant addAddr\n");
-            addAddr(varBddAddr, new2);
-            */
             addAddr(varBddAddr, new);
+            /*
+            if (isInRectangle(r_INSA,new->addr.coord)==1)
+            {
+                bdd_addr *new_INSA=(bdd_addr*)malloc(sizeof(bdd_addr));
+                new_INSA->addr=varAddr;
+                addAddr(bddAddr_INSA, new_INSA);
+                bdd_addr *new_Bourges=(bdd_addr*)malloc(sizeof(bdd_addr));
+                new_Bourges->addr=varAddr;
+                addAddr(bddAddr_Bourges, new_Bourges);
+            }
+            else 
+            {
+                if (isInRectangle(r_Bourges,new->addr.coord)==1)
+                {
+                    bdd_addr *new_Bourges=(bdd_addr*)malloc(sizeof(bdd_addr));
+                    new_Bourges->addr=varAddr;
+                    addAddr(bddAddr_Bourges, new_Bourges);
+                }
+            }*/
 
             //printf("apres addAddr\n");
 
-           // compteur++;
+            //compteur++;
        }//end while ou if fscanf
     //}//endfor
     printf("avant return\n");
@@ -347,14 +423,7 @@ bdd_addr * readAddr(FILE * fd)
  */
 bdd_addr * readAddr2(FILE * fd)
 {
-    bdd_addr *varBddAddr=(bdd_addr*)malloc(sizeof(bdd_addr));
-    varBddAddr->addr.coord.x=47.096689;
-    varBddAddr->addr.coord.y=2.486328;
-    varBddAddr->addr.numero=0;
-    varBddAddr->addr.code_postal=18390;
-    varBddAddr->FGauche=NULL;
-    varBddAddr->FDroit=NULL;
-    strcpy(varBddAddr->addr.nom_rue,"Valeur de reference bdd");
+    bdd_addr* varBddAddr=initBddAddr();
     afficheAdresse(varBddAddr->addr);
 
     char nom_rue[128];
@@ -382,3 +451,16 @@ bdd_addr * readAddr2(FILE * fd)
     }
     return varBddAddr;
 }
+
+/*
+Coordonnées globales
+coin sup gauche x=604985.292, y=6766065.828
+coin inf droit x=6566034.495, y=3.115997
+Bourges
+coin sup gauche x=647963.613, y=6668368.027
+coin inf droit x=659963.225, y=659963.225
+INSA
+coin sup gauche x=653950.963, y=6665562.403
+coin inf droit x=656956.306, y=6663788.842
+http://tool-online.com/en/coordinate-converter.php WGS84 ->RGFG3-Lambert-93
+*/

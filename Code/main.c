@@ -64,11 +64,64 @@ void debugBack(void)
 	//Initialisation : 
 	FILE * fd2 = pretreat_bddaddr("../Data/ADRESSE.csv","../Data/ADRESSE2.csv");
 	printf("\n Apres pretreatBddAddr\n");
-	bdd_addr * base_addr = readAddr(fd2);
-	FILE * fd3 = openBddAddr("../Data/bdd_adresse.csv");
-	write_infixe_bddAddr(base_addr, fd3);
+	bdd_addr * base_addr_Bourges;
+	bdd_addr * base_addr_INSA; 
+
+	bdd_addr * base_addr_glob = readAddr(fd2,base_addr_Bourges,base_addr_INSA);
+	
+	FILE * fd_glob = openBddAddr("../Data/bdd_adresse.csv");
+	write_prefixe_bddAddr(base_addr_glob, fd_glob);
+
+	point a=initPoint(47.096689,2.486328);
+	printf("recherche_exacte\n");
+	bdd_addr* test=recherche_exacte(base_addr_glob,a);
+	printf("recherche_exacte\n");
+	if(test!=NULL){
+		afficheAdresse(test->addr);
+	}
+	else{
+		printf("pas trouve\n");
+	}
+	
+	point b=initPoint(47.148817,2.163267);
+	printf("recherche_exacte2\n");
+	test=recherche_exacte(base_addr_glob,b);
+	printf("recherche_exacte2\n");
+	if(test!=NULL){
+		afficheAdresse(test->addr);
+	}
+	else{
+		printf("pas trouve\n");
+	}
+
+	bdd_addr* test1=(bdd_addr*)malloc(sizeof(bdd_addr));
+	printf("recherche_intervalle\n");
+	bdd_addr* test2=recherche_intervalle(base_addr_glob,b,10000.0,test1);
+	if(test2!=NULL){
+		afficheAdresse(test2->addr);
+	}
+	else{
+		printf("pas trouve\n");
+	}
+
+	 /*FILE * fd_Bourges = openBddAddr("../Data/bdd_addr_bourges.csv");
+	FILE * fd_INSA = openBddAddr("../Data/bdd_addr_insa.csv");
+  
+	if (fd_Bourges==NULL || fd_INSA == NULL){
+		printf("Erreur\n");
+	}
+	else{
+		printf("base_addr_glob\n");
+		write_infixe_bddAddr(base_addr_Bourges, fd_Bourges);
+		printf("base_addr_bourges\n");
+		write_infixe_bddAddr(base_addr_INSA, fd_INSA);
+		printf("base_addr_insa\n");
+	}
+	
 	fclose(fd2);
-	fclose(fd3);
+	fclose(fd_glob);
+	fclose(fd_Bourges);
+	fclose(fd_INSA);*/
 	
 	//Si déjà initialisée
 	/*
