@@ -180,19 +180,24 @@ liste_pt_interet * calculPointInteretTemp(trajet * parTr)
 		varC.centre.y = varListe->t[i]->position.y;
 		for (j = i + 1 ; j < varListe->occupee; j++)
 		{
-			if (dis2points(varC.centre, varListe->t[j]->position, varC.rayon))
+			if (dis2points(varC.centre, varListe->t[j]->position, varC.rayon) > 0)
 			{
 				varListe->t[i] = fusionPtInteret(varListe->t[i], varListe->t[j]);
 				for (k = j; k < varListe->occupee; k++)
 				{
+					/*
 					if (varListe->importance_max < varListe->t[k]->importance)
 					{
 						varListe->importance_max = varListe->t[k]->importance;
-					}
+					}*/
 					varListe->t[k] = varListe->t[k + 1];
 				}
 				varListe->occupee--;
 				j--;
+			}
+			if (varListe->importance_max < varListe->t[j]->importance)
+			{
+				varListe->importance_max = varListe->t[j]->importance;
 			}
 		}
 	}
