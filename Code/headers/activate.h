@@ -78,7 +78,7 @@ void changeCarte(GtkWidget *widget, gpointer user_data);
 int overlayTempAjout(GtkWidget* zoneCercle, GtkWidget* eventBox, int id);
 void overlayTempSuppr(GtkWidget* eventBox, int id);
 void bloqueCarte(int mode);
-void debloqueCarte();
+void debloqueCarte(int mode);
 int getCarte();
 void getPosSouris(GtkWidget* widget, GdkEvent *event, gpointer user_data);
 void focusTrajet(int carte, int id);

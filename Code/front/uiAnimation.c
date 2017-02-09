@@ -255,6 +255,15 @@ int uiAnimation(GtkWidget* widget, gpointer user_data)
   return EXIT_SUCCESS;
 }
 
+/**
+ * \fn      void setCalendrierDebut(GtkWidget* widget, gpointer user_data)
+ * \brief   Affiche un calendrier qui permet de configurer la fenetre de vision temporelle.
+ *
+ * \param   widget GtkWidget d'ou provient le signal.
+ * \param   user_data Pointeur sur une donnee transmis par le signal pere.
+ *
+ * \return  None.
+*/
 void setCalendrierDebut(GtkWidget* widget, gpointer user_data)
 {
   static int etat = UI_ANIM_FERME;
@@ -315,6 +324,15 @@ void setCalendrierDebut(GtkWidget* widget, gpointer user_data)
   }
 }
 
+/**
+ * \fn      void setCalendrierFin(GtkWidget* widget, gpointer user_data)
+ * \brief   Affiche un calendrier qui permet de configurer la fenetre de vision temporelle.
+ *
+ * \param   widget GtkWidget d'ou provient le signal.
+ * \param   user_data Pointeur sur une donnee transmis par le signal pere.
+ *
+ * \return  None.
+*/
 void setCalendrierFin(GtkWidget* widget, gpointer user_data)
 {
   static int etat = UI_ANIM_FERME;
@@ -375,11 +393,29 @@ void setCalendrierFin(GtkWidget* widget, gpointer user_data)
   }
 }
 
+/**
+ * \fn      void annulerCal(GtkWidget* widget, gpointer user_data)
+ * \brief   Ignore les modification du calendrier et le cache.
+ *
+ * \param   widget GtkWidget d'ou provient le signal.
+ * \param   user_data Pointeur sur une donnee transmis par le signal pere.
+ *
+ * \return  None.
+*/
 void annulerCal(GtkWidget* widget, gpointer user_data)
 {
 	gtk_widget_hide(GTK_WIDGET(user_data));
 }
 
+/**
+ * \fn      void confirmerCalDebut(GtkWidget* widget, gpointer user_data)
+ * \brief   Confirme la selection de l'utilisateur et modifie la fenetre temporelle de visionnage.
+ *
+ * \param   widget GtkWidget d'ou provient le signal.
+ * \param   user_data Pointeur sur une donnee transmis par le signal pere.
+ *
+ * \return  None.
+*/
 void confirmerCalDebut(GtkWidget* widget, gpointer user_data)
 {
 	gtk_calendar_get_date(GTK_CALENDAR(fenetreAnim->calendrierDeb), &(dateDebut.tm_year), &(dateDebut.tm_mon), &(dateDebut.tm_mday));
@@ -392,6 +428,15 @@ void confirmerCalDebut(GtkWidget* widget, gpointer user_data)
 	gtk_widget_hide(GTK_WIDGET(user_data));
 }
 
+/**
+ * \fn      void confirmerCalFin(GtkWidget* widget, gpointer user_data)
+ * \brief   Confirme la selection de l'utilisateur et modifie la fenetre temporelle de visionnage.
+ *
+ * \param   widget GtkWidget d'ou provient le signal.
+ * \param   user_data Pointeur sur une donnee transmis par le signal pere.
+ *
+ * \return  None.
+*/
 void confirmerCalFin(GtkWidget* widget, gpointer user_data)
 {
   	gtk_calendar_get_date(GTK_CALENDAR(fenetreAnim->calendrierFin), &(dateFin.tm_year), &(dateFin.tm_mon), &(dateFin.tm_mday));
@@ -404,6 +449,15 @@ void confirmerCalFin(GtkWidget* widget, gpointer user_data)
   	gtk_widget_hide(GTK_WIDGET(user_data));
 }
 
+/**
+ * \fn      void changeMode(GtkWidget* widget, gpointer user_data)
+ * \brief   Modifie le mode d'affichage des traces (statique ou animation).
+ *
+ * \param   widget GtkWidget d'ou provient le signal.
+ * \param   user_data Pointeur sur une donnee transmis par le signal pere.
+ *
+ * \return  None.
+*/
 void changeMode(GtkWidget* widget, gpointer user_data)
 {
 	// Credits Gtk+ doc pour le dialog d'erreur
@@ -449,7 +503,7 @@ void changeMode(GtkWidget* widget, gpointer user_data)
   	else
   	{
   		gtk_button_set_label(GTK_BUTTON(fenetreAnim->boutonMode), "Valider");
-  		debloqueCarte();
+  		debloqueCarte(0);
   		debloqueInterfaceAnim();
   		defocusTrajet(getCarte(), gtk_combo_box_get_active(GTK_COMBO_BOX(fenetreAnim->menuDeroulant)));
 
@@ -460,6 +514,12 @@ void changeMode(GtkWidget* widget, gpointer user_data)
 	}
 }
 
+/**
+ * \fn      void getHeure()
+ * \brief   Recupere l'heure de la fenetre temporelle.
+ *
+ * \return  None.
+*/
 void getHeure()
 {
 	dateDebut.tm_hour = gtk_combo_box_get_active(GTK_COMBO_BOX(fenetreAnim->comboHG));
@@ -473,6 +533,15 @@ void getHeure()
 	tpsFin = mktime(&dateFin);
 }
 
+/**
+ * \fn      void arriere(GtkWidget* widget, gpointer user_data)
+ * \brief   Si possible, cache la trace actuelle et recule vers la precedente.
+ *
+ * \param   widget GtkWidget d'ou provient le signal.
+ * \param   user_data Pointeur sur une donnee transmis par le signal pere.
+ *
+ * \return  None.
+*/
 void arriere(GtkWidget* widget, gpointer user_data)
 {
 	int idTraces = gtk_combo_box_get_active(GTK_COMBO_BOX(fenetreAnim->menuDeroulant));
@@ -480,11 +549,29 @@ void arriere(GtkWidget* widget, gpointer user_data)
 	majCartes(idTraces);
 }
 
+/**
+ * \fn      void stop(GtkWidget* widget, gpointer user_data)
+ * \brief   Force l'arret de l'animation des traces en cours.
+ *
+ * \param   widget GtkWidget d'ou provient le signal.
+ * \param   user_data Pointeur sur une donnee transmis par le signal pere.
+ *
+ * \return  None.
+*/
 void stop(GtkWidget* widget, gpointer user_data)
 {
 	ANIMER = 0;
 }
 
+/**
+ * \fn      void playPause(GtkWidget* widget, gpointer user_data)
+ * \brief   Anime automatiquement les traces ou met en pause si l'animation est deja lancee.
+ *
+ * \param   widget GtkWidget d'ou provient le signal.
+ * \param   user_data Pointeur sur une donnee transmis par le signal pere.
+ *
+ * \return  None.
+*/
 void playPause(GtkWidget* widget, gpointer user_data)
 {
   static int active = 1;
@@ -511,6 +598,15 @@ void playPause(GtkWidget* widget, gpointer user_data)
   }
 }
 
+/**
+ * \fn      void avance(GtkWidget* widget, gpointer user_data)
+ * \brief   Si possible, affiche la prochaine trace dans le trajet.
+ *
+ * \param   widget GtkWidget d'ou provient le signal.
+ * \param   user_data Pointeur sur une donnee transmis par le signal pere.
+ *
+ * \return  None.
+*/
 void avance(GtkWidget* widget, gpointer user_data)
 {
 	int idTraces = gtk_combo_box_get_active(GTK_COMBO_BOX(fenetreAnim->menuDeroulant));
@@ -525,6 +621,12 @@ int avanceAux(gpointer user_data)
 	return 1;
 }
 
+/**
+ * \fn      void initCombo()
+ * \brief   Initialise l'etat des menus deroulants pour le choix de la fenetre temporelle.
+ *
+ * \return  None.
+*/
 void initCombo()
 {
 	char tmp[4];
@@ -552,22 +654,53 @@ void initCombo()
 	gtk_combo_box_set_active(GTK_COMBO_BOX(fenetreAnim->comboSD), 0);
 }
 
+/**
+ * \fn      void ajoutMenuTracesAnim(const gchar* nom)
+ * \brief   Ajoute un nouveau trajet dans le menu deroulant.
+ *
+ * \param   nom Le nom du trajet.
+ *
+ * \return  None.
+*/
 void ajoutMenuTracesAnim(const gchar* nom)
 {
   gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(fenetreAnim->menuDeroulant), NULL, nom);
 }
 
+/**
+ * \fn      void supprimeMenuTracesAnim(gint id)
+ * \brief   Supprime un trajet du menu deroulant.
+ *
+ * \param   id l'ID du trajet a supprimer du menu.
+ *
+ * \return  None.
+*/
 void supprimeMenuTracesAnim(gint id)
 {
   gtk_combo_box_text_remove(GTK_COMBO_BOX_TEXT(fenetreAnim->menuDeroulant), id);
 }
 
+/**
+ * \fn      void renommeMenuTracesAnim(gint id, const gchar* nom)
+ * \brief   Renomme un trajet deja existant dans le menu deroulant.
+ *
+ * \param   id L'ID du trajet a renommer.
+ * \param   nom Le nouveau nom du trajet.
+ *
+ * \return  None.
+*/
 void renommeMenuTracesAnim(gint id, const gchar* nom)
 {
   supprimeMenuTracesAnim(id);
   gtk_combo_box_text_insert_text(GTK_COMBO_BOX_TEXT(fenetreAnim->menuDeroulant), id, nom);
 }
 
+/**
+ * \fn      void bloqueInterfaceAnim()
+ * \brief   Bloque l'interface de l'animation pour la passer en mode animation.
+ *
+ * \return  None.
+*/
 void bloqueInterfaceAnim()
 {
 	gtk_widget_set_sensitive(fenetreAnim->boxFrame, FALSE);
@@ -591,6 +724,12 @@ void bloqueInterfaceAnim()
     gtk_widget_show(fenetreAnim->boxAffichage);
 }
 
+/**
+ * \fn      void debloqueInterfaceAnim()
+ * \brief   Debloque l'interface de l'animation pour la passer en mode statique.
+ *
+ * \return  None.
+*/
 void debloqueInterfaceAnim()
 {
 	gtk_widget_set_sensitive(fenetreAnim->boxFrame, TRUE);
@@ -614,6 +753,14 @@ void debloqueInterfaceAnim()
     gtk_widget_hide(fenetreAnim->boxAffichage);
 }
 
+/**
+ * \fn      int compareTps(time_t date)
+ * \brief   Verifie si un temps donne est dans la fenetre de visionnage temporelle.
+ *
+ * \param   date Temps a comparer a la fenetre.
+ *
+ * \return  None.
+*/
 int compareTps(time_t date)
 {
 	if( (date >= tpsDebut) && (date <= tpsFin))

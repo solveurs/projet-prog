@@ -12,7 +12,19 @@
 #include "../headers/front.h"
 
 static uiMain* ui;
+static LIBRE_ANIMATION = 1;
+static LIBRE_ANONYMAT = 1;
 
+
+/**
+ * \fn 		void activate(GtkApplication *app, gpointer user_data)
+ * \brief 	Fonction d'initialisation de la fenetre principale de l'application.
+ *
+ * \param 	app L'application GTK+ dont depend la fenetre.
+ * \param 	user_data Pointeur sur une donnee transmis par le signal pere.
+ *
+ * \return 	None.
+*/
 void activate(GtkApplication *app, gpointer user_data)
 {
 	// ============== Initialisation widgets =============
@@ -174,6 +186,15 @@ void activate(GtkApplication *app, gpointer user_data)
 	changeCarte(ui->selectCarte, ui);
 }
 
+
+/**
+ * \fn 		void ajoutOverlays(tracesItem* ptrItem)
+ * \brief 	Ajoute une nouvelle couche aux overlayx des cartes.
+ *
+ * \param 	ptrItem Pointeur sur l'item ayant besoin d'une nouvelle couche.
+ *
+ * \return 	None.
+*/
 void ajoutOverlays(tracesItem* ptrItem)
 {
 	GtkWidget* zoneDessinCher = gtk_drawing_area_new();
@@ -197,6 +218,15 @@ void ajoutOverlays(tracesItem* ptrItem)
 	gtk_widget_show(zoneDessinInsa);
 }
 
+/**
+ * \fn 		void changeCarte(GtkWidget *widget, gpointer user_data)
+ * \brief 	Indique a l'interface quelle carte afficher sur un evenement de changement de carte.
+ *
+ * \param 	widget GtkWidget d'ou provient le signal.
+ * \param 	user_data Pointeur sur une donnee transmis par le signal pere.
+ *
+ * \return 	None.
+*/
 void changeCarte(GtkWidget *widget, gpointer user_data)
 {
 	uiMain* fenetre = (uiMain *)user_data;
@@ -223,6 +253,16 @@ void changeCarte(GtkWidget *widget, gpointer user_data)
 
 }
 
+/**
+ * \fn 		int overlayTempAjout(GtkWidget* zoneCercle, GtkWidget* eventBox, int id)
+ * \brief 	Ajoute temporairement une zone de dessin pour le cercle d'anonymat.
+ *
+ * \param 	zoneCercle La zone de dessin initialisee pour le cercle.
+ * \param 	eventBox La GtkEventBox qui permet de capter les mouvements de souris.
+ * \param   id L'id du trajet associe a ce cercle.
+ *
+ * \return 	1 en cas de succes. 0 en cas d'echec.
+*/
 int overlayTempAjout(GtkWidget* zoneCercle, GtkWidget* eventBox, int id)
 {
 	int idCarte = gtk_combo_box_get_active(GTK_COMBO_BOX(ui->selectCarte));
@@ -307,6 +347,15 @@ int overlayTempAjout(GtkWidget* zoneCercle, GtkWidget* eventBox, int id)
 	return 1;
 }
 
+/**
+ * \fn 		void overlayTempSuppr(GtkWidget* eventBox, int id)
+ * \brief 	Supprime l'overlay temporaire associee a l'anonymisation d'un trajet.
+ *
+ * \param 	eventBox La zone d'evenement associee a la zone de dessin d'anonymat.
+ * \param 	id Id du trajet associee a la zone.
+ *
+ * \return 	None.
+*/
 void overlayTempSuppr(GtkWidget* eventBox, int id)
 {
 	int idCarte = gtk_combo_box_get_active(GTK_COMBO_BOX(ui->selectCarte));
@@ -346,33 +395,89 @@ void overlayTempSuppr(GtkWidget* eventBox, int id)
 	}
 }
 
+/**
+ * \fn 		void bloqueCarte(int mode)
+ * \brief 	Bloque le changement de carte ainsi que l'option de suppression des traces.
+ *
+ * \param 	mode Indique dans quel mode le blocage s'effectue.
+ *
+ * \return 	None.
+*/
 void bloqueCarte(int mode)
 {
-	gtk_widget_set_sensitive(ui->boutonTraces, FALSE);
 	gtk_widget_set_sensitive(ui->selectCarte, FALSE);
+
+	int i;
+	for(i=0; i<varGlobFront.idTrajet; i++)
+	{
+		gtk_widget_set_sensitive(varGlobFront.traces[i]->boutonSupprimer, FALSE);
+		gtk_widget_set_sensitive(varGlobFront.traces[i]->details->boutonAppliquer, FALSE);
+	}
+
+
 	if(mode) // Mode anonymite
 	{
-		gtk_widget_set_sensitive(ui->boutonAnimation, FALSE);
+		LIBRE_ANONYMAT = 0;
 	}
 	else     // Mode animation
 	{
-		gtk_widget_set_sensitive(ui->boutonAnonymat, FALSE);
+		LIBRE_ANIMATION = 0;
 	}
 }
 
-void debloqueCarte()
+/**
+ * \fn 		void debloqueCarte(int mode)
+ * \brief 	Debloque le changement de carte ainsi que l'option de suppression des traces si aucune edition est en cours.
+ *
+ * \param 	mode Indique dans quel mode le deblocage s'effectue.
+ *
+ * \return 	None.
+*/
+void debloqueCarte(int mode)
 {
-	gtk_widget_set_sensitive(ui->boutonTraces, TRUE);
-	gtk_widget_set_sensitive(ui->boutonAnimation, TRUE);
-	gtk_widget_set_sensitive(ui->selectCarte, TRUE);
-	gtk_widget_set_sensitive(ui->boutonAnonymat, TRUE);
+	if(mode) // Mode anonymite
+	{
+		LIBRE_ANONYMAT = 1;
+	}
+	else     // Mode animation
+	{
+		LIBRE_ANIMATION = 1;
+	}
+
+	if(LIBRE_ANONYMAT && LIBRE_ANIMATION)
+	{
+		int i;
+		gtk_widget_set_sensitive(ui->selectCarte, TRUE);
+		for(i=0; i<varGlobFront.idTrajet; i++)
+		{
+			gtk_widget_set_sensitive(varGlobFront.traces[i]->boutonSupprimer, TRUE);
+			gtk_widget_set_sensitive(varGlobFront.traces[i]->details->boutonAppliquer, TRUE);
+		}
+	}
+	
 }
 
+/**
+ * \fn 		int getCarte()
+ * \brief 	Permet de savoir quelle carte est actuellement utilisee.
+ *
+ * \return 	L'id de la carte selectionnee actuellement.
+*/
 int getCarte()
 {
 	return gtk_combo_box_get_active(GTK_COMBO_BOX(ui->selectCarte));
 }
 
+/**
+ * \fn 		void getPosSouris(GtkWidget* widget, GdkEvent *event, gpointer user_data)
+ * \brief 	Fonction qui recupere la position de la souris lors de l'anonymisation.
+ *
+ * \param 	widget GtkWidget d'ou provient le signal.
+ * \param   event La variable GdkEvent envoyee par le signal.
+ * \param 	user_data Pointeur sur une donnee transmis par le signal pere.
+ *
+ * \return 	None.
+*/
 void getPosSouris(GtkWidget* widget, GdkEvent *event, gpointer user_data)
 {
   /* Credits StackOverflow forum */
@@ -383,6 +488,15 @@ void getPosSouris(GtkWidget* widget, GdkEvent *event, gpointer user_data)
   gtk_label_set_text(GTK_LABEL(ui->labelPos), text);
 }
 
+/**
+ * \fn 		void focusTrajet(int carte, int id)
+ * \brief 	Cache tous les trajets en dehors de celui cible par id pour la carte actuelle.
+ *
+ * \param 	carte Id de la carte actuellement selectionnee.
+ * \param 	id Id du trajet a ne pas cacher.
+ *
+ * \return 	None.
+*/
 void focusTrajet(int carte, int id)
 {
 	int i;
@@ -415,6 +529,15 @@ void focusTrajet(int carte, int id)
 	}
 }
 
+/**
+ * \fn 		void defocusTrajet(int carte, int id)
+ * \brief 	Affiche tous les trajets en dehors de celui cible par id pour la carte actuelle.
+ *
+ * \param 	carte Id de la carte actuellement selectionnee.
+ * \param 	id Id du trajet a ignorer.
+ *
+ * \return 	None.
+*/
 void defocusTrajet(int carte, int id)
 {
 	int i;
@@ -447,17 +570,34 @@ void defocusTrajet(int carte, int id)
 	}
 }
 
-
+/**
+ * \fn 		void affUITraces()
+ * \brief 	Envoie un signal pour afficher l'UI de gestion des traces.
+ *
+ * \return 	None.
+*/
 void affUITraces()
 {
 	g_signal_emit_by_name(ui->boutonTraces, "clicked", ui->widget);
 }
 
+/**
+ * \fn 		void affUIAnim()
+ * \brief 	Envoie un signal pour afficher l'UI de gestion des animations.
+ *
+ * \return 	None.
+*/
 void affUIAnim()
 {
 	g_signal_emit_by_name(ui->boutonAnonymat, "clicked", ui->widget);
 }
 
+/**
+ * \fn 		void affUIAnon()
+ * \brief 	Envoie un signal pour afficher l'UI de gestion de l'anonymat.
+ *
+ * \return 	None.
+*/
 void affUIAnon()
 {
 	g_signal_emit_by_name(ui->boutonAnimation,  "clicked", ui->widget);

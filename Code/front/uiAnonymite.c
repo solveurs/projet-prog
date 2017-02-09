@@ -1,24 +1,18 @@
 /**
  * \file      uiAnonymite.c
  * \brief     Fichier main de la GUI de l'anonymat.
- * \author    Thanh.L
- * \version   0.1a
+ * \author    T.Luu, G.Froger
+ * \version   1.0
  *
  * Le fichier contient toutes les fonctions liees au PopUp de gestion de l'anonymat.
  * ====================
  *       TODO
  * ====================
- * Spin button
- * Fonction calendrier
- * Modifier faire_trace en fonction du temps
- * Fonction avancer, reculer
- * Doxygen
  *
  * ====================
  *        MaJ
  * ====================
- * Creation du fichier.
- * Ceci n'est que le squelette graphique, les fonctions ne sont pas encore ecrites.
+ * Doxygen
  *
 */
 
@@ -34,7 +28,15 @@ static point CERCLE_BORD;
 static cercle CERCLE_UTILISATEUR;
 static int CLICKED = 0;
 
-
+/**
+ * \fn      int uiAnonymite(GtkWidget* widget, gpointer user_data)
+ * \brief   Fonction d'initialisation de l'interface d'anonymat.
+ *
+ * \param   widget GtkWidget d'ou provient le signal.
+ * \param   user_data Pointeur sur une donnee transmis par le signal pere.
+ *
+ * \return  1 en cas de succes.
+*/
 int uiAnonymite(GtkWidget* widget, gpointer user_data)
 {
   static int etat = UI_ANON_FERME;
@@ -140,9 +142,20 @@ int uiAnonymite(GtkWidget* widget, gpointer user_data)
 	return EXIT_SUCCESS;
 }
 
+/**
+ * \fn      void annulerCercle(GtkWidget* widget, gpointer user_data)
+ * \brief   Annule toutes les modifications d'anonymat en cas.
+ *
+ * \param   widget GtkWidget d'ou provient le signal.
+ * \param   user_data Pointeur sur une donnee transmis par le signal pere.
+ *
+ * \return  None.
+*/
 void annulerCercle(GtkWidget* widget, gpointer user_data)
 {
   int idTraces = gtk_combo_box_get_active(GTK_COMBO_BOX(fenetreAnon->menuDeroulant));
+
+
   overlayTempSuppr(EVENT_BOX, idTraces);
 
   gtk_widget_hide(fenetreAnon->boxTracer);
@@ -150,13 +163,23 @@ void annulerCercle(GtkWidget* widget, gpointer user_data)
   CERCLE_UTILISATEUR.centre.x = 0.0;
   CERCLE_UTILISATEUR.centre.y = 0.0;
   CERCLE_UTILISATEUR.rayon = 0.0;
-  debloqueCarte();
+  debloqueCarte(1);
 }
 
+/**
+ * \fn      void confirmerCercle(GtkWidget* widget, gpointer user_data)
+ * \brief   Confirme l'anonymisation en cours et traite les donnees en consequence.
+ *
+ * \param   widget GtkWidget d'ou provient le signal.
+ * \param   user_data Pointeur sur une donnee transmis par le signal pere.
+ *
+ * \return  None.
+*/
 void confirmerCercle(GtkWidget* widget, gpointer user_data)
 {
   //IModeAnonymisation();
   int idTraces = gtk_combo_box_get_active(GTK_COMBO_BOX(fenetreAnon->menuDeroulant));
+  gtk_widget_set_sensitive(fenetreAnon->menuDeroulant, TRUE);
   overlayTempSuppr(EVENT_BOX, idTraces);
 
   CERCLE_UTILISATEUR.centre.x = conversionGPS(CERCLE_UTILISATEUR.centre.x, getCarte(), 1);
@@ -174,7 +197,7 @@ void confirmerCercle(GtkWidget* widget, gpointer user_data)
   CERCLE_UTILISATEUR.centre.x = 0.0;
   CERCLE_UTILISATEUR.centre.y = 0.0;
   CERCLE_UTILISATEUR.rayon = 0.0;
-  debloqueCarte();
+  debloqueCarte(1);
   IfinModeAnonymisation(*(varGlobFront.traces[idTraces]->ptrTrajet));
 }
 
@@ -292,6 +315,15 @@ void optionItemAnon(GtkWidget* widget, gpointer user_data)
   }
 }
 
+/**
+ * \fn      void ajouteCercle(GtkWidget* widget, gpointer user_data)
+ * \brief   Initialise l'interface d'anonymat pour l'anonymisation d'une zone circulaire.
+ *
+ * \param   widget GtkWidget d'ou provient le signal.
+ * \param   user_data Pointeur sur une donnee transmis par le signal pere.
+ *
+ * \return  None.
+*/
 void ajouteCercle(GtkWidget* widget, gpointer user_data)
 {
   // Credits Gtk+ doc pour le dialog d'erreur
@@ -323,6 +355,7 @@ void ajouteCercle(GtkWidget* widget, gpointer user_data)
     EVENT_BOX = gtk_event_box_new();
     if(overlayTempAjout(ZONE_CERCLE, EVENT_BOX, activeId))
     {
+      gtk_widget_set_sensitive(parent->menuDeroulant, FALSE);
       gtk_widget_queue_draw(ZONE_CERCLE);
       gtk_widget_hide(parent->boutonCercle);
       gtk_widget_show(parent->boxTracer);
@@ -332,11 +365,14 @@ void ajouteCercle(GtkWidget* widget, gpointer user_data)
 }
 
 /**
- * \fn      static void do_drawing(cairo_t *cr)
- * \brief   Initialise la carte et trace le cercle d'anonymat.
+ * \fn      void traceCercle(GtkWidget* widget, cairo_t* cr, gpointer user_data)
+ * \brief   Trace graphiquement un cercle sur un signal "draw"
  *
- * \param   cr Pointeur sur un Cairo Context où on applique nos dessins.
- * \return  Void.
+ * \param   widget GtkWidget d'ou provient le signal.
+ * \param   cr Zone de dessin generee automatiquement par le signal.
+ * \param   user_data Pointeur sur une donnee transmis par le signal pere.
+ *
+ * \return  None.
 */
 void traceCercle(GtkWidget* widget, cairo_t* cr, gpointer user_data)
 {
@@ -348,22 +384,57 @@ void traceCercle(GtkWidget* widget, cairo_t* cr, gpointer user_data)
   cairo_stroke(cr); 
 }
 
+/**
+ * \fn      void ajoutMenuTracesAnon(const gchar* nom)
+ * \brief   Ajoute un nouvel option de cible dans le menu des traces disponibles.
+ *
+ * \param   nom Nom du trajet a ajouter.
+ *
+ * \return  None.
+*/
 void ajoutMenuTracesAnon(const gchar* nom)
 {
   gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(fenetreAnon->menuDeroulant), NULL, nom);
 }
 
+/**
+ * \fn      void supprimeMenuTracesAnon(gint id)
+ * \brief   Supprime le choix de selection d'une trace.
+ *
+ * \param   id l'Id du trajet a supprimer.
+ *
+ * \return  None.
+*/
 void supprimeMenuTracesAnon(gint id)
 {
   gtk_combo_box_text_remove(GTK_COMBO_BOX_TEXT(fenetreAnon->menuDeroulant), id);
 }
 
+/**
+ * \fn      void renommeMenuTracesAnon(gint id, const gchar* nom)
+ * \brief   Renomme un choix d'option selon le nom d'un trajet.
+ *
+ * \param   id Id du trajet a renommer.
+ * \param   nom Nouveau nom du trajet.
+ *
+ * \return  None.
+*/
 void renommeMenuTracesAnon(gint id, const gchar* nom)
 {
   supprimeMenuTracesAnon(id);
   gtk_combo_box_text_insert_text(GTK_COMBO_BOX_TEXT(fenetreAnon->menuDeroulant), id, nom);
 }
 
+/**
+ * \fn      void deplacementSouris(GtkWidget *widget, GdkEvent *event, gpointer user_data)
+ * \brief   Permet de suivre dynamiquement la position de la souris.
+ *
+ * \param   widget GtkWidget d'ou provient le signal.
+ * \param   event La structure GdkEvent issue du signal.
+ * \param   user_data Pointeur sur une donnee transmis par le signal pere.
+ *
+ * \return  None.
+*/
 void deplacementSouris(GtkWidget *widget, GdkEvent *event, gpointer user_data)
 {
   /* Credits StackOverflow forum */
@@ -378,13 +449,13 @@ void deplacementSouris(GtkWidget *widget, GdkEvent *event, gpointer user_data)
 }
 
 /**
- * \fn      static int rayon(int centreX, int centreY, int rayonX, int rayonY)
+ * \fn      double rayonAnon(point centre, int rayonX, int rayonY)
  * \brief   Calcul le rayon d'un cercle.
  *
- * \param   centreX Coordonnees X du centre du cercle.
- * \param   centreY Coordonnees Y du centre du cercle.
+ * \param   centre Structure point representant le centre du cercle.
  * \param   rayonX Coordonnees X du rayon du cercle.
  * \param   rayonY Coordonnees Y du rayon du cercle.
+ *
  * \return  Retourne la longueur du rayon.
 */
 double rayonAnon(point centre, int rayonX, int rayonY)
@@ -400,13 +471,14 @@ double rayonAnon(point centre, int rayonX, int rayonY)
 }
 
 /**
- * \fn      static gboolean clicked(GtkWidget *widget, GdkEventButton *event, gpointer user_data)
- * \brief   Detecte le click de la souris et agit en consequence.
+ * \fn      void clickCercle(GtkWidget *widget, GdkEventButton *event, gpointer user_data)
+ * \brief   Memorise les coordonnees du centre du cercle sur clique de la souris.
  *
- * \param   widget      Instance a laquelle est rattachee le signal.
- * \param   event       Evenement lie au click de la souris.
- * \param   user_data   Donnees transferee par le signal.
- * \return  gboolean.
+ * \param   widget GtkWidget d'ou provient le signal.
+ * \param   event La structure GdkEvent issue du signal.
+ * \param   user_data Pointeur sur une donnee transmis par le signal pere.
+ *
+ * \return  None.
 */
 void clickCercle(GtkWidget *widget, GdkEventButton *event, gpointer user_data)
 {

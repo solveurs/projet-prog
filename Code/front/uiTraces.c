@@ -273,6 +273,8 @@ void ajoutItemTraces(GtkWidget* boxScroll, const char* nomTrajet, trajet* ptrTra
   // ==================== Affichage ====================
   gtk_widget_show_all(item->widget);
   gtk_box_pack_start(GTK_BOX(boxScroll), item->widget, FALSE, FALSE, UI_TRACE_ESPACEMENT);
+  gtk_button_clicked(GTK_BUTTON(item->boutonOption));
+  gtk_button_clicked(GTK_BUTTON(item->details->boutonAnnuler));
 }
 
 
@@ -569,6 +571,7 @@ void optionItemTraces(GtkWidget* widget, gpointer user_data)
 
     // ==================== Affichage ====================
     gtk_widget_show_all(popupTD->widget);
+    gtk_widget_set_sensitive(popupTD->boutonAppliquer, FALSE);
   }
   else
   {
@@ -627,6 +630,12 @@ void annulerTD(GtkWidget* widget, gpointer user_data)
   gtk_widget_hide(GTK_WIDGET(user_data));
 }
 
+/**
+ * \fn      void appelImporter()
+ * \brief   Envoie l'appel d'importation d'un nouvel ensemble de traces.
+ *
+ * \return  None.
+*/
 void appelImporter()
 {
   gtk_button_clicked(GTK_BUTTON(fenetreTraces->boutonImporter));  
