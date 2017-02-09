@@ -577,6 +577,7 @@ void optionItemTraces(GtkWidget* widget, gpointer user_data)
   {
     gtk_entry_set_text(GTK_ENTRY(itemTD->details->zoneEntry), gtk_label_get_text(GTK_LABEL(itemTD->labelNom)));
     gtk_window_present(GTK_WINDOW(itemTD->details->widget));
+    gtk_widget_set_sensitive(itemTD->details->boutonAppliquer);
     itemTD->option = 1;
   }
 }

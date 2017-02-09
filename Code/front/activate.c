@@ -38,7 +38,7 @@ void activate(GtkApplication *app, gpointer user_data)
 
 	// ====== Fenetre
 	ui->widget = gtk_application_window_new(app);
-	gtk_window_set_title (GTK_WINDOW(ui->widget), "Geoloc v0.9");
+	gtk_window_set_title (GTK_WINDOW(ui->widget), "Geoloc v1.0");
 	gtk_window_set_icon_from_file(GTK_WINDOW(ui->widget),"../Data/icones/logo_solveur-200.png",NULL);
 	gtk_window_set_default_size (GTK_WINDOW(ui->widget), UI_MAIN_TAILLE_X, UI_MAIN_TAILLE_Y);
 	gtk_window_maximize(GTK_WINDOW(ui->widget));
