@@ -7,7 +7,7 @@
 #define UI_ANON_OUVERT  	      1
 #define UI_ANON_FERME           0
 #define UI_ANON_TAILLE_X      250
-#define UI_ANON_TAILLE_Y      300
+#define UI_ANON_TAILLE_Y      150
 
 /* ===== Structures ===== */
 

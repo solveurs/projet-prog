@@ -55,7 +55,7 @@ void initialisation_menu(uiMain* ui){
   g_signal_connect(ui->ssMenuItem1_2, "activate", G_CALLBACK(auxImporter), NULL);
   g_signal_connect(ui->ssMenuItem2_1, "activate", G_CALLBACK(auxAnim), NULL);
   g_signal_connect(ui->ssMenuItem3_1, "activate", G_CALLBACK(auxAnon), NULL);
-  g_signal_connect(ui->ssMenuItem4, "active", G_CALLBACK(auxAide), NULL);
+  g_signal_connect(ui->ssMenuItem4, "activate", G_CALLBACK(auxAide), NULL);
 }
 
 void auxTraces(GtkWidget* widget, gpointer user_data)
@@ -80,5 +80,6 @@ void auxAnon(GtkWidget* widget, gpointer user_data)
 
 void auxAide(GtkWidget* widget, gpointer user_data)
 {
-  //char* message = "Une documentation se trouve dans : %s\n"
+  char* message = "Une documentation se trouve dans Doc/html/index.html\nLien du GitHub : https://github.com/solveurs/projet-prog\nLogiciel Géoloc v1.0\n\nProfesseurs encadrants :\n\tPatrice CLEMENTE\n\tJean-François LALANDE\n\nEquipe de développement :\n\tFlavien RONTEIX--JACQUET,\n\tGuillaume FROGER\n\tVincent MALENFER-HENARD\n\tThanh LUU";
+  popupMessage("Aide", message, NULL);
 }

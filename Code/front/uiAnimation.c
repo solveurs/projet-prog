@@ -301,7 +301,7 @@ void setCalendrierDebut(GtkWidget* widget, gpointer user_data)
 
 	// ===================== Signaux =====================
 	g_signal_connect(popupCal->boutonAnnuler, "clicked", G_CALLBACK(annulerCal), popupCal->widget);
-	g_signal_connect(popupCal->boutonConfirmer, "clicked", G_CALLBACK(confirmerCalDebut), popupCal);
+	g_signal_connect(popupCal->boutonConfirmer, "clicked", G_CALLBACK(confirmerCalDebut), popupCal->widget);
 
 	// ==================== Packaging ====================
 	// Box principale <- calendrier + box boutons
@@ -370,7 +370,7 @@ void setCalendrierFin(GtkWidget* widget, gpointer user_data)
 
 	// ===================== Signaux =====================
 	g_signal_connect(popupCal->boutonAnnuler, "clicked", G_CALLBACK(annulerCal), popupCal->widget);
-	g_signal_connect(popupCal->boutonConfirmer, "clicked", G_CALLBACK(confirmerCalFin), popupCal);
+	g_signal_connect(popupCal->boutonConfirmer, "clicked", G_CALLBACK(confirmerCalFin), popupCal->widget);
 
 	// ==================== Packaging ====================
 	// Box principale <- calendrier + box boutons
