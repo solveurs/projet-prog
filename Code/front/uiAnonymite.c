@@ -154,7 +154,7 @@ int uiAnonymite(GtkWidget* widget, gpointer user_data)
 void annulerCercle(GtkWidget* widget, gpointer user_data)
 {
   int idTraces = gtk_combo_box_get_active(GTK_COMBO_BOX(fenetreAnon->menuDeroulant));
-
+  gtk_widget_set_sensitive(fenetreAnon->menuDeroulant, TRUE);
 
   overlayTempSuppr(EVENT_BOX, idTraces);
 

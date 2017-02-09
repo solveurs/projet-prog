@@ -18,3 +18,4 @@ struct PageInfo{
 typedef struct PageInfo PageInfo;
 //typedef struct AideImportationUI AideImportationUI;
 int uiAide(GtkWidget* widget, gpointer user_data);
+void auxAide(GtkWidget* widget, gpointer user_data);
